@@ -104,9 +104,9 @@ export function TriggerModeConfig() {
   // 获取触发模式标签
   const getTriggerModeBadge = (mode: string) => {
     const styles = {
-      manual: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      automatic: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      event: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+      manual: 'bg-[#6366F1]/20 text-[#6366F1] border-purple-500/30',
+      automatic: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      event: 'bg-[#FF9100]/20 text-[#FF9100] border-orange-500/30',
     };
     const labels = {
       manual: '手动触发',
@@ -124,8 +124,8 @@ export function TriggerModeConfig() {
   // 获取状态标签
   const getStatusBadge = (status: string) => {
     const styles = {
-      enabled: 'bg-green-500/20 text-green-400 border-green-500/30',
-      disabled: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+      enabled: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      disabled: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
     };
     const labels = {
       enabled: '已启用',
@@ -139,26 +139,26 @@ export function TriggerModeConfig() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务自动/手动/事件多模式触发</h1>
-        <p className="text-slate-400">配置任务的多种触发方式</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务自动/手动/事件多模式触发</h1>
+        <p className="text-[#9CA3AF]">配置任务的多种触发方式</p>
       </div>
 
       {/* 操作栏 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             {/* 搜索框 */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索任务名称..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
 
@@ -166,7 +166,7 @@ export function TriggerModeConfig() {
             <select
               value={filterMode}
               onChange={(e) => setFilterMode(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部模式</option>
               <option value="manual">手动触发</option>
@@ -178,7 +178,7 @@ export function TriggerModeConfig() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="enabled">已启用</option>
@@ -189,7 +189,7 @@ export function TriggerModeConfig() {
           {/* 新增按钮 */}
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             新增配置
@@ -198,47 +198,47 @@ export function TriggerModeConfig() {
       </div>
 
       {/* 数据表格 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">触发模式</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">触发配置</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">触发模式</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">触发配置</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredData.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.taskName}</td>
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.taskName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getTriggerModeBadge(item.triggerMode)}</td>
-                <td className="px-6 py-4 text-sm text-slate-400">{item.triggerConfig}</td>
+                <td className="px-6 py-4 text-sm text-[#9CA3AF]">{item.triggerConfig}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.createdAt}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.createdAt}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleRunNow(item)}
-                      className="p-1.5 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#00C853] hover:text-[#33D97A] hover:bg-[#00C853]/10 rounded transition-colors"
                       title="立即执行"
                     >
                       <Play className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                       title="编辑"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                       title="删除"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -252,7 +252,7 @@ export function TriggerModeConfig() {
 
         {filteredData.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
@@ -260,31 +260,31 @@ export function TriggerModeConfig() {
       {/* 新增/编辑模态框 */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingItem ? '编辑触发配置' : '新增触发配置'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">任务名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">任务名称</label>
                 <input
                   type="text"
                   value={formData.taskName || ''}
                   onChange={(e) => setFormData({ ...formData, taskName: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请选择或输入任务名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">触发模式</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">触发模式</label>
                 <div className="grid grid-cols-3 gap-3">
                   {[
                     { value: 'manual', label: '手动触发', icon: Play, desc: '手动点击执行' },
@@ -297,17 +297,17 @@ export function TriggerModeConfig() {
                       onClick={() => setFormData({ ...formData, triggerMode: option.value as any })}
                       className={`p-4 rounded-lg border-2 text-left transition-colors ${
                         formData.triggerMode === option.value
-                          ? 'border-blue-500 bg-blue-500/10'
-                          : 'border-slate-700 bg-slate-800 hover:border-slate-600'
+                          ? 'border-blue-500 bg-[#0066FF]/10'
+                          : 'border-[#2A354D] bg-[#181F32] hover:border-[#3A4560]'
                       }`}
                     >
                       <option.icon className={`w-5 h-5 mb-2 ${
-                        formData.triggerMode === option.value ? 'text-blue-400' : 'text-slate-400'
+                        formData.triggerMode === option.value ? 'text-[#0066FF]' : 'text-[#9CA3AF]'
                       }`} />
                       <div className={`font-medium ${
-                        formData.triggerMode === option.value ? 'text-blue-400' : 'text-white'
+                        formData.triggerMode === option.value ? 'text-[#0066FF]' : 'text-[#F3F4F6]'
                       }`}>{option.label}</div>
-                      <div className="text-xs text-slate-500 mt-1">{option.desc}</div>
+                      <div className="text-xs text-[#6B7280] mt-1">{option.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -315,8 +315,8 @@ export function TriggerModeConfig() {
 
               {/* 手动触发配置 */}
               {formData.triggerMode === 'manual' && (
-                <div className="bg-slate-800/50 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-sm text-slate-400">
+                <div className="bg-[#181F32]/50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-sm text-[#9CA3AF]">
                     <Play className="w-4 h-4" />
                     <span>手动触发无需额外配置，在任务列表中点击"立即执行"即可</span>
                   </div>
@@ -327,17 +327,17 @@ export function TriggerModeConfig() {
               {formData.triggerMode === 'automatic' && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">Cron表达式</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">Cron表达式</label>
                     <div className="flex gap-3">
                       <input
                         type="text"
                         value={formData.triggerConfig || ''}
                         onChange={(e) => setFormData({ ...formData, triggerConfig: e.target.value })}
-                        className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                        className="flex-1 px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono"
                         placeholder="0 2 * * *"
                       />
                     </div>
-                    <p className="text-xs text-slate-500 mt-1.5">格式: 分 时 日 月 周</p>
+                    <p className="text-xs text-[#6B7280] mt-1.5">格式: 分 时 日 月 周</p>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
@@ -350,7 +350,7 @@ export function TriggerModeConfig() {
                         key={preset.value}
                         type="button"
                         onClick={() => setFormData({ ...formData, triggerConfig: preset.value })}
-                        className="px-3 py-2 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-left transition-colors"
+                        className="px-3 py-2 text-sm bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-left transition-colors"
                       >
                         {preset.label}
                       </button>
@@ -362,11 +362,11 @@ export function TriggerModeConfig() {
               {/* 事件触发配置 */}
               {formData.triggerMode === 'event' && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1.5">事件类型</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">事件类型</label>
                   <select
                     value={formData.triggerConfig || ''}
                     onChange={(e) => setFormData({ ...formData, triggerConfig: `事件: ${e.target.value}` })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   >
                     <option value="">请选择事件类型</option>
                     <option value="新漏洞告警">新漏洞告警</option>
@@ -379,27 +379,27 @@ export function TriggerModeConfig() {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">状态</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">状态</label>
                 <select
                   value={formData.status || 'enabled'}
                   onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 >
                   <option value="enabled">已启用</option>
                   <option value="disabled">已禁用</option>
                 </select>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

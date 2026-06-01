@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell, TooltipProps } from 'recharts';
 import { Download, Calendar, Activity, TrendingUp, AlertCircle, Zap, BarChart3, PieChart as PieChartIcon, Clock, Users, ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
 const hourlyData = [
@@ -65,14 +65,15 @@ export function ApiCallAnalysis() {
 
   const currentData = timeRange === '7d' ? dailyData : hourlyData;
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
+  const CustomTooltip = (props: TooltipProps<number, string>) => {
+    const { active, payload, label } = props as any;
+    if (active && payload && payload.length > 0) {
       return (
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-lg min-w-[150px]">
-          <p className="text-slate-300 text-sm mb-2 font-medium">{label}</p>
-          {payload.map((entry: any, index: number) => (
+        <div className="bg-[#181F32] border border-[#2A354D] rounded-lg p-3 shadow-lg min-w-[150px]">
+          <p className="text-[#D1D5DB] text-sm mb-2 font-medium">{label}</p>
+          {payload.map((entry: any, index: any) => (
             <p key={index} className="text-sm mb-1" style={{ color: entry.color }}>
-              <span className="text-slate-400">{entry.name}: </span>
+              <span className="text-[#9CA3AF]">{entry.name}: </span>
               <span className="font-medium">{entry.value}{entry.unit || ''}</span>
             </p>
           ))}
@@ -101,23 +102,23 @@ export function ApiCallAnalysis() {
   const totalErrors = apiStats.reduce((sum, a) => sum + Math.round(a.totalCalls * (a.errorRate / 100)), 0);
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务API接口调用分析与统计</h1>
-        <p className="text-slate-400">分析和监控任务API调用性能指标</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务API接口调用分析与统计</h1>
+        <p className="text-[#9CA3AF]">分析和监控任务API调用性能指标</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-6">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center gap-3">
-            <Calendar className="w-5 h-5 text-slate-400" />
-            <div className="flex bg-slate-800 rounded-lg p-1">
+            <Calendar className="w-5 h-5 text-[#9CA3AF]" />
+            <div className="flex bg-[#181F32] rounded-lg p-1">
               {[['1h', '1小时'], ['6h', '6小时'], ['24h', '24小时'], ['7d', '7天']].map(([key, label]) => (
                 <button
                   key={key}
                   onClick={() => setTimeRange(key as any)}
                   className={`px-4 py-1.5 rounded-md text-sm transition-colors ${
-                    timeRange === key ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                    timeRange === key ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                   }`}
                 >
                   {label}
@@ -127,11 +128,11 @@ export function ApiCallAnalysis() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex bg-slate-800 rounded-lg p-1">
+            <div className="flex bg-[#181F32] rounded-lg p-1">
               <button
                 onClick={() => setViewMode('time')}
                 className={`px-4 py-1.5 rounded-md text-sm transition-colors flex items-center gap-2 ${
-                  viewMode === 'time' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  viewMode === 'time' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                 }`}
               >
                 <Clock className="w-4 h-4" />
@@ -140,7 +141,7 @@ export function ApiCallAnalysis() {
               <button
                 onClick={() => setViewMode('application')}
                 className={`px-4 py-1.5 rounded-md text-sm transition-colors flex items-center gap-2 ${
-                  viewMode === 'application' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  viewMode === 'application' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                 }`}
               >
                 <Users className="w-4 h-4" />
@@ -151,7 +152,7 @@ export function ApiCallAnalysis() {
             <select
               value={selectedApi}
               onChange={(e) => setSelectedApi(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="all">全部API</option>
               <option value="API-001">获取威胁情报</option>
@@ -162,7 +163,7 @@ export function ApiCallAnalysis() {
 
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
             >
               <Download className="w-4 h-4" />
               导出报表
@@ -172,60 +173,60 @@ export function ApiCallAnalysis() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">总调用次数</p>
-            <Activity className="w-5 h-5 text-blue-400" />
+            <p className="text-[#9CA3AF] text-sm">总调用次数</p>
+            <Activity className="w-5 h-5 text-[#0066FF]" />
           </div>
-          <p className="text-3xl font-bold text-white">{totalCalls.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{totalCalls.toLocaleString()}</p>
           <div className="flex items-center gap-1 mt-1">
-            <ArrowUpRight className="w-4 h-4 text-green-400" />
-            <p className="text-green-400 text-sm">↑ 12% vs 上期</p>
+            <ArrowUpRight className="w-4 h-4 text-[#00C853]" />
+            <p className="text-[#00C853] text-sm">↑ 12% vs 上期</p>
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">平均成功率</p>
-            <TrendingUp className="w-5 h-5 text-green-400" />
+            <p className="text-[#9CA3AF] text-sm">平均成功率</p>
+            <TrendingUp className="w-5 h-5 text-[#00C853]" />
           </div>
-          <p className="text-3xl font-bold text-white">{avgSuccessRate}%</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{avgSuccessRate}%</p>
           <div className="flex items-center gap-1 mt-1">
-            <ArrowUpRight className="w-4 h-4 text-green-400" />
-            <p className="text-green-400 text-sm">↑ 2.1% vs 上期</p>
+            <ArrowUpRight className="w-4 h-4 text-[#00C853]" />
+            <p className="text-[#00C853] text-sm">↑ 2.1% vs 上期</p>
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">平均响应时间</p>
-            <Zap className="w-5 h-5 text-yellow-400" />
+            <p className="text-[#9CA3AF] text-sm">平均响应时间</p>
+            <Zap className="w-5 h-5 text-[#FF9100]" />
           </div>
-          <p className="text-3xl font-bold text-white">{avgResponseTime}ms</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{avgResponseTime}ms</p>
           <div className="flex items-center gap-1 mt-1">
-            <ArrowDownRight className="w-4 h-4 text-red-400" />
-            <p className="text-red-400 text-sm">↑ 5.2% vs 上期</p>
+            <ArrowDownRight className="w-4 h-4 text-[#FF3B30]" />
+            <p className="text-[#FF3B30] text-sm">↑ 5.2% vs 上期</p>
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">错误次数</p>
-            <AlertCircle className="w-5 h-5 text-red-400" />
+            <p className="text-[#9CA3AF] text-sm">错误次数</p>
+            <AlertCircle className="w-5 h-5 text-[#FF3B30]" />
           </div>
-          <p className="text-3xl font-bold text-white">{totalErrors}</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{totalErrors}</p>
           <div className="flex items-center gap-1 mt-1">
-            <ArrowDownRight className="w-4 h-4 text-green-400" />
-            <p className="text-green-400 text-sm">↓ 8.3% vs 上期</p>
+            <ArrowDownRight className="w-4 h-4 text-[#00C853]" />
+            <p className="text-[#00C853] text-sm">↓ 8.3% vs 上期</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center gap-2 mb-4">
-            <BarChart3 className="w-5 h-5 text-blue-400" />
-            <h3 className="text-lg font-semibold text-white">调用次数趋势</h3>
+            <BarChart3 className="w-5 h-5 text-[#0066FF]" />
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">调用次数趋势</h3>
           </div>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={currentData}>
@@ -242,7 +243,7 @@ export function ApiCallAnalysis() {
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="label" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={CustomTooltip as any} />
               <Legend wrapperStyle={{ color: '#94a3b8', paddingTop: '10px' }} />
               <Area type="monotone" dataKey="calls" name="总调用" stroke="#3b82f6" fillOpacity={1} fill="url(#totalGradient)" />
               <Area type="monotone" dataKey="success" name="成功" stroke="#22c55e" fillOpacity={1} fill="url(#successGradient)" />
@@ -250,17 +251,17 @@ export function ApiCallAnalysis() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Zap className="w-5 h-5 text-yellow-400" />
-            <h3 className="text-lg font-semibold text-white">平均响应时间趋势</h3>
+            <Zap className="w-5 h-5 text-[#FF9100]" />
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">平均响应时间趋势</h3>
           </div>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={currentData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="label" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={CustomTooltip as any} />
               <Legend wrapperStyle={{ color: '#94a3b8', paddingTop: '10px' }} />
               <Line type="monotone" dataKey="avgTime" name="响应时间(ms)" stroke="#06b6d4" strokeWidth={2} dot={{ fill: '#06b6d4', r: 4 }} activeDot={{ fill: '#06b6d4', r: 6 }} />
             </LineChart>
@@ -270,17 +271,17 @@ export function ApiCallAnalysis() {
 
       {viewMode === 'application' ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-purple-400" />
-              <h3 className="text-lg font-semibold text-white">应用调用分布</h3>
+              <Users className="w-5 h-5 text-[#6366F1]" />
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">应用调用分布</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={applicationStats} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                 <XAxis type="number" stroke="#94a3b8" />
                 <YAxis dataKey="name" type="category" stroke="#94a3b8" width={80} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={CustomTooltip as any} />
                 <Legend wrapperStyle={{ color: '#94a3b8', paddingTop: '10px' }} />
                 <Bar dataKey="calls" name="总调用" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
                 <Bar dataKey="success" name="成功" fill="#22c55e" radius={[0, 4, 4, 0]} />
@@ -288,10 +289,10 @@ export function ApiCallAnalysis() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
             <div className="flex items-center gap-2 mb-4">
-              <PieChartIcon className="w-5 h-5 text-orange-400" />
-              <h3 className="text-lg font-semibold text-white">请求方法分布</h3>
+              <PieChartIcon className="w-5 h-5 text-[#FF9100]" />
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">请求方法分布</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -310,7 +311,7 @@ export function ApiCallAnalysis() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={CustomTooltip as any} />
                 <Legend wrapperStyle={{ color: '#94a3b8' }} />
               </PieChart>
             </ResponsiveContainer>
@@ -318,27 +319,27 @@ export function ApiCallAnalysis() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Zap className="w-5 h-5 text-cyan-400" />
-              <h3 className="text-lg font-semibold text-white">响应时间分布</h3>
+              <Zap className="w-5 h-5 text-[#00BCD4]" />
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">响应时间分布</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={responseTimeDistribution} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                 <XAxis type="number" stroke="#94a3b8" />
                 <YAxis dataKey="range" type="category" stroke="#94a3b8" width={80} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={CustomTooltip as any} />
                 <Legend wrapperStyle={{ color: '#94a3b8', paddingTop: '10px' }} />
                 <Bar dataKey="count" name="调用次数" fill="#06b6d4" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
             <div className="flex items-center gap-2 mb-4">
-              <PieChartIcon className="w-5 h-5 text-green-400" />
-              <h3 className="text-lg font-semibold text-white">调用状态分布</h3>
+              <PieChartIcon className="w-5 h-5 text-[#00C853]" />
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">调用状态分布</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -357,7 +358,7 @@ export function ApiCallAnalysis() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={CustomTooltip as any} />
                 <Legend wrapperStyle={{ color: '#94a3b8' }} />
               </PieChart>
             </ResponsiveContainer>
@@ -365,40 +366,40 @@ export function ApiCallAnalysis() {
         </div>
       )}
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Activity className="w-5 h-5 text-blue-400" />
-          <h3 className="text-lg font-semibold text-white">API性能对比</h3>
+          <Activity className="w-5 h-5 text-[#0066FF]" />
+          <h3 className="text-lg font-semibold text-[#F3F4F6]">API性能对比</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {apiStats.map((api, index) => (
-            <div key={index} className="p-4 bg-slate-800 rounded-lg border border-slate-700">
+            <div key={index} className="p-4 bg-[#181F32] rounded-lg border border-[#2A354D]">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-white font-medium text-sm">{api.name}</span>
-                <span className={`text-xs font-medium ${api.successRate >= 95 ? 'text-green-400' : api.successRate >= 80 ? 'text-yellow-400' : 'text-red-400'}`}>
+                <span className="text-[#F3F4F6] font-medium text-sm">{api.name}</span>
+                <span className={`text-xs font-medium ${api.successRate >= 95 ? 'text-[#00C853]' : api.successRate >= 80 ? 'text-[#FF9100]' : 'text-[#FF3B30]'}`}>
                   {api.successRate}%
                 </span>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
+              <div className="w-full bg-[#2A354D] rounded-full h-2 mb-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-500 ${api.successRate >= 95 ? 'bg-green-500' : api.successRate >= 80 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                  className={`h-2 rounded-full transition-all duration-500 ${api.successRate >= 95 ? 'bg-[#00C853]' : api.successRate >= 80 ? 'bg-[#FF9100]' : 'bg-[#FF3B30]'}`}
                   style={{ width: `${api.successRate}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-slate-400">
+              <div className="flex items-center justify-between text-xs text-[#9CA3AF]">
                 <span>总调用: {api.totalCalls}</span>
                 <span>平均: {api.avgTime}ms</span>
               </div>
               <div className="flex items-center gap-1 mt-2">
                 {api.trend >= 0 ? (
                   <>
-                    <ArrowUpRight className="w-3 h-3 text-red-400" />
-                    <span className="text-xs text-red-400">↑{api.trend}%</span>
+                    <ArrowUpRight className="w-3 h-3 text-[#FF3B30]" />
+                    <span className="text-xs text-[#FF3B30]">↑{api.trend}%</span>
                   </>
                 ) : (
                   <>
-                    <ArrowDownRight className="w-3 h-3 text-green-400" />
-                    <span className="text-xs text-green-400">↓{Math.abs(api.trend)}%</span>
+                    <ArrowDownRight className="w-3 h-3 text-[#00C853]" />
+                    <span className="text-xs text-[#00C853]">↓{Math.abs(api.trend)}%</span>
                   </>
                 )}
               </div>

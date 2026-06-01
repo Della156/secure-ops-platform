@@ -1,25 +1,76 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0f172a;
-  --color-foreground: #f8fafc;
+  --color-background: #111625;
+  --color-foreground: #F3F4F6;
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 }
 
-/* Custom scrollbar for sidebar */
+/* ===== XSOAR 设计系统变量 ===== */
+:root {
+  /* 基础背景层 */
+  --bg-main: #111625;          /* 画布背景 */
+  --bg-surface: #181F32;       /* 面板/工作区 */
+  --bg-card: #20293F;          /* 卡片/菜单底色 */
+
+  /* 边框与连线 */
+  --border-light: #2A354D;     /* 默认边框 */
+  --border-focus: #0066FF;     /* 激活态边框 */
+
+  /* 文本层级 */
+  --text-primary: #F3F4F6;     /* 主标题/代码 */
+  --text-secondary: #9CA3AF;   /* 描述/时间戳 */
+  --text-muted: #6B7280;       /* 禁用状态 */
+
+  /* 语义资产色 — XSOAR 经典 */
+  --color-primary: #0066FF;    /* 核心行动点 */
+  --color-ai: #6366F1;         /* AI 智能体专用 */
+  --color-success: #00C853;    /* 正常/通过 */
+  --color-warning: #FF9100;    /* 审批/异常 */
+  --color-danger: #FF3B30;     /* 失败/高危 */
+}
+
+/* 极细滚动条 (XSOAR 风格) */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
+  height: 4px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
+  background: #2A354D;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A4560;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+/* 点阵网格背景（用于编排画布） */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* 智能体节点卡片左侧标识条 */
+.agent-bar-blue { border-left: 4px solid #0066FF; }
+.agent-bar-purple { border-left: 4px solid #6366F1; }
+.agent-bar-red { border-left: 4px solid #FF3B30; }
+
+/* 状态胶囊标签（低透明度背景） */
+.badge-success {
+  background: rgba(0, 200, 83, 0.1);
+  color: #00C853;
+  border: 1px solid rgba(0, 200, 83, 0.2);
+}
+.badge-danger {
+  background: rgba(255, 59, 48, 0.1);
+  color: #FF3B30;
+  border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+/* Modal/浮层光晕边框 */
+.glow-focus {
+  box-shadow: 0 0 12px 0 rgba(0, 102, 255, 0.12);
 }

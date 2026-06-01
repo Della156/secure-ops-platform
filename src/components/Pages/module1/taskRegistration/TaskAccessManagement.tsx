@@ -92,9 +92,9 @@ export function TaskAccessManagement() {
   // 获取状态标签
   const getStatusBadge = (status: string) => {
     const styles = {
-      normal: 'bg-green-500/20 text-green-400 border-green-500/30',
-      abnormal: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      offline: 'bg-red-500/20 text-red-400 border-red-500/30',
+      normal: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      abnormal: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      offline: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       normal: '正常',
@@ -109,26 +109,26 @@ export function TaskAccessManagement() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务接入管理</h1>
-        <p className="text-slate-400">管理和配置自动化任务的接入参数</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务接入管理</h1>
+        <p className="text-[#9CA3AF]">管理和配置自动化任务的接入参数</p>
       </div>
 
       {/* 操作栏 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             {/* 搜索框 */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索任务名称..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
 
@@ -136,7 +136,7 @@ export function TaskAccessManagement() {
             <select
               value={filterProtocol}
               onChange={(e) => setFilterProtocol(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部协议</option>
               <option value="SSH">SSH</option>
@@ -149,7 +149,7 @@ export function TaskAccessManagement() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="normal">正常</option>
@@ -161,7 +161,7 @@ export function TaskAccessManagement() {
           {/* 新增按钮 */}
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             新增任务
@@ -170,53 +170,53 @@ export function TaskAccessManagement() {
       </div>
 
       {/* 数据表格 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接入协议</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接入参数</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接入协议</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接入参数</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredData.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[#0066FF]/20 text-[#0066FF] border border-blue-500/30">
                     {item.protocol}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-slate-400 max-w-xs truncate" title={item.params}>
+                <td className="px-6 py-4 text-sm text-[#9CA3AF] max-w-xs truncate" title={item.params}>
                   {item.params}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.createdAt}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.createdAt}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleTestConnection(item)}
-                      className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                       title="连接测试"
                     >
                       <Link2 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                       title="编辑"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                       title="删除"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -230,7 +230,7 @@ export function TaskAccessManagement() {
 
         {filteredData.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
@@ -238,35 +238,35 @@ export function TaskAccessManagement() {
       {/* 新增/编辑模态框 */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingItem ? '编辑任务' : '新增任务'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">任务名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">任务名称</label>
                 <input
                   type="text"
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入任务名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">接入协议</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">接入协议</label>
                 <select
                   value={formData.protocol || 'SSH'}
                   onChange={(e) => setFormData({ ...formData, protocol: e.target.value as any })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 >
                   <option value="SSH">SSH</option>
                   <option value="REST">REST</option>
@@ -275,34 +275,34 @@ export function TaskAccessManagement() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">接入参数 (JSON)</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">接入参数 (JSON)</label>
                 <textarea
                   value={formData.params || ''}
                   onChange={(e) => setFormData({ ...formData, params: e.target.value })}
                   rows={4}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono text-sm"
                   placeholder='{"key":"value"}'
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">描述</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">描述</label>
                 <textarea
                   rows={2}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入任务描述"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

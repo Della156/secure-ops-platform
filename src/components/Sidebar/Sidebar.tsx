@@ -12,26 +12,26 @@ export function Sidebar() {
   return (
     <aside
       className={`
-        fixed left-0 top-0 h-screen bg-slate-900 border-r border-slate-800
+        fixed left-0 top-0 h-screen bg-[#20293F] border-r border-[#2A354D]
         transition-all duration-300 z-50 flex flex-col
         ${sidebarCollapsed ? 'w-[72px]' : 'w-[280px]'}
       `}
     >
       {/* Logo Header */}
-      <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
+      <div className="h-16 flex items-center justify-between px-4 border-b border-[#2A354D]">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
-            <Shield className="w-5 h-5 text-white" />
+          <div className="w-8 h-8 bg-[#0066FF] rounded-lg flex items-center justify-center flex-shrink-0">
+            <Shield className="w-5 h-5 text-[#F3F4F6]" />
           </div>
           {!sidebarCollapsed && (
-            <span className="text-white font-semibold whitespace-nowrap">
+            <span className="text-[#F3F4F6] font-semibold whitespace-nowrap">
               网络安全态势感知
             </span>
           )}
         </div>
         <button
           onClick={toggleSidebar}
-          className="p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+          className="p-1.5 rounded-md text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] transition-colors"
         >
           {sidebarCollapsed ? (
             <PanelLeft className="w-5 h-5" />
@@ -54,9 +54,9 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-[#2A354D]">
         {!sidebarCollapsed && (
-          <p className="text-xs text-slate-500 text-center">
+          <p className="text-xs text-[#6B7280] text-center">
             v1.0.0 · 2026
           </p>
         )}

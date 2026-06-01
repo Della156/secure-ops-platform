@@ -2,53 +2,85 @@
 
 import { useSystem } from '@/contexts/SystemContext';
 import { menuData } from '@/data/menuData';
-import { PageRouter } from '@/components/Pages/PageRouter';
+import { getPageComponent } from '@/data/pageRegistry';
+import { PageShell } from '@/components/PageShell';
 
+// 菜单信息查找工具
+function findMenuInfo(menuId: string) {
+  for (const item of menuData) {
+    // 一级菜单
+    if (item.id === menuId) {
+      return { title: item.label, breadcrumb: [{ label: item.label }] };
+    }
+    // 二级菜单
+    if (item.children) {
+      for (const sub of item.children) {
+        if (sub.id === menuId) {
+          return {
+            title: sub.label,
+            breadcrumb: [
+              { label: item.label },
+              { label: sub.label },
+            ],
+          };
+        }
+        // 三级菜单
+        if (sub.children) {
+          const third = sub.children.find((t) => t.id === menuId);
+          if (third) {
+            return {
+              title: third.label,
+              breadcrumb: [
+                { label: item.label },
+                { label: sub.label },
+                { label: third.label },
+              ],
+            };
+          }
+        }
+      }
+    }
+  }
+  return { title: '首页', breadcrumb: [] };
+}
+
+/**
+ * PageContent 组件
+ * 
+ * 统一页面渲染入口：
+ * - 根据 activeMenu 查找对应页面组件
+ * - 包裹统一的 PageShell（含面包屑、标题、描述）
+ * - 未注册的页面显示占位内容（含风险卡片）
+ */
 export function PageContent() {
   const { activeMenu } = useSystem();
 
-  // 检查是否是模块1的三级菜单
-  const isModule1ThirdLevelMenu = () => {
-    for (const item of menuData) {
-      if (item.id === 'menu-1' && item.children) {
-        for (const sub of item.children) {
-          if (sub.children) {
-            const third = sub.children.find((t) => t.id === activeMenu);
-            if (third) return true;
-          }
-        }
-      }
-    }
-    return false;
-  };
+  // 尝试从注册表获取页面组件
+  const PageComponent = getPageComponent(activeMenu);
+  const { title, breadcrumb } = findMenuInfo(activeMenu);
 
-  // 如果是模块1的三级菜单，使用PageRouter
-  if (isModule1ThirdLevelMenu()) {
-    return <PageRouter />;
+  // 如果页面已注册（非 DefaultPage），使用 PageShell
+  if (activeMenu.startsWith('menu-1-') && activeMenu !== 'menu-1') {
+    return (
+      <PageShell title={title} breadcrumb={breadcrumb}>
+        <PageComponent />
+      </PageShell>
+    );
   }
 
-  // 否则显示默认页面
-  return <DefaultPage />;
+  // 未注册页面 / 首页 → 显示默认占位（含风险卡片）
+  return <DefaultPlaceholder />;
 }
 
-function DefaultPage() {
+/**
+ * 默认首页占位（含风险评分卡片）
+ */
+function DefaultPlaceholder() {
   const { activeMenu, highPriorityTodos, riskScore } = useSystem();
 
   const getMenuTitle = () => {
-    for (const item of menuData) {
-      if (item.id === activeMenu) return item.label;
-      if (item.children) {
-        const child = item.children.find((c) => c.id === activeMenu);
-        if (child) return child.label;
-        for (const sub of item.children) {
-          if (sub.children) {
-            const third = sub.children.find((t) => t.id === activeMenu);
-            if (third) return `${sub.label} / ${third.label}`;
-          }
-        }
-      }
-    }
-    return '首页';
+    const info = findMenuInfo(activeMenu);
+    return info.title;
   };
 
   const getPageDescription = () => {
@@ -60,12 +92,6 @@ function DefaultPage() {
       if (item.children) {
         const child = item.children.find((c) => c.id === activeMenu);
         if (child) return `二级菜单：${child.label}`;
-        for (const sub of item.children) {
-          if (sub.children) {
-            const third = sub.children.find((t) => t.id === activeMenu);
-            if (third) return `三级菜单：${third.label}`;
-          }
-        }
       }
     }
     return '网络安全智能化运维平台';
@@ -74,53 +100,47 @@ function DefaultPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white mb-2">{getMenuTitle()}</h1>
-        <p className="text-slate-400">{getPageDescription()}</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">{getMenuTitle()}</h1>
+        <p className="text-[#9CA3AF]">{getPageDescription()}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">系统风险评分</span>
-            <span className={`text-xs px-2 py-1 rounded-full ${
-              riskScore > 90 ? 'bg-red-500/20 text-red-400' :
-              riskScore > 75 ? 'bg-orange-500/20 text-orange-400' :
-              'bg-emerald-500/20 text-emerald-400'
+            <span className="text-[#9CA3AF] text-sm">安全风险评分</span>
+            <span className={`px-2 py-1 rounded text-xs font-medium ${
+              riskScore >= 70 ? 'bg-[#FF3B30]/20 text-[#FF3B30]' :
+              riskScore >= 40 ? 'bg-[#FF9100]/20 text-[#FF9100]' :
+              'bg-[#00C853]/20 text-[#00C853]'
             }`}>
-              {riskScore > 75 ? '关注' : '正常'}
+              {riskScore >= 70 ? '高危' : riskScore >= 40 ? '中危' : '低危'}
             </span>
           </div>
-          <p className={`text-3xl font-bold ${
-            riskScore > 90 ? 'text-red-400' :
-            riskScore > 75 ? 'text-orange-400' :
-            'text-emerald-400'
-          }`}>
-            {riskScore}
-          </p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{riskScore}</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">高危待办</span>
-            <span className="bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded-full">
+            <span className="text-[#9CA3AF] text-sm">高危待办</span>
+            <span className="bg-[#FF3B30]/20 text-[#FF3B30] text-xs px-2 py-1 rounded-full">
               {highPriorityTodos.length} 项
             </span>
           </div>
-          <p className="text-3xl font-bold text-red-400">{highPriorityTodos.length}</p>
+          <p className="text-3xl font-bold text-[#FF3B30]">{highPriorityTodos.length}</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">自动化任务</span>
+            <span className="text-[#9CA3AF] text-sm">自动化任务</span>
           </div>
-          <p className="text-3xl font-bold text-white">1,284</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">1,284</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">今日执行</span>
+            <span className="text-[#9CA3AF] text-sm">今日执行</span>
           </div>
-          <p className="text-3xl font-bold text-white">98.5%</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">98.5%</p>
         </div>
       </div>
     </div>

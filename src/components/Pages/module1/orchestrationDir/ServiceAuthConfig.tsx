@@ -192,11 +192,11 @@ export function ServiceAuthConfig() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      active: 'bg-green-500/20 text-green-400 border-green-500/30',
-      inactive: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-      pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      approved: 'bg-green-500/20 text-green-400 border-green-500/30',
-      rejected: 'bg-red-500/20 text-red-400 border-red-500/30'
+      active: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      inactive: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
+      pending: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      approved: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      rejected: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30'
     };
     const labels = {
       active: '已启用',
@@ -264,10 +264,10 @@ export function ServiceAuthConfig() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务服务接口授权配置</h1>
-        <p className="text-slate-400">管理自动化能力的访问授权策略和申请审批</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务服务接口授权配置</h1>
+        <p className="text-[#9CA3AF]">管理自动化能力的访问授权策略和申请审批</p>
       </div>
 
       <div className="flex gap-2 mb-6">
@@ -275,8 +275,8 @@ export function ServiceAuthConfig() {
           onClick={() => setActiveTab('policies')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
             activeTab === 'policies'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'bg-[#181F32] text-[#D1D5DB] hover:bg-[#2A354D]'
           }`}
         >
           <Shield className="w-4 h-4" />
@@ -286,37 +286,37 @@ export function ServiceAuthConfig() {
           onClick={() => setActiveTab('requests')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
             activeTab === 'requests'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'bg-[#181F32] text-[#D1D5DB] hover:bg-[#2A354D]'
           }`}
         >
           <Clock className="w-4 h-4" />
           申请审批
           {mockRequests.filter(r => r.status === 'pending').length > 0 && (
-            <span className="px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
+            <span className="px-1.5 py-0.5 bg-[#FF3B30] text-[#F3F4F6] rounded-full text-xs">
               {mockRequests.filter(r => r.status === 'pending').length}
             </span>
           )}
         </button>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder={`搜索${activeTab === 'policies' ? '策略名称或能力' : '申请名称或申请人'}...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               {activeTab === 'policies' ? (
@@ -337,7 +337,7 @@ export function ServiceAuthConfig() {
           {activeTab === 'policies' && (
             <button
               onClick={() => handleOpenModal('create')}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
             >
               <Plus className="w-4 h-4" />
               新建策略
@@ -347,35 +347,35 @@ export function ServiceAuthConfig() {
       </div>
 
       {activeTab === 'policies' ? (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">策略ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">策略名称</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">能力</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">授权对象</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">有效期</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">策略ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">策略名称</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">能力</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">授权对象</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">有效期</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {filteredPolicies.map(item => (
-                <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.abilityName}</td>
+                <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.abilityName}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-1">
-                      {item.authType === 'role' ? <Users className="w-3 h-3 text-slate-400" /> : <User className="w-3 h-3 text-slate-400" />}
-                      <span className="text-sm text-slate-300">
+                      {item.authType === 'role' ? <Users className="w-3 h-3 text-[#9CA3AF]" /> : <User className="w-3 h-3 text-[#9CA3AF]" />}
+                      <span className="text-sm text-[#D1D5DB]">
                         {item.authTargets.slice(0, 2).join(', ')}
                         {item.authTargets.length > 2 && ` +${item.authTargets.length - 2}`}
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                     {item.validFrom} ~ {item.validUntil}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
@@ -383,20 +383,20 @@ export function ServiceAuthConfig() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleOpenModal('view', item)}
-                        className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                        className="p-1.5 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#2A354D] rounded transition-colors"
                         title="查看"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleOpenModal('edit', item)}
-                        className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                         title="编辑"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
-                        className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                         title="删除"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -409,38 +409,38 @@ export function ServiceAuthConfig() {
           </table>
           {filteredPolicies.length === 0 && (
             <div className="px-6 py-12 text-center">
-              <p className="text-slate-500">暂无数据</p>
+              <p className="text-[#6B7280]">暂无数据</p>
             </div>
           )}
         </div>
       ) : (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">申请ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">申请名称</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">能力</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">申请人</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">申请时间</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">申请ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">申请名称</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">能力</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">申请人</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">申请时间</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {filteredRequests.map(item => (
-                <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.policyName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.abilityName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.requester}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.requestTime}</td>
+                <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.policyName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.abilityName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.requester}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.requestTime}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleOpenModal('view', item)}
-                        className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+                        className="p-1.5 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#2A354D] rounded transition-colors"
                         title="查看"
                       >
                         <Eye className="w-4 h-4" />
@@ -449,13 +449,13 @@ export function ServiceAuthConfig() {
                         <>
                           <button
                             onClick={() => handleOpenModal('approve', item)}
-                            className="p-1.5 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                            className="p-1.5 text-[#00C853] hover:text-[#33D97A] hover:bg-[#00C853]/10 rounded transition-colors"
                             title="批准"
                           >
                             <CheckCircle2 className="w-4 h-4" />
                           </button>
                           <button
-                            className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                            className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                             title="拒绝"
                             onClick={handleReject}
                           >
@@ -471,7 +471,7 @@ export function ServiceAuthConfig() {
           </table>
           {filteredRequests.length === 0 && (
             <div className="px-6 py-12 text-center">
-              <p className="text-slate-500">暂无数据</p>
+              <p className="text-[#6B7280]">暂无数据</p>
             </div>
           )}
         </div>
@@ -479,9 +479,9 @@ export function ServiceAuthConfig() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {modalType === 'create' && '新建授权策略'}
                 {modalType === 'edit' && '编辑授权策略'}
                 {modalType === 'view' && selectedItem && 'policyName' in selectedItem ? '查看申请详情' : '查看策略详情'}
@@ -489,7 +489,7 @@ export function ServiceAuthConfig() {
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -498,21 +498,21 @@ export function ServiceAuthConfig() {
               {(modalType === 'create' || modalType === 'edit') && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">策略名称</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">策略名称</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       placeholder="请输入策略名称"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">选择能力</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">选择能力</label>
                     <select
                       value={formData.abilityId}
                       onChange={(e) => setFormData({ ...formData, abilityId: e.target.value })}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                     >
                       <option value="">请选择能力</option>
                       {abilities.map(ab => (
@@ -521,7 +521,7 @@ export function ServiceAuthConfig() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">授权类型</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">授权类型</label>
                     <div className="flex gap-4">
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -530,9 +530,9 @@ export function ServiceAuthConfig() {
                           value="role"
                           checked={formData.authType === 'role'}
                           onChange={(e) => setFormData({ ...formData, authType: e.target.value as 'role' | 'user', authTargets: [] })}
-                          className="text-blue-600 bg-slate-800 border-slate-600 focus:ring-blue-500"
+                          className="text-[#4D94FF] bg-[#181F32] border-[#3A4560] focus:ring-[#0066FF]"
                         />
-                        <span className="text-slate-300">按角色授权</span>
+                        <span className="text-[#D1D5DB]">按角色授权</span>
                       </label>
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -541,14 +541,14 @@ export function ServiceAuthConfig() {
                           value="user"
                           checked={formData.authType === 'user'}
                           onChange={(e) => setFormData({ ...formData, authType: e.target.value as 'role' | 'user', authTargets: [] })}
-                          className="text-blue-600 bg-slate-800 border-slate-600 focus:ring-blue-500"
+                          className="text-[#4D94FF] bg-[#181F32] border-[#3A4560] focus:ring-[#0066FF]"
                         />
-                        <span className="text-slate-300">按用户授权</span>
+                        <span className="text-[#D1D5DB]">按用户授权</span>
                       </label>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">
                       选择{formData.authType === 'role' ? '角色' : '用户'}
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -558,8 +558,8 @@ export function ServiceAuthConfig() {
                           onClick={() => handleToggleTarget(target)}
                           className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                             formData.authTargets.includes(target)
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                              ? 'bg-[#0066FF] text-[#F3F4F6]'
+                              : 'bg-[#181F32] text-[#D1D5DB] hover:bg-[#2A354D]'
                           }`}
                         >
                           {target}
@@ -569,7 +569,7 @@ export function ServiceAuthConfig() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5 flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         有效期开始
                       </label>
@@ -577,11 +577,11 @@ export function ServiceAuthConfig() {
                         type="date"
                         value={formData.validFrom}
                         onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
-                        className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5 flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         有效期结束
                       </label>
@@ -589,17 +589,17 @@ export function ServiceAuthConfig() {
                         type="date"
                         value={formData.validUntil}
                         onChange={(e) => setFormData({ ...formData, validUntil: e.target.value })}
-                        className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">描述</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">描述</label>
                     <textarea
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       rows={3}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       placeholder="请输入策略描述"
                     />
                   </div>
@@ -610,42 +610,42 @@ export function ServiceAuthConfig() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-slate-400 mb-1">策略ID</p>
-                      <p className="text-white font-medium">{selectedItem.id}</p>
+                      <p className="text-sm text-[#9CA3AF] mb-1">策略ID</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedItem.id}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-slate-400 mb-1">状态</p>
+                      <p className="text-sm text-[#9CA3AF] mb-1">状态</p>
                       {getStatusBadge(selectedItem.status)}
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">策略名称</p>
-                    <p className="text-white">{selectedItem.name}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">策略名称</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.name}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">能力</p>
-                    <p className="text-white">{selectedItem.abilityName}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">能力</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.abilityName}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">授权对象</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">授权对象</p>
                     <div className="flex flex-wrap gap-2 mt-1">
                       {selectedItem.authTargets.map(target => (
-                        <span key={target} className="px-2 py-1 bg-slate-800 text-slate-300 rounded text-sm">{target}</span>
+                        <span key={target} className="px-2 py-1 bg-[#181F32] text-[#D1D5DB] rounded text-sm">{target}</span>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">有效期</p>
-                    <p className="text-white">{selectedItem.validFrom} ~ {selectedItem.validUntil}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">有效期</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.validFrom} ~ {selectedItem.validUntil}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">描述</p>
-                    <p className="text-white">{selectedItem.description}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">描述</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.description}</p>
                   </div>
-                  <div className="pt-4 border-t border-slate-800">
-                    <p className="text-sm text-slate-400 mb-1">创建信息</p>
-                    <p className="text-slate-300 text-sm">创建人：{selectedItem.createdBy}</p>
-                    <p className="text-slate-300 text-sm">创建时间：{selectedItem.createdAt}</p>
+                  <div className="pt-4 border-t border-[#2A354D]">
+                    <p className="text-sm text-[#9CA3AF] mb-1">创建信息</p>
+                    <p className="text-[#D1D5DB] text-sm">创建人：{selectedItem.createdBy}</p>
+                    <p className="text-[#D1D5DB] text-sm">创建时间：{selectedItem.createdAt}</p>
                   </div>
                 </div>
               )}
@@ -654,54 +654,54 @@ export function ServiceAuthConfig() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-slate-400 mb-1">申请ID</p>
-                      <p className="text-white font-medium">{selectedItem.id}</p>
+                      <p className="text-sm text-[#9CA3AF] mb-1">申请ID</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedItem.id}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-slate-400 mb-1">状态</p>
+                      <p className="text-sm text-[#9CA3AF] mb-1">状态</p>
                       {getStatusBadge(selectedItem.status)}
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">申请名称</p>
-                    <p className="text-white">{selectedItem.policyName}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">申请名称</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.policyName}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">申请能力</p>
-                    <p className="text-white">{selectedItem.abilityName}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">申请能力</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.abilityName}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">申请人</p>
-                    <p className="text-white">{selectedItem.requester}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">申请人</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.requester}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">申请时间</p>
-                    <p className="text-white">{selectedItem.requestTime}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">申请时间</p>
+                    <p className="text-[#F3F4F6]">{selectedItem.requestTime}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">申请原因</p>
-                    <div className="bg-slate-800 rounded-lg p-3 mt-1">
-                      <p className="text-white">{selectedItem.requestReason}</p>
+                    <p className="text-sm text-[#9CA3AF] mb-1">申请原因</p>
+                    <div className="bg-[#181F32] rounded-lg p-3 mt-1">
+                      <p className="text-[#F3F4F6]">{selectedItem.requestReason}</p>
                     </div>
                   </div>
                   {selectedItem.approver && (
-                    <div className="pt-4 border-t border-slate-800">
-                      <p className="text-sm text-slate-400 mb-1">审批信息</p>
-                      <p className="text-slate-300 text-sm">审批人：{selectedItem.approver}</p>
-                      <p className="text-slate-300 text-sm">审批时间：{selectedItem.approvalTime}</p>
+                    <div className="pt-4 border-t border-[#2A354D]">
+                      <p className="text-sm text-[#9CA3AF] mb-1">审批信息</p>
+                      <p className="text-[#D1D5DB] text-sm">审批人：{selectedItem.approver}</p>
+                      <p className="text-[#D1D5DB] text-sm">审批时间：{selectedItem.approvalTime}</p>
                       {selectedItem.approvalComment && (
-                        <div className="bg-slate-800 rounded-lg p-3 mt-2">
-                          <p className="text-white text-sm">{selectedItem.approvalComment}</p>
+                        <div className="bg-[#181F32] rounded-lg p-3 mt-2">
+                          <p className="text-[#F3F4F6] text-sm">{selectedItem.approvalComment}</p>
                         </div>
                       )}
                     </div>
                   )}
                   {modalType === 'approve' && (
-                    <div className="pt-4 border-t border-slate-800">
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">审批意见</label>
+                    <div className="pt-4 border-t border-[#2A354D]">
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">审批意见</label>
                       <textarea
                         rows={3}
-                        className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                         placeholder="请输入审批意见"
                       />
                     </div>
@@ -710,48 +710,48 @@ export function ServiceAuthConfig() {
               )}
             </div>
             {(modalType === 'create' || modalType === 'edit') && (
-              <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   取消
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   保存
                 </button>
               </div>
             )}
             {modalType === 'approve' && (
-              <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   取消
                 </button>
                 <button
                   onClick={handleReject}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   拒绝
                 </button>
                 <button
                   onClick={handleApprove}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   批准
                 </button>
               </div>
             )}
             {modalType === 'view' && (
-              <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   关闭
                 </button>

@@ -127,22 +127,22 @@ export function InterfaceConnectTest() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'testing':
-        return <Loader2 className="w-4 h-4 text-yellow-400 animate-spin" />;
+        return <Loader2 className="w-4 h-4 text-[#FF9100] animate-spin" />;
       case 'success':
-        return <CheckCircle2 className="w-4 h-4 text-green-400" />;
+        return <CheckCircle2 className="w-4 h-4 text-[#00C853]" />;
       case 'failed':
-        return <XCircle className="w-4 h-4 text-red-400" />;
+        return <XCircle className="w-4 h-4 text-[#FF3B30]" />;
       default:
-        return <Activity className="w-4 h-4 text-slate-400" />;
+        return <Activity className="w-4 h-4 text-[#9CA3AF]" />;
     }
   };
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      idle: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-      testing: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      success: 'bg-green-500/20 text-green-400 border-green-500/30',
-      failed: 'bg-red-500/20 text-red-400 border-red-500/30',
+      idle: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
+      testing: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      success: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      failed: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       idle: '待测试',
@@ -165,34 +165,34 @@ export function InterfaceConnectTest() {
 
   const getSeverityColor = (severity: string) => {
     const colors: Record<string, string> = {
-      high: 'text-red-400 bg-red-500/20',
-      medium: 'text-yellow-400 bg-yellow-500/20',
-      critical: 'text-orange-400 bg-orange-500/20',
-      low: 'text-green-400 bg-green-500/20',
+      high: 'text-[#FF3B30] bg-[#FF3B30]/20',
+      medium: 'text-[#FF9100] bg-[#FF9100]/20',
+      critical: 'text-[#FF9100] bg-[#FF9100]/20',
+      low: 'text-[#00C853] bg-[#00C853]/20',
     };
-    return colors[severity] || 'text-slate-400 bg-slate-500/20';
+    return colors[severity] || 'text-[#9CA3AF] bg-[#4A5570]/20';
   };
 
   return (
     <div className="p-6">
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-green-500/20 rounded-lg">
-            <Wifi className="w-5 h-5 text-green-400" />
+          <div className="p-2 bg-[#00C853]/20 rounded-lg">
+            <Wifi className="w-5 h-5 text-[#00C853]" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">数据接口连接测试验证</h1>
-            <p className="text-slate-400 text-sm">测试数据接口连接并预览返回数据</p>
+            <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">数据接口连接测试验证</h1>
+            <p className="text-[#9CA3AF] text-sm">测试数据接口连接并预览返回数据</p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
             <div className="flex items-center gap-2 mb-4">
-              <Server className="w-4 h-4 text-slate-400" />
-              <h3 className="text-lg font-semibold text-white">接口列表</h3>
+              <Server className="w-4 h-4 text-[#9CA3AF]" />
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">接口列表</h3>
             </div>
             <div className="space-y-3">
               {interfaces.map((iface) => (
@@ -201,26 +201,26 @@ export function InterfaceConnectTest() {
                   onClick={() => setSelectedInterface(iface)}
                   className={`p-4 rounded-lg border cursor-pointer transition-all ${
                     selectedInterface?.id === iface.id
-                      ? 'bg-blue-500/10 border-blue-500/50 shadow-lg shadow-blue-500/10'
-                      : 'bg-slate-800 border-slate-700 hover:bg-slate-750 hover:border-slate-600'
+                      ? 'bg-[#0066FF]/10 border-blue-500/50 shadow-lg shadow-blue-500/10'
+                      : 'bg-[#181F32] border-[#2A354D] hover:bg-[#242D45] hover:border-[#3A4560]'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-white">{iface.name}</span>
+                    <span className="text-sm font-medium text-[#F3F4F6]">{iface.name}</span>
                     {getStatusBadge(iface.status)}
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-                    <span className="px-2 py-0.5 bg-slate-700 rounded">{iface.type}</span>
-                    <span className="px-2 py-0.5 bg-slate-700 rounded">{iface.authType}</span>
+                  <div className="flex items-center gap-2 text-xs text-[#6B7280] mb-2">
+                    <span className="px-2 py-0.5 bg-[#2A354D] rounded">{iface.type}</span>
+                    <span className="px-2 py-0.5 bg-[#2A354D] rounded">{iface.authType}</span>
                   </div>
-                  <p className="text-xs text-slate-400 truncate mb-2">{iface.url}</p>
+                  <p className="text-xs text-[#9CA3AF] truncate mb-2">{iface.url}</p>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 flex items-center gap-1">
+                    <span className="text-[#6B7280] flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {iface.lastTestTime}
                     </span>
                     {iface.responseTime && (
-                      <span className="text-slate-300 font-mono">{iface.responseTime}ms</span>
+                      <span className="text-[#D1D5DB] font-mono">{iface.responseTime}ms</span>
                     )}
                   </div>
                 </div>
@@ -232,20 +232,20 @@ export function InterfaceConnectTest() {
         <div className="lg:col-span-2 space-y-4">
           {selectedInterface && (
             <>
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+              <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-lg font-semibold text-white">{selectedInterface.name}</h3>
-                      <span className="px-2 py-0.5 bg-slate-700 rounded text-xs text-slate-300">{selectedInterface.type}</span>
+                      <h3 className="text-lg font-semibold text-[#F3F4F6]">{selectedInterface.name}</h3>
+                      <span className="px-2 py-0.5 bg-[#2A354D] rounded text-xs text-[#D1D5DB]">{selectedInterface.type}</span>
                     </div>
-                    <p className="text-sm text-slate-400">{selectedInterface.url}</p>
+                    <p className="text-sm text-[#9CA3AF]">{selectedInterface.url}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => runTest(selectedInterface)}
                       disabled={isRunningTest}
-                      className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 text-white rounded-lg transition-all hover:shadow-lg hover:shadow-blue-500/20"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-[#0066FF] hover:bg-[#0052CC] disabled:bg-[#3A4560] text-[#F3F4F6] rounded-lg transition-all hover:shadow-lg hover:shadow-blue-500/20"
                     >
                       {isRunningTest ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
                       {isRunningTest ? '测试中...' : '开始测试'}
@@ -256,7 +256,7 @@ export function InterfaceConnectTest() {
                         setPreviewData(null);
                         setDiagnosticLogs([]);
                       }}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-all"
+                      className="flex items-center gap-2 px-4 py-2.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-all"
                     >
                       <RotateCcw className="w-4 h-4" />
                       重置
@@ -267,92 +267,92 @@ export function InterfaceConnectTest() {
                 {testResult && (
                   <div className="space-y-5">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className={`p-4 rounded-lg ${testResult.success ? 'bg-green-500/10 border border-green-500/30' : 'bg-red-500/10 border border-red-500/30'}`}>
-                        <p className="text-sm text-slate-400 mb-1">测试结果</p>
+                      <div className={`p-4 rounded-lg ${testResult.success ? 'bg-[#00C853]/10 border border-green-500/30' : 'bg-[#FF3B30]/10 border border-red-500/30'}`}>
+                        <p className="text-sm text-[#9CA3AF] mb-1">测试结果</p>
                         <div className="flex items-center gap-2">
                           {testResult.success ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-400" />
+                            <CheckCircle2 className="w-5 h-5 text-[#00C853]" />
                           ) : (
-                            <XCircle className="w-5 h-5 text-red-400" />
+                            <XCircle className="w-5 h-5 text-[#FF3B30]" />
                           )}
-                          <p className={`text-xl font-bold ${testResult.success ? 'text-green-400' : 'text-red-400'}`}>
+                          <p className={`text-xl font-bold ${testResult.success ? 'text-[#00C853]' : 'text-[#FF3B30]'}`}>
                             {testResult.success ? '成功' : '失败'}
                           </p>
                         </div>
                       </div>
-                      <div className="p-4 bg-slate-800 rounded-lg">
-                        <p className="text-sm text-slate-400 mb-1">状态码</p>
-                        <p className="text-xl font-bold text-white">{testResult.statusCode}</p>
+                      <div className="p-4 bg-[#181F32] rounded-lg">
+                        <p className="text-sm text-[#9CA3AF] mb-1">状态码</p>
+                        <p className="text-xl font-bold text-[#F3F4F6]">{testResult.statusCode}</p>
                       </div>
-                      <div className="p-4 bg-slate-800 rounded-lg">
-                        <p className="text-sm text-slate-400 mb-1">响应时间</p>
-                        <p className="text-xl font-bold text-white">{testResult.responseTime}ms</p>
+                      <div className="p-4 bg-[#181F32] rounded-lg">
+                        <p className="text-sm text-[#9CA3AF] mb-1">响应时间</p>
+                        <p className="text-xl font-bold text-[#F3F4F6]">{testResult.responseTime}ms</p>
                       </div>
-                      <div className="p-4 bg-slate-800 rounded-lg">
-                        <p className="text-sm text-slate-400 mb-1">测试时间</p>
-                        <p className="text-xl font-bold text-white">{new Date().toLocaleTimeString('zh-CN')}</p>
+                      <div className="p-4 bg-[#181F32] rounded-lg">
+                        <p className="text-sm text-[#9CA3AF] mb-1">测试时间</p>
+                        <p className="text-xl font-bold text-[#F3F4F6]">{new Date().toLocaleTimeString('zh-CN')}</p>
                       </div>
                     </div>
 
                     {testResult.latency && (
-                      <div className="p-4 bg-slate-800 rounded-lg">
-                        <p className="text-sm font-medium text-slate-300 mb-3">延迟分析</p>
+                      <div className="p-4 bg-[#181F32] rounded-lg">
+                        <p className="text-sm font-medium text-[#D1D5DB] mb-3">延迟分析</p>
                         <div className="space-y-2">
                           <div className="flex items-center gap-4">
-                            <span className="text-sm text-slate-400 w-24">DNS解析</span>
-                            <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                              <div className="h-full bg-blue-500 rounded-full" style={{ width: `${Math.min(testResult.latency.dns / 2, 100)}%` }} />
+                            <span className="text-sm text-[#9CA3AF] w-24">DNS解析</span>
+                            <div className="flex-1 h-2 bg-[#2A354D] rounded-full overflow-hidden">
+                              <div className="h-full bg-[#0066FF] rounded-full" style={{ width: `${Math.min(testResult.latency.dns / 2, 100)}%` }} />
                             </div>
-                            <span className="text-sm text-white font-mono w-16 text-right">{testResult.latency.dns}ms</span>
+                            <span className="text-sm text-[#F3F4F6] font-mono w-16 text-right">{testResult.latency.dns}ms</span>
                           </div>
                           <div className="flex items-center gap-4">
-                            <span className="text-sm text-slate-400 w-24">TCP连接</span>
-                            <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                              <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${Math.min(testResult.latency.tcp / 2, 100)}%` }} />
+                            <span className="text-sm text-[#9CA3AF] w-24">TCP连接</span>
+                            <div className="flex-1 h-2 bg-[#2A354D] rounded-full overflow-hidden">
+                              <div className="h-full bg-[#00BCD4] rounded-full" style={{ width: `${Math.min(testResult.latency.tcp / 2, 100)}%` }} />
                             </div>
-                            <span className="text-sm text-white font-mono w-16 text-right">{testResult.latency.tcp}ms</span>
+                            <span className="text-sm text-[#F3F4F6] font-mono w-16 text-right">{testResult.latency.tcp}ms</span>
                           </div>
                           <div className="flex items-center gap-4">
-                            <span className="text-sm text-slate-400 w-24">请求发送</span>
-                            <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                              <div className="h-full bg-purple-500 rounded-full" style={{ width: `${Math.min(testResult.latency.request / 2, 100)}%` }} />
+                            <span className="text-sm text-[#9CA3AF] w-24">请求发送</span>
+                            <div className="flex-1 h-2 bg-[#2A354D] rounded-full overflow-hidden">
+                              <div className="h-full bg-[#6366F1] rounded-full" style={{ width: `${Math.min(testResult.latency.request / 2, 100)}%` }} />
                             </div>
-                            <span className="text-sm text-white font-mono w-16 text-right">{testResult.latency.request}ms</span>
+                            <span className="text-sm text-[#F3F4F6] font-mono w-16 text-right">{testResult.latency.request}ms</span>
                           </div>
                           <div className="flex items-center gap-4">
-                            <span className="text-sm text-slate-400 w-24">响应接收</span>
-                            <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                              <div className="h-full bg-green-500 rounded-full" style={{ width: `${Math.min(testResult.latency.response / 5, 100)}%` }} />
+                            <span className="text-sm text-[#9CA3AF] w-24">响应接收</span>
+                            <div className="flex-1 h-2 bg-[#2A354D] rounded-full overflow-hidden">
+                              <div className="h-full bg-[#00C853] rounded-full" style={{ width: `${Math.min(testResult.latency.response / 5, 100)}%` }} />
                             </div>
-                            <span className="text-sm text-white font-mono w-16 text-right">{testResult.latency.response}ms</span>
+                            <span className="text-sm text-[#F3F4F6] font-mono w-16 text-right">{testResult.latency.response}ms</span>
                           </div>
                         </div>
                       </div>
                     )}
 
-                    <div className="p-4 bg-slate-800 rounded-lg">
+                    <div className="p-4 bg-[#181F32] rounded-lg">
                       <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-medium text-slate-300">响应头</p>
+                        <p className="text-sm font-medium text-[#D1D5DB]">响应头</p>
                         <button
                           onClick={() => handleCopy(JSON.stringify(testResult.headers, null, 2))}
-                          className="flex items-center gap-1 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm transition-colors"
+                          className="flex items-center gap-1 px-3 py-1.5 bg-[#2A354D] hover:bg-[#3A4560] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                         >
                           <Copy className="w-3 h-3" />
                           复制
                         </button>
                       </div>
-                      <pre className="text-xs text-slate-400 font-mono bg-slate-900 p-3 rounded overflow-x-auto">
+                      <pre className="text-xs text-[#9CA3AF] font-mono bg-[#20293F] p-3 rounded overflow-x-auto">
                         {JSON.stringify(testResult.headers, null, 2)}
                       </pre>
                     </div>
 
                     {testResult.error && (
-                      <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                      <div className="p-4 bg-[#FF3B30]/10 border border-red-500/30 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
-                          <AlertTriangle className="w-4 h-4 text-red-400" />
-                          <p className="text-sm font-medium text-red-400">错误信息</p>
+                          <AlertTriangle className="w-4 h-4 text-[#FF3B30]" />
+                          <p className="text-sm font-medium text-[#FF3B30]">错误信息</p>
                         </div>
-                        <p className="text-sm text-slate-300">{testResult.error}</p>
+                        <p className="text-sm text-[#D1D5DB]">{testResult.error}</p>
                       </div>
                     )}
                   </div>
@@ -360,43 +360,43 @@ export function InterfaceConnectTest() {
               </div>
 
               {previewData && (
-                <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-                  <div className="flex items-center justify-between p-4 border-b border-slate-800">
+                <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+                  <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
                     <div className="flex items-center gap-2">
-                      <Eye className="w-4 h-4 text-slate-400" />
-                      <span className="text-sm font-medium text-white">数据预览</span>
+                      <Eye className="w-4 h-4 text-[#9CA3AF]" />
+                      <span className="text-sm font-medium text-[#F3F4F6]">数据预览</span>
                     </div>
                     <button
                       onClick={() => handleCopy(previewData)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                     >
                       <Copy className="w-3 h-3" />
                       复制
                     </button>
                   </div>
                   <div className="p-4">
-                    <pre className="text-xs text-slate-300 font-mono bg-slate-950 p-4 rounded overflow-x-auto max-h-80 overflow-y-auto">
+                    <pre className="text-xs text-[#D1D5DB] font-mono bg-[#111625] p-4 rounded overflow-x-auto max-h-80 overflow-y-auto">
                       {previewData}
                     </pre>
                   </div>
                 </div>
               )}
 
-              <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-                <div className="flex items-center gap-2 p-4 border-b border-slate-800">
-                  <Terminal className="w-4 h-4 text-slate-400" />
-                  <h3 className="text-lg font-semibold text-white">诊断信息</h3>
+              <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+                <div className="flex items-center gap-2 p-4 border-b border-[#2A354D]">
+                  <Terminal className="w-4 h-4 text-[#9CA3AF]" />
+                  <h3 className="text-lg font-semibold text-[#F3F4F6]">诊断信息</h3>
                 </div>
                 <div className="p-4">
-                  <div className="bg-slate-950 p-4 rounded-lg font-mono text-xs space-y-1 min-h-[120px]">
+                  <div className="bg-[#111625] p-4 rounded-lg font-mono text-xs space-y-1 min-h-[120px]">
                     {diagnosticLogs.length > 0 ? (
                       diagnosticLogs.map((log, index) => (
-                        <p key={index} className={`${log.includes('[ERROR]') ? 'text-red-400' : log.includes('[SUCCESS]') ? 'text-green-400' : 'text-slate-400'}`}>
+                        <p key={index} className={`${log.includes('[ERROR]') ? 'text-[#FF3B30]' : log.includes('[SUCCESS]') ? 'text-[#00C853]' : 'text-[#9CA3AF]'}`}>
                           {log}
                         </p>
                       ))
                     ) : (
-                      <p className="text-slate-600">点击"开始测试"按钮进行接口连接测试...</p>
+                      <p className="text-[#4B5563]">点击"开始测试"按钮进行接口连接测试...</p>
                     )}
                   </div>
                 </div>

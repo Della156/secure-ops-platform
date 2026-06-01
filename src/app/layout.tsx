@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="h-full">
-      <body className="font-sans h-full antialiased bg-slate-950 text-slate-100">
+      <body className="font-sans h-full antialiased bg-[#111625] text-[#F3F4F6]">
         <SystemProvider>
           <MainLayout>{children}</MainLayout>
         </SystemProvider>

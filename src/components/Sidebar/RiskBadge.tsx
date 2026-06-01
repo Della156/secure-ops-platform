@@ -6,28 +6,28 @@ export function RiskBadge() {
   const { riskScore } = useSystem();
 
   const getRiskLevel = (score: number) => {
-    if (score <= 50) return { label: '低风险', color: 'bg-emerald-500', textColor: 'text-emerald-400' };
-    if (score <= 75) return { label: '中风险', color: 'bg-yellow-500', textColor: 'text-yellow-400' };
-    if (score <= 90) return { label: '高风险', color: 'bg-orange-500', textColor: 'text-orange-400' };
-    return { label: '极高风险', color: 'bg-red-500', textColor: 'text-red-400' };
+    if (score <= 50) return { label: '低风险', color: 'bg-[#00C853]', textColor: 'text-[#00C853]' };
+    if (score <= 75) return { label: '中风险', color: 'bg-[#FF9100]', textColor: 'text-[#FF9100]' };
+    if (score <= 90) return { label: '高风险', color: 'bg-[#FF9100]', textColor: 'text-[#FF9100]' };
+    return { label: '极高风险', color: 'bg-[#FF3B30]', textColor: 'text-[#FF3B30]' };
   };
 
   const risk = getRiskLevel(riskScore);
 
   return (
     <div className="px-4 py-3">
-      <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+      <div className="bg-[#181F32]/50 rounded-lg p-4 border border-[#2A354D]">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-slate-400 uppercase tracking-wider">系统风险评分</span>
-          <span className={`text-xs px-2 py-0.5 rounded-full ${risk.color} text-white`}>
+          <span className="text-xs text-[#9CA3AF] uppercase tracking-wider">系统风险评分</span>
+          <span className={`text-xs px-2 py-0.5 rounded-full ${risk.color} text-[#F3F4F6]`}>
             {risk.label}
           </span>
         </div>
         <div className="flex items-baseline gap-2">
           <span className={`text-4xl font-bold ${risk.textColor}`}>{riskScore}</span>
-          <span className="text-slate-500 text-sm">/ 100</span>
+          <span className="text-[#6B7280] text-sm">/ 100</span>
         </div>
-        <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
+        <div className="mt-3 h-2 bg-[#2A354D] rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-500 ${risk.color}`}
             style={{ width: `${riskScore}%` }}

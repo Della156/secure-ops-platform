@@ -113,9 +113,9 @@ export function TaskShelfManagement() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      published: 'bg-green-500/20 text-green-400 border-green-500/30',
-      offline: 'bg-red-500/20 text-red-400 border-red-500/30',
-      pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+      published: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      offline: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      pending: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
     };
     const labels = {
       published: '已上架',
@@ -153,29 +153,29 @@ export function TaskShelfManagement() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务上下架管理</h1>
-        <p className="text-slate-400">管理任务的上架、下架和审批流程</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务上下架管理</h1>
+        <p className="text-[#9CA3AF]">管理任务的上架、下架和审批流程</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索任务名称..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="published">已上架</option>
@@ -186,39 +186,39 @@ export function TaskShelfManagement() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">版本</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">上架时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">下架时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作人</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">版本</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">上架时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">下架时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作人</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredData.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.taskName}</td>
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.taskName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[#0066FF]/20 text-[#0066FF] border border-blue-500/30">
                     {item.version}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.publishTime}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.offlineTime}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.operator}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.publishTime}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.offlineTime}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.operator}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleOpenModal('history', item)}
-                      className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                       title="操作日志"
                     >
                       <History className="w-4 h-4" />
@@ -226,7 +226,7 @@ export function TaskShelfManagement() {
                     {(item.status === 'offline' || item.status === 'pending') && (
                       <button
                         onClick={() => handleOpenModal('publish', item)}
-                        className="p-1.5 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#00C853] hover:text-[#33D97A] hover:bg-[#00C853]/10 rounded transition-colors"
                         title="申请上架"
                       >
                         <ArrowUp className="w-4 h-4" />
@@ -235,7 +235,7 @@ export function TaskShelfManagement() {
                     {item.status === 'published' && (
                       <button
                         onClick={() => handleOpenModal('offline', item)}
-                        className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                         title="申请下架"
                       >
                         <ArrowDown className="w-4 h-4" />
@@ -244,7 +244,7 @@ export function TaskShelfManagement() {
                     {item.status === 'pending' && (
                       <button
                         onClick={() => handleOpenModal('approval', item)}
-                        className="p-1.5 text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#FF9100] hover:text-[#FF9100] hover:bg-[#FF9100]/10 rounded transition-colors"
                         title="查看审批流程"
                       >
                         <FileText className="w-4 h-4" />
@@ -259,16 +259,16 @@ export function TaskShelfManagement() {
 
         {filteredData.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {modalType === 'publish' && '申请上架'}
                 {modalType === 'offline' && '申请下架'}
                 {modalType === 'history' && '操作日志'}
@@ -276,7 +276,7 @@ export function TaskShelfManagement() {
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -284,26 +284,26 @@ export function TaskShelfManagement() {
             <div className="p-6 overflow-y-auto flex-1">
               {modalType === 'publish' && selectedTask && (
                 <div className="space-y-4">
-                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                    <p className="text-blue-400 text-sm">
+                  <div className="bg-[#0066FF]/10 border border-blue-500/30 rounded-lg p-4">
+                    <p className="text-[#0066FF] text-sm">
                       即将上架任务：{selectedTask.taskName} ({selectedTask.version})
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">任务描述</label>
-                    <p className="text-slate-400 text-sm bg-slate-800 p-3 rounded-lg">{selectedTask.description}</p>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">任务描述</label>
+                    <p className="text-[#9CA3AF] text-sm bg-[#181F32] p-3 rounded-lg">{selectedTask.description}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">上架原因</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">上架原因</label>
                     <textarea
                       value={formData.reason}
                       onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                       rows={4}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       placeholder="请输入上架原因"
                     />
                   </div>
-                  <div className="text-sm text-slate-500">
+                  <div className="text-sm text-[#6B7280]">
                     <p>注意：上架申请将触发审批流程，审批通过后任务将自动上线。</p>
                   </div>
                 </div>
@@ -311,26 +311,26 @@ export function TaskShelfManagement() {
 
               {modalType === 'offline' && selectedTask && (
                 <div className="space-y-4">
-                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-                    <p className="text-red-400 text-sm">
+                  <div className="bg-[#FF3B30]/10 border border-red-500/30 rounded-lg p-4">
+                    <p className="text-[#FF3B30] text-sm">
                       警告：即将下架任务：{selectedTask.taskName} ({selectedTask.version})
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">任务描述</label>
-                    <p className="text-slate-400 text-sm bg-slate-800 p-3 rounded-lg">{selectedTask.description}</p>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">任务描述</label>
+                    <p className="text-[#9CA3AF] text-sm bg-[#181F32] p-3 rounded-lg">{selectedTask.description}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">下架原因</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">下架原因</label>
                     <textarea
                       value={formData.reason}
                       onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                       rows={4}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                       placeholder="请输入下架原因"
                     />
                   </div>
-                  <div className="text-sm text-slate-500">
+                  <div className="text-sm text-[#6B7280]">
                     <p>注意：下架申请将触发审批流程，审批通过后任务将自动下线。</p>
                   </div>
                 </div>
@@ -339,38 +339,38 @@ export function TaskShelfManagement() {
               {modalType === 'history' && selectedTask && (
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="font-medium text-white">{selectedTask.taskName}</span>
-                    <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">{selectedTask.version}</span>
+                    <span className="font-medium text-[#F3F4F6]">{selectedTask.taskName}</span>
+                    <span className="px-2 py-1 bg-[#0066FF]/20 text-[#0066FF] rounded text-xs">{selectedTask.version}</span>
                   </div>
                   <div className="space-y-3">
                     {getTaskAuditLogs(selectedTask.id).map((log) => (
-                      <div key={log.id} className="bg-slate-800 rounded-lg p-4">
+                      <div key={log.id} className="bg-[#181F32] rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             {log.action === 'publish' ? (
-                              <ArrowUp className="w-4 h-4 text-green-400" />
+                              <ArrowUp className="w-4 h-4 text-[#00C853]" />
                             ) : (
-                              <ArrowDown className="w-4 h-4 text-red-400" />
+                              <ArrowDown className="w-4 h-4 text-[#FF3B30]" />
                             )}
-                            <span className="font-medium text-white">
+                            <span className="font-medium text-[#F3F4F6]">
                               {log.action === 'publish' ? '上架' : '下架'}
                             </span>
                           </div>
-                          <span className="text-sm text-slate-400">{log.time}</span>
+                          <span className="text-sm text-[#9CA3AF]">{log.time}</span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-slate-400 mb-2">
+                        <div className="flex items-center gap-4 text-sm text-[#9CA3AF] mb-2">
                           <div className="flex items-center gap-1">
                             <User className="w-3 h-3" />
                             <span>操作人：{log.operator}</span>
                           </div>
                         </div>
-                        <div className="text-sm text-slate-400 bg-slate-700/50 p-2 rounded">
+                        <div className="text-sm text-[#9CA3AF] bg-[#2A354D]/50 p-2 rounded">
                           {log.reason}
                         </div>
                       </div>
                     ))}
                     {getTaskAuditLogs(selectedTask.id).length === 0 && (
-                      <div className="text-center py-8 text-slate-500">
+                      <div className="text-center py-8 text-[#6B7280]">
                         暂无操作日志
                       </div>
                     )}
@@ -381,37 +381,37 @@ export function TaskShelfManagement() {
               {modalType === 'approval' && selectedTask && (
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="font-medium text-white">{selectedTask.taskName}</span>
-                    <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">{selectedTask.version}</span>
+                    <span className="font-medium text-[#F3F4F6]">{selectedTask.taskName}</span>
+                    <span className="px-2 py-1 bg-[#0066FF]/20 text-[#0066FF] rounded text-xs">{selectedTask.version}</span>
                   </div>
                   <div className="relative pl-8 space-y-6">
                     {(selectedTask.status === 'pending' ? approvalStepsPublish : approvalStepsOffline).map((step, index) => (
                       <div key={step.step} className="relative">
                         {index < approvalStepsPublish.length - 1 && (
-                          <div className={`absolute left-[-20px] top-6 w-0.5 h-8 ${step.status === 'completed' ? 'bg-green-500' : 'bg-slate-700'}`} />
+                          <div className={`absolute left-[-20px] top-6 w-0.5 h-8 ${step.status === 'completed' ? 'bg-[#00C853]' : 'bg-[#2A354D]'}`} />
                         )}
                         <div className={`absolute left-[-24px] top-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                          step.status === 'completed' ? 'bg-green-500 text-white' :
-                          step.status === 'in_progress' ? 'bg-yellow-500 text-white animate-pulse' :
-                          'bg-slate-700 text-slate-400'
+                          step.status === 'completed' ? 'bg-[#00C853] text-[#F3F4F6]' :
+                          step.status === 'in_progress' ? 'bg-[#FF9100] text-[#F3F4F6] animate-pulse' :
+                          'bg-[#2A354D] text-[#9CA3AF]'
                         }`}>
                           {step.status === 'completed' ? <CheckCircle2 className="w-4 h-4" /> :
                            step.status === 'in_progress' ? <Clock className="w-4 h-4" /> :
                            step.step}
                         </div>
-                        <div className="bg-slate-800 rounded-lg p-4">
+                        <div className="bg-[#181F32] rounded-lg p-4">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium text-white">{step.name}</span>
+                            <span className="font-medium text-[#F3F4F6]">{step.name}</span>
                             <span className={`text-xs px-2 py-1 rounded-full ${
-                              step.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                              step.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                              'bg-slate-700 text-slate-400'
+                              step.status === 'completed' ? 'bg-[#00C853]/20 text-[#00C853]' :
+                              step.status === 'in_progress' ? 'bg-[#FF9100]/20 text-[#FF9100]' :
+                              'bg-[#2A354D] text-[#9CA3AF]'
                             }`}>
                               {step.status === 'completed' ? '已完成' :
                                step.status === 'in_progress' ? '进行中' : '待处理'}
                             </span>
                           </div>
-                          <div className="text-sm text-slate-400 space-y-1">
+                          <div className="text-sm text-[#9CA3AF] space-y-1">
                             <div className="flex items-center gap-1">
                               <User className="w-3 h-3" />
                               <span>处理人：{step.operator}</span>
@@ -429,18 +429,18 @@ export function TaskShelfManagement() {
               )}
             </div>
             {(modalType === 'publish' || modalType === 'offline') && (
-              <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   取消
                 </button>
                 <button
                   onClick={modalType === 'publish' ? handlePublish : handleOffline}
                   className={`px-4 py-2 rounded-lg transition-colors ${
-                    modalType === 'offline' ? 'bg-red-600 hover:bg-red-700 text-white' :
-                    'bg-green-600 hover:bg-green-700 text-white'
+                    modalType === 'offline' ? 'bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6]' :
+                    'bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6]'
                   }`}
                 >
                   {modalType === 'publish' ? '提交上架申请' : '提交下架申请'}
@@ -448,10 +448,10 @@ export function TaskShelfManagement() {
               </div>
             )}
             {(modalType === 'history' || modalType === 'approval') && (
-              <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   关闭
                 </button>

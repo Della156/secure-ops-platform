@@ -50,11 +50,11 @@ export function HostAuthManagement() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      active: 'bg-green-500/20 text-green-400 border-green-500/30',
-      inactive: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-      pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      approved: 'bg-green-500/20 text-green-400 border-green-500/30',
-      rejected: 'bg-red-500/20 text-red-400 border-red-500/30',
+      active: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      inactive: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
+      pending: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      approved: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      rejected: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       active: '生效中',
@@ -72,8 +72,8 @@ export function HostAuthManagement() {
 
   const getTypeBadge = (type: string) => {
     const styles = {
-      role: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      user: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+      role: 'bg-[#6366F1]/20 text-[#6366F1] border-purple-500/30',
+      user: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
     };
     const labels = {
       role: '角色',
@@ -131,21 +131,21 @@ export function HostAuthManagement() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">主机访问授权管理</h1>
-        <p className="text-slate-400">管理主机访问授权策略，处理授权申请</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">主机访问授权管理</h1>
+        <p className="text-[#9CA3AF]">管理主机访问授权策略，处理授权申请</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
-          <h3 className="text-white font-semibold flex items-center gap-2">
+          <h3 className="text-[#F3F4F6] font-semibold flex items-center gap-2">
             <Shield className="w-5 h-5" />
             授权策略列表
           </h3>
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             新增策略
@@ -153,38 +153,38 @@ export function HostAuthManagement() {
         </div>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">策略名称</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">目标主机</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">类型</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">状态</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">有效期</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase">操作</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">策略名称</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">目标主机</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">类型</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">状态</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">有效期</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {policies.map(policy => (
-                <tr key={policy.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-4 py-3 text-white font-medium">{policy.name}</td>
-                  <td className="px-4 py-3 text-slate-300">{policy.target}</td>
+                <tr key={policy.id} className="hover:bg-[#181F32]/30 transition-colors">
+                  <td className="px-4 py-3 text-[#F3F4F6] font-medium">{policy.name}</td>
+                  <td className="px-4 py-3 text-[#D1D5DB]">{policy.target}</td>
                   <td className="px-4 py-3">{getTypeBadge(policy.type)}</td>
                   <td className="px-4 py-3">{getStatusBadge(policy.status)}</td>
-                  <td className="px-4 py-3 text-slate-400 text-sm">
+                  <td className="px-4 py-3 text-[#9CA3AF] text-sm">
                     {policy.validFrom} ~ {policy.validUntil}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleOpenModal(policy)}
-                        className="p-1.5 text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#9CA3AF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                         title="编辑"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(policy.id)}
-                        className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#9CA3AF] hover:text-[#FF3B30] hover:bg-[#FF3B30]/10 rounded transition-colors"
                         title="删除"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -198,43 +198,43 @@ export function HostAuthManagement() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
+        <h3 className="text-[#F3F4F6] font-semibold mb-4 flex items-center gap-2">
           <Users className="w-5 h-5" />
           授权申请审批
         </h3>
         <div className="space-y-3">
           {requests.map(request => (
-            <div key={request.id} className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <div key={request.id} className="bg-[#181F32]/50 border border-[#2A354D] rounded-lg p-4">
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center gap-3 mb-1">
-                    <span className="text-white font-medium">{request.applicant}</span>
+                    <span className="text-[#F3F4F6] font-medium">{request.applicant}</span>
                     {getStatusBadge(request.status)}
                   </div>
-                  <div className="text-slate-400 text-sm">申请访问: {request.target}</div>
+                  <div className="text-[#9CA3AF] text-sm">申请访问: {request.target}</div>
                 </div>
-                <div className="flex items-center gap-2 text-slate-500 text-sm">
+                <div className="flex items-center gap-2 text-[#6B7280] text-sm">
                   <Clock className="w-4 h-4" />
                   <span>{request.requestTime}</span>
                 </div>
               </div>
-              <div className="bg-slate-900 rounded-lg p-3 mb-3">
-                <div className="text-slate-400 text-xs mb-1">申请理由</div>
-                <div className="text-slate-300">{request.reason}</div>
+              <div className="bg-[#20293F] rounded-lg p-3 mb-3">
+                <div className="text-[#9CA3AF] text-xs mb-1">申请理由</div>
+                <div className="text-[#D1D5DB]">{request.reason}</div>
               </div>
               {request.status === 'pending' && (
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleApprove(request.id)}
-                    className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors text-sm"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     通过
                   </button>
                   <button
                     onClick={() => handleReject(request.id)}
-                    className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6] rounded-lg transition-colors text-sm"
                   >
                     <XCircle className="w-4 h-4" />
                     拒绝
@@ -248,55 +248,55 @@ export function HostAuthManagement() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingPolicy ? '编辑授权策略' : '新增授权策略'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1">策略名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1">策略名称</label>
                 <input
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="例如：Web服务器管理员访问"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1">目标主机</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1">目标主机</label>
                 <input
                   value={formData.target || ''}
                   onChange={(e) => setFormData({ ...formData, target: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="选择或输入主机名称"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">授权类型</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">授权类型</label>
                   <select
                     value={formData.type || 'role'}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   >
                     <option value="role">角色</option>
                     <option value="user">用户</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">状态</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">状态</label>
                   <select
                     value={formData.status || 'active'}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   >
                     <option value="active">生效中</option>
                     <option value="inactive">已失效</option>
@@ -305,34 +305,34 @@ export function HostAuthManagement() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">生效日期</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">生效日期</label>
                   <input
                     type="date"
                     value={formData.validFrom || ''}
                     onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">失效日期</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">失效日期</label>
                   <input
                     type="date"
                     value={formData.validUntil || ''}
                     onChange={(e) => setFormData({ ...formData, validUntil: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   取消
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   保存
                 </button>

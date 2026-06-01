@@ -144,9 +144,9 @@ export function ApiDocView() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      active: 'bg-green-500/20 text-green-400 border-green-500/30',
-      deprecated: 'bg-red-500/20 text-red-400 border-red-500/30',
-      draft: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+      active: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      deprecated: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      draft: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30'
     };
     const labels = {
       active: '活跃',
@@ -162,10 +162,10 @@ export function ApiDocView() {
 
   const getMethodBadge = (method: string) => {
     const styles = {
-      GET: 'bg-blue-500/20 text-blue-400',
-      POST: 'bg-green-500/20 text-green-400',
-      PUT: 'bg-yellow-500/20 text-yellow-400',
-      DELETE: 'bg-red-500/20 text-red-400'
+      GET: 'bg-[#0066FF]/20 text-[#0066FF]',
+      POST: 'bg-[#00C853]/20 text-[#00C853]',
+      PUT: 'bg-[#FF9100]/20 text-[#FF9100]',
+      DELETE: 'bg-[#FF3B30]/20 text-[#FF3B30]'
     };
     return (
       <span className={`px-2 py-1 rounded text-xs font-medium ${styles[method as keyof typeof styles]}`}>
@@ -190,29 +190,29 @@ export function ApiDocView() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务接口描述与文档查看</h1>
-        <p className="text-slate-400">查看和管理自动化能力的API接口文档</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务接口描述与文档查看</h1>
+        <p className="text-[#9CA3AF]">查看和管理自动化能力的API接口文档</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索接口名称或能力..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="active">活跃</option>
@@ -223,35 +223,35 @@ export function ApiDocView() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">文档ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接口名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">能力</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">方法</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">版本</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">更新时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">文档ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接口名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">能力</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">方法</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">版本</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">更新时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredDocs.map(doc => (
-            <tr key={doc.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{doc.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{doc.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{doc.abilityName}</td>
+            <tr key={doc.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{doc.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{doc.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{doc.abilityName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getMethodBadge(doc.method)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-400 font-mono">{doc.version}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{doc.updatedAt}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0066FF] font-mono">{doc.version}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{doc.updatedAt}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(doc.status)}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleViewDetail(doc)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg text-xs transition-colors"
                     >
                       <Eye className="w-3 h-3" />
                       查看
@@ -264,25 +264,25 @@ export function ApiDocView() {
         </table>
         {filteredDocs.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       {isDetailModalOpen && selectedDoc && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
-                  <FileCode className="w-5 h-5 text-blue-400" />
-                  <h3 className="text-lg font-semibold text-white">{selectedDoc.name}</h3>
+                  <FileCode className="w-5 h-5 text-[#0066FF]" />
+                  <h3 className="text-lg font-semibold text-[#F3F4F6]">{selectedDoc.name}</h3>
                 </div>
-                <span className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">{selectedDoc.version}</span>
+                <span className="px-2 py-1 bg-[#181F32] text-[#9CA3AF] rounded text-xs">{selectedDoc.version}</span>
               </div>
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -291,20 +291,20 @@ export function ApiDocView() {
               <div className="flex flex-wrap gap-4 mb-6">
                 <div className="flex items-center gap-2">
                   {getMethodBadge(selectedDoc.method)}
-                  <span className="font-mono text-slate-300 text-sm">{selectedDoc.path}</span>
+                  <span className="font-mono text-[#D1D5DB] text-sm">{selectedDoc.path}</span>
                 </div>
                 {getStatusBadge(selectedDoc.status)}
               </div>
 
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-slate-200 mb-2">描述</h4>
-                <p className="text-slate-300">{selectedDoc.description}</p>
+                <h4 className="text-sm font-semibold text-[#E5E7EB] mb-2">描述</h4>
+                <p className="text-[#D1D5DB]">{selectedDoc.description}</p>
               </div>
 
               <div className="flex gap-3 mb-6">
                 <button
                   onClick={() => setShowVersions(!showVersions)}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                 >
                   <GitCompare className="w-4 h-4" />
                   版本历史
@@ -312,14 +312,14 @@ export function ApiDocView() {
                 </button>
                 <button
                   onClick={() => handleDownload('json')}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   下载 JSON
                 </button>
                 <button
                   onClick={() => handleDownload('yaml')}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   下载 YAML
@@ -327,17 +327,17 @@ export function ApiDocView() {
               </div>
 
               {showVersions && (
-                <div className="bg-slate-800 rounded-lg p-4 mb-6">
-                  <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                <div className="bg-[#181F32] rounded-lg p-4 mb-6">
+                  <h4 className="text-sm font-semibold text-[#E5E7EB] mb-3 flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                     版本历史
                   </h4>
                   <div className="space-y-3">
                     {versions.map(v => (
-                      <div key={v.version} className="flex items-start gap-3 pb-3 border-b border-slate-700 last:border-0">
-                        <div className="flex-shrink-0 w-24 text-sm text-blue-400 font-mono">{v.version}</div>
-                        <div className="flex-shrink-0 w-32 text-sm text-slate-400">{v.date}</div>
-                        <div className="text-sm text-slate-300">{v.changes}</div>
+                      <div key={v.version} className="flex items-start gap-3 pb-3 border-b border-[#2A354D] last:border-0">
+                        <div className="flex-shrink-0 w-24 text-sm text-[#0066FF] font-mono">{v.version}</div>
+                        <div className="flex-shrink-0 w-32 text-sm text-[#9CA3AF]">{v.date}</div>
+                        <div className="text-sm text-[#D1D5DB]">{v.changes}</div>
                       </div>
                     ))}
                   </div>
@@ -345,33 +345,33 @@ export function ApiDocView() {
               )}
 
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full" />
+                <h4 className="text-sm font-semibold text-[#E5E7EB] mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#00C853] rounded-full" />
                   请求参数
                 </h4>
-                <div className="bg-slate-800 rounded-lg overflow-hidden">
+                <div className="bg-[#181F32] rounded-lg overflow-hidden">
                   <table className="w-full">
-                    <thead className="bg-slate-700/50">
+                    <thead className="bg-[#2A354D]/50">
                       <tr>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">参数名</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">类型</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">位置</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">必填</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">描述</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">参数名</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">类型</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">位置</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">必填</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">描述</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-700">
+                    <tbody className="divide-y divide-[#2A354D]">
                       {selectedDoc.requestParams.map((param, idx) => (
                         <tr key={idx}>
-                          <td className="px-4 py-2 text-sm text-white font-mono">{param.name}</td>
-                          <td className="px-4 py-2 text-sm text-blue-400 font-mono">{param.type}</td>
-                          <td className="px-4 py-2 text-sm text-slate-300">{param.in}</td>
+                          <td className="px-4 py-2 text-sm text-[#F3F4F6] font-mono">{param.name}</td>
+                          <td className="px-4 py-2 text-sm text-[#0066FF] font-mono">{param.type}</td>
+                          <td className="px-4 py-2 text-sm text-[#D1D5DB]">{param.in}</td>
                           <td className="px-4 py-2 text-sm">
-                            <span className={`px-2 py-0.5 rounded text-xs ${param.required ? 'bg-red-500/20 text-red-400' : 'bg-slate-600 text-slate-300'}`}>
+                            <span className={`px-2 py-0.5 rounded text-xs ${param.required ? 'bg-[#FF3B30]/20 text-[#FF3B30]' : 'bg-[#3A4560] text-[#D1D5DB]'}`}>
                               {param.required ? '是' : '否'}
                             </span>
                           </td>
-                          <td className="px-4 py-2 text-sm text-slate-400">{param.description}</td>
+                          <td className="px-4 py-2 text-sm text-[#9CA3AF]">{param.description}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -380,25 +380,25 @@ export function ApiDocView() {
               </div>
 
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full" />
+                <h4 className="text-sm font-semibold text-[#E5E7EB] mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#0066FF] rounded-full" />
                   响应参数
                 </h4>
-                <div className="bg-slate-800 rounded-lg overflow-hidden">
+                <div className="bg-[#181F32] rounded-lg overflow-hidden">
                   <table className="w-full">
-                    <thead className="bg-slate-700/50">
+                    <thead className="bg-[#2A354D]/50">
                       <tr>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">参数名</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">类型</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">描述</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">参数名</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">类型</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">描述</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-700">
+                    <tbody className="divide-y divide-[#2A354D]">
                       {selectedDoc.responseParams.map((param, idx) => (
                         <tr key={idx}>
-                          <td className="px-4 py-2 text-sm text-white font-mono">{param.name}</td>
-                          <td className="px-4 py-2 text-sm text-blue-400 font-mono">{param.type}</td>
-                          <td className="px-4 py-2 text-sm text-slate-400">{param.description}</td>
+                          <td className="px-4 py-2 text-sm text-[#F3F4F6] font-mono">{param.name}</td>
+                          <td className="px-4 py-2 text-sm text-[#0066FF] font-mono">{param.type}</td>
+                          <td className="px-4 py-2 text-sm text-[#9CA3AF]">{param.description}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -408,46 +408,46 @@ export function ApiDocView() {
 
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-[#E5E7EB] flex items-center gap-2">
                     <Code className="w-4 h-4" />
                     请求示例
                   </h4>
                   <button
                     onClick={() => handleCopy(selectedDoc.exampleRequest)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#3A4560] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                   >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                    {copied ? <Check className="w-4 h-4 text-[#00C853]" /> : <Copy className="w-4 h-4" />}
                     {copied ? '已复制' : '复制'}
                   </button>
                 </div>
-                <pre className="bg-slate-800 p-4 rounded-lg text-sm text-slate-300 overflow-x-auto">
+                <pre className="bg-[#181F32] p-4 rounded-lg text-sm text-[#D1D5DB] overflow-x-auto">
                   <code>{selectedDoc.exampleRequest}</code>
                 </pre>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-[#E5E7EB] flex items-center gap-2">
                     <Code className="w-4 h-4" />
                     响应示例
                   </h4>
                   <button
                     onClick={() => handleCopy(selectedDoc.exampleResponse)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#3A4560] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                   >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                    {copied ? <Check className="w-4 h-4 text-[#00C853]" /> : <Copy className="w-4 h-4" />}
                     {copied ? '已复制' : '复制'}
                   </button>
                 </div>
-                <pre className="bg-slate-800 p-4 rounded-lg text-sm text-slate-300 overflow-x-auto">
+                <pre className="bg-[#181F32] p-4 rounded-lg text-sm text-[#D1D5DB] overflow-x-auto">
                   <code>{selectedDoc.exampleResponse}</code>
                 </pre>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 关闭
               </button>

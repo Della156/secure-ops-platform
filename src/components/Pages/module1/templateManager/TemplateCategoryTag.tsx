@@ -140,20 +140,20 @@ export function TemplateCategoryTag() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">模板分类打标与检索</h1>
-        <p className="text-slate-400">管理模板分类、标签，以及组合筛选检索</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">模板分类打标与检索</h1>
+        <p className="text-[#9CA3AF]">管理模板分类、标签，以及组合筛选检索</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* 左侧：分类和标签管理 */}
         <div className="lg:col-span-1 space-y-6">
           {/* 分类管理 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
                 <Folder className="w-5 h-5" />
                 分类管理
               </h3>
@@ -163,7 +163,7 @@ export function TemplateCategoryTag() {
                   setCategoryForm({ name: '', description: '', color: '#3b82f6' });
                   setIsCategoryModalOpen(true);
                 }}
-                className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -173,8 +173,8 @@ export function TemplateCategoryTag() {
                 onClick={() => setSelectedCategory('')}
                 className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                   !selectedCategory
-                    ? 'bg-blue-600/20 text-blue-400'
-                    : 'text-slate-300 hover:bg-slate-800'
+                    ? 'bg-[#0066FF]/20 text-[#0066FF]'
+                    : 'text-[#D1D5DB] hover:bg-[#181F32]'
                 }`}
               >
                 全部分类
@@ -186,14 +186,14 @@ export function TemplateCategoryTag() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`flex-1 text-left px-3 py-2 rounded-lg transition-colors ${
                         selectedCategory === category.id
-                          ? 'bg-blue-600/20 text-blue-400'
-                          : 'text-slate-300 hover:bg-slate-800'
+                          ? 'bg-[#0066FF]/20 text-[#0066FF]'
+                          : 'text-[#D1D5DB] hover:bg-[#181F32]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: category.color }} />
                         <span>{category.name}</span>
-                        <span className="text-xs text-slate-500">({category.templateCount})</span>
+                        <span className="text-xs text-[#6B7280]">({category.templateCount})</span>
                       </div>
                     </button>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
@@ -203,13 +203,13 @@ export function TemplateCategoryTag() {
                           setCategoryForm(category);
                           setIsCategoryModalOpen(true);
                         }}
-                        className="p-1 text-slate-500 hover:text-slate-300"
+                        className="p-1 text-[#6B7280] hover:text-[#D1D5DB]"
                       >
                         <Edit className="w-3 h-3" />
                       </button>
                       <button
                         onClick={() => handleDeleteCategory(category.id)}
-                        className="p-1 text-slate-500 hover:text-red-400"
+                        className="p-1 text-[#6B7280] hover:text-[#FF3B30]"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -221,9 +221,9 @@ export function TemplateCategoryTag() {
           </div>
 
           {/* 标签管理 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
                 <Tag className="w-5 h-5" />
                 标签管理
               </h3>
@@ -233,7 +233,7 @@ export function TemplateCategoryTag() {
                   setTagForm({ name: '', color: '#3b82f6' });
                   setIsTagModalOpen(true);
                 }}
-                className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -261,7 +261,7 @@ export function TemplateCategoryTag() {
                         setTagForm(tag);
                         setIsTagModalOpen(true);
                       }}
-                      className="p-1 text-slate-500 hover:text-slate-300"
+                      className="p-1 text-[#6B7280] hover:text-[#D1D5DB]"
                     >
                       <Edit className="w-3 h-3" />
                     </button>
@@ -270,7 +270,7 @@ export function TemplateCategoryTag() {
                         e.stopPropagation();
                         handleDeleteTag(tag.id);
                       }}
-                      className="p-1 text-slate-500 hover:text-red-400"
+                      className="p-1 text-[#6B7280] hover:text-[#FF3B30]"
                     >
                       <Trash2 className="w-3 h-3" />
                     </button>
@@ -284,21 +284,21 @@ export function TemplateCategoryTag() {
         {/* 右侧：模板检索 */}
         <div className="lg:col-span-3">
           {/* 搜索栏 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
             <div className="flex flex-wrap gap-4 items-center">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
                 <input
                   type="text"
                   placeholder="搜索模板名称或描述..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 />
               </div>
               <div className="flex items-center gap-2">
-                <Filter className="w-4 h-4 text-slate-500" />
-                <span className="text-slate-400 text-sm">
+                <Filter className="w-4 h-4 text-[#6B7280]" />
+                <span className="text-[#9CA3AF] text-sm">
                   筛选结果：{filteredTemplates.length} 个
                 </span>
               </div>
@@ -312,9 +312,9 @@ export function TemplateCategoryTag() {
               const templateTags = tags.filter(t => template.tags.includes(t.id));
               
               return (
-                <div key={template.id} className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-colors">
+                <div key={template.id} className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5 hover:border-[#2A354D] transition-colors">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold text-white">{template.name}</h3>
+                    <h3 className="font-semibold text-[#F3F4F6]">{template.name}</h3>
                     {category && (
                       <span className="px-2 py-1 rounded-full text-xs flex items-center gap-1" style={{ backgroundColor: `${category.color}20`, color: category.color }}>
                         <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: category.color }} />
@@ -322,7 +322,7 @@ export function TemplateCategoryTag() {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-slate-400 mb-4 line-clamp-2">{template.description}</p>
+                  <p className="text-sm text-[#9CA3AF] mb-4 line-clamp-2">{template.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {templateTags.map(tag => (
                       <span key={tag.id} className="px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: `${tag.color}20`, color: tag.color }}>
@@ -336,8 +336,8 @@ export function TemplateCategoryTag() {
           </div>
 
           {filteredTemplates.length === 0 && (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-12 text-center">
-              <p className="text-slate-500">没有找到匹配的模板</p>
+            <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-12 text-center">
+              <p className="text-[#6B7280]">没有找到匹配的模板</p>
             </div>
           )}
         </div>
@@ -346,41 +346,41 @@ export function TemplateCategoryTag() {
       {/* 分类模态框 */}
       {isCategoryModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingCategory ? '编辑分类' : '新增分类'}
               </h3>
               <button
                 onClick={() => setIsCategoryModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">分类名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">分类名称</label>
                 <input
                   type="text"
                   value={categoryForm.name || ''}
                   onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入分类名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">分类描述</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">分类描述</label>
                 <textarea
                   value={categoryForm.description || ''}
                   onChange={(e) => setCategoryForm({ ...categoryForm, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入分类描述"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-2">
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5 flex items-center gap-2">
                   <Palette className="w-4 h-4" />
                   分类颜色
                 </label>
@@ -398,16 +398,16 @@ export function TemplateCategoryTag() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsCategoryModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSaveCategory}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>
@@ -419,31 +419,31 @@ export function TemplateCategoryTag() {
       {/* 标签模态框 */}
       {isTagModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingTag ? '编辑标签' : '新增标签'}
               </h3>
               <button
                 onClick={() => setIsTagModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">标签名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">标签名称</label>
                 <input
                   type="text"
                   value={tagForm.name || ''}
                   onChange={(e) => setTagForm({ ...tagForm, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入标签名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-2">
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5 flex items-center gap-2">
                   <Palette className="w-4 h-4" />
                   标签颜色
                 </label>
@@ -461,16 +461,16 @@ export function TemplateCategoryTag() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsTagModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSaveTag}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

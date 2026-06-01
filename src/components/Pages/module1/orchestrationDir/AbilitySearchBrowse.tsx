@@ -211,35 +211,35 @@ export function AbilitySearchBrowse() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">自动化能力可视化检索与浏览</h1>
-        <p className="text-slate-400">浏览、搜索和使用可用的自动化能力</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">自动化能力可视化检索与浏览</h1>
+        <p className="text-[#9CA3AF]">浏览、搜索和使用可用的自动化能力</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center flex-1">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索能力名称或描述..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
               />
             </div>
-            <div className="flex items-center gap-2 bg-slate-800 rounded-lg p-1">
+            <div className="flex items-center gap-2 bg-[#181F32] rounded-lg p-1">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'}`}
               >
                 <Grid className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded-md transition-colors ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                className={`p-2 rounded-md transition-colors ${viewMode === 'list' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'}`}
               >
                 <List className="w-4 h-4" />
               </button>
@@ -248,12 +248,12 @@ export function AbilitySearchBrowse() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <Filter className="w-4 h-4 text-slate-400" />
-              <span className="text-sm font-medium text-slate-300">分类</span>
+              <Filter className="w-4 h-4 text-[#9CA3AF]" />
+              <span className="text-sm font-medium text-[#D1D5DB]">分类</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {categories.map(category => (
@@ -262,8 +262,8 @@ export function AbilitySearchBrowse() {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                     selectedCategory === category
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      ? 'bg-[#0066FF] text-[#F3F4F6]'
+                      : 'bg-[#181F32] text-[#D1D5DB] hover:bg-[#2A354D]'
                   }`}
                 >
                   {category}
@@ -274,8 +274,8 @@ export function AbilitySearchBrowse() {
         </div>
         <div className="mt-4">
           <div className="flex items-center gap-2 mb-2">
-            <Tag className="w-4 h-4 text-slate-400" />
-            <span className="text-sm font-medium text-slate-300">标签筛选</span>
+            <Tag className="w-4 h-4 text-[#9CA3AF]" />
+            <span className="text-sm font-medium text-[#D1D5DB]">标签筛选</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {allTags.map(tag => (
@@ -284,8 +284,8 @@ export function AbilitySearchBrowse() {
                 onClick={() => handleToggleTag(tag)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   selectedTags.includes(tag)
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    ? 'bg-[#6366F1] text-[#F3F4F6]'
+                    : 'bg-[#181F32] text-[#D1D5DB] hover:bg-[#2A354D]'
                 }`}
               >
                 {tag}
@@ -300,27 +300,27 @@ export function AbilitySearchBrowse() {
           {filteredData.map(item => (
             <div
               key={item.id}
-              className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 hover:shadow-lg transition-all cursor-pointer"
+              className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5 hover:border-[#2A354D] hover:shadow-lg transition-all cursor-pointer"
               onClick={() => handleViewDetail(item)}
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">{item.name}</h3>
-                  <span className="text-xs text-slate-400">{item.category}</span>
+                  <h3 className="text-lg font-semibold text-[#F3F4F6] mb-1">{item.name}</h3>
+                  <span className="text-xs text-[#9CA3AF]">{item.category}</span>
                 </div>
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs font-medium">
+                <span className="px-2 py-1 bg-[#0066FF]/20 text-[#0066FF] rounded text-xs font-medium">
                   {item.id}
                 </span>
               </div>
-              <p className="text-sm text-slate-400 mb-4 line-clamp-2">{item.description}</p>
+              <p className="text-sm text-[#9CA3AF] mb-4 line-clamp-2">{item.description}</p>
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {item.tags.map(tag => (
-                  <span key={tag} className="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs">
+                  <span key={tag} className="px-2 py-0.5 bg-[#181F32] text-[#D1D5DB] rounded text-xs">
                     {tag}
                   </span>
                 ))}
               </div>
-              <div className="flex items-center justify-between text-xs text-slate-500">
+              <div className="flex items-center justify-between text-xs text-[#6B7280]">
                 <div className="flex items-center gap-4">
                   <span>使用 {item.usageCount} 次</span>
                   <span>⭐ {item.rating}</span>
@@ -331,47 +331,47 @@ export function AbilitySearchBrowse() {
           ))}
         </div>
       ) : (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">名称</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">分类</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">标签</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">使用次数</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">评分</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">更新时间</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">名称</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">分类</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">标签</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">使用次数</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">评分</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">更新时间</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {filteredData.map(item => (
-                <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
+                <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 py-1 bg-slate-800 text-slate-300 rounded text-xs">{item.category}</span>
+                    <span className="px-2 py-1 bg-[#181F32] text-[#D1D5DB] rounded text-xs">{item.category}</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
                       {item.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="px-1.5 py-0.5 bg-slate-800 text-slate-400 rounded text-xs">
+                        <span key={tag} className="px-1.5 py-0.5 bg-[#181F32] text-[#9CA3AF] rounded text-xs">
                           {tag}
                         </span>
                       ))}
                       {item.tags.length > 3 && (
-                        <span className="px-1.5 py-0.5 text-slate-500 text-xs">+{item.tags.length - 3}</span>
+                        <span className="px-1.5 py-0.5 text-[#6B7280] text-xs">+{item.tags.length - 3}</span>
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.usageCount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-yellow-400">⭐ {item.rating}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.updatedAt}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.usageCount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#FF9100]">⭐ {item.rating}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.updatedAt}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <button
                       onClick={(e) => { e.stopPropagation(); handleViewDetail(item); }}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg text-xs transition-colors"
                     >
                       <Eye className="w-3 h-3" />
                       详情
@@ -385,85 +385,85 @@ export function AbilitySearchBrowse() {
       )}
 
       {filteredData.length === 0 && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-12 text-center">
-          <p className="text-slate-500 text-lg">未找到匹配的能力</p>
-          <p className="text-slate-600 text-sm mt-2">请尝试调整搜索条件或筛选标签</p>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-12 text-center">
+          <p className="text-[#6B7280] text-lg">未找到匹配的能力</p>
+          <p className="text-[#4B5563] text-sm mt-2">请尝试调整搜索条件或筛选标签</p>
         </div>
       )}
 
       {isDetailModalOpen && selectedAbility && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
               <div className="flex items-center gap-3">
-                <h3 className="text-lg font-semibold text-white">{selectedAbility.name}</h3>
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs font-medium">
+                <h3 className="text-lg font-semibold text-[#F3F4F6]">{selectedAbility.name}</h3>
+                <span className="px-2 py-1 bg-[#0066FF]/20 text-[#0066FF] rounded text-xs font-medium">
                   {selectedAbility.id}
                 </span>
               </div>
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 overflow-y-auto flex-1">
               <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-slate-800 text-slate-300 rounded-lg text-sm">
+                <span className="px-3 py-1 bg-[#181F32] text-[#D1D5DB] rounded-lg text-sm">
                   {selectedAbility.category}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedAbility.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs">
+                    <span key={tag} className="px-2 py-0.5 bg-[#181F32] text-[#D1D5DB] rounded text-xs">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <p className="text-slate-300 mb-6">{selectedAbility.description}</p>
+              <p className="text-[#D1D5DB] mb-6">{selectedAbility.description}</p>
               
               <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="bg-slate-800 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-white">{selectedAbility.usageCount}</div>
-                  <div className="text-sm text-slate-400">使用次数</div>
+                <div className="bg-[#181F32] rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-[#F3F4F6]">{selectedAbility.usageCount}</div>
+                  <div className="text-sm text-[#9CA3AF]">使用次数</div>
                 </div>
-                <div className="bg-slate-800 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-yellow-400">⭐ {selectedAbility.rating}</div>
-                  <div className="text-sm text-slate-400">评分</div>
+                <div className="bg-[#181F32] rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-[#FF9100]">⭐ {selectedAbility.rating}</div>
+                  <div className="text-sm text-[#9CA3AF]">评分</div>
                 </div>
-                <div className="bg-slate-800 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-400">{selectedAbility.author}</div>
-                  <div className="text-sm text-slate-400">作者</div>
+                <div className="bg-[#181F32] rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-[#0066FF]">{selectedAbility.author}</div>
+                  <div className="text-sm text-[#9CA3AF]">作者</div>
                 </div>
               </div>
 
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full" />
+                <h4 className="text-sm font-semibold text-[#E5E7EB] mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#00C853] rounded-full" />
                   输入参数
                 </h4>
-                <div className="bg-slate-800 rounded-lg overflow-hidden">
+                <div className="bg-[#181F32] rounded-lg overflow-hidden">
                   <table className="w-full">
-                    <thead className="bg-slate-700/50">
+                    <thead className="bg-[#2A354D]/50">
                       <tr>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">参数名</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">类型</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">必填</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">描述</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">参数名</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">类型</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">必填</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">描述</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-700">
+                    <tbody className="divide-y divide-[#2A354D]">
                       {selectedAbility.inputParams.map((param, idx) => (
                         <tr key={idx}>
-                          <td className="px-4 py-2 text-sm text-white font-mono">{param.name}</td>
-                          <td className="px-4 py-2 text-sm text-blue-400 font-mono">{param.type}</td>
+                          <td className="px-4 py-2 text-sm text-[#F3F4F6] font-mono">{param.name}</td>
+                          <td className="px-4 py-2 text-sm text-[#0066FF] font-mono">{param.type}</td>
                           <td className="px-4 py-2 text-sm">
-                            <span className={`px-2 py-0.5 rounded text-xs ${param.required ? 'bg-red-500/20 text-red-400' : 'bg-slate-600 text-slate-300'}`}>
+                            <span className={`px-2 py-0.5 rounded text-xs ${param.required ? 'bg-[#FF3B30]/20 text-[#FF3B30]' : 'bg-[#3A4560] text-[#D1D5DB]'}`}>
                               {param.required ? '是' : '否'}
                             </span>
                           </td>
-                          <td className="px-4 py-2 text-sm text-slate-400">{param.description}</td>
+                          <td className="px-4 py-2 text-sm text-[#9CA3AF]">{param.description}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -472,25 +472,25 @@ export function AbilitySearchBrowse() {
               </div>
 
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-slate-200 mb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full" />
+                <h4 className="text-sm font-semibold text-[#E5E7EB] mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#0066FF] rounded-full" />
                   输出参数
                 </h4>
-                <div className="bg-slate-800 rounded-lg overflow-hidden">
+                <div className="bg-[#181F32] rounded-lg overflow-hidden">
                   <table className="w-full">
-                    <thead className="bg-slate-700/50">
+                    <thead className="bg-[#2A354D]/50">
                       <tr>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">参数名</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">类型</th>
-                        <th className="px-4 py-2 text-left text-xs font-medium text-slate-400">描述</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">参数名</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">类型</th>
+                        <th className="px-4 py-2 text-left text-xs font-medium text-[#9CA3AF]">描述</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-700">
+                    <tbody className="divide-y divide-[#2A354D]">
                       {selectedAbility.outputParams.map((param, idx) => (
                         <tr key={idx}>
-                          <td className="px-4 py-2 text-sm text-white font-mono">{param.name}</td>
-                          <td className="px-4 py-2 text-sm text-blue-400 font-mono">{param.type}</td>
-                          <td className="px-4 py-2 text-sm text-slate-400">{param.description}</td>
+                          <td className="px-4 py-2 text-sm text-[#F3F4F6] font-mono">{param.name}</td>
+                          <td className="px-4 py-2 text-sm text-[#0066FF] font-mono">{param.type}</td>
+                          <td className="px-4 py-2 text-sm text-[#9CA3AF]">{param.description}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -500,27 +500,27 @@ export function AbilitySearchBrowse() {
 
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-[#E5E7EB] flex items-center gap-2">
                     <Code className="w-4 h-4" />
                     调用示例
                   </h4>
                   <button
                     onClick={handleCopyCode}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#3A4560] text-[#D1D5DB] rounded-lg text-sm transition-colors"
                   >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                    {copied ? <Check className="w-4 h-4 text-[#00C853]" /> : <Copy className="w-4 h-4" />}
                     {copied ? '已复制' : '复制代码'}
                   </button>
                 </div>
-                <pre className="bg-slate-800 p-4 rounded-lg text-sm text-slate-300 overflow-x-auto">
+                <pre className="bg-[#181F32] p-4 rounded-lg text-sm text-[#D1D5DB] overflow-x-auto">
                   <code>{selectedAbility.exampleCode}</code>
                 </pre>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsDetailModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 关闭
               </button>

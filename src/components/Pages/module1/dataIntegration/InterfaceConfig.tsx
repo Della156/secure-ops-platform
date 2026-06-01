@@ -90,9 +90,9 @@ export function InterfaceConfig() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      connected: 'bg-green-500/20 text-green-400 border-green-500/30',
-      disconnected: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-      error: 'bg-red-500/20 text-red-400 border-red-500/30',
+      connected: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      disconnected: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
+      error: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const icons = {
       connected: <CheckCircle2 className="w-3 h-3" />,
@@ -114,10 +114,10 @@ export function InterfaceConfig() {
 
   const getTypeBadge = (type: string) => {
     const styles: Record<string, string> = {
-      REST: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      GraphQL: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      SOAP: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-      WebSocket: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+      REST: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      GraphQL: 'bg-[#6366F1]/20 text-[#6366F1] border-purple-500/30',
+      SOAP: 'bg-[#FF9100]/20 text-[#FF9100] border-orange-500/30',
+      WebSocket: 'bg-[#00BCD4]/20 text-[#00BCD4] border-cyan-500/30',
     };
     return (
       <span className={`px-3 py-1.5 rounded-full text-xs font-medium border ${styles[type]}`}>
@@ -130,34 +130,34 @@ export function InterfaceConfig() {
     <div className="p-6">
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <Settings className="w-5 h-5 text-blue-400" />
+          <div className="p-2 bg-[#0066FF]/20 rounded-lg">
+            <Settings className="w-5 h-5 text-[#0066FF]" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">数据接口配置管理</h1>
-            <p className="text-slate-400 text-sm">配置和管理数据对接接口</p>
+            <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">数据接口配置管理</h1>
+            <p className="text-[#9CA3AF] text-sm">配置和管理数据对接接口</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索接口名称..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
 
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部类型</option>
               <option value="REST">REST</option>
@@ -169,7 +169,7 @@ export function InterfaceConfig() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="connected">已连接</option>
@@ -180,7 +180,7 @@ export function InterfaceConfig() {
 
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-all hover:shadow-lg hover:shadow-blue-500/20"
           >
             <Plus className="w-4 h-4" />
             新增接口
@@ -188,30 +188,30 @@ export function InterfaceConfig() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接口名称</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接口类型</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">认证方式</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">连接状态</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建时间</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接口名称</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接口类型</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">认证方式</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">连接状态</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建时间</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {filteredData.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400 font-mono">{item.id}</td>
+                <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF] font-mono">{item.id}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <Database className="w-4 h-4 text-slate-500" />
+                      <Database className="w-4 h-4 text-[#6B7280]" />
                       <div>
-                        <div className="text-sm text-white font-medium">{item.name}</div>
-                        <div className="text-xs text-slate-500 flex items-center gap-1">
+                        <div className="text-sm text-[#F3F4F6] font-medium">{item.name}</div>
+                        <div className="text-xs text-[#6B7280] flex items-center gap-1">
                           <ExternalLink className="w-3 h-3" />
                           {item.url}
                         </div>
@@ -219,21 +219,21 @@ export function InterfaceConfig() {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{getTypeBadge(item.type)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.authType}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.authType}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.createdAt}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.createdAt}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleOpenModal(item)}
-                        className="p-2 text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-all"
+                        className="p-2 text-[#9CA3AF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-all"
                         title="编辑"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                        className="p-2 text-[#9CA3AF] hover:text-[#FF3B30] hover:bg-[#FF3B30]/10 rounded-lg transition-all"
                         title="删除"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -248,69 +248,69 @@ export function InterfaceConfig() {
 
         {filteredData.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <Database className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-            <p className="text-slate-500">暂无数据</p>
+            <Database className="w-12 h-12 text-[#374151] mx-auto mb-4" />
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between p-5 border-b border-slate-800">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between p-5 border-b border-[#2A354D]">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <Settings className="w-5 h-5 text-blue-400" />
+                <div className="p-2 bg-[#0066FF]/20 rounded-lg">
+                  <Settings className="w-5 h-5 text-[#0066FF]" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">
+                <h3 className="text-lg font-semibold text-[#F3F4F6]">
                   {editingItem ? '编辑接口' : '新增接口'}
                 </h3>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+                className="p-2 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded-lg transition-all"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-5 space-y-5">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">接口名称 *</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">接口名称 *</label>
                 <input
                   type="text"
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent"
                   placeholder="请输入接口名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">接口描述</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">接口描述</label>
                 <textarea
                   value={formData.description || ''}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={2}
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent resize-none"
                   placeholder="请输入接口描述"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">接口 URL *</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">接口 URL *</label>
                 <input
                   type="text"
                   value={formData.url || ''}
                   onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+                  className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent font-mono text-sm"
                   placeholder="https://api.example.com"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">接口类型</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-2">接口类型</label>
                   <select
                     value={formData.type || 'REST'}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-                    className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent"
                   >
                     <option value="REST">REST</option>
                     <option value="GraphQL">GraphQL</option>
@@ -319,11 +319,11 @@ export function InterfaceConfig() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">认证方式</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-2">认证方式</label>
                   <select
                     value={formData.authType || 'None'}
                     onChange={(e) => setFormData({ ...formData, authType: e.target.value as any })}
-                    className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent"
                   >
                     <option value="None">None</option>
                     <option value="Basic">Basic Auth</option>
@@ -333,37 +333,37 @@ export function InterfaceConfig() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">连接参数 (JSON)</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">连接参数 (JSON)</label>
                 <textarea
                   value={formData.params || '{}'}
                   onChange={(e) => setFormData({ ...formData, params: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm resize-none"
+                  className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent font-mono text-sm resize-none"
                   placeholder={`{\n  "timeout": 5000\n}`}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">数据格式映射 (JSON)</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">数据格式映射 (JSON)</label>
                 <textarea
                   value={formData.mapping || '{}'}
                   onChange={(e) => setFormData({ ...formData, mapping: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm resize-none"
+                  className="w-full px-4 py-2.5 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] focus:border-transparent font-mono text-sm resize-none"
                   placeholder={`{\n  "sourceField": "targetField"\n}`}
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-5 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-5 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-all"
+                className="px-5 py-2.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-all"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
                 disabled={!formData.name || !formData.url}
-                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white rounded-lg transition-all"
+                className="px-5 py-2.5 bg-[#0066FF] hover:bg-[#0052CC] disabled:bg-[#3A4560] disabled:cursor-not-allowed text-[#F3F4F6] rounded-lg transition-all"
               >
                 保存
               </button>

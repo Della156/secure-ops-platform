@@ -111,9 +111,9 @@ export function TemplateImportInstance() {
   // 获取状态徽章
   const getStatusBadge = (status: string) => {
     const styles = {
-      success: 'bg-green-500/20 text-green-400 border-green-500/30',
-      running: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      failed: 'bg-red-500/20 text-red-400 border-red-500/30',
+      success: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      running: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      failed: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const icons = {
       success: CheckCircle2,
@@ -136,21 +136,21 @@ export function TemplateImportInstance() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">模板一键导入与任务实例化</h1>
-        <p className="text-slate-400">从模板库导入模板，快速实例化为可执行任务</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">模板一键导入与任务实例化</h1>
+        <p className="text-[#9CA3AF]">从模板库导入模板，快速实例化为可执行任务</p>
       </div>
 
       {/* 标签页切换 */}
-      <div className="flex gap-1 mb-6 bg-slate-900 border border-slate-800 rounded-xl p-1 w-fit">
+      <div className="flex gap-1 mb-6 bg-[#20293F] border border-[#2A354D] rounded-xl p-1 w-fit">
         <button
           onClick={() => setActiveTab('import')}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'import'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#181F32]'
           }`}
         >
           <div className="flex items-center gap-2">
@@ -162,8 +162,8 @@ export function TemplateImportInstance() {
           onClick={() => setActiveTab('history')}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'history'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#181F32]'
           }`}
         >
           <div className="flex items-center gap-2">
@@ -177,33 +177,33 @@ export function TemplateImportInstance() {
       {activeTab === 'import' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* 可用模板列表 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl">
-            <div className="p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl">
+            <div className="p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
                 <FileText className="w-5 h-5" />
                 可用模板
               </h3>
             </div>
             <div className="p-4 space-y-3">
               {mockTemplates.map(template => (
-                <div key={template.id} className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800 transition-colors">
+                <div key={template.id} className="bg-[#181F32]/50 rounded-xl p-4 hover:bg-[#181F32] transition-colors">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-medium text-white">{template.name}</h4>
-                    <span className="px-2 py-0.5 rounded-full text-xs bg-slate-700 text-slate-400">
+                    <h4 className="font-medium text-[#F3F4F6]">{template.name}</h4>
+                    <span className="px-2 py-0.5 rounded-full text-xs bg-[#2A354D] text-[#9CA3AF]">
                       {template.category}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-400 mb-3">{template.description}</p>
+                  <p className="text-sm text-[#9CA3AF] mb-3">{template.description}</p>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {template.tags.map(tag => (
-                      <span key={tag} className="px-2 py-0.5 rounded-full text-xs bg-blue-500/20 text-blue-400">
+                      <span key={tag} className="px-2 py-0.5 rounded-full text-xs bg-[#0066FF]/20 text-[#0066FF]">
                         {tag}
                       </span>
                     ))}
                   </div>
                   <button
                     onClick={() => handleOpenInstanceModal(template)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
                   >
                     <Play className="w-4 h-4" />
                     实例化此模板
@@ -215,38 +215,38 @@ export function TemplateImportInstance() {
 
           {/* 导入/导出操作 */}
           <div className="space-y-6">
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <h3 className="text-lg font-semibold text-white mb-4">模板导入/导出</h3>
+            <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
+              <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">模板导入/导出</h3>
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center">
-                  <Upload className="w-12 h-12 text-slate-500 mx-auto mb-4" />
-                  <p className="text-slate-400 mb-4">拖放模板文件到此处，或点击选择文件</p>
-                  <label className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg cursor-pointer transition-colors">
+                <div className="border-2 border-dashed border-[#2A354D] rounded-xl p-8 text-center">
+                  <Upload className="w-12 h-12 text-[#6B7280] mx-auto mb-4" />
+                  <p className="text-[#9CA3AF] mb-4">拖放模板文件到此处，或点击选择文件</p>
+                  <label className="inline-flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
                     <Upload className="w-4 h-4" />
                     选择文件
                     <input type="file" className="hidden" accept=".json" />
                   </label>
                 </div>
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#181F32] hover:bg-[#2A354D] text-[#F3F4F6] rounded-lg transition-colors">
                   <Download className="w-4 h-4" />
                   导出所有模板
                 </button>
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <h3 className="text-lg font-semibold text-white mb-4">快速开始</h3>
-              <div className="space-y-2 text-sm text-slate-400">
+            <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
+              <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">快速开始</h3>
+              <div className="space-y-2 text-sm text-[#9CA3AF]">
                 <div className="flex items-start gap-2">
-                  <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-xs">1</span>
+                  <span className="w-6 h-6 rounded-full bg-[#0066FF] text-[#F3F4F6] flex items-center justify-center flex-shrink-0 text-xs">1</span>
                   <span>从左侧选择一个模板，点击"实例化此模板"</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-xs">2</span>
+                  <span className="w-6 h-6 rounded-full bg-[#0066FF] text-[#F3F4F6] flex items-center justify-center flex-shrink-0 text-xs">2</span>
                   <span>填写任务实例名称和所需参数</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-xs">3</span>
+                  <span className="w-6 h-6 rounded-full bg-[#0066FF] text-[#F3F4F6] flex items-center justify-center flex-shrink-0 text-xs">3</span>
                   <span>确认后创建可执行任务</span>
                 </div>
               </div>
@@ -257,9 +257,9 @@ export function TemplateImportInstance() {
 
       {/* 实例化记录页面 */}
       {activeTab === 'history' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl">
-          <div className="p-4 border-b border-slate-800 flex flex-wrap gap-4 items-center justify-between">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl">
+          <div className="p-4 border-b border-[#2A354D] flex flex-wrap gap-4 items-center justify-between">
+            <h3 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
               <History className="w-5 h-5" />
               实例化记录
             </h3>
@@ -269,28 +269,28 @@ export function TemplateImportInstance() {
                 placeholder="搜索实例或模板..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-800/50">
+              <thead className="bg-[#181F32]/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">实例名称</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">模板来源</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建人</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建时间</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">实例名称</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">模板来源</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建人</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建时间</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-[#2A354D]">
                 {filteredRecords.map(record => (
-                  <tr key={record.id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{record.instanceName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{record.templateName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{record.createdBy}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{record.createdAt}</td>
+                  <tr key={record.id} className="hover:bg-[#181F32]/30 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#F3F4F6]">{record.instanceName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{record.templateName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{record.createdBy}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{record.createdAt}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(record.status)}</td>
                   </tr>
                 ))}
@@ -298,7 +298,7 @@ export function TemplateImportInstance() {
             </table>
             {filteredRecords.length === 0 && (
               <div className="px-6 py-12 text-center">
-                <p className="text-slate-500">没有找到匹配的实例记录</p>
+                <p className="text-[#6B7280]">没有找到匹配的实例记录</p>
               </div>
             )}
           </div>
@@ -308,12 +308,12 @@ export function TemplateImportInstance() {
       {/* 实例化模态框 */}
       {isInstanceModalOpen && selectedTemplate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800 sticky top-0 bg-slate-900 z-10">
-              <h3 className="text-lg font-semibold text-white">实例化模板 - {selectedTemplate.name}</h3>
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D] sticky top-0 bg-[#20293F] z-10">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">实例化模板 - {selectedTemplate.name}</h3>
               <button
                 onClick={() => setIsInstanceModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -321,25 +321,25 @@ export function TemplateImportInstance() {
             <div className="p-6 space-y-6">
               {/* 任务实例名称 */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">任务实例名称 <span className="text-red-400">*</span></label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">任务实例名称 <span className="text-[#FF3B30]">*</span></label>
                 <input
                   type="text"
                   value={instanceForm.name}
                   onChange={(e) => setInstanceForm({ ...instanceForm, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入任务实例名称"
                 />
               </div>
 
               {/* 模板参数 */}
               <div>
-                <h4 className="text-sm font-medium text-slate-300 mb-4">模板参数配置</h4>
+                <h4 className="text-sm font-medium text-[#D1D5DB] mb-4">模板参数配置</h4>
                 <div className="space-y-4">
                   {(mockVariables[selectedTemplate.id] || []).map(variable => (
                     <div key={variable.id}>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">
                         {variable.name}
-                        {variable.required && <span className="text-red-400 ml-1">*</span>}
+                        {variable.required && <span className="text-[#FF3B30] ml-1">*</span>}
                       </label>
                       {variable.type === 'boolean' ? (
                         <select
@@ -348,7 +348,7 @@ export function TemplateImportInstance() {
                             ...instanceForm,
                             variables: { ...instanceForm.variables, [variable.name]: e.target.value }
                           })}
-                          className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                         >
                           <option value="true">true</option>
                           <option value="false">false</option>
@@ -361,32 +361,32 @@ export function TemplateImportInstance() {
                             ...instanceForm,
                             variables: { ...instanceForm.variables, [variable.name]: e.target.value }
                           })}
-                          className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                          className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono"
                           placeholder={`请输入 ${variable.name}`}
                         />
                       )}
-                      <p className="text-xs text-slate-500 mt-1">{variable.description}</p>
+                      <p className="text-xs text-[#6B7280] mt-1">{variable.description}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* 模板描述 */}
-              <div className="bg-slate-800/50 rounded-lg p-4">
-                <h4 className="text-sm font-medium text-slate-300 mb-2">模板说明</h4>
-                <p className="text-sm text-slate-400">{selectedTemplate.description}</p>
+              <div className="bg-[#181F32]/50 rounded-lg p-4">
+                <h4 className="text-sm font-medium text-[#D1D5DB] mb-2">模板说明</h4>
+                <p className="text-sm text-[#9CA3AF]">{selectedTemplate.description}</p>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800 sticky bottom-0 bg-slate-900">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D] sticky bottom-0 bg-[#20293F]">
               <button
                 onClick={() => setIsInstanceModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleCreateInstance}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 <Play className="w-4 h-4" />
                 创建实例

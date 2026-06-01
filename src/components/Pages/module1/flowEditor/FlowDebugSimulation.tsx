@@ -187,10 +187,10 @@ export function FlowDebugSimulation() {
   // 获取日志样式
   const getLogStyle = (level: ExecutionLog['level']) => {
     const styles = {
-      info: 'text-blue-400',
-      warn: 'text-yellow-400',
-      error: 'text-red-400',
-      success: 'text-green-400'
+      info: 'text-[#0066FF]',
+      warn: 'text-[#FF9100]',
+      error: 'text-[#FF3B30]',
+      success: 'text-[#00C853]'
     };
     return styles[level];
   };
@@ -210,11 +210,11 @@ export function FlowDebugSimulation() {
 
   const getNodeStatusStyle = (status: NodeExecution['status']) => {
     const styles = {
-      pending: 'bg-slate-800 text-slate-400 border-slate-700',
-      running: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      success: 'bg-green-500/20 text-green-400 border-green-500/30',
-      failed: 'bg-red-500/20 text-red-400 border-red-500/30',
-      skipped: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+      pending: 'bg-[#181F32] text-[#9CA3AF] border-[#2A354D]',
+      running: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      success: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      failed: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      skipped: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30'
     };
     return styles[status];
   };
@@ -231,23 +231,23 @@ export function FlowDebugSimulation() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">流程调试与模拟运行</h1>
-        <p className="text-slate-400">调试和测试自动化流程的运行过程</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">流程调试与模拟运行</h1>
+        <p className="text-[#9CA3AF]">调试和测试自动化流程的运行过程</p>
       </div>
 
       {/* 主控制面板 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-6">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="flex items-center gap-2">
-              <label className="text-slate-400 text-sm">选择流程:</label>
+              <label className="text-[#9CA3AF] text-sm">选择流程:</label>
               <select
                 value={selectedWorkflow}
                 onChange={(e) => setSelectedWorkflow(e.target.value)}
-                className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 disabled={isRunning}
               >
                 <option value="">请选择流程</option>
@@ -260,14 +260,14 @@ export function FlowDebugSimulation() {
             </div>
 
             <div className="flex items-center gap-2">
-              <label className="text-slate-400 text-sm">调试模式:</label>
-              <div className="flex bg-slate-800 rounded-lg p-0.5">
+              <label className="text-[#9CA3AF] text-sm">调试模式:</label>
+              <div className="flex bg-[#181F32] rounded-lg p-0.5">
                 <button
                   onClick={() => setDebugMode('auto')}
                   className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
                     debugMode === 'auto'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0066FF] text-[#F3F4F6]'
+                      : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                   }`}
                 >
                   自动执行
@@ -276,8 +276,8 @@ export function FlowDebugSimulation() {
                   onClick={() => setDebugMode('step')}
                   className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
                     debugMode === 'step'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-[#0066FF] text-[#F3F4F6]'
+                      : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                   }`}
                 >
                   单步执行
@@ -291,7 +291,7 @@ export function FlowDebugSimulation() {
               <>
                 <button
                   onClick={handleStart}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors"
                   disabled={!selectedWorkflow}
                 >
                   <Play className="w-4 h-4" />
@@ -299,7 +299,7 @@ export function FlowDebugSimulation() {
                 </button>
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   <RotateCcw className="w-4 h-4" />
                   重置
@@ -309,7 +309,7 @@ export function FlowDebugSimulation() {
               <>
                 <button
                   onClick={handlePause}
-                  className="flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#FF9100] hover:bg-[#FF9100] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   <Pause className="w-4 h-4" />
                   {isPaused ? '继续' : '暂停'}
@@ -317,7 +317,7 @@ export function FlowDebugSimulation() {
                 {debugMode === 'step' && (
                   <button
                     onClick={handleStep}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
                   >
                     <StepForward className="w-4 h-4" />
                     下一步
@@ -325,7 +325,7 @@ export function FlowDebugSimulation() {
                 )}
                 <button
                   onClick={handleStop}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   <XCircle className="w-4 h-4" />
                   停止
@@ -337,14 +337,14 @@ export function FlowDebugSimulation() {
 
         {/* 执行进度 */}
         {isRunning && (
-          <div className="mt-4 pt-4 border-t border-slate-800">
+          <div className="mt-4 pt-4 border-t border-[#2A354D]">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-4">
-                <span className="text-slate-400 text-sm flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-green-400 animate-pulse" />
+                <span className="text-[#9CA3AF] text-sm flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-[#00C853] animate-pulse" />
                   执行进度: {Math.round(executionProgress)}%
                 </span>
-                <span className="text-slate-400 text-sm flex items-center gap-2">
+                <span className="text-[#9CA3AF] text-sm flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   运行时间: {executionTime}s
                 </span>
@@ -352,16 +352,16 @@ export function FlowDebugSimulation() {
               <div className="flex items-center gap-2">
                 <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
                   isPaused 
-                    ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
-                    : 'bg-green-500/20 text-green-400 border-green-500/30'
+                    ? 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30'
+                    : 'bg-[#00C853]/20 text-[#00C853] border-green-500/30'
                 }`}>
                   {isPaused ? '已暂停' : '运行中'}
                 </span>
               </div>
             </div>
-            <div className="w-full bg-slate-800 rounded-full h-2">
+            <div className="w-full bg-[#181F32] rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                className="bg-[#0066FF] h-2 rounded-full transition-all duration-500"
                 style={{ width: `${executionProgress}%` }}
               />
             </div>
@@ -374,14 +374,14 @@ export function FlowDebugSimulation() {
         {/* 左侧：输入参数和节点执行 */}
         <div className="lg:col-span-1 space-y-6">
           {/* 输入参数 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-white font-semibold flex items-center gap-2">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-[#F3F4F6] font-semibold flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 输入参数
               </h3>
               <button
-                className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+                className="text-[#0066FF] hover:text-[#4D94FF] text-sm flex items-center gap-1"
                 disabled={isRunning}
               >
                 <Save className="w-4 h-4" />
@@ -394,15 +394,15 @@ export function FlowDebugSimulation() {
                 onChange={(e) => setInputParams(e.target.value)}
                 disabled={isRunning}
                 rows={10}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
               />
             </div>
           </div>
 
           {/* 节点执行状态 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="p-4 border-b border-slate-800">
-              <h3 className="text-white font-semibold flex items-center gap-2">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+            <div className="p-4 border-b border-[#2A354D]">
+              <h3 className="text-[#F3F4F6] font-semibold flex items-center gap-2">
                 <Zap className="w-4 h-4" />
                 节点执行状态
               </h3>
@@ -417,15 +417,15 @@ export function FlowDebugSimulation() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-slate-500">#{index + 1}</span>
+                      <span className="text-xs text-[#6B7280]">#{index + 1}</span>
                       <span className="font-medium">{node.name}</span>
                     </div>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800/50">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-[#181F32]/50">
                       {getNodeStatusLabel(node.status)}
                     </span>
                   </div>
                   {node.startTime && (
-                    <div className="mt-2 text-xs text-slate-400">
+                    <div className="mt-2 text-xs text-[#9CA3AF]">
                       开始: {node.startTime}
                       {node.endTime && (
                         <>
@@ -449,37 +449,37 @@ export function FlowDebugSimulation() {
 
         {/* 中间：执行日志 */}
         <div className="lg:col-span-1">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden h-full">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-white font-semibold flex items-center gap-2">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden h-full">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-[#F3F4F6] font-semibold flex items-center gap-2">
                 <Terminal className="w-4 h-4" />
                 执行日志
               </h3>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setLogs([])}
-                  className="text-slate-400 hover:text-slate-300 text-sm"
+                  className="text-[#9CA3AF] hover:text-[#D1D5DB] text-sm"
                 >
                   清空
                 </button>
                 <button
-                  className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+                  className="text-[#0066FF] hover:text-[#4D94FF] text-sm flex items-center gap-1"
                 >
                   <Download className="w-4 h-4" />
                   导出
                 </button>
               </div>
             </div>
-            <div className="p-4 bg-slate-950 h-[500px] overflow-y-auto font-mono text-sm">
+            <div className="p-4 bg-[#111625] h-[500px] overflow-y-auto font-mono text-sm">
               {logs.length === 0 ? (
-                <div className="text-slate-600 text-center py-12">
+                <div className="text-[#4B5563] text-center py-12">
                   等待执行开始...
                 </div>
               ) : (
                 <div className="space-y-2">
                   {logs.map((log) => (
                     <div key={log.id} className="flex items-start gap-2">
-                      <span className="text-slate-500 shrink-0">[{log.timestamp}]</span>
+                      <span className="text-[#6B7280] shrink-0">[{log.timestamp}]</span>
                       <span className={`shrink-0 ${getLogStyle(log.level)}`}>
                         {getLogIcon(log.level)}
                       </span>
@@ -494,9 +494,9 @@ export function FlowDebugSimulation() {
 
         {/* 右侧：变量监控 */}
         <div className="lg:col-span-1">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden h-full">
-            <div className="p-4 border-b border-slate-800">
-              <h3 className="text-white font-semibold flex items-center gap-2">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden h-full">
+            <div className="p-4 border-b border-[#2A354D]">
+              <h3 className="text-[#F3F4F6] font-semibold flex items-center gap-2">
                 <Eye className="w-4 h-4" />
                 变量监控
               </h3>
@@ -505,29 +505,29 @@ export function FlowDebugSimulation() {
               {variables.map((variable) => (
                 <div
                   key={variable.id}
-                  className="bg-slate-800 rounded-lg p-3 border border-slate-700 hover:border-slate-600 transition-colors cursor-pointer"
+                  className="bg-[#181F32] rounded-lg p-3 border border-[#2A354D] hover:border-[#3A4560] transition-colors cursor-pointer"
                   onClick={() => setShowVariableDetail(
                     showVariableDetail === variable.id ? null : variable.id
                   )}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-white font-medium">{variable.name}</span>
-                    <span className="text-xs px-2 py-0.5 bg-slate-700 rounded-full text-slate-300">
+                    <span className="text-[#F3F4F6] font-medium">{variable.name}</span>
+                    <span className="text-xs px-2 py-0.5 bg-[#2A354D] rounded-full text-[#D1D5DB]">
                       {variable.type}
                     </span>
                   </div>
-                  <div className="text-slate-400 text-sm font-mono truncate">
+                  <div className="text-[#9CA3AF] text-sm font-mono truncate">
                     {typeof variable.value === 'object'
                       ? JSON.stringify(variable.value)
                       : String(variable.value)}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">
+                  <div className="text-xs text-[#6B7280] mt-1">
                     更新于: {variable.updatedAt}
                   </div>
 
                   {showVariableDetail === variable.id && (
-                    <div className="mt-3 pt-3 border-t border-slate-700">
-                      <pre className="text-xs text-slate-300 bg-slate-900 p-2 rounded overflow-x-auto">
+                    <div className="mt-3 pt-3 border-t border-[#2A354D]">
+                      <pre className="text-xs text-[#D1D5DB] bg-[#20293F] p-2 rounded overflow-x-auto">
                         {JSON.stringify(variable.value, null, 2)}
                       </pre>
                     </div>
@@ -535,7 +535,7 @@ export function FlowDebugSimulation() {
                 </div>
               ))}
 
-              <button className="w-full py-2 text-blue-400 hover:text-blue-300 hover:bg-slate-800 rounded-lg border border-dashed border-slate-700 text-sm transition-colors">
+              <button className="w-full py-2 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#181F32] rounded-lg border border-dashed border-[#2A354D] text-sm transition-colors">
                 + 添加监控变量
               </button>
             </div>
@@ -544,70 +544,70 @@ export function FlowDebugSimulation() {
       </div>
 
       {/* 执行历史 */}
-      <div className="mt-6 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-slate-800">
-          <h3 className="text-white font-semibold">调试历史</h3>
+      <div className="mt-6 bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+        <div className="p-4 border-b border-[#2A354D]">
+          <h3 className="text-[#F3F4F6] font-semibold">调试历史</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                   开始时间
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                   流程名称
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                   状态
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                   耗时
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                   操作
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
-              <tr className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+            <tbody className="divide-y divide-[#2A354D]">
+              <tr className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                   2026-06-01 10:25:00
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6]">
                   安全事件响应流程
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-400 border border-green-500/30">
+                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#00C853]/20 text-[#00C853] border border-green-500/30">
                     成功
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                   15s
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <button className="text-blue-400 hover:text-blue-300 mr-3">查看日志</button>
-                  <button className="text-slate-400 hover:text-slate-300">重新运行</button>
+                  <button className="text-[#0066FF] hover:text-[#4D94FF] mr-3">查看日志</button>
+                  <button className="text-[#9CA3AF] hover:text-[#D1D5DB]">重新运行</button>
                 </td>
               </tr>
-              <tr className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+              <tr className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                   2026-05-31 14:18:00
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6]">
                   漏洞扫描与修复
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-500/20 text-red-400 border border-red-500/30">
+                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#FF3B30]/20 text-[#FF3B30] border border-red-500/30">
                     失败
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                   8s
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <button className="text-blue-400 hover:text-blue-300 mr-3">查看日志</button>
-                  <button className="text-slate-400 hover:text-slate-300">重新运行</button>
+                  <button className="text-[#0066FF] hover:text-[#4D94FF] mr-3">查看日志</button>
+                  <button className="text-[#9CA3AF] hover:text-[#D1D5DB]">重新运行</button>
                 </td>
               </tr>
             </tbody>

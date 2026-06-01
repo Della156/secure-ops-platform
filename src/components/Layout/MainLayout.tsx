@@ -11,7 +11,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   const { sidebarCollapsed } = useSystem();
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#111625]">
       <Sidebar />
       <main
         className={`

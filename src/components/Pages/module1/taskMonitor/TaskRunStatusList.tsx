@@ -38,10 +38,10 @@ export function TaskRunStatusList() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      running: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      success: 'bg-green-500/20 text-green-400 border-green-500/30',
-      failed: 'bg-red-500/20 text-red-400 border-red-500/30',
-      pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+      running: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      success: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      failed: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      pending: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
     };
     const labels = {
       running: '运行中',
@@ -75,29 +75,29 @@ export function TaskRunStatusList() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务运行状态列表</h1>
-        <p className="text-slate-400">查看所有自动化任务的执行状态和进度</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务运行状态列表</h1>
+        <p className="text-[#9CA3AF]">查看所有自动化任务的执行状态和进度</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索任务名称..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="running">运行中</option>
@@ -109,12 +109,12 @@ export function TaskRunStatusList() {
               type="date"
               value={filterDate}
               onChange={(e) => setFilterDate(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             />
           </div>
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
           >
             <Download className="w-4 h-4" />
             导出 Excel
@@ -122,40 +122,40 @@ export function TaskRunStatusList() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">开始时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">结束时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">耗时</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">进度</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">开始时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">结束时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">耗时</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">进度</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredData.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.startTime}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.endTime || '-'}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.duration}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.startTime}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.endTime || '-'}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.duration}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="w-32">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-slate-400">{item.progress}%</span>
+                      <span className="text-xs text-[#9CA3AF]">{item.progress}%</span>
                     </div>
-                    <div className="w-full bg-slate-800 rounded-full h-2">
+                    <div className="w-full bg-[#181F32] rounded-full h-2">
                       <div
                         className={`h-2 rounded-full transition-all duration-300 ${
-                          item.status === 'success' ? 'bg-green-500' :
-                          item.status === 'failed' ? 'bg-red-500' :
-                          item.status === 'running' ? 'bg-blue-500' : 'bg-yellow-500'
+                          item.status === 'success' ? 'bg-[#00C853]' :
+                          item.status === 'failed' ? 'bg-[#FF3B30]' :
+                          item.status === 'running' ? 'bg-[#0066FF]' : 'bg-[#FF9100]'
                         }`}
                         style={{ width: `${item.progress}%` }}
                       />
@@ -166,14 +166,14 @@ export function TaskRunStatusList() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleViewDetail(item)}
-                      className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                       title="查看详情"
                     >
                       <Eye className="w-4 h-4" />
                     </button>
                     {item.status === 'pending' && (
                       <button
-                        className="p-1.5 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#00C853] hover:text-[#33D97A] hover:bg-[#00C853]/10 rounded transition-colors"
                         title="启动任务"
                       >
                         <Play className="w-4 h-4" />
@@ -182,7 +182,7 @@ export function TaskRunStatusList() {
                     {item.status === 'failed' && (
                       <button
                         onClick={() => handleRetry(item)}
-                        className="p-1.5 text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#FF9100] hover:text-[#FF9100] hover:bg-[#FF9100]/10 rounded transition-colors"
                         title="重试"
                       >
                         <RotateCcw className="w-4 h-4" />
@@ -191,7 +191,7 @@ export function TaskRunStatusList() {
                     {item.status === 'running' && (
                       <button
                         onClick={() => handleStop(item)}
-                        className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                        className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                         title="停止"
                       >
                         <XCircle className="w-4 h-4" />
@@ -206,17 +206,17 @@ export function TaskRunStatusList() {
 
         {filteredData.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       <div className="mt-4 flex items-center justify-center gap-2">
-        <button className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-sm transition-colors">上一页</button>
-        <button className="px-3 py-1 bg-blue-600 text-white rounded text-sm">1</button>
-        <button className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-sm transition-colors">2</button>
-        <button className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-sm transition-colors">3</button>
-        <button className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-sm transition-colors">下一页</button>
+        <button className="px-3 py-1 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded text-sm transition-colors">上一页</button>
+        <button className="px-3 py-1 bg-[#0066FF] text-[#F3F4F6] rounded text-sm">1</button>
+        <button className="px-3 py-1 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded text-sm transition-colors">2</button>
+        <button className="px-3 py-1 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded text-sm transition-colors">3</button>
+        <button className="px-3 py-1 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded text-sm transition-colors">下一页</button>
       </div>
     </div>
   );

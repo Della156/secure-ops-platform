@@ -55,8 +55,8 @@ export function TaskRunStatistics() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-lg">
-          <p className="text-slate-300 text-sm mb-1">{label}</p>
+        <div className="bg-[#181F32] border border-[#2A354D] rounded-lg p-3 shadow-lg">
+          <p className="text-[#D1D5DB] text-sm mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {entry.value}
@@ -69,21 +69,21 @@ export function TaskRunStatistics() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务运行统计分析</h1>
-        <p className="text-slate-400">分析和展示任务执行的统计数据和趋势</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务运行统计分析</h1>
+        <p className="text-[#9CA3AF]">分析和展示任务执行的统计数据和趋势</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-6">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center gap-3">
-            <Calendar className="w-5 h-5 text-slate-400" />
-            <div className="flex bg-slate-800 rounded-lg p-1">
+            <Calendar className="w-5 h-5 text-[#9CA3AF]" />
+            <div className="flex bg-[#181F32] rounded-lg p-1">
               <button
                 onClick={() => setPeriod('day')}
                 className={`px-4 py-1.5 rounded-md text-sm transition-colors ${
-                  period === 'day' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  period === 'day' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                 }`}
               >
                 日
@@ -91,7 +91,7 @@ export function TaskRunStatistics() {
               <button
                 onClick={() => setPeriod('week')}
                 className={`px-4 py-1.5 rounded-md text-sm transition-colors ${
-                  period === 'week' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  period === 'week' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                 }`}
               >
                 周
@@ -99,7 +99,7 @@ export function TaskRunStatistics() {
               <button
                 onClick={() => setPeriod('month')}
                 className={`px-4 py-1.5 rounded-md text-sm transition-colors ${
-                  period === 'month' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  period === 'month' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
                 }`}
               >
                 月
@@ -108,7 +108,7 @@ export function TaskRunStatistics() {
           </div>
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
           >
             <Download className="w-4 h-4" />
             导出报表
@@ -117,31 +117,31 @@ export function TaskRunStatistics() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <div className="text-slate-400 text-sm mb-1">总执行次数</div>
-          <div className="text-3xl font-bold text-white">45</div>
-          <div className="text-green-400 text-sm mt-1">↑ 12% vs 昨日</div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <div className="text-[#9CA3AF] text-sm mb-1">总执行次数</div>
+          <div className="text-3xl font-bold text-[#F3F4F6]">45</div>
+          <div className="text-[#00C853] text-sm mt-1">↑ 12% vs 昨日</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <div className="text-slate-400 text-sm mb-1">成功次数</div>
-          <div className="text-3xl font-bold text-green-400">38</div>
-          <div className="text-slate-500 text-sm mt-1">成功率 84.4%</div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <div className="text-[#9CA3AF] text-sm mb-1">成功次数</div>
+          <div className="text-3xl font-bold text-[#00C853]">38</div>
+          <div className="text-[#6B7280] text-sm mt-1">成功率 84.4%</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <div className="text-slate-400 text-sm mb-1">失败次数</div>
-          <div className="text-3xl font-bold text-red-400">7</div>
-          <div className="text-red-400 text-sm mt-1">↓ 8% vs 昨日</div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <div className="text-[#9CA3AF] text-sm mb-1">失败次数</div>
+          <div className="text-3xl font-bold text-[#FF3B30]">7</div>
+          <div className="text-[#FF3B30] text-sm mt-1">↓ 8% vs 昨日</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <div className="text-slate-400 text-sm mb-1">平均耗时</div>
-          <div className="text-3xl font-bold text-blue-400">18min</div>
-          <div className="text-slate-500 text-sm mt-1">中位数 12min</div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <div className="text-[#9CA3AF] text-sm mb-1">平均耗时</div>
+          <div className="text-3xl font-bold text-[#0066FF]">18min</div>
+          <div className="text-[#6B7280] text-sm mt-1">中位数 12min</div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">执行次数趋势</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">执行次数趋势</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={currentData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
@@ -156,8 +156,8 @@ export function TaskRunStatistics() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">成功率趋势</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">成功率趋势</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={currentData.map(d => ({
               ...d,
@@ -175,8 +175,8 @@ export function TaskRunStatistics() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">执行耗时分布</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">执行耗时分布</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={durationData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
@@ -188,8 +188,8 @@ export function TaskRunStatistics() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">执行结果分布</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">执行结果分布</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie

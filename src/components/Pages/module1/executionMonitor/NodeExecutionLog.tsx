@@ -105,9 +105,9 @@ export function NodeExecutionLog() {
 
   const getStatusConfig = (status: string) => {
     const configs = {
-      success: { label: '成功', color: 'bg-green-500/20 text-green-400 border-green-500/30', icon: CheckCircle2 },
-      failed: { label: '失败', color: 'bg-red-500/20 text-red-400 border-red-500/30', icon: XCircle },
-      running: { label: '运行中', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30', icon: Clock },
+      success: { label: '成功', color: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30', icon: CheckCircle2 },
+      failed: { label: '失败', color: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30', icon: XCircle },
+      running: { label: '运行中', color: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30', icon: Clock },
       pending: { label: '等待', color: 'bg-gray-500/20 text-gray-400 border-gray-500/30', icon: Clock },
     };
     return configs[status as keyof typeof configs] || configs.pending;
@@ -125,22 +125,22 @@ export function NodeExecutionLog() {
 
   const getLogLevelColor = (level: string) => {
     const colors = {
-      info: 'text-blue-400',
-      warn: 'text-yellow-400',
-      error: 'text-red-400',
-      success: 'text-green-400',
+      info: 'text-[#0066FF]',
+      warn: 'text-[#FF9100]',
+      error: 'text-[#FF3B30]',
+      success: 'text-[#00C853]',
     };
-    return colors[level as keyof typeof colors] || 'text-slate-400';
+    return colors[level as keyof typeof colors] || 'text-[#9CA3AF]';
   };
 
   const getLogLevelBg = (level: string) => {
     const colors = {
-      info: 'bg-blue-500/10',
-      warn: 'bg-yellow-500/10',
-      error: 'bg-red-500/10',
-      success: 'bg-green-500/10',
+      info: 'bg-[#0066FF]/10',
+      warn: 'bg-[#FF9100]/10',
+      error: 'bg-[#FF3B30]/10',
+      success: 'bg-[#00C853]/10',
     };
-    return colors[level as keyof typeof colors] || 'bg-slate-800';
+    return colors[level as keyof typeof colors] || 'bg-[#181F32]';
   };
 
   const handleCopy = (text: string) => {
@@ -149,17 +149,17 @@ export function NodeExecutionLog() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务节点执行日志查看</h1>
-        <p className="text-slate-400">查看任务节点的执行详情、输入输出和日志信息</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务节点执行日志查看</h1>
+        <p className="text-[#9CA3AF]">查看任务节点的执行详情、输入输出和日志信息</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 bg-slate-800/50">
-              <h3 className="text-sm font-semibold text-white">执行链</h3>
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-[#2A354D] bg-[#181F32]/50">
+              <h3 className="text-sm font-semibold text-[#F3F4F6]">执行链</h3>
             </div>
             <div className="p-4">
               <div className="space-y-2">
@@ -175,31 +175,31 @@ export function NodeExecutionLog() {
                       <div
                         onClick={() => setSelectedNode(node)}
                         className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
-                          isSelected ? 'bg-blue-500/10 border border-blue-500/30' : 'bg-slate-800/50 border border-transparent hover:bg-slate-800'
+                          isSelected ? 'bg-[#0066FF]/10 border border-blue-500/30' : 'bg-[#181F32]/50 border border-transparent hover:bg-[#181F32]'
                         }`}
                       >
                         <div className="flex-shrink-0 mt-0.5">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            node.status === 'success' ? 'bg-green-500/20 text-green-400' :
-                            node.status === 'failed' ? 'bg-red-500/20 text-red-400' :
-                            node.status === 'running' ? 'bg-blue-500/20 text-blue-400' :
-                            'bg-slate-700 text-slate-500'
+                            node.status === 'success' ? 'bg-[#00C853]/20 text-[#00C853]' :
+                            node.status === 'failed' ? 'bg-[#FF3B30]/20 text-[#FF3B30]' :
+                            node.status === 'running' ? 'bg-[#0066FF]/20 text-[#0066FF]' :
+                            'bg-[#2A354D] text-[#6B7280]'
                           }`}>
                             <Icon className="w-4 h-4" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-sm font-medium text-white truncate">{node.name}</span>
+                            <span className="text-sm font-medium text-[#F3F4F6] truncate">{node.name}</span>
                             <span className={`px-1.5 py-0.5 rounded-full text-xs border ${statusConfig.color}`}>{statusConfig.label}</span>
                           </div>
-                          <div className="text-xs text-slate-500">
+                          <div className="text-xs text-[#6B7280]">
                             {node.startTime !== '-' ? `${node.startTime} · ${node.duration}` : '等待执行'}
                           </div>
                         </div>
                       </div>
                       {!isLast && (
-                        <div className="absolute left-7 top-10 bottom-0 w-0.5 bg-slate-700" />
+                        <div className="absolute left-7 top-10 bottom-0 w-0.5 bg-[#2A354D]" />
                       )}
                     </div>
                   );
@@ -210,12 +210,12 @@ export function NodeExecutionLog() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 bg-slate-800/50">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-[#2A354D] bg-[#181F32]/50">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-white">{selectedNode.name}</h3>
-                  <p className="text-sm text-slate-500">节点 ID: {selectedNode.id}</p>
+                  <h3 className="text-lg font-semibold text-[#F3F4F6]">{selectedNode.name}</h3>
+                  <p className="text-sm text-[#6B7280]">节点 ID: {selectedNode.id}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   {(() => {
@@ -232,7 +232,7 @@ export function NodeExecutionLog() {
               </div>
             </div>
 
-            <div className="border-b border-slate-800">
+            <div className="border-b border-[#2A354D]">
               <div className="flex">
                 {[
                   { id: 'overview', label: '概览', icon: FileText },
@@ -246,7 +246,7 @@ export function NodeExecutionLog() {
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id as any)}
                       className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
-                        activeTab === tab.id ? 'text-blue-400 border-b-2 border-blue-500' : 'text-slate-400 hover:text-slate-300'
+                        activeTab === tab.id ? 'text-[#0066FF] border-b-2 border-blue-500' : 'text-[#9CA3AF] hover:text-[#D1D5DB]'
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -261,21 +261,21 @@ export function NodeExecutionLog() {
               {activeTab === 'overview' && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-800/50 rounded-lg p-4">
-                      <div className="text-sm text-slate-400 mb-1">节点类型</div>
-                      <div className="text-white font-medium">{selectedNode.type === 'task' ? '任务' : selectedNode.type === 'condition' ? '条件' : selectedNode.type === 'parallel' ? '并行' : '循环'}</div>
+                    <div className="bg-[#181F32]/50 rounded-lg p-4">
+                      <div className="text-sm text-[#9CA3AF] mb-1">节点类型</div>
+                      <div className="text-[#F3F4F6] font-medium">{selectedNode.type === 'task' ? '任务' : selectedNode.type === 'condition' ? '条件' : selectedNode.type === 'parallel' ? '并行' : '循环'}</div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
-                      <div className="text-sm text-slate-400 mb-1">开始时间</div>
-                      <div className="text-white font-medium">{selectedNode.startTime}</div>
+                    <div className="bg-[#181F32]/50 rounded-lg p-4">
+                      <div className="text-sm text-[#9CA3AF] mb-1">开始时间</div>
+                      <div className="text-[#F3F4F6] font-medium">{selectedNode.startTime}</div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
-                      <div className="text-sm text-slate-400 mb-1">结束时间</div>
-                      <div className="text-white font-medium">{selectedNode.endTime || '-'}</div>
+                    <div className="bg-[#181F32]/50 rounded-lg p-4">
+                      <div className="text-sm text-[#9CA3AF] mb-1">结束时间</div>
+                      <div className="text-[#F3F4F6] font-medium">{selectedNode.endTime || '-'}</div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
-                      <div className="text-sm text-slate-400 mb-1">执行时长</div>
-                      <div className="text-white font-medium">{selectedNode.duration}</div>
+                    <div className="bg-[#181F32]/50 rounded-lg p-4">
+                      <div className="text-sm text-[#9CA3AF] mb-1">执行时长</div>
+                      <div className="text-[#F3F4F6] font-medium">{selectedNode.duration}</div>
                     </div>
                   </div>
                 </div>
@@ -284,16 +284,16 @@ export function NodeExecutionLog() {
               {activeTab === 'input' && (
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm font-medium text-slate-300">输入参数</h4>
+                    <h4 className="text-sm font-medium text-[#D1D5DB]">输入参数</h4>
                     <button
                       onClick={() => handleCopy(JSON.stringify(selectedNode.input, null, 2))}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-xs transition-colors"
                     >
                       <Copy className="w-3 h-3" />
                       复制
                     </button>
                   </div>
-                  <pre className="bg-slate-950 border border-slate-800 rounded-lg p-4 overflow-x-auto text-sm font-mono text-slate-300">
+                  <pre className="bg-[#111625] border border-[#2A354D] rounded-lg p-4 overflow-x-auto text-sm font-mono text-[#D1D5DB]">
                     {JSON.stringify(selectedNode.input, null, 2)}
                   </pre>
                 </div>
@@ -302,16 +302,16 @@ export function NodeExecutionLog() {
               {activeTab === 'output' && (
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm font-medium text-slate-300">输出结果</h4>
+                    <h4 className="text-sm font-medium text-[#D1D5DB]">输出结果</h4>
                     <button
                       onClick={() => handleCopy(JSON.stringify(selectedNode.output, null, 2))}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs transition-colors"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg text-xs transition-colors"
                     >
                       <Copy className="w-3 h-3" />
                       复制
                     </button>
                   </div>
-                  <pre className="bg-slate-950 border border-slate-800 rounded-lg p-4 overflow-x-auto text-sm font-mono text-slate-300">
+                  <pre className="bg-[#111625] border border-[#2A354D] rounded-lg p-4 overflow-x-auto text-sm font-mono text-[#D1D5DB]">
                     {JSON.stringify(selectedNode.output, null, 2) || '暂无输出'}
                   </pre>
                 </div>
@@ -320,22 +320,22 @@ export function NodeExecutionLog() {
               {activeTab === 'logs' && (
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm font-medium text-slate-300">执行日志</h4>
-                    <div className="text-xs text-slate-500">{selectedNode.logs.length} 条日志</div>
+                    <h4 className="text-sm font-medium text-[#D1D5DB]">执行日志</h4>
+                    <div className="text-xs text-[#6B7280]">{selectedNode.logs.length} 条日志</div>
                   </div>
-                  <div className="bg-slate-950 border border-slate-800 rounded-lg p-4 max-h-96 overflow-y-auto font-mono text-sm">
+                  <div className="bg-[#111625] border border-[#2A354D] rounded-lg p-4 max-h-96 overflow-y-auto font-mono text-sm">
                     {selectedNode.logs.length > 0 ? (
                       <div className="space-y-1">
                         {selectedNode.logs.map(log => (
                           <div key={log.id} className={`flex items-start gap-3 px-2 py-1.5 rounded ${getLogLevelBg(log.level)}`}>
-                            <span className="text-slate-500 flex-shrink-0">[{log.timestamp}]</span>
+                            <span className="text-[#6B7280] flex-shrink-0">[{log.timestamp}]</span>
                             <span className={`flex-shrink-0 font-medium ${getLogLevelColor(log.level)}`}>{log.level.toUpperCase()}</span>
-                            <span className="text-slate-300">{log.message}</span>
+                            <span className="text-[#D1D5DB]">{log.message}</span>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <div className="text-center py-8 text-slate-500">
+                      <div className="text-center py-8 text-[#6B7280]">
                         暂无日志
                       </div>
                     )}

@@ -81,9 +81,9 @@ export function SystemList() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      online: 'bg-green-500/20 text-green-400 border-green-500/30',
-      warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      offline: 'bg-red-500/20 text-red-400 border-red-500/30',
+      online: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      warning: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      offline: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       online: '在线',
@@ -99,13 +99,13 @@ export function SystemList() {
 
   const getTagColorClass = (color: string) => {
     const colors = {
-      blue: 'bg-blue-500/20 text-blue-400',
-      green: 'bg-green-500/20 text-green-400',
-      purple: 'bg-purple-500/20 text-purple-400',
-      yellow: 'bg-yellow-500/20 text-yellow-400',
-      cyan: 'bg-cyan-500/20 text-cyan-400',
+      blue: 'bg-[#0066FF]/20 text-[#0066FF]',
+      green: 'bg-[#00C853]/20 text-[#00C853]',
+      purple: 'bg-[#6366F1]/20 text-[#6366F1]',
+      yellow: 'bg-[#FF9100]/20 text-[#FF9100]',
+      cyan: 'bg-[#00BCD4]/20 text-[#00BCD4]',
     };
-    return colors[color as keyof typeof colors] || 'bg-slate-500/20 text-slate-400';
+    return colors[color as keyof typeof colors] || 'bg-[#4A5570]/20 text-[#9CA3AF]';
   };
 
   const handleOpenModal = (item?: SecuritySystem) => {
@@ -188,29 +188,29 @@ export function SystemList() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">安全系统列表管理</h1>
-        <p className="text-slate-400">管理和配置安全系统资源</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">安全系统列表管理</h1>
+        <p className="text-[#9CA3AF]">管理和配置安全系统资源</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索系统名称..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={filterGroup}
               onChange={(e) => setFilterGroup(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部分组</option>
               {groups.map(group => (
@@ -220,7 +220,7 @@ export function SystemList() {
             <select
               value={filterTag}
               onChange={(e) => setFilterTag(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部标签</option>
               {tags.map(tag => (
@@ -230,7 +230,7 @@ export function SystemList() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="online">在线</option>
@@ -241,21 +241,21 @@ export function SystemList() {
           <div className="flex gap-2">
             <button
               onClick={() => { setEditingGroup(null); setGroupFormData({ name: '' }); setIsGroupModalOpen(true); }}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
             >
               <FolderOpen className="w-4 h-4" />
               分组管理
             </button>
             <button
               onClick={() => { setEditingTag(null); setTagFormData({ name: '', color: 'blue' }); setIsTagModalOpen(true); }}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
             >
               <Tag className="w-4 h-4" />
               标签管理
             </button>
             <button
               onClick={() => handleOpenModal()}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
             >
               <Plus className="w-4 h-4" />
               新增系统
@@ -264,28 +264,28 @@ export function SystemList() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">系统名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">IP地址</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">分组</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">标签</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">创建时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">系统名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">IP地址</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">分组</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">标签</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">创建时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredSystems.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.ip}</td>
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.ip}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">{item.group}</span>
+                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[#0066FF]/20 text-[#0066FF] border border-blue-500/30">{item.group}</span>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex flex-wrap gap-1">
@@ -295,13 +295,13 @@ export function SystemList() {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.createdAt}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.createdAt}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
-                    <button onClick={() => handleOpenModal(item)} className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors" title="编辑">
+                    <button onClick={() => handleOpenModal(item)} className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors" title="编辑">
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button onClick={() => handleDelete(item.id)} className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors" title="删除">
+                    <button onClick={() => handleDelete(item.id)} className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors" title="删除">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
@@ -312,38 +312,38 @@ export function SystemList() {
         </table>
         {filteredSystems.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">{editingItem ? '编辑系统' : '新增系统'}</h3>
-              <button onClick={() => setIsModalOpen(false)} className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">{editingItem ? '编辑系统' : '新增系统'}</h3>
+              <button onClick={() => setIsModalOpen(false)} className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">系统名称</label>
-                <input type="text" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="请输入系统名称" />
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">系统名称</label>
+                <input type="text" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]" placeholder="请输入系统名称" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">IP地址</label>
-                <input type="text" value={formData.ip || ''} onChange={(e) => setFormData({ ...formData, ip: e.target.value })} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="192.168.1.1" />
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">IP地址</label>
+                <input type="text" value={formData.ip || ''} onChange={(e) => setFormData({ ...formData, ip: e.target.value })} className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]" placeholder="192.168.1.1" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">分组</label>
-                <select value={formData.group || ''} onChange={(e) => setFormData({ ...formData, group: e.target.value })} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">分组</label>
+                <select value={formData.group || ''} onChange={(e) => setFormData({ ...formData, group: e.target.value })} className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]">
                   <option value="">请选择分组</option>
                   {groups.map(group => <option key={group.id} value={group.name}>{group.name}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">标签</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">标签</label>
                 <div className="flex flex-wrap gap-2">
                   {tags.map(tag => (
                     <label key={tag.id} className="flex items-center gap-1">
@@ -351,20 +351,20 @@ export function SystemList() {
                         const currentTags = formData.tags || [];
                         const newTags = e.target.checked ? [...currentTags, tag.name] : currentTags.filter(t => t !== tag.name);
                         setFormData({ ...formData, tags: newTags });
-                      }} className="rounded border-slate-600 bg-slate-800 text-blue-600 focus:ring-blue-500" />
+                      }} className="rounded border-[#3A4560] bg-[#181F32] text-[#4D94FF] focus:ring-[#0066FF]" />
                       <span className={`px-2 py-0.5 rounded text-xs ${getTagColorClass(tag.color)}`}>{tag.name}</span>
                     </label>
                   ))}
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">描述</label>
-                <textarea value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} rows={3} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="请输入系统描述" />
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">描述</label>
+                <textarea value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} rows={3} className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]" placeholder="请输入系统描述" />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
-              <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors">取消</button>
-              <button onClick={handleSave} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">保存</button>
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
+              <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors">取消</button>
+              <button onClick={handleSave} className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors">保存</button>
             </div>
           </div>
         </div>
@@ -372,30 +372,30 @@ export function SystemList() {
 
       {isGroupModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">分组管理</h3>
-              <button onClick={() => setIsGroupModalOpen(false)} className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">分组管理</h3>
+              <button onClick={() => setIsGroupModalOpen(false)} className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6">
               <div className="flex gap-2 mb-4">
-                <input type="text" value={groupFormData.name || ''} onChange={(e) => setGroupFormData({ ...groupFormData, name: e.target.value })} className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="分组名称" />
-                <button onClick={handleSaveGroup} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">{editingGroup ? '更新' : '添加'}</button>
+                <input type="text" value={groupFormData.name || ''} onChange={(e) => setGroupFormData({ ...groupFormData, name: e.target.value })} className="flex-1 px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]" placeholder="分组名称" />
+                <button onClick={handleSaveGroup} className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors">{editingGroup ? '更新' : '添加'}</button>
               </div>
               <div className="space-y-2">
                 {groups.map(group => (
-                  <div key={group.id} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                  <div key={group.id} className="flex items-center justify-between p-3 bg-[#181F32]/50 rounded-lg">
                     <div>
-                      <span className="text-white">{group.name}</span>
-                      <span className="text-slate-500 ml-2 text-sm">({group.count}个系统)</span>
+                      <span className="text-[#F3F4F6]">{group.name}</span>
+                      <span className="text-[#6B7280] ml-2 text-sm">({group.count}个系统)</span>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => { setEditingGroup(group); setGroupFormData(group); }} className="p-1 text-slate-400 hover:text-slate-300">
+                      <button onClick={() => { setEditingGroup(group); setGroupFormData(group); }} className="p-1 text-[#9CA3AF] hover:text-[#D1D5DB]">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button onClick={() => handleDeleteGroup(group.id)} className="p-1 text-red-400 hover:text-red-300">
+                      <button onClick={() => handleDeleteGroup(group.id)} className="p-1 text-[#FF3B30] hover:text-[#FF6B5A]">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -409,37 +409,37 @@ export function SystemList() {
 
       {isTagModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">标签管理</h3>
-              <button onClick={() => setIsTagModalOpen(false)} className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">标签管理</h3>
+              <button onClick={() => setIsTagModalOpen(false)} className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6">
               <div className="flex gap-2 mb-4">
-                <input type="text" value={tagFormData.name || ''} onChange={(e) => setTagFormData({ ...tagFormData, name: e.target.value })} className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="标签名称" />
-                <select value={tagFormData.color || 'blue'} onChange={(e) => setTagFormData({ ...tagFormData, color: e.target.value })} className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" value={tagFormData.name || ''} onChange={(e) => setTagFormData({ ...tagFormData, name: e.target.value })} className="flex-1 px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]" placeholder="标签名称" />
+                <select value={tagFormData.color || 'blue'} onChange={(e) => setTagFormData({ ...tagFormData, color: e.target.value })} className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]">
                   <option value="blue">蓝色</option>
                   <option value="green">绿色</option>
                   <option value="purple">紫色</option>
                   <option value="yellow">黄色</option>
                   <option value="cyan">青色</option>
                 </select>
-                <button onClick={handleSaveTag} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">{editingTag ? '更新' : '添加'}</button>
+                <button onClick={handleSaveTag} className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors">{editingTag ? '更新' : '添加'}</button>
               </div>
               <div className="space-y-2">
                 {tags.map(tag => (
-                  <div key={tag.id} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                  <div key={tag.id} className="flex items-center justify-between p-3 bg-[#181F32]/50 rounded-lg">
                     <div className="flex items-center gap-3">
                       <span className={`px-2 py-0.5 rounded text-xs ${getTagColorClass(tag.color)}`}>{tag.name}</span>
-                      <span className="text-white">{tag.name}</span>
+                      <span className="text-[#F3F4F6]">{tag.name}</span>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => { setEditingTag(tag); setTagFormData(tag); }} className="p-1 text-slate-400 hover:text-slate-300">
+                      <button onClick={() => { setEditingTag(tag); setTagFormData(tag); }} className="p-1 text-[#9CA3AF] hover:text-[#D1D5DB]">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button onClick={() => handleDeleteTag(tag.id)} className="p-1 text-red-400 hover:text-red-300">
+                      <button onClick={() => handleDeleteTag(tag.id)} className="p-1 text-[#FF3B30] hover:text-[#FF6B5A]">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

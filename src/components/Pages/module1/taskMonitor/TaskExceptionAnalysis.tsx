@@ -111,10 +111,10 @@ export function TaskExceptionAnalysis() {
 
   const getSeverityBadge = (severity: string) => {
     const styles = {
-      critical: 'bg-red-500/20 text-red-400 border-red-500/30',
-      high: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-      medium: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      low: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+      critical: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      high: 'bg-[#FF9100]/20 text-[#FF9100] border-orange-500/30',
+      medium: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      low: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
     };
     const labels = {
       critical: '严重',
@@ -131,10 +131,10 @@ export function TaskExceptionAnalysis() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      open: 'bg-red-500/20 text-red-400 border-red-500/30',
-      investigating: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      resolved: 'bg-green-500/20 text-green-400 border-green-500/30',
-      ignored: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+      open: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      investigating: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      resolved: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      ignored: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
     };
     const labels = {
       open: '待处理',
@@ -163,8 +163,8 @@ export function TaskExceptionAnalysis() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-lg">
-          <p className="text-slate-300 text-sm mb-1">{label}</p>
+        <div className="bg-[#181F32] border border-[#2A354D] rounded-lg p-3 shadow-lg">
+          <p className="text-[#D1D5DB] text-sm mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {entry.value}
@@ -184,46 +184,46 @@ export function TaskExceptionAnalysis() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务异常事件分析</h1>
-        <p className="text-slate-400">分析和处理任务执行过程中的异常事件</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务异常事件分析</h1>
+        <p className="text-[#9CA3AF]">分析和处理任务执行过程中的异常事件</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">总异常数</span>
-            <AlertTriangle className="w-5 h-5 text-yellow-400" />
+            <span className="text-[#9CA3AF] text-sm">总异常数</span>
+            <AlertTriangle className="w-5 h-5 text-[#FF9100]" />
           </div>
-          <div className="text-3xl font-bold text-white">{stats.total}</div>
+          <div className="text-3xl font-bold text-[#F3F4F6]">{stats.total}</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">待处理</span>
-            <AlertTriangle className="w-5 h-5 text-red-400" />
+            <span className="text-[#9CA3AF] text-sm">待处理</span>
+            <AlertTriangle className="w-5 h-5 text-[#FF3B30]" />
           </div>
-          <div className="text-3xl font-bold text-red-400">{stats.open}</div>
+          <div className="text-3xl font-bold text-[#FF3B30]">{stats.open}</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">已解决</span>
-            <FileText className="w-5 h-5 text-green-400" />
+            <span className="text-[#9CA3AF] text-sm">已解决</span>
+            <FileText className="w-5 h-5 text-[#00C853]" />
           </div>
-          <div className="text-3xl font-bold text-green-400">{stats.resolved}</div>
+          <div className="text-3xl font-bold text-[#00C853]">{stats.resolved}</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">严重异常</span>
-            <AlertTriangle className="w-5 h-5 text-orange-400" />
+            <span className="text-[#9CA3AF] text-sm">严重异常</span>
+            <AlertTriangle className="w-5 h-5 text-[#FF9100]" />
           </div>
-          <div className="text-3xl font-bold text-orange-400">{stats.critical}</div>
+          <div className="text-3xl font-bold text-[#FF9100]">{stats.critical}</div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">异常类型分布</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">异常类型分布</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -245,8 +245,8 @@ export function TaskExceptionAnalysis() {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">异常趋势</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">异常趋势</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={exceptionTrendData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
@@ -259,22 +259,22 @@ export function TaskExceptionAnalysis() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
             <input
               type="text"
               placeholder="搜索异常事件..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             />
           </div>
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           >
             <option value="">全部类型</option>
             <option value="timeout">超时</option>
@@ -286,7 +286,7 @@ export function TaskExceptionAnalysis() {
           <select
             value={filterSeverity}
             onChange={(e) => setFilterSeverity(e.target.value)}
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           >
             <option value="">全部级别</option>
             <option value="critical">严重</option>
@@ -297,7 +297,7 @@ export function TaskExceptionAnalysis() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           >
             <option value="">全部状态</option>
             <option value="open">待处理</option>
@@ -308,23 +308,23 @@ export function TaskExceptionAnalysis() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-800">
-          <h3 className="text-lg font-semibold text-white">异常事件列表</h3>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#2A354D]">
+          <h3 className="text-lg font-semibold text-[#F3F4F6]">异常事件列表</h3>
         </div>
-        <div className="divide-y divide-slate-800">
+        <div className="divide-y divide-[#2A354D]">
           {filteredExceptions.map((exception) => (
-            <div key={exception.id} className="p-6 hover:bg-slate-800/30 transition-colors">
+            <div key={exception.id} className="p-6 hover:bg-[#181F32]/30 transition-colors">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-mono text-slate-400">{exception.id}</span>
+                    <span className="text-sm font-mono text-[#9CA3AF]">{exception.id}</span>
                     {getSeverityBadge(exception.severity)}
                     {getStatusBadge(exception.status)}
                   </div>
-                  <h4 className="text-white font-semibold mb-1">{exception.taskName}</h4>
-                  <p className="text-slate-300 text-sm mb-2">{exception.reason}</p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <h4 className="text-[#F3F4F6] font-semibold mb-1">{exception.taskName}</h4>
+                  <p className="text-[#D1D5DB] text-sm mb-2">{exception.reason}</p>
+                  <div className="flex items-center gap-4 text-xs text-[#6B7280]">
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {exception.occurredAt}
@@ -344,14 +344,14 @@ export function TaskExceptionAnalysis() {
                 <div className="flex items-center gap-2 ml-4">
                   <button
                     onClick={() => setSelectedException(exception)}
-                    className="p-2 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded-lg transition-colors"
+                    className="p-2 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
                     title="查看详情"
                   >
                     <Eye className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setExpandedId(expandedId === exception.id ? null : exception.id)}
-                    className="p-2 text-slate-400 hover:text-slate-300 hover:bg-slate-700 rounded-lg transition-colors"
+                    className="p-2 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#2A354D] rounded-lg transition-colors"
                   >
                     {expandedId === exception.id ? (
                       <ChevronUp className="w-4 h-4" />
@@ -362,10 +362,10 @@ export function TaskExceptionAnalysis() {
                 </div>
               </div>
               {expandedId === exception.id && (
-                <div className="mt-4 pt-4 border-t border-slate-800">
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <h5 className="text-sm font-medium text-slate-300 mb-2">详细信息</h5>
-                    <p className="text-slate-400 text-sm">{exception.details}</p>
+                <div className="mt-4 pt-4 border-t border-[#2A354D]">
+                  <div className="bg-[#181F32]/50 rounded-lg p-4">
+                    <h5 className="text-sm font-medium text-[#D1D5DB] mb-2">详细信息</h5>
+                    <p className="text-[#9CA3AF] text-sm">{exception.details}</p>
                   </div>
                 </div>
               )}
@@ -375,19 +375,19 @@ export function TaskExceptionAnalysis() {
 
         {filteredExceptions.length === 0 && (
           <div className="p-12 text-center">
-            <p className="text-slate-500">暂无异常事件</p>
+            <p className="text-[#6B7280]">暂无异常事件</p>
           </div>
         )}
       </div>
 
       {selectedException && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">{selectedException.id} - 异常详情</h3>
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">{selectedException.id} - 异常详情</h3>
               <button
                 onClick={() => setSelectedException(null)}
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-[#9CA3AF] hover:text-[#F3F4F6] transition-colors"
               >
                 ✕
               </button>
@@ -395,45 +395,45 @@ export function TaskExceptionAnalysis() {
             <div className="p-6 overflow-y-auto max-h-[calc(80vh-80px)]">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">任务名称</label>
-                  <p className="text-white">{selectedException.taskName}</p>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">任务名称</label>
+                  <p className="text-[#F3F4F6]">{selectedException.taskName}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">异常类型</label>
-                  <p className="text-white">{getTypeLabel(selectedException.type)}</p>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">异常类型</label>
+                  <p className="text-[#F3F4F6]">{getTypeLabel(selectedException.type)}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">严重级别</label>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">严重级别</label>
                   <div>{getSeverityBadge(selectedException.severity)}</div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">状态</label>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">状态</label>
                   <div>{getStatusBadge(selectedException.status)}</div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">发生时间</label>
-                  <p className="text-white">{selectedException.occurredAt}</p>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">发生时间</label>
+                  <p className="text-[#F3F4F6]">{selectedException.occurredAt}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-1">负责人</label>
-                  <p className="text-white">{selectedException.assignee || '-'}</p>
+                  <label className="block text-sm font-medium text-[#9CA3AF] mb-1">负责人</label>
+                  <p className="text-[#F3F4F6]">{selectedException.assignee || '-'}</p>
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-slate-400 mb-1">异常原因</label>
-                <p className="text-white">{selectedException.reason}</p>
+                <label className="block text-sm font-medium text-[#9CA3AF] mb-1">异常原因</label>
+                <p className="text-[#F3F4F6]">{selectedException.reason}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-400 mb-1">详细描述</label>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <p className="text-slate-300">{selectedException.details}</p>
+                <label className="block text-sm font-medium text-[#9CA3AF] mb-1">详细描述</label>
+                <div className="bg-[#181F32] rounded-lg p-4">
+                  <p className="text-[#D1D5DB]">{selectedException.details}</p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setSelectedException(null)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 关闭
               </button>

@@ -198,9 +198,9 @@ export function ApiCallLog() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      success: 'bg-green-500/20 text-green-400 border-green-500/30',
-      warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      error: 'bg-red-500/20 text-red-400 border-red-500/30',
+      success: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      warning: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      error: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const icons = {
       success: <CheckCircle2 className="w-3 h-3" />,
@@ -222,10 +222,10 @@ export function ApiCallLog() {
 
   const getMethodBadge = (method: string) => {
     const colors = {
-      GET: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      POST: 'bg-green-500/20 text-green-400 border-green-500/30',
-      PUT: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      DELETE: 'bg-red-500/20 text-red-400 border-red-500/30',
+      GET: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      POST: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      PUT: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      DELETE: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     return (
       <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${colors[method as keyof typeof colors]}`}>
@@ -235,9 +235,9 @@ export function ApiCallLog() {
   };
 
   const getResponseTimeColor = (time: number) => {
-    if (time < 200) return 'text-green-400';
-    if (time < 500) return 'text-yellow-400';
-    return 'text-red-400';
+    if (time < 200) return 'text-[#00C853]';
+    if (time < 500) return 'text-[#FF9100]';
+    return 'text-[#FF3B30]';
   };
 
   const handleViewDetail = (log: ApiCallLog) => {
@@ -269,30 +269,30 @@ export function ApiCallLog() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务API调用日志查询</h1>
-        <p className="text-slate-400">查看和查询任务API调用历史记录</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务API调用日志查询</h1>
+        <p className="text-[#9CA3AF]">查看和查询任务API调用历史记录</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索API、路径、应用或请求ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
 
             <select
               value={selectedApi}
               onChange={(e) => setSelectedApi(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部API</option>
               <option value="API-001">获取威胁情报</option>
@@ -304,7 +304,7 @@ export function ApiCallLog() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="success">成功</option>
@@ -315,7 +315,7 @@ export function ApiCallLog() {
             <select
               value={selectedMethod}
               onChange={(e) => setSelectedMethod(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部方法</option>
               <option value="GET">GET</option>
@@ -327,7 +327,7 @@ export function ApiCallLog() {
 
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
           >
             <Download className="w-4 h-4" />
             导出CSV
@@ -335,33 +335,33 @@ export function ApiCallLog() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">API</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">方法</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">响应时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">应用</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">请求ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">API</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">方法</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">响应时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">应用</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">请求ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredLogs.map((log) => (
-              <tr key={log.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{log.timestamp}</td>
+              <tr key={log.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{log.timestamp}</td>
                 <td className="px-6 py-4">
-                  <div className="text-sm text-white font-medium">{log.apiName}</div>
-                  <div className="text-xs text-slate-500 truncate max-w-xs">{log.path}</div>
+                  <div className="text-sm text-[#F3F4F6] font-medium">{log.apiName}</div>
+                  <div className="text-xs text-[#6B7280] truncate max-w-xs">{log.path}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{getMethodBadge(log.method)}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
                     {getStatusBadge(log.status)}
-                    <span className="text-sm text-slate-400">{log.statusCode}</span>
+                    <span className="text-sm text-[#9CA3AF]">{log.statusCode}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -369,14 +369,14 @@ export function ApiCallLog() {
                     {log.responseTime}ms
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{log.application}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{log.application}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <code className="text-xs text-slate-400 font-mono">{log.requestId}</code>
+                  <code className="text-xs text-[#9CA3AF] font-mono">{log.requestId}</code>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <button
                     onClick={() => handleViewDetail(log)}
-                    className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                    className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                     title="查看详情"
                   >
                     <Eye className="w-4 h-4" />
@@ -389,28 +389,28 @@ export function ApiCallLog() {
 
         {filteredLogs.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无匹配的日志记录</p>
+            <p className="text-[#6B7280]">暂无匹配的日志记录</p>
           </div>
         )}
       </div>
 
       {showDetail && selectedLog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-5xl max-h-[90vh] overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-5xl max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
               <div className="flex items-center gap-2">
-                <Info className="w-5 h-5 text-slate-400" />
-                <h3 className="text-lg font-semibold text-white">日志详情</h3>
-                <code className="text-xs text-slate-500">{selectedLog.requestId}</code>
+                <Info className="w-5 h-5 text-[#9CA3AF]" />
+                <h3 className="text-lg font-semibold text-[#F3F4F6]">日志详情</h3>
+                <code className="text-xs text-[#6B7280]">{selectedLog.requestId}</code>
               </div>
               <button
                 onClick={() => setShowDetail(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex border-b border-slate-800">
+            <div className="flex border-b border-[#2A354D]">
               {[
                 { key: 'overview', label: '概览', icon: Info },
                 { key: 'request', label: '请求', icon: Clock },
@@ -421,8 +421,8 @@ export function ApiCallLog() {
                   onClick={() => setActiveDetailTab(tab.key as any)}
                   className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors ${
                     activeDetailTab === tab.key 
-                      ? 'bg-blue-600/20 text-blue-400 border-b-2 border-blue-500' 
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-[#0066FF]/20 text-[#0066FF] border-b-2 border-blue-500' 
+                      : 'text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32]'
                   }`}
                 >
                   <tab.icon className="w-4 h-4" />
@@ -435,79 +435,79 @@ export function ApiCallLog() {
               {activeDetailTab === 'overview' && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">API名称</p>
-                      <p className="text-white font-medium">{selectedLog.apiName}</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">API名称</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedLog.apiName}</p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">请求方法</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">请求方法</p>
                       <p>{getMethodBadge(selectedLog.method)}</p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">状态</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">状态</p>
                       <div className="flex items-center gap-2">
                         {getStatusBadge(selectedLog.status)}
-                        <span className="text-white font-medium">HTTP {selectedLog.statusCode}</span>
+                        <span className="text-[#F3F4F6] font-medium">HTTP {selectedLog.statusCode}</span>
                       </div>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">响应时间</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">响应时间</p>
                       <p className={`text-lg font-bold ${getResponseTimeColor(selectedLog.responseTime)}`}>
                         {selectedLog.responseTime}ms
                       </p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">请求大小</p>
-                      <p className="text-white font-medium">{selectedLog.requestSize}</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">请求大小</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedLog.requestSize}</p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">响应大小</p>
-                      <p className="text-white font-medium">{selectedLog.responseSize}</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">响应大小</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedLog.responseSize}</p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">应用</p>
-                      <p className="text-white font-medium">{selectedLog.application}</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">应用</p>
+                      <p className="text-[#F3F4F6] font-medium">{selectedLog.application}</p>
                     </div>
-                    <div className="p-4 bg-slate-800 rounded-lg">
-                      <p className="text-sm text-slate-400 mb-1">IP地址</p>
-                      <p className="text-white font-medium font-mono">{selectedLog.ipAddress}</p>
+                    <div className="p-4 bg-[#181F32] rounded-lg">
+                      <p className="text-sm text-[#9CA3AF] mb-1">IP地址</p>
+                      <p className="text-[#F3F4F6] font-medium font-mono">{selectedLog.ipAddress}</p>
                     </div>
                   </div>
 
-                  <div className="p-4 bg-slate-800 rounded-lg">
-                    <p className="text-sm text-slate-400 mb-2">请求路径</p>
-                    <p className="text-slate-300 break-all font-mono text-sm">{selectedLog.path}</p>
+                  <div className="p-4 bg-[#181F32] rounded-lg">
+                    <p className="text-sm text-[#9CA3AF] mb-2">请求路径</p>
+                    <p className="text-[#D1D5DB] break-all font-mono text-sm">{selectedLog.path}</p>
                   </div>
 
-                  <div className="p-4 bg-slate-800 rounded-lg">
-                    <p className="text-sm text-slate-400 mb-2">User Agent</p>
-                    <p className="text-slate-300 text-sm">{selectedLog.userAgent}</p>
+                  <div className="p-4 bg-[#181F32] rounded-lg">
+                    <p className="text-sm text-[#9CA3AF] mb-2">User Agent</p>
+                    <p className="text-[#D1D5DB] text-sm">{selectedLog.userAgent}</p>
                   </div>
                 </div>
               )}
 
               {activeDetailTab === 'request' && (
                 <div className="space-y-4">
-                  <div className="p-4 bg-slate-800 rounded-lg">
+                  <div className="p-4 bg-[#181F32] rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-400">请求头</p>
-                      <span className="text-xs text-slate-500">{Object.keys(selectedLog.requestHeaders).length} 个字段</span>
+                      <p className="text-sm text-[#9CA3AF]">请求头</p>
+                      <span className="text-xs text-[#6B7280]">{Object.keys(selectedLog.requestHeaders).length} 个字段</span>
                     </div>
-                    <pre className="text-xs text-slate-400 font-mono bg-slate-900 p-3 rounded overflow-x-auto">
+                    <pre className="text-xs text-[#9CA3AF] font-mono bg-[#20293F] p-3 rounded overflow-x-auto">
                       {JSON.stringify(selectedLog.requestHeaders, null, 2)}
                     </pre>
                   </div>
 
-                  <div className="p-4 bg-slate-800 rounded-lg">
+                  <div className="p-4 bg-[#181F32] rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-400">请求体</p>
+                      <p className="text-sm text-[#9CA3AF]">请求体</p>
                     </div>
                     {selectedLog.requestBody ? (
-                      <pre className="text-xs text-slate-400 font-mono bg-slate-900 p-3 rounded overflow-x-auto max-h-64 overflow-y-auto">
+                      <pre className="text-xs text-[#9CA3AF] font-mono bg-[#20293F] p-3 rounded overflow-x-auto max-h-64 overflow-y-auto">
                         {JSON.stringify(selectedLog.requestBody, null, 2)}
                       </pre>
                     ) : (
-                      <p className="text-slate-500 text-sm">无请求体</p>
+                      <p className="text-[#6B7280] text-sm">无请求体</p>
                     )}
                   </div>
                 </div>
@@ -515,38 +515,38 @@ export function ApiCallLog() {
 
               {activeDetailTab === 'response' && (
                 <div className="space-y-4">
-                  <div className="p-4 bg-slate-800 rounded-lg">
+                  <div className="p-4 bg-[#181F32] rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-400">响应头</p>
-                      <span className="text-xs text-slate-500">{Object.keys(selectedLog.responseHeaders).length} 个字段</span>
+                      <p className="text-sm text-[#9CA3AF]">响应头</p>
+                      <span className="text-xs text-[#6B7280]">{Object.keys(selectedLog.responseHeaders).length} 个字段</span>
                     </div>
-                    <pre className="text-xs text-slate-400 font-mono bg-slate-900 p-3 rounded overflow-x-auto">
+                    <pre className="text-xs text-[#9CA3AF] font-mono bg-[#20293F] p-3 rounded overflow-x-auto">
                       {JSON.stringify(selectedLog.responseHeaders, null, 2)}
                     </pre>
                   </div>
 
-                  <div className="p-4 bg-slate-800 rounded-lg">
+                  <div className="p-4 bg-[#181F32] rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm text-slate-400">响应体</p>
+                      <p className="text-sm text-[#9CA3AF]">响应体</p>
                     </div>
                     {selectedLog.responseBody ? (
-                      <pre className={`text-xs font-mono bg-slate-900 p-3 rounded overflow-x-auto max-h-64 overflow-y-auto ${
-                        selectedLog.status === 'error' ? 'text-red-400' : 'text-slate-400'
+                      <pre className={`text-xs font-mono bg-[#20293F] p-3 rounded overflow-x-auto max-h-64 overflow-y-auto ${
+                        selectedLog.status === 'error' ? 'text-[#FF3B30]' : 'text-[#9CA3AF]'
                       }`}>
                         {JSON.stringify(selectedLog.responseBody, null, 2)}
                       </pre>
                     ) : (
-                      <p className="text-slate-500 text-sm">无响应体</p>
+                      <p className="text-[#6B7280] text-sm">无响应体</p>
                     )}
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setShowDetail(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors">
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors">
                 关闭
               </button>
             </div>

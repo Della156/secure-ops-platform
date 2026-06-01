@@ -101,6 +101,10 @@ export function FlowOrchestration() {
   const [nodes, setNodes] = useState<Node[]>(mockNodes);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [showNodePanel, setShowNodePanel] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [draggingNodeId, setDraggingNodeId] = useState<string | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [dragOverCanvas, setDragOverCanvas] = useState(false);
 
   // 过滤数据
   const filteredFlows = flows.filter(item => {
@@ -158,9 +162,9 @@ export function FlowOrchestration() {
   // 获取状态标签
   const getStatusBadge = (status: string) => {
     const styles = {
-      draft: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      active: 'bg-green-500/20 text-green-400 border-green-500/30',
-      inactive: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+      draft: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      active: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      inactive: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
     };
     const labels = {
       draft: '草稿',
@@ -178,17 +182,17 @@ export function FlowOrchestration() {
   const getNodeIcon = (type: string) => {
     switch (type) {
       case 'start':
-        return <Play className="w-4 h-4 text-green-400" />;
+        return <Play className="w-4 h-4 text-[#00C853]" />;
       case 'end':
-        return <Check className="w-4 h-4 text-red-400" />;
+        return <Check className="w-4 h-4 text-[#FF3B30]" />;
       case 'condition':
-        return <GitBranch className="w-4 h-4 text-yellow-400" />;
+        return <GitBranch className="w-4 h-4 text-[#FF9100]" />;
       case 'parallel':
-        return <GitMerge className="w-4 h-4 text-purple-400" />;
+        return <GitMerge className="w-4 h-4 text-[#6366F1]" />;
       case 'loop':
-        return <Zap className="w-4 h-4 text-orange-400" />;
+        return <Zap className="w-4 h-4 text-[#FF9100]" />;
       default:
-        return <Layers className="w-4 h-4 text-blue-400" />;
+        return <Layers className="w-4 h-4 text-[#0066FF]" />;
     }
   };
 
@@ -210,29 +214,119 @@ export function FlowOrchestration() {
     setShowNodePanel(true);
   };
 
+  // 节点拖拽开始
+  const handleNodeMouseDown = (e: React.MouseEvent, node: Node) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+    setDraggingNodeId(node.id);
+    setDragOffset({
+      x: e.clientX - node.x,
+      y: e.clientY - node.y,
+    });
+    setSelectedNode(node);
+    setShowNodePanel(true);
+  };
+
+  // 鼠标移动处理
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && draggingNodeId) {
+      setNodes(prevNodes => prevNodes.map(n => {
+        if (n.id === draggingNodeId) {
+          return {
+            ...n,
+            x: e.clientX - dragOffset.x,
+            y: e.clientY - dragOffset.y,
+          };
+        }
+        return n;
+      }));
+    }
+  };
+
+  // 鼠标释放处理
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setDraggingNodeId(null);
+  };
+
+  // 从节点库拖拽开始
+  const handleDragStart = (e: React.DragEvent, nodeType: string) => {
+    e.dataTransfer.setData('nodeType', nodeType);
+    e.dataTransfer.effectAllowed = 'copy';
+  };
+
+  // 拖拽经过画布
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    setDragOverCanvas(true);
+  };
+
+  // 拖放到画布
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const nodeType = e.dataTransfer.getData('nodeType');
+    if (nodeType) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left - 120;
+      const y = e.clientY - rect.top - 30;
+      
+      const newNode: Node = {
+        id: `node-${Date.now()}`,
+        type: nodeType as Node['type'],
+        name: getNodeTypeName(nodeType),
+        x: Math.max(0, x),
+        y: Math.max(0, y),
+      };
+      setNodes(prev => [...prev, newNode]);
+      setSelectedNode(newNode);
+      setShowNodePanel(true);
+    }
+    setDragOverCanvas(false);
+  };
+
+  // 获取节点类型名称
+  const getNodeTypeName = (type: string) => {
+    const names: Record<string, string> = {
+      start: '开始',
+      end: '结束',
+      task: '任务',
+      condition: '条件判断',
+      parallel: '并行执行',
+      loop: '循环',
+    };
+    return names[type] || '任务';
+  };
+
+  // 拖拽离开画布
+  const handleDragLeave = () => {
+    setDragOverCanvas(false);
+  };
+
   return (
-    <div className="p-8">
+    <div>
       {viewMode === 'list' ? (
         <>
           {/* 页面标题 */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-white mb-2">自动化剧本/流程编排管理</h1>
-            <p className="text-slate-400">创建、管理和编排自动化安全流程</p>
+            <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">自动化剧本/流程编排管理</h1>
+            <p className="text-[#9CA3AF]">创建、管理和编排自动化安全流程</p>
           </div>
 
           {/* 操作栏 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex flex-wrap gap-3 items-center">
                 {/* 搜索框 */}
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
                   <input
                     type="text"
                     placeholder="搜索流程名称..."
                     value={searchName}
                     onChange={(e) => setSearchName(e.target.value)}
-                    className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                    className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
                   />
                 </div>
 
@@ -240,7 +334,7 @@ export function FlowOrchestration() {
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 >
                   <option value="">全部状态</option>
                   <option value="draft">草稿</option>
@@ -252,7 +346,7 @@ export function FlowOrchestration() {
               {/* 新增按钮 */}
               <button
                 onClick={() => handleOpenModal()}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 新建流程
@@ -261,53 +355,53 @@ export function FlowOrchestration() {
           </div>
 
           {/* 数据表格 */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
             <table className="w-full">
-              <thead className="bg-slate-800/50">
+              <thead className="bg-[#181F32]/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">流程名称</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">描述</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">版本</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">更新时间</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">ID</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">流程名称</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">描述</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">版本</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">更新时间</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-[#2A354D]">
                 {filteredFlows.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{item.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{item.name}</td>
-                    <td className="px-6 py-4 text-sm text-slate-400 max-w-xs truncate" title={item.description}>
+                  <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{item.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{item.name}</td>
+                    <td className="px-6 py-4 text-sm text-[#9CA3AF] max-w-xs truncate" title={item.description}>
                       {item.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs font-medium">
+                      <span className="px-2 py-1 bg-[#0066FF]/20 text-[#0066FF] rounded text-xs font-medium">
                         {item.version}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.updatedAt}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.updatedAt}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleOpenCanvas(item)}
-                          className="p-1.5 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                          className="p-1.5 text-[#00C853] hover:text-[#33D97A] hover:bg-[#00C853]/10 rounded transition-colors"
                           title="编排画布"
                         >
                           <Workflow className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleOpenModal(item)}
-                          className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                          className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                           title="编辑"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                          className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                           title="删除"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -321,7 +415,7 @@ export function FlowOrchestration() {
 
             {filteredFlows.length === 0 && (
               <div className="px-6 py-12 text-center">
-                <p className="text-slate-500">暂无数据</p>
+                <p className="text-[#6B7280]">暂无数据</p>
               </div>
             )}
           </div>
@@ -333,42 +427,42 @@ export function FlowOrchestration() {
             <div className="flex items-center gap-4 mb-4">
               <button
                 onClick={handleBackToList}
-                className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-3 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 <X className="w-4 h-4" />
                 返回列表
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-white">{selectedFlow?.name}</h1>
-                <p className="text-slate-400 text-sm">{selectedFlow?.description}</p>
+                <h1 className="text-2xl font-bold text-[#F3F4F6]">{selectedFlow?.name}</h1>
+                <p className="text-[#9CA3AF] text-sm">{selectedFlow?.description}</p>
               </div>
             </div>
 
             {/* 操作栏 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
               <div className="flex flex-wrap gap-3 items-center justify-between">
                 <div className="flex gap-2">
-                  <button className="flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors">
                     <Save className="w-4 h-4" />
                     保存
                   </button>
-                  <button className="flex items-center gap-2 px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors">
                     <Play className="w-4 h-4" />
                     运行
                   </button>
-                  <button className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors">
                     <Upload className="w-4 h-4" />
                     导入
                   </button>
-                  <button className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors">
                     <Download className="w-4 h-4" />
                     导出
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-slate-400 text-sm">版本: {selectedFlow?.version}</span>
-                  <span className="text-slate-400 text-sm">|</span>
-                  <span className="text-slate-400 text-sm">状态: {selectedFlow?.status === 'active' ? '运行中' : selectedFlow?.status === 'draft' ? '草稿' : '已停用'}</span>
+                  <span className="text-[#9CA3AF] text-sm">版本: {selectedFlow?.version}</span>
+                  <span className="text-[#9CA3AF] text-sm">|</span>
+                  <span className="text-[#9CA3AF] text-sm">状态: {selectedFlow?.status === 'active' ? '运行中' : selectedFlow?.status === 'draft' ? '草稿' : '已停用'}</span>
                 </div>
               </div>
             </div>
@@ -377,57 +471,96 @@ export function FlowOrchestration() {
           {/* 画布区域 */}
           <div className="flex gap-4">
             {/* 节点库面板 */}
-            <div className="w-64 bg-slate-900 border border-slate-800 rounded-xl p-4 shrink-0">
-              <h3 className="text-white font-semibold mb-4">节点库</h3>
+            <div className="w-64 bg-[#20293F] border border-[#2A354D] rounded-xl p-4 shrink-0">
+              <h3 className="text-[#F3F4F6] font-semibold mb-4">节点库</h3>
               <div className="space-y-3">
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'start')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <Play className="w-4 h-4 text-green-400" />
-                    <span className="text-white text-sm">开始节点</span>
+                    <Play className="w-4 h-4 text-[#00C853]" />
+                    <span className="text-[#F3F4F6] text-sm">开始节点</span>
                   </div>
-                  <p className="text-slate-500 text-xs">流程入口</p>
+                  <p className="text-[#6B7280] text-xs">流程入口</p>
                 </div>
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'task')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <Layers className="w-4 h-4 text-blue-400" />
-                    <span className="text-white text-sm">任务节点</span>
+                    <Layers className="w-4 h-4 text-[#0066FF]" />
+                    <span className="text-[#F3F4F6] text-sm">任务节点</span>
                   </div>
-                  <p className="text-slate-500 text-xs">执行自动化任务</p>
+                  <p className="text-[#6B7280] text-xs">执行自动化任务</p>
                 </div>
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'condition')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <GitBranch className="w-4 h-4 text-yellow-400" />
-                    <span className="text-white text-sm">条件分支</span>
+                    <GitBranch className="w-4 h-4 text-[#FF9100]" />
+                    <span className="text-[#F3F4F6] text-sm">条件分支</span>
                   </div>
-                  <p className="text-slate-500 text-xs">逻辑判断分支</p>
+                  <p className="text-[#6B7280] text-xs">逻辑判断分支</p>
                 </div>
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'parallel')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <GitMerge className="w-4 h-4 text-purple-400" />
-                    <span className="text-white text-sm">并行执行</span>
+                    <GitMerge className="w-4 h-4 text-[#6366F1]" />
+                    <span className="text-[#F3F4F6] text-sm">并行执行</span>
                   </div>
-                  <p className="text-slate-500 text-xs">多任务并行</p>
+                  <p className="text-[#6B7280] text-xs">多任务并行</p>
                 </div>
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'loop')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <Zap className="w-4 h-4 text-orange-400" />
-                    <span className="text-white text-sm">循环节点</span>
+                    <Zap className="w-4 h-4 text-[#FF9100]" />
+                    <span className="text-[#F3F4F6] text-sm">循环节点</span>
                   </div>
-                  <p className="text-slate-500 text-xs">循环执行任务</p>
+                  <p className="text-[#6B7280] text-xs">循环执行任务</p>
                 </div>
-                <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-move hover:border-blue-500 transition-colors">
+                <div 
+                  draggable 
+                  onDragStart={(e) => handleDragStart(e, 'end')}
+                  className="p-3 bg-[#181F32] rounded-lg border border-[#2A354D] cursor-grab active:cursor-grabbing hover:border-blue-500 transition-colors"
+                >
                   <div className="flex items-center gap-2 mb-1">
-                    <Check className="w-4 h-4 text-red-400" />
-                    <span className="text-white text-sm">结束节点</span>
+                    <Check className="w-4 h-4 text-[#FF3B30]" />
+                    <span className="text-[#F3F4F6] text-sm">结束节点</span>
                   </div>
-                  <p className="text-slate-500 text-xs">流程出口</p>
+                  <p className="text-[#6B7280] text-xs">流程出口</p>
                 </div>
               </div>
             </div>
 
             {/* 主画布 */}
-            <div className="flex-1 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-              <div className="relative h-[600px] bg-slate-950" style={{ backgroundImage: 'radial-gradient(circle, #334155 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+            <div className="flex-1 bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+              <div 
+                className={`relative h-[600px] bg-[#111625] transition-colors ${
+                  dragOverCanvas ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
+                }`} 
+                style={{ backgroundImage: 'radial-gradient(circle, #334155 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+                onDragLeave={handleDragLeave}
+                onClick={() => {
+                  setSelectedNode(null);
+                  setShowNodePanel(false);
+                }}
+              >
                 {/* 绘制连接线条 */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none">
                   {mockConnections.map(conn => {
@@ -455,23 +588,27 @@ export function FlowOrchestration() {
                 {nodes.map(node => (
                   <div
                     key={node.id}
-                    className={`absolute p-4 rounded-lg border-2 cursor-move transition-all ${
+                    className={`absolute p-4 rounded-lg border-2 cursor-move transition-all select-none ${
                       selectedNode?.id === node.id 
-                        ? 'border-blue-500 bg-slate-800/90' 
-                        : 'border-slate-700 bg-slate-800 hover:border-slate-600'
+                        ? 'border-blue-500 bg-[#181F32]/90' 
+                        : 'border-[#2A354D] bg-[#181F32] hover:border-[#3A4560]'
                     }`}
                     style={{ left: node.x, top: node.y, width: '240px' }}
-                    onClick={() => handleNodeClick(node)}
+                    onMouseDown={(e) => handleNodeMouseDown(e, node)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNodeClick(node);
+                    }}
                   >
                     <div className="flex items-center gap-2 mb-2">
                       {getNodeIcon(node.type)}
-                      <span className="text-white font-medium text-sm">{node.name}</span>
+                      <span className="text-[#F3F4F6] font-medium text-sm">{node.name}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-500 text-xs">ID: {node.id}</span>
+                      <span className="text-[#6B7280] text-xs">ID: {node.id}</span>
                       <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 bg-slate-700 rounded-full" />
-                        <div className="w-2 h-2 bg-slate-700 rounded-full" />
+                        <div className="w-2 h-2 bg-[#2A354D] rounded-full" />
+                        <div className="w-2 h-2 bg-[#2A354D] rounded-full" />
                       </div>
                     </div>
                   </div>
@@ -481,38 +618,44 @@ export function FlowOrchestration() {
 
             {/* 节点配置面板 */}
             {showNodePanel && selectedNode && (
-              <div className="w-80 bg-slate-900 border border-slate-800 rounded-xl p-4 shrink-0">
+              <div className="w-80 bg-[#20293F] border border-[#2A354D] rounded-xl p-4 shrink-0">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold">节点配置</h3>
+                  <h3 className="text-[#F3F4F6] font-semibold">节点配置</h3>
                   <button
                     onClick={() => setShowNodePanel(false)}
-                    className="p-1 text-slate-400 hover:text-white rounded"
+                    className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] rounded"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">节点名称</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">节点名称</label>
                     <input
                       type="text"
                       value={selectedNode.name}
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      onChange={(e) => {
+                        setNodes(prev => prev.map(n => 
+                          n.id === selectedNode.id ? { ...n, name: e.target.value } : n
+                        ));
+                        setSelectedNode(prev => prev ? { ...prev, name: e.target.value } : null);
+                      }}
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1.5">节点类型</label>
+                    <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">节点类型</label>
                     <input
                       type="text"
                       value={selectedNode.type}
-                      disabled
-                      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-400"
+                      readOnly
+                      className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#9CA3AF]"
                     />
                   </div>
                   {selectedNode.type === 'task' && (
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">关联任务</label>
-                      <select className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">关联任务</label>
+                      <select className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]">
                         <option>选择任务...</option>
                         <option>防火墙配置同步任务</option>
                         <option>IDS日志采集任务</option>
@@ -522,17 +665,28 @@ export function FlowOrchestration() {
                   )}
                   {selectedNode.type === 'condition' && (
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">条件表达式</label>
+                      <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">条件表达式</label>
                       <textarea
                         rows={4}
                         placeholder="输入条件表达式..."
-                        className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                        className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono text-sm"
                       />
                     </div>
                   )}
-                  <div className="pt-4 border-t border-slate-800">
-                    <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                  <div className="pt-4 border-t border-[#2A354D] space-y-2">
+                    <button className="w-full px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors">
                       应用配置
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setNodes(prev => prev.filter(n => n.id !== selectedNode.id));
+                        setSelectedNode(null);
+                        setShowNodePanel(false);
+                      }}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#FF3B30]/20 hover:bg-[#FF3B30]/30 text-[#FF3B30] rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      删除节点
                     </button>
                   </div>
                 </div>
@@ -545,50 +699,50 @@ export function FlowOrchestration() {
       {/* 新增/编辑模态框 */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingItem ? '编辑流程' : '新建流程'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">流程名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">流程名称</label>
                 <input
                   type="text"
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入流程名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">流程描述</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">流程描述</label>
                 <textarea
                   rows={4}
                   value={formData.description || ''}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入流程描述"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

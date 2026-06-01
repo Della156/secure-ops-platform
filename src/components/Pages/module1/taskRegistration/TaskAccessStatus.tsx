@@ -90,22 +90,22 @@ export function TaskAccessStatus() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'normal':
-        return <CheckCircle2 className="w-6 h-6 text-green-400" />;
+        return <CheckCircle2 className="w-6 h-6 text-[#00C853]" />;
       case 'abnormal':
-        return <AlertCircle className="w-6 h-6 text-yellow-400" />;
+        return <AlertCircle className="w-6 h-6 text-[#FF9100]" />;
       case 'offline':
-        return <XCircle className="w-6 h-6 text-red-400" />;
+        return <XCircle className="w-6 h-6 text-[#FF3B30]" />;
       default:
-        return <Clock className="w-6 h-6 text-slate-400" />;
+        return <Clock className="w-6 h-6 text-[#9CA3AF]" />;
     }
   };
 
   // 获取状态样式
   const getStatusBadge = (status: string) => {
     const styles = {
-      normal: 'bg-green-500/20 text-green-400 border-green-500/30',
-      abnormal: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      offline: 'bg-red-500/20 text-red-400 border-red-500/30',
+      normal: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      abnormal: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      offline: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       normal: '正常',
@@ -121,10 +121,10 @@ export function TaskAccessStatus() {
 
   // 获取响应时间样式
   const getResponseTimeColor = (time: number) => {
-    if (time === 0) return 'text-slate-500';
-    if (time < 200) return 'text-green-400';
-    if (time < 500) return 'text-yellow-400';
-    return 'text-red-400';
+    if (time === 0) return 'text-[#6B7280]';
+    if (time < 200) return 'text-[#00C853]';
+    if (time < 500) return 'text-[#FF9100]';
+    return 'text-[#FF3B30]';
   };
 
   // 获取当前任务的历史记录
@@ -133,17 +133,17 @@ export function TaskAccessStatus() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-2">任务接入状态管理</h1>
-          <p className="text-slate-400">实时监控任务接入状态和变更历史</p>
+          <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务接入状态管理</h1>
+          <p className="text-[#9CA3AF]">实时监控任务接入状态和变更历史</p>
         </div>
         <button
           onClick={handleRefresh}
           disabled={isRefreshing}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 text-white rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] disabled:bg-[#2A354D] text-[#F3F4F6] rounded-lg transition-colors"
         >
           <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
           {isRefreshing ? '刷新中...' : '刷新状态'}
@@ -152,67 +152,67 @@ export function TaskAccessStatus() {
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
-                <Server className="w-5 h-5 text-slate-400" />
+              <div className="w-10 h-10 rounded-lg bg-[#181F32] flex items-center justify-center">
+                <Server className="w-5 h-5 text-[#9CA3AF]" />
               </div>
-              <span className="text-slate-400 text-sm">任务总数</span>
+              <span className="text-[#9CA3AF] text-sm">任务总数</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-white">{stats.total}</p>
+          <p className="text-3xl font-bold text-[#F3F4F6]">{stats.total}</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-5 h-5 text-green-400" />
+              <div className="w-10 h-10 rounded-lg bg-[#00C853]/10 flex items-center justify-center">
+                <CheckCircle2 className="w-5 h-5 text-[#00C853]" />
               </div>
-              <span className="text-slate-400 text-sm">正常</span>
+              <span className="text-[#9CA3AF] text-sm">正常</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-green-400">{stats.normal}</p>
+          <p className="text-3xl font-bold text-[#00C853]">{stats.normal}</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-                <AlertCircle className="w-5 h-5 text-yellow-400" />
+              <div className="w-10 h-10 rounded-lg bg-[#FF9100]/10 flex items-center justify-center">
+                <AlertCircle className="w-5 h-5 text-[#FF9100]" />
               </div>
-              <span className="text-slate-400 text-sm">异常</span>
+              <span className="text-[#9CA3AF] text-sm">异常</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-yellow-400">{stats.abnormal}</p>
+          <p className="text-3xl font-bold text-[#FF9100]">{stats.abnormal}</p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
-                <XCircle className="w-5 h-5 text-red-400" />
+              <div className="w-10 h-10 rounded-lg bg-[#FF3B30]/10 flex items-center justify-center">
+                <XCircle className="w-5 h-5 text-[#FF3B30]" />
               </div>
-              <span className="text-slate-400 text-sm">离线</span>
+              <span className="text-[#9CA3AF] text-sm">离线</span>
             </div>
           </div>
-          <p className="text-3xl font-bold text-red-400">{stats.offline}</p>
+          <p className="text-3xl font-bold text-[#FF3B30]">{stats.offline}</p>
         </div>
       </div>
 
       {/* 操作栏 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center">
           {/* 搜索框 */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
             <input
               type="text"
               placeholder="搜索任务名称..."
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+              className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
             />
           </div>
 
@@ -220,7 +220,7 @@ export function TaskAccessStatus() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           >
             <option value="">全部状态</option>
             <option value="normal">正常</option>
@@ -235,20 +235,20 @@ export function TaskAccessStatus() {
         {filteredTaskData.map((task) => (
           <div
             key={task.id}
-            className={`bg-slate-900 border rounded-xl p-5 transition-all hover:shadow-lg ${
-              task.hasAlert ? 'border-red-500/50' : 'border-slate-800'
+            className={`bg-[#20293F] border rounded-xl p-5 transition-all hover:shadow-lg ${
+              task.hasAlert ? 'border-red-500/50' : 'border-[#2A354D]'
             }`}
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 {getStatusIcon(task.status)}
                 <div>
-                  <h3 className="text-white font-medium">{task.name}</h3>
-                  <p className="text-slate-500 text-sm">{task.id}</p>
+                  <h3 className="text-[#F3F4F6] font-medium">{task.name}</h3>
+                  <p className="text-[#6B7280] text-sm">{task.id}</p>
                 </div>
               </div>
               {task.hasAlert && (
-                <div className="flex items-center gap-1 text-red-400 text-sm">
+                <div className="flex items-center gap-1 text-[#FF3B30] text-sm">
                   <Bell className="w-4 h-4" />
                   <span>告警</span>
                 </div>
@@ -257,7 +257,7 @@ export function TaskAccessStatus() {
 
             <div className="flex items-center justify-between mb-4">
               {getStatusBadge(task.status)}
-              <div className="flex items-center gap-2 text-slate-500 text-sm">
+              <div className="flex items-center gap-2 text-[#6B7280] text-sm">
                 <Wifi className="w-4 h-4" />
                 <span>上次检查: {task.lastCheck}</span>
               </div>
@@ -265,20 +265,20 @@ export function TaskAccessStatus() {
 
             <div className="grid grid-cols-2 gap-4 text-sm mb-4">
               <div>
-              <span className="text-slate-500">响应时间</span>
+              <span className="text-[#6B7280]">响应时间</span>
               <p className={`font-medium ${getResponseTimeColor(task.responseTime)}`}>
                 {task.responseTime > 0 ? `${task.responseTime}ms` : '-'}
               </p>
             </div>
             <div>
-              <span className="text-slate-500">可用性</span>
-              <p className="text-white font-medium">{task.uptime}</p>
+              <span className="text-[#6B7280]">可用性</span>
+              <p className="text-[#F3F4F6] font-medium">{task.uptime}</p>
             </div>
           </div>
 
           <button
             onClick={() => handleViewHistory(task)}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
           >
             <Eye className="w-4 h-4" />
             变更历史
@@ -288,11 +288,11 @@ export function TaskAccessStatus() {
     </div>
 
     {/* 状态变更历史 */}
-    <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-800">
-        <h3 className="text-lg font-semibold text-white">状态变更历史</h3>
+    <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+      <div className="px-6 py-4 border-b border-[#2A354D]">
+        <h3 className="text-lg font-semibold text-[#F3F4F6]">状态变更历史</h3>
       </div>
-      <div className="divide-y divide-slate-800">
+      <div className="divide-y divide-[#2A354D]">
         {historyData.map((history) => (
           <div key={history.id} className="px-6 py-4">
             <div className="flex items-start justify-between">
@@ -302,24 +302,24 @@ export function TaskAccessStatus() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-white font-medium">{history.taskName}</span>
-                    <span className="text-slate-500 text-sm">({history.taskId}</span>
+                    <span className="text-[#F3F4F6] font-medium">{history.taskName}</span>
+                    <span className="text-[#6B7280] text-sm">({history.taskId}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <span className={history.fromStatus === 'normal' ? 'text-green-400' : history.fromStatus === 'abnormal' ? 'text-yellow-400' : 'text-red-400'}>
+                    <span className={history.fromStatus === 'normal' ? 'text-[#00C853]' : history.fromStatus === 'abnormal' ? 'text-[#FF9100]' : 'text-[#FF3B30]'}>
                       {history.fromStatus === 'normal' ? '正常' : history.fromStatus === 'abnormal' ? '异常' : '离线'}
                     </span>
-                    <span className="text-slate-500">→</span>
-                    <span className={history.toStatus === 'normal' ? 'text-green-400' : history.toStatus === 'abnormal' ? 'text-yellow-400' : 'text-red-400'}>
+                    <span className="text-[#6B7280]">→</span>
+                    <span className={history.toStatus === 'normal' ? 'text-[#00C853]' : history.toStatus === 'abnormal' ? 'text-[#FF9100]' : 'text-[#FF3B30]'}>
                       {history.toStatus === 'normal' ? '正常' : history.toStatus === 'abnormal' ? '异常' : '离线'}
                     </span>
                   </div>
                   {history.reason && (
-                    <p className="text-slate-400 text-sm mt-1">{history.reason}</p>
+                    <p className="text-[#9CA3AF] text-sm mt-1">{history.reason}</p>
                   )}
                 </div>
               </div>
-              <span className="text-slate-500 text-sm">{history.time}</span>
+              <span className="text-[#6B7280] text-sm">{history.time}</span>
             </div>
           </div>
         ))}
@@ -329,77 +329,77 @@ export function TaskAccessStatus() {
     {/* 变更历史模态框 */}
     {isHistoryModalOpen && selectedTask && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl mx-4">
-          <div className="flex items-center justify-between p-4 border-b border-slate-800">
-            <h3 className="text-lg font-semibold text-white">变更历史 - {selectedTask.name}</h3>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-2xl mx-4">
+          <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">变更历史 - {selectedTask.name}</h3>
             <button
               onClick={() => setIsHistoryModalOpen(false)}
-              className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+              className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
           <div className="p-6">
-            <div className="mb-6 p-4 bg-slate-800/50 rounded-lg">
+            <div className="mb-6 p-4 bg-[#181F32]/50 rounded-lg">
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <span className="text-slate-500 text-sm">任务ID</span>
-                  <p className="text-white">{selectedTask.id}</p>
+                  <span className="text-[#6B7280] text-sm">任务ID</span>
+                  <p className="text-[#F3F4F6]">{selectedTask.id}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500 text-sm">当前状态</span>
+                  <span className="text-[#6B7280] text-sm">当前状态</span>
                   <div className="mt-1">{getStatusBadge(selectedTask.status)}</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-slate-500 text-sm">可用性</span>
-                  <p className="text-white">{selectedTask.uptime}</p>
+                  <span className="text-[#6B7280] text-sm">可用性</span>
+                  <p className="text-[#F3F4F6]">{selectedTask.uptime}</p>
                 </div>
                 <div>
-                  <span className="text-slate-500 text-sm">上次检查</span>
-                  <p className="text-white">{selectedTask.lastCheck}</p>
+                  <span className="text-[#6B7280] text-sm">上次检查</span>
+                  <p className="text-[#F3F4F6]">{selectedTask.lastCheck}</p>
                 </div>
               </div>
             </div>
 
-            <h4 className="text-sm font-medium text-slate-300 mb-4">历史记录</h4>
+            <h4 className="text-sm font-medium text-[#D1D5DB] mb-4">历史记录</h4>
             <div className="space-y-4">
               {getTaskHistory(selectedTask.id).map((history) => (
-                <div key={history.id} className="flex items-start gap-4 p-4 bg-slate-800/30 rounded-lg">
+                <div key={history.id} className="flex items-start gap-4 p-4 bg-[#181F32]/30 rounded-lg">
                   <div className="mt-1">
                     {getStatusIcon(history.toStatus)}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className={history.fromStatus === 'normal' ? 'text-green-400' : history.fromStatus === 'abnormal' ? 'text-yellow-400' : 'text-red-400'}>
+                        <span className={history.fromStatus === 'normal' ? 'text-[#00C853]' : history.fromStatus === 'abnormal' ? 'text-[#FF9100]' : 'text-[#FF3B30]'}>
                           {history.fromStatus === 'normal' ? '正常' : history.fromStatus === 'abnormal' ? '异常' : '离线'}
                         </span>
-                        <span className="text-slate-500">→</span>
-                        <span className={history.toStatus === 'normal' ? 'text-green-400' : history.toStatus === 'abnormal' ? 'text-yellow-400' : 'text-red-400'}>
+                        <span className="text-[#6B7280]">→</span>
+                        <span className={history.toStatus === 'normal' ? 'text-[#00C853]' : history.toStatus === 'abnormal' ? 'text-[#FF9100]' : 'text-[#FF3B30]'}>
                           {history.toStatus === 'normal' ? '正常' : history.toStatus === 'abnormal' ? '异常' : '离线'}
                         </span>
                       </div>
-                      <span className="text-slate-500 text-sm">{history.time}</span>
+                      <span className="text-[#6B7280] text-sm">{history.time}</span>
                     </div>
                     {history.reason && (
-                      <p className="text-slate-400 text-sm mt-2">{history.reason}</p>
+                      <p className="text-[#9CA3AF] text-sm mt-2">{history.reason}</p>
                     )}
                   </div>
                 </div>
               ))}
               {getTaskHistory(selectedTask.id).length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-slate-500">暂无变更历史</p>
+                  <p className="text-[#6B7280]">暂无变更历史</p>
                 </div>
               )}
             </div>
           </div>
-          <div className="flex items-center justify-end p-4 border-t border-slate-800">
+          <div className="flex items-center justify-end p-4 border-t border-[#2A354D]">
             <button
               onClick={() => setIsHistoryModalOpen(false)}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+              className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
             >
               关闭
             </button>

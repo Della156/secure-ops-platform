@@ -54,9 +54,9 @@ export function HostConnectTest() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      connected: 'bg-green-500/20 text-green-400 border-green-500/30',
-      disconnected: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-      error: 'bg-red-500/20 text-red-400 border-red-500/30',
+      connected: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      disconnected: 'bg-[#4A5570]/20 text-[#9CA3AF] border-[#4A5570]/30',
+      error: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       connected: '已连接',
@@ -72,9 +72,9 @@ export function HostConnectTest() {
 
   const getProtocolBadge = (protocol: string) => {
     const styles = {
-      ssh: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      winrm: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      rdp: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+      ssh: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
+      winrm: 'bg-[#6366F1]/20 text-[#6366F1] border-purple-500/30',
+      rdp: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
     };
     return (
       <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${styles[protocol as keyof typeof styles]}`}>
@@ -141,17 +141,17 @@ export function HostConnectTest() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-2">主机连接测试</h1>
-          <p className="text-slate-400">测试主机连接状态和管理连接凭证</p>
+          <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">主机连接测试</h1>
+          <p className="text-[#9CA3AF]">测试主机连接状态和管理连接凭证</p>
         </div>
         <div className="flex gap-3">
           <button
             onClick={handleTestAll}
             disabled={isAutoTestRunning || testingIds.size > 0}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#00C853] hover:bg-[#00A843] disabled:bg-[#2A354D] disabled:cursor-not-allowed text-[#F3F4F6] rounded-lg transition-colors"
           >
             {isAutoTestRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
             {isAutoTestRunning ? '测试中...' : '测试全部'}
@@ -162,7 +162,7 @@ export function HostConnectTest() {
               setFormData({ name: '', host: '', username: '', protocol: 'ssh', port: 22 });
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             添加凭证
@@ -171,58 +171,58 @@ export function HostConnectTest() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">已连接</span>
-            <CheckCircle2 className="w-5 h-5 text-green-400" />
+            <span className="text-[#9CA3AF] text-sm">已连接</span>
+            <CheckCircle2 className="w-5 h-5 text-[#00C853]" />
           </div>
-          <div className="text-3xl font-bold text-green-400">{stats.connected}</div>
-          <div className="text-slate-500 text-sm">主机正常连接</div>
+          <div className="text-3xl font-bold text-[#00C853]">{stats.connected}</div>
+          <div className="text-[#6B7280] text-sm">主机正常连接</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">未连接</span>
-            <Activity className="w-5 h-5 text-slate-400" />
+            <span className="text-[#9CA3AF] text-sm">未连接</span>
+            <Activity className="w-5 h-5 text-[#9CA3AF]" />
           </div>
-          <div className="text-3xl font-bold text-slate-400">{stats.disconnected}</div>
-          <div className="text-slate-500 text-sm">等待连接测试</div>
+          <div className="text-3xl font-bold text-[#9CA3AF]">{stats.disconnected}</div>
+          <div className="text-[#6B7280] text-sm">等待连接测试</div>
         </div>
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-400 text-sm">连接错误</span>
-            <XCircle className="w-5 h-5 text-red-400" />
+            <span className="text-[#9CA3AF] text-sm">连接错误</span>
+            <XCircle className="w-5 h-5 text-[#FF3B30]" />
           </div>
-          <div className="text-3xl font-bold text-red-400">{stats.error}</div>
-          <div className="text-slate-500 text-sm">需要检查配置</div>
+          <div className="text-3xl font-bold text-[#FF3B30]">{stats.error}</div>
+          <div className="text-[#6B7280] text-sm">需要检查配置</div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
               <Key className="w-5 h-5" />
               连接凭证
             </h2>
           </div>
           <div className="space-y-3">
             {credentials.map(cred => (
-              <div key={cred.id} className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+              <div key={cred.id} className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="text-white font-medium">{cred.name}</h3>
+                      <h3 className="text-[#F3F4F6] font-medium">{cred.name}</h3>
                       {getProtocolBadge(cred.protocol)}
                       {getStatusBadge(cred.status)}
                     </div>
-                    <div className="text-slate-400 text-sm font-mono">{cred.host}:{cred.port}</div>
-                    <div className="text-slate-500 text-sm">用户: {cred.username}</div>
+                    <div className="text-[#9CA3AF] text-sm font-mono">{cred.host}:{cred.port}</div>
+                    <div className="text-[#6B7280] text-sm">用户: {cred.username}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleTestConnection(cred.id)}
                       disabled={testingIds.has(cred.id)}
-                      className="p-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                      className="p-2 bg-[#0066FF] hover:bg-[#0052CC] disabled:bg-[#2A354D] disabled:cursor-not-allowed text-[#F3F4F6] rounded-lg transition-colors"
                       title="测试连接"
                     >
                       {testingIds.has(cred.id) ? (
@@ -237,21 +237,21 @@ export function HostConnectTest() {
                         setFormData(cred);
                         setIsModalOpen(true);
                       }}
-                      className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                      className="p-2 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded-lg transition-colors"
                       title="编辑"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteCredential(cred.id)}
-                      className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                      className="p-2 text-[#9CA3AF] hover:text-[#FF3B30] hover:bg-[#FF3B30]/10 rounded-lg transition-colors"
                       title="删除"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-slate-500 text-sm">
+                <div className="flex items-center gap-2 text-[#6B7280] text-sm">
                   <Clock className="w-4 h-4" />
                   <span>最后连接: {cred.lastConnected}</span>
                 </div>
@@ -262,26 +262,26 @@ export function HostConnectTest() {
 
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
               <Activity className="w-5 h-5" />
               连接日志
             </h2>
             <button
               onClick={() => {}}
-              className="text-sm text-slate-400 hover:text-white flex items-center gap-1"
+              className="text-sm text-[#9CA3AF] hover:text-[#F3F4F6] flex items-center gap-1"
             >
               <RefreshCw className="w-4 h-4" />
               刷新
             </button>
           </div>
-          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
             <div className="max-h-96 overflow-y-auto">
               {logs.map(log => (
-                <div key={log.id} className="flex items-center gap-4 px-4 py-3 border-b border-slate-800 last:border-0 hover:bg-slate-800/50 transition-colors">
+                <div key={log.id} className="flex items-center gap-4 px-4 py-3 border-b border-[#2A354D] last:border-0 hover:bg-[#181F32]/50 transition-colors">
                   <div className={`p-2 rounded-lg ${
-                    log.result === 'success' ? 'bg-green-500/20 text-green-400' :
-                    log.result === 'failed' ? 'bg-red-500/20 text-red-400' :
-                    'bg-yellow-500/20 text-yellow-400'
+                    log.result === 'success' ? 'bg-[#00C853]/20 text-[#00C853]' :
+                    log.result === 'failed' ? 'bg-[#FF3B30]/20 text-[#FF3B30]' :
+                    'bg-[#FF9100]/20 text-[#FF9100]'
                   }`}>
                     {log.result === 'success' ? <CheckCircle2 className="w-4 h-4" /> :
                      log.result === 'failed' ? <XCircle className="w-4 h-4" /> :
@@ -289,12 +289,12 @@ export function HostConnectTest() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-white text-sm font-medium">{log.host}</span>
-                      <span className="text-slate-500 text-sm">{log.action}</span>
+                      <span className="text-[#F3F4F6] text-sm font-medium">{log.host}</span>
+                      <span className="text-[#6B7280] text-sm">{log.action}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-slate-400 text-xs">
+                    <div className="flex items-center gap-3 text-[#9CA3AF] text-xs">
                       <span>{log.timestamp}</span>
-                      <span className="text-slate-500">耗时: {log.duration}</span>
+                      <span className="text-[#6B7280]">耗时: {log.duration}</span>
                     </div>
                   </div>
                 </div>
@@ -306,55 +306,55 @@ export function HostConnectTest() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingCredential ? '编辑凭证' : '添加凭证'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1">凭证名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1">凭证名称</label>
                 <input
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="例如：生产Web服务器"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">主机地址</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">主机地址</label>
                   <input
                     value={formData.host || ''}
                     onChange={(e) => setFormData({ ...formData, host: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono"
                     placeholder="10.0.1.101"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">端口</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">端口</label>
                   <input
                     type="number"
                     value={formData.port || ''}
                     onChange={(e) => setFormData({ ...formData, port: parseInt(e.target.value) || 22 })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">协议</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">协议</label>
                   <select
                     value={formData.protocol || 'ssh'}
                     onChange={(e) => setFormData({ ...formData, protocol: e.target.value as any })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   >
                     <option value="ssh">SSH</option>
                     <option value="winrm">WinRM</option>
@@ -362,35 +362,35 @@ export function HostConnectTest() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-1">用户名</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-1">用户名</label>
                   <input
                     value={formData.username || ''}
                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1 flex items-center gap-2">
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1 flex items-center gap-2">
                   <Lock className="w-4 h-4" />
                   密码/密钥
                 </label>
                 <input
                   type="password"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="输入密码或选择密钥文件"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-4">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
                 >
                   取消
                 </button>
                 <button
                   onClick={handleSaveCredential}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   保存
                 </button>

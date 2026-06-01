@@ -51,8 +51,8 @@ export function MenuItem({ item }: MenuItemProps) {
           w-full flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg
           transition-colors duration-150
           ${isActive
-            ? 'bg-blue-500/20 text-blue-400 border-l-2 border-blue-500'
-            : 'text-slate-300 hover:bg-slate-800/50 hover:text-white border-l-2 border-transparent'
+            ? 'bg-[#0066FF]/20 text-[#0066FF] border-l-2 border-blue-500'
+            : 'text-[#D1D5DB] hover:bg-[#181F32]/50 hover:text-[#F3F4F6] border-l-2 border-transparent'
           }
         `}
       >
@@ -70,7 +70,7 @@ export function MenuItem({ item }: MenuItemProps) {
       </button>
 
       {hasChildren && expanded && (
-        <div className="ml-6 mt-1 space-y-0.5 border-l border-slate-700 pl-4">
+        <div className="ml-6 mt-1 space-y-0.5 border-l border-[#2A354D] pl-4">
           {item.children?.map((child) => {
             const hasThirdLevel = child.children && child.children.length > 0;
             const isChildActive = activeMenu === child.id || (hasThirdLevel && activeMenu.startsWith(child.id + '-'));
@@ -80,7 +80,7 @@ export function MenuItem({ item }: MenuItemProps) {
                 <button
                   onClick={() => {
                     if (hasThirdLevel) {
-                      // Toggle third level locally via data attribute on DOM
+                      // Toggle third level submenu
                       const btn = document.getElementById(`third-toggle-${child.id}`);
                       if (btn) {
                         const isOpen = btn.getAttribute('data-open') === 'true';
@@ -90,15 +90,21 @@ export function MenuItem({ item }: MenuItemProps) {
                           submenu.style.display = isOpen ? 'none' : 'block';
                         }
                       }
+                      // Auto-navigate to first child page
+                      const firstChild = child.children?.[0];
+                      if (firstChild) {
+                        setActiveMenu(firstChild.id);
+                      }
+                    } else {
+                      setActiveMenu(child.id);
                     }
-                    setActiveMenu(child.id);
                   }}
                   className={`
                     w-full flex items-center gap-1 text-left px-4 py-2 text-sm rounded-md
                     transition-colors duration-150
                     ${isChildActive
-                      ? 'bg-blue-500/10 text-blue-400 font-medium'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/30'
+                      ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium'
+                      : 'text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32]/30'
                     }
                   `}
                 >
@@ -119,14 +125,14 @@ export function MenuItem({ item }: MenuItemProps) {
                         }
                       }}
                     >
-                      <ChevronRight className="w-3 h-3 text-slate-500" />
+                      <ChevronRight className="w-3 h-3 text-[#6B7280]" />
                     </span>
                   )}
                 </button>
                 {hasThirdLevel && (
                   <div
                     id={`third-submenu-${child.id}`}
-                    className="ml-4 border-l border-slate-700/50 pl-3"
+                    className="ml-4 border-l border-[#2A354D]/50 pl-3"
                     style={{ display: 'none' }}
                   >
                     {child.children?.map((third) => (
@@ -137,8 +143,8 @@ export function MenuItem({ item }: MenuItemProps) {
                           w-full text-left px-4 py-1.5 text-xs rounded-md
                           transition-colors duration-150
                           ${activeMenu === third.id
-                            ? 'bg-blue-500/10 text-blue-400 font-medium'
-                            : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800/30'
+                            ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium'
+                            : 'text-[#6B7280] hover:text-[#D1D5DB] hover:bg-[#181F32]/30'
                           }
                         `}
                       >

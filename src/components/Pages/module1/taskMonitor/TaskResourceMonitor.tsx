@@ -74,8 +74,8 @@ export function TaskResourceMonitor() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-lg">
-          <p className="text-slate-300 text-sm mb-1">{label}</p>
+        <div className="bg-[#181F32] border border-[#2A354D] rounded-lg p-3 shadow-lg">
+          <p className="text-[#D1D5DB] text-sm mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {entry.value.toFixed(1)}%
@@ -98,10 +98,10 @@ export function TaskResourceMonitor() {
     const offset = circumference - (value / 100) * circumference;
 
     return (
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
         <div className="flex items-center gap-3 mb-4">
-          <Icon className="w-6 h-6 text-slate-400" />
-          <h4 className="text-lg font-semibold text-white">{label}</h4>
+          <Icon className="w-6 h-6 text-[#9CA3AF]" />
+          <h4 className="text-lg font-semibold text-[#F3F4F6]">{label}</h4>
         </div>
         <div className="flex justify-center">
           <div className="relative w-36 h-36">
@@ -128,7 +128,7 @@ export function TaskResourceMonitor() {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-3xl font-bold text-white">{Math.round(value)}%</span>
+              <span className="text-3xl font-bold text-[#F3F4F6]">{Math.round(value)}%</span>
             </div>
           </div>
         </div>
@@ -182,10 +182,10 @@ export function TaskResourceMonitor() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务资源使用率监控</h1>
-        <p className="text-slate-400">监控任务运行时的 CPU、内存和网络资源使用情况</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务资源使用率监控</h1>
+        <p className="text-[#9CA3AF]">监控任务运行时的 CPU、内存和网络资源使用情况</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -194,8 +194,8 @@ export function TaskResourceMonitor() {
         <Gauge value={currentMetrics.network} label="网络带宽使用率" icon={Activity} />
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
-        <h3 className="text-lg font-semibold text-white mb-4">资源使用趋势</h3>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6 mb-6">
+        <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4">资源使用趋势</h3>
         <ResponsiveContainer width="100%" height={400}>
           <AreaChart data={data}>
             <defs>
@@ -224,15 +224,15 @@ export function TaskResourceMonitor() {
         </ResponsiveContainer>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
           <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-slate-400" />
-            <h3 className="text-lg font-semibold text-white">告警规则配置</h3>
+            <Bell className="w-5 h-5 text-[#9CA3AF]" />
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">告警规则配置</h3>
           </div>
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             新增规则
@@ -242,34 +242,34 @@ export function TaskResourceMonitor() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-800">
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">规则名称</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">监控指标</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">条件</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">阈值</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+                <tr className="border-b border-[#2A354D]">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">规则名称</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">监控指标</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">条件</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">阈值</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-[#2A354D]">
                 {alertRules.map((rule) => (
-                  <tr key={rule.id} className="hover:bg-slate-800/30">
+                  <tr key={rule.id} className="hover:bg-[#181F32]/30">
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-2">
-                        {rule.enabled && <AlertTriangle className="w-4 h-4 text-yellow-400" />}
-                        <span className="text-sm text-white">{rule.name}</span>
+                        {rule.enabled && <AlertTriangle className="w-4 h-4 text-[#FF9100]" />}
+                        <span className="text-sm text-[#F3F4F6]">{rule.name}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-300">{getMetricLabel(rule.metric)}</td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-300">{rule.operator}</td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-300">{rule.threshold}%</td>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{getMetricLabel(rule.metric)}</td>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{rule.operator}</td>
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{rule.threshold}%</td>
                     <td className="px-4 py-4 whitespace-nowrap">
                       <button
                         onClick={() => toggleRule(rule.id)}
                         className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                           rule.enabled
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-slate-700 text-slate-400'
+                            ? 'bg-[#00C853]/20 text-[#00C853]'
+                            : 'bg-[#2A354D] text-[#9CA3AF]'
                         }`}
                       >
                         {rule.enabled ? '已启用' : '已禁用'}
@@ -279,13 +279,13 @@ export function TaskResourceMonitor() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleOpenModal(rule)}
-                          className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                          className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteRule(rule.id)}
-                          className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                          className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -301,30 +301,30 @@ export function TaskResourceMonitor() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-md mx-4">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">{editingRule ? '编辑告警规则' : '新增告警规则'}</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-md mx-4">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">{editingRule ? '编辑告警规则' : '新增告警规则'}</h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-[#9CA3AF] hover:text-[#F3F4F6]">
                 ✕
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">规则名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">规则名称</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="请输入规则名称"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">监控指标</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-2">监控指标</label>
                 <select
                   value={formData.metric}
                   onChange={(e) => setFormData({ ...formData, metric: e.target.value as any })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                 >
                   <option value="cpu">CPU</option>
                   <option value="memory">内存</option>
@@ -333,11 +333,11 @@ export function TaskResourceMonitor() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">运算符</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-2">运算符</label>
                   <select
                     value={formData.operator}
                     onChange={(e) => setFormData({ ...formData, operator: e.target.value as any })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   >
                     <option value=">">大于</option>
                     <option value="<">小于</option>
@@ -346,12 +346,12 @@ export function TaskResourceMonitor() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">阈值 (%)</label>
+                  <label className="block text-sm font-medium text-[#D1D5DB] mb-2">阈值 (%)</label>
                   <input
                     type="number"
                     value={formData.threshold}
                     onChange={(e) => setFormData({ ...formData, threshold: parseInt(e.target.value) })}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                     min="0"
                     max="100"
                   />
@@ -363,21 +363,21 @@ export function TaskResourceMonitor() {
                   id="enabled"
                   checked={formData.enabled}
                   onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-                  className="w-4 h-4 text-blue-600 bg-slate-800 border-slate-700 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#4D94FF] bg-[#181F32] border-[#2A354D] rounded focus:ring-[#0066FF]"
                 />
-                <label htmlFor="enabled" className="text-sm text-slate-300">启用此规则</label>
+                <label htmlFor="enabled" className="text-sm text-[#D1D5DB]">启用此规则</label>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSaveRule}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

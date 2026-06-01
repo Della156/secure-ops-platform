@@ -111,9 +111,9 @@ export function ResourcePoolConfig() {
   // 获取状态标签
   const getStatusBadge = (status: string) => {
     const styles = {
-      online: 'bg-green-500/20 text-green-400 border-green-500/30',
-      warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      offline: 'bg-red-500/20 text-red-400 border-red-500/30',
+      online: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30',
+      warning: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      offline: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
     };
     const labels = {
       online: '在线',
@@ -137,9 +137,9 @@ export function ResourcePoolConfig() {
   // 获取告警级别标签
   const getAlertLevelBadge = (level: string) => {
     const styles = {
-      critical: 'bg-red-500/20 text-red-400 border-red-500/30',
-      warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      info: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+      critical: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      warning: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      info: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
     };
     const labels = {
       critical: '严重',
@@ -155,9 +155,9 @@ export function ResourcePoolConfig() {
 
   // 获取负载条颜色
   const getLoadBarColor = (load: number) => {
-    if (load >= 90) return 'bg-red-500';
-    if (load >= 70) return 'bg-yellow-500';
-    return 'bg-green-500';
+    if (load >= 90) return 'bg-[#FF3B30]';
+    if (load >= 70) return 'bg-[#FF9100]';
+    return 'bg-[#00C853]';
   };
 
   // 统计信息
@@ -171,11 +171,11 @@ export function ResourcePoolConfig() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       {/* 页面标题 */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务调度资源池负载配置管理</h1>
-        <p className="text-slate-400">管理工作节点和资源池配置</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务调度资源池负载配置管理</h1>
+        <p className="text-[#9CA3AF]">管理工作节点和资源池配置</p>
       </div>
 
       {/* 统计卡片 */}
@@ -186,20 +186,20 @@ export function ResourcePoolConfig() {
           { label: '告警节点', value: stats.warningNodes, icon: Bell, color: 'yellow' },
           { label: '离线节点', value: stats.offlineNodes, icon: XCircle, color: 'red' },
         ].map((stat, idx) => (
-          <div key={idx} className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <div key={idx} className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-400">{stat.label}</p>
+                <p className="text-sm text-[#9CA3AF]">{stat.label}</p>
                 <p className={`text-3xl font-bold mt-1 ${
-                  stat.color === 'blue' ? 'text-blue-400' :
-                  stat.color === 'green' ? 'text-green-400' :
-                  stat.color === 'yellow' ? 'text-yellow-400' : 'text-red-400'
+                  stat.color === 'blue' ? 'text-[#0066FF]' :
+                  stat.color === 'green' ? 'text-[#00C853]' :
+                  stat.color === 'yellow' ? 'text-[#FF9100]' : 'text-[#FF3B30]'
                 }`}>{stat.value}</p>
               </div>
               <stat.icon className={`w-8 h-8 ${
-                stat.color === 'blue' ? 'text-blue-500' :
-                stat.color === 'green' ? 'text-green-500' :
-                stat.color === 'yellow' ? 'text-yellow-500' : 'text-red-500'
+                stat.color === 'blue' ? 'text-[#4D94FF]' :
+                stat.color === 'green' ? 'text-[#00C853]' :
+                stat.color === 'yellow' ? 'text-[#FF9100]' : 'text-[#FF3B30]'
               }`} />
             </div>
           </div>
@@ -207,42 +207,42 @@ export function ResourcePoolConfig() {
       </div>
 
       {/* 资源池概览 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
-        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-          <Activity className="w-5 h-5 text-blue-400" />
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-6">
+        <h3 className="text-lg font-semibold text-[#F3F4F6] mb-4 flex items-center gap-2">
+          <Activity className="w-5 h-5 text-[#0066FF]" />
           资源池负载概览
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-slate-400 mb-2">总并发容量</p>
-            <p className="text-2xl font-bold text-white">{stats.currentTasks} / {stats.totalCapacity}</p>
+            <p className="text-sm text-[#9CA3AF] mb-2">总并发容量</p>
+            <p className="text-2xl font-bold text-[#F3F4F6]">{stats.currentTasks} / {stats.totalCapacity}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-400 mb-2">资源利用率</p>
-            <div className="mt-2 bg-slate-800 rounded-full h-3">
+            <p className="text-sm text-[#9CA3AF] mb-2">资源利用率</p>
+            <div className="mt-2 bg-[#181F32] rounded-full h-3">
               <div
                 className={`h-3 rounded-full transition-all ${getLoadBarColor((stats.currentTasks / stats.totalCapacity) * 100)}`}
                 style={{ width: `${Math.min((stats.currentTasks / stats.totalCapacity) * 100, 100)}%` }}
               />
             </div>
-            <p className="text-xs text-slate-500 mt-1">{Math.round((stats.currentTasks / stats.totalCapacity) * 100)}%</p>
+            <p className="text-xs text-[#6B7280] mt-1">{Math.round((stats.currentTasks / stats.totalCapacity) * 100)}%</p>
           </div>
         </div>
       </div>
 
       {/* 操作栏 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-4">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-4">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             {/* 搜索框 */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索节点名称或IP..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
 
@@ -250,7 +250,7 @@ export function ResourcePoolConfig() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="online">在线</option>
@@ -262,7 +262,7 @@ export function ResourcePoolConfig() {
           {/* 新增按钮 */}
           <button
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             新增节点
@@ -271,78 +271,78 @@ export function ResourcePoolConfig() {
       </div>
 
       {/* 工作节点列表 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden mb-6">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 节点
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 IP地址
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 状态
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 当前任务
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 最大并发
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 负载率
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 创建时间
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 操作
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {filteredNodes.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
+              <tr key={item.id} className="hover:bg-[#181F32]/30 transition-colors">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center">
-                      <Server className="w-5 h-5 text-blue-400" />
+                    <div className="w-10 h-10 bg-[#181F32] rounded-lg flex items-center justify-center">
+                      <Server className="w-5 h-5 text-[#0066FF]" />
                     </div>
-                    <span className="text-sm text-white font-medium">{item.name}</span>
+                    <span className="text-sm text-[#F3F4F6] font-medium">{item.name}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400 font-mono">{item.ip}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF] font-mono">{item.ip}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item.status)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{item.currentTasks}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.maxConcurrency}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6]">{item.currentTasks}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.maxConcurrency}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
-                    <div className="w-24 bg-slate-800 rounded-full h-2">
+                    <div className="w-24 bg-[#181F32] rounded-full h-2">
                       <div
                         className={`h-2 rounded-full transition-all ${getLoadBarColor(item.loadPercentage)}`}
                         style={{ width: `${item.loadPercentage}%` }}
                       />
                     </div>
                     <span className={`text-xs font-medium ${
-                      item.loadPercentage >= 90 ? 'text-red-400' :
-                      item.loadPercentage >= 70 ? 'text-yellow-400' : 'text-green-400'
+                      item.loadPercentage >= 90 ? 'text-[#FF3B30]' :
+                      item.loadPercentage >= 70 ? 'text-[#FF9100]' : 'text-[#00C853]'
                     }`}>{item.loadPercentage}%</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{item.createdAt}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{item.createdAt}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors"
                       title="编辑"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                       title="删除"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -356,44 +356,44 @@ export function ResourcePoolConfig() {
 
         {filteredNodes.length === 0 && (
           <div className="px-6 py-12 text-center">
-            <p className="text-slate-500">暂无数据</p>
+            <p className="text-[#6B7280]">暂无数据</p>
           </div>
         )}
       </div>
 
       {/* 告警规则配置 */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-slate-800">
-          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <Bell className="w-5 h-5 text-yellow-400" />
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+        <div className="p-4 border-b border-[#2A354D]">
+          <h3 className="text-lg font-semibold text-[#F3F4F6] flex items-center gap-2">
+            <Bell className="w-5 h-5 text-[#FF9100]" />
             告警规则配置
           </h3>
         </div>
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 规则名称
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 阈值
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 级别
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 状态
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">
                 操作
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {alertRules.map((rule) => (
-              <tr key={rule.id} className="hover:bg-slate-800/30 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{rule.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+              <tr key={rule.id} className="hover:bg-[#181F32]/30 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{rule.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">
                   {rule.threshold > 0 ? `${rule.threshold}%` : '立即告警'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{getAlertLevelBadge(rule.level)}</td>
@@ -402,15 +402,15 @@ export function ResourcePoolConfig() {
                     onClick={() => toggleAlertRule(rule.id)}
                     className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                       rule.enabled
-                        ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
-                        : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
+                        ? 'bg-[#00C853]/20 text-[#00C853] hover:bg-[#00C853]/30'
+                        : 'bg-[#2A354D] text-[#9CA3AF] hover:bg-[#3A4560]'
                     }`}
                   >
                     {rule.enabled ? '已启用' : '已禁用'}
                   </button>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <button className="p-1.5 text-slate-400 hover:text-slate-300 hover:bg-slate-500/10 rounded transition-colors" title="编辑规则">
+                  <button className="p-1.5 text-[#9CA3AF] hover:text-[#D1D5DB] hover:bg-[#4A5570]/10 rounded transition-colors" title="编辑规则">
                     <Edit className="w-4 h-4" />
                   </button>
                 </td>
@@ -423,61 +423,61 @@ export function ResourcePoolConfig() {
       {/* 新增/编辑节点模态框 */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-lg mx-4">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingNode ? '编辑工作节点' : '新增工作节点'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+                className="p-1 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">节点名称</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">节点名称</label>
                 <input
                   type="text"
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   placeholder="例如: Worker-01"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">IP地址</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">IP地址</label>
                 <input
                   type="text"
                   value={formData.ip || ''}
                   onChange={(e) => setFormData({ ...formData, ip: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF] font-mono"
                   placeholder="例如: 192.168.1.101"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">最大并发任务数</label>
+                <label className="block text-sm font-medium text-[#D1D5DB] mb-1.5">最大并发任务数</label>
                 <input
                   type="number"
                   value={formData.maxConcurrency || ''}
                   onChange={(e) => setFormData({ ...formData, maxConcurrency: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
                   min={1}
                   max={100}
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-[#2A354D]">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

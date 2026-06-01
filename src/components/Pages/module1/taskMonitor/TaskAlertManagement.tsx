@@ -106,9 +106,9 @@ export function TaskAlertManagement() {
 
   const getSeverityBadge = (severity: string) => {
     const styles = {
-      critical: 'bg-red-500/20 text-red-400 border-red-500/30',
-      warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      info: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+      critical: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30',
+      warning: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30',
+      info: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30',
     };
     const labels = {
       critical: '严重',
@@ -133,8 +133,8 @@ export function TaskAlertManagement() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      sent: 'bg-green-500/20 text-green-400',
-      failed: 'bg-red-500/20 text-red-400',
+      sent: 'bg-[#00C853]/20 text-[#00C853]',
+      failed: 'bg-[#FF3B30]/20 text-[#FF3B30]',
     };
     const icons = {
       sent: <CheckCircle2 className="w-3 h-3" />,
@@ -183,49 +183,49 @@ export function TaskAlertManagement() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
           <input
             type="text"
             placeholder="搜索告警规则..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           />
         </div>
         <button
           onClick={() => handleOpenModal('rule')}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
           新增规则
         </button>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">规则名称</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">触发条件</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">级别</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">通知渠道</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">规则名称</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">触发条件</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">级别</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">通知渠道</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {alertRules.map((rule) => (
-              <tr key={rule.id} className="hover:bg-slate-800/30">
+              <tr key={rule.id} className="hover:bg-[#181F32]/30">
                 <td className="px-6 py-4">
-                  <div className="text-sm font-medium text-white">{rule.name}</div>
-                  <div className="text-xs text-slate-500">{rule.createdAt}</div>
+                  <div className="text-sm font-medium text-[#F3F4F6]">{rule.name}</div>
+                  <div className="text-xs text-[#6B7280]">{rule.createdAt}</div>
                 </td>
-                <td className="px-6 py-4 text-sm text-slate-300">{rule.condition}</td>
+                <td className="px-6 py-4 text-sm text-[#D1D5DB]">{rule.condition}</td>
                 <td className="px-6 py-4">{getSeverityBadge(rule.severity)}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
                     {rule.channels.map((channel, idx) => (
-                      <span key={idx} className="p-1.5 bg-slate-800 rounded-lg text-slate-400">
+                      <span key={idx} className="p-1.5 bg-[#181F32] rounded-lg text-[#9CA3AF]">
                         {getChannelIcon(channel)}
                       </span>
                     ))}
@@ -236,8 +236,8 @@ export function TaskAlertManagement() {
                     onClick={() => toggleRule(rule.id)}
                     className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                       rule.enabled
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-slate-700 text-slate-400'
+                        ? 'bg-[#00C853]/20 text-[#00C853]'
+                        : 'bg-[#2A354D] text-[#9CA3AF]'
                     }`}
                   >
                     {rule.enabled ? '已启用' : '已禁用'}
@@ -247,13 +247,13 @@ export function TaskAlertManagement() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleOpenModal('rule', rule)}
-                      className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(rule.id)}
-                      className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -270,10 +270,10 @@ export function TaskAlertManagement() {
   const renderLevelsTab = () => (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-white">告警级别配置</h3>
+        <h3 className="text-lg font-semibold text-[#F3F4F6]">告警级别配置</h3>
         <button
           onClick={() => handleOpenModal('level')}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
           新增级别
@@ -282,22 +282,22 @@ export function TaskAlertManagement() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {alertLevels.map((level) => (
-          <div key={level.id} className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div key={level.id} className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div
                   className="w-4 h-4 rounded-full"
                   style={{ backgroundColor: level.color }}
                 />
-                <span className="text-white font-semibold">{level.name}</span>
+                <span className="text-[#F3F4F6] font-semibold">{level.name}</span>
               </div>
               <div className="flex items-center gap-2">
-                <button className="p-1.5 text-slate-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors">
+                <button className="p-1.5 text-[#9CA3AF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 rounded transition-colors">
                   <Edit className="w-4 h-4" />
                 </button>
               </div>
             </div>
-            <div className="text-sm text-slate-400">
+            <div className="text-sm text-[#9CA3AF]">
               优先级: {level.priority}
             </div>
           </div>
@@ -310,45 +310,45 @@ export function TaskAlertManagement() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
           <input
             type="text"
             placeholder="搜索接收人..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           />
         </div>
         <button
           onClick={() => handleOpenModal('recipient')}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
           新增接收人
         </button>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">姓名</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">邮箱</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">电话</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">角色</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">操作</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">姓名</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">邮箱</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">电话</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">角色</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {recipients.map((recipient) => (
-              <tr key={recipient.id} className="hover:bg-slate-800/30">
-                <td className="px-6 py-4 text-sm font-medium text-white">{recipient.name}</td>
-                <td className="px-6 py-4 text-sm text-slate-300">{recipient.email}</td>
-                <td className="px-6 py-4 text-sm text-slate-300">{recipient.phone || '-'}</td>
+              <tr key={recipient.id} className="hover:bg-[#181F32]/30">
+                <td className="px-6 py-4 text-sm font-medium text-[#F3F4F6]">{recipient.name}</td>
+                <td className="px-6 py-4 text-sm text-[#D1D5DB]">{recipient.email}</td>
+                <td className="px-6 py-4 text-sm text-[#D1D5DB]">{recipient.phone || '-'}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-wrap gap-1">
                     {recipient.roles.map((role, idx) => (
-                      <span key={idx} className="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs">
+                      <span key={idx} className="px-2 py-0.5 bg-[#181F32] text-[#D1D5DB] rounded text-xs">
                         {role}
                       </span>
                     ))}
@@ -358,13 +358,13 @@ export function TaskAlertManagement() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleOpenModal('recipient', recipient)}
-                      className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#0066FF] hover:text-[#4D94FF] hover:bg-[#0066FF]/10 rounded transition-colors"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(recipient.id)}
-                      className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-[#FF3B30] hover:text-[#FF6B5A] hover:bg-[#FF3B30]/10 rounded transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -382,38 +382,38 @@ export function TaskAlertManagement() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
           <input
             type="text"
             placeholder="搜索告警历史..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
           />
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800/50">
+          <thead className="bg-[#181F32]/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">告警ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">触发规则</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">级别</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">接收人</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">触发时间</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">告警ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">触发规则</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">级别</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">接收人</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">触发时间</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800">
+          <tbody className="divide-y divide-[#2A354D]">
             {alertHistory.map((alert) => (
-              <tr key={alert.id} className="hover:bg-slate-800/30">
-                <td className="px-6 py-4 text-sm font-mono text-slate-400">{alert.id}</td>
-                <td className="px-6 py-4 text-sm text-white">{alert.rule}</td>
+              <tr key={alert.id} className="hover:bg-[#181F32]/30">
+                <td className="px-6 py-4 text-sm font-mono text-[#9CA3AF]">{alert.id}</td>
+                <td className="px-6 py-4 text-sm text-[#F3F4F6]">{alert.rule}</td>
                 <td className="px-6 py-4">{getSeverityBadge(alert.severity)}</td>
-                <td className="px-6 py-4 text-sm text-slate-300">{alert.recipient}</td>
+                <td className="px-6 py-4 text-sm text-[#D1D5DB]">{alert.recipient}</td>
                 <td className="px-6 py-4">
-                  <div className="flex items-center gap-1 text-sm text-slate-400">
+                  <div className="flex items-center gap-1 text-sm text-[#9CA3AF]">
                     <Clock className="w-3 h-3" />
                     {alert.triggeredAt}
                   </div>
@@ -428,19 +428,19 @@ export function TaskAlertManagement() {
   );
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务告警管理与推送</h1>
-        <p className="text-slate-400">配置告警规则、级别、接收人，查看推送历史</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务告警管理与推送</h1>
+        <p className="text-[#9CA3AF]">配置告警规则、级别、接收人，查看推送历史</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-1 mb-6 inline-flex">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-1 mb-6 inline-flex">
         <button
           onClick={() => setActiveTab('rules')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'rules'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
           }`}
         >
           <Bell className="w-4 h-4" />
@@ -450,8 +450,8 @@ export function TaskAlertManagement() {
           onClick={() => setActiveTab('levels')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'levels'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
           }`}
         >
           <Settings className="w-4 h-4" />
@@ -461,8 +461,8 @@ export function TaskAlertManagement() {
           onClick={() => setActiveTab('recipients')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'recipients'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -472,8 +472,8 @@ export function TaskAlertManagement() {
           onClick={() => setActiveTab('history')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeTab === 'history'
-              ? 'bg-blue-600 text-white'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#0066FF] text-[#F3F4F6]'
+              : 'text-[#9CA3AF] hover:text-[#F3F4F6]'
           }`}
         >
           <Clock className="w-4 h-4" />
@@ -488,9 +488,9 @@ export function TaskAlertManagement() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-md mx-4">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-              <h3 className="text-lg font-semibold text-white">
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-xl w-full max-w-md mx-4">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-[#F3F4F6]">
                 {editingItem ? '编辑' : '新增'}
                 {modalType === 'rule' ? '告警规则' : modalType === 'level' ? '告警级别' : '接收人'}
               </h3>
@@ -499,27 +499,27 @@ export function TaskAlertManagement() {
                   setIsModalOpen(false);
                   setEditingItem(null);
                 }}
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-[#9CA3AF] hover:text-[#F3F4F6] transition-colors"
               >
                 ✕
               </button>
             </div>
             <div className="p-6">
-              <p className="text-slate-400 text-center">表单内容开发中...</p>
+              <p className="text-[#9CA3AF] text-center">表单内容开发中...</p>
             </div>
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#2A354D]">
               <button
                 onClick={() => {
                   setIsModalOpen(false);
                   setEditingItem(null);
                 }}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] rounded-lg transition-colors"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 保存
               </button>

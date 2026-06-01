@@ -42,20 +42,20 @@ export function GlobalProgressView() {
 
   const getStatusConfig = (status: string) => {
     const configs = {
-      running: { label: '运行中', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30', icon: Activity },
-      success: { label: '成功', color: 'bg-green-500/20 text-green-400 border-green-500/30', icon: CheckCircle2 },
-      failed: { label: '失败', color: 'bg-red-500/20 text-red-400 border-red-500/30', icon: XCircle },
-      pending: { label: '等待', color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30', icon: PlayCircle },
-      paused: { label: '已暂停', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30', icon: PauseCircle },
+      running: { label: '运行中', color: 'bg-[#0066FF]/20 text-[#0066FF] border-blue-500/30', icon: Activity },
+      success: { label: '成功', color: 'bg-[#00C853]/20 text-[#00C853] border-green-500/30', icon: CheckCircle2 },
+      failed: { label: '失败', color: 'bg-[#FF3B30]/20 text-[#FF3B30] border-red-500/30', icon: XCircle },
+      pending: { label: '等待', color: 'bg-[#FF9100]/20 text-[#FF9100] border-yellow-500/30', icon: PlayCircle },
+      paused: { label: '已暂停', color: 'bg-[#6366F1]/20 text-[#6366F1] border-purple-500/30', icon: PauseCircle },
     };
     return configs[status as keyof typeof configs] || configs.pending;
   };
 
   const getPriorityColor = (priority: string) => {
     const colors = {
-      high: 'bg-red-500/20 text-red-400',
-      medium: 'bg-yellow-500/20 text-yellow-400',
-      low: 'bg-green-500/20 text-green-400',
+      high: 'bg-[#FF3B30]/20 text-[#FF3B30]',
+      medium: 'bg-[#FF9100]/20 text-[#FF9100]',
+      low: 'bg-[#00C853]/20 text-[#00C853]',
     };
     return colors[priority as keyof typeof colors] || colors.medium;
   };
@@ -70,29 +70,29 @@ export function GlobalProgressView() {
   const statuses = ['running', 'pending', 'paused', 'success', 'failed'];
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务执行进度全局视图</h1>
-        <p className="text-slate-400">查看所有任务的执行状态和进度概览</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务执行进度全局视图</h1>
+        <p className="text-[#9CA3AF]">查看所有任务的执行状态和进度概览</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 mb-6">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex flex-wrap gap-3 items-center">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
               <input
                 type="text"
                 placeholder="搜索任务名称或标签..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                className="pl-10 pr-4 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] placeholder-[#6B7280] focus:outline-none focus:ring-2 focus:ring-[#0066FF] w-64"
               />
             </div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部状态</option>
               <option value="running">运行中</option>
@@ -104,7 +104,7 @@ export function GlobalProgressView() {
             <select
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
-              className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 bg-[#181F32] border border-[#2A354D] rounded-lg text-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
             >
               <option value="">全部优先级</option>
               <option value="high">高优先级</option>
@@ -115,13 +115,13 @@ export function GlobalProgressView() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setViewMode('kanban')}
-              className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'kanban' ? 'bg-blue-600 text-white' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}`}
+              className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'kanban' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB]'}`}
             >
               看板视图
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}`}
+              className={`px-4 py-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-[#0066FF] text-[#F3F4F6]' : 'bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB]'}`}
             >
               列表视图
             </button>
@@ -135,15 +135,15 @@ export function GlobalProgressView() {
           const tasksByStatus = getStatusTasks(status);
           const Icon = config.icon;
           return (
-            <div key={status} className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <div key={status} className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <Icon className="w-5 h-5" style={{ color: config.color.includes('blue') ? '#60a5fa' : config.color.includes('green') ? '#22c55e' : config.color.includes('red') ? '#ef4444' : config.color.includes('purple') ? '#a855f7' : '#eab308' }} />
-                  <span className="text-sm font-medium text-slate-300">{config.label}</span>
+                  <span className="text-sm font-medium text-[#D1D5DB]">{config.label}</span>
                 </div>
-                <span className="text-2xl font-bold text-white">{tasksByStatus.length}</span>
+                <span className="text-2xl font-bold text-[#F3F4F6]">{tasksByStatus.length}</span>
               </div>
-              <div className="text-xs text-slate-500">个任务</div>
+              <div className="text-xs text-[#6B7280]">个任务</div>
             </div>
           );
         })}
@@ -155,37 +155,37 @@ export function GlobalProgressView() {
             const config = getStatusConfig(status);
             const tasksByStatus = getStatusTasks(status);
             return (
-              <div key={status} className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-                <div className="px-4 py-3 border-b border-slate-800 bg-slate-800/50">
+              <div key={status} className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+                <div className="px-4 py-3 border-b border-[#2A354D] bg-[#181F32]/50">
                   <div className="flex items-center justify-between">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium border ${config.color}`}>{config.label}</span>
-                    <span className="text-xs text-slate-400">{tasksByStatus.length}</span>
+                    <span className="text-xs text-[#9CA3AF]">{tasksByStatus.length}</span>
                   </div>
                 </div>
                 <div className="p-3 space-y-3 max-h-[600px] overflow-y-auto">
                   {tasksByStatus.map(task => (
-                    <div key={task.id} className="bg-slate-800/50 border border-slate-700 rounded-lg p-3 hover:border-slate-600 transition-colors">
-                      <div className="font-medium text-white text-sm mb-2">{task.name}</div>
+                    <div key={task.id} className="bg-[#181F32]/50 border border-[#2A354D] rounded-lg p-3 hover:border-[#3A4560] transition-colors">
+                      <div className="font-medium text-[#F3F4F6] text-sm mb-2">{task.name}</div>
                       <div className="flex items-center gap-2 mb-2">
                         <span className={`px-2 py-0.5 rounded-full text-xs ${getPriorityColor(task.priority)}`}>{getPriorityLabel(task.priority)}</span>
                       </div>
                       <div className="mb-2">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs text-slate-400">{task.progress}%</span>
+                          <span className="text-xs text-[#9CA3AF]">{task.progress}%</span>
                         </div>
-                        <div className="w-full bg-slate-700 rounded-full h-1.5">
+                        <div className="w-full bg-[#2A354D] rounded-full h-1.5">
                           <div
                             className={`h-1.5 rounded-full transition-all duration-300 ${
-                              task.status === 'success' ? 'bg-green-500' :
-                              task.status === 'failed' ? 'bg-red-500' :
-                              task.status === 'running' ? 'bg-blue-500' :
-                              task.status === 'paused' ? 'bg-purple-500' : 'bg-yellow-500'
+                              task.status === 'success' ? 'bg-[#00C853]' :
+                              task.status === 'failed' ? 'bg-[#FF3B30]' :
+                              task.status === 'running' ? 'bg-[#0066FF]' :
+                              task.status === 'paused' ? 'bg-[#6366F1]' : 'bg-[#FF9100]'
                             }`}
                             style={{ width: `${task.progress}%` }}
                           />
                         </div>
                       </div>
-                      <div className="text-xs text-slate-500">
+                      <div className="text-xs text-[#6B7280]">
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           <span>{task.startTime !== '-' ? task.startTime : '未开始'}</span>
@@ -193,13 +193,13 @@ export function GlobalProgressView() {
                       </div>
                       <div className="mt-2 flex flex-wrap gap-1">
                         {task.tags.map((tag, idx) => (
-                          <span key={idx} className="px-1.5 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">{tag}</span>
+                          <span key={idx} className="px-1.5 py-0.5 bg-[#2A354D] text-[#D1D5DB] rounded text-xs">{tag}</span>
                         ))}
                       </div>
                     </div>
                   ))}
                   {tasksByStatus.length === 0 && (
-                    <div className="text-center py-8 text-slate-500 text-sm">
+                    <div className="text-center py-8 text-[#6B7280] text-sm">
                       暂无任务
                     </div>
                   )}
@@ -209,26 +209,26 @@ export function GlobalProgressView() {
           })}
         </div>
       ) : (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
           <table className="w-full">
-            <thead className="bg-slate-800/50">
+            <thead className="bg-[#181F32]/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">任务名称</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">状态</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">优先级</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">进度</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">负责人</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">开始时间</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">任务名称</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">状态</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">优先级</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">进度</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">负责人</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-[#9CA3AF] uppercase tracking-wider">开始时间</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-[#2A354D]">
               {filteredTasks.map((task) => {
                 const statusConfig = getStatusConfig(task.status);
                 return (
-                  <tr key={task.id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-300">{task.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">{task.name}</td>
+                  <tr key={task.id} className="hover:bg-[#181F32]/30 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#D1D5DB]">{task.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#F3F4F6] font-medium">{task.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${statusConfig.color}`}>{statusConfig.label}</span>
                     </td>
@@ -238,23 +238,23 @@ export function GlobalProgressView() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="w-32">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs text-slate-400">{task.progress}%</span>
+                          <span className="text-xs text-[#9CA3AF]">{task.progress}%</span>
                         </div>
-                        <div className="w-full bg-slate-800 rounded-full h-2">
+                        <div className="w-full bg-[#181F32] rounded-full h-2">
                           <div
                             className={`h-2 rounded-full transition-all duration-300 ${
-                              task.status === 'success' ? 'bg-green-500' :
-                              task.status === 'failed' ? 'bg-red-500' :
-                              task.status === 'running' ? 'bg-blue-500' :
-                              task.status === 'paused' ? 'bg-purple-500' : 'bg-yellow-500'
+                              task.status === 'success' ? 'bg-[#00C853]' :
+                              task.status === 'failed' ? 'bg-[#FF3B30]' :
+                              task.status === 'running' ? 'bg-[#0066FF]' :
+                              task.status === 'paused' ? 'bg-[#6366F1]' : 'bg-[#FF9100]'
                             }`}
                             style={{ width: `${task.progress}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{task.assignee}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-400">{task.startTime}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{task.assignee}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#9CA3AF]">{task.startTime}</td>
                   </tr>
                 );
               })}
@@ -262,7 +262,7 @@ export function GlobalProgressView() {
           </table>
           {filteredTasks.length === 0 && (
             <div className="px-6 py-12 text-center">
-              <p className="text-slate-500">暂无数据</p>
+              <p className="text-[#6B7280]">暂无数据</p>
             </div>
           )}
         </div>

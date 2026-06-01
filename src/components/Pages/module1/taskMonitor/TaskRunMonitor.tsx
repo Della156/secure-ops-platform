@@ -76,22 +76,22 @@ export function TaskRunMonitor() {
 
   const getLevelColor = (level: string) => {
     const colors = {
-      info: 'text-blue-400',
-      warn: 'text-yellow-400',
-      error: 'text-red-400',
-      success: 'text-green-400',
+      info: 'text-[#0066FF]',
+      warn: 'text-[#FF9100]',
+      error: 'text-[#FF3B30]',
+      success: 'text-[#00C853]',
     };
-    return colors[level as keyof typeof colors] || 'text-slate-400';
+    return colors[level as keyof typeof colors] || 'text-[#9CA3AF]';
   };
 
   const getLevelBg = (level: string) => {
     const bgs = {
-      info: 'bg-blue-500/10',
-      warn: 'bg-yellow-500/10',
-      error: 'bg-red-500/10',
-      success: 'bg-green-500/10',
+      info: 'bg-[#0066FF]/10',
+      warn: 'bg-[#FF9100]/10',
+      error: 'bg-[#FF3B30]/10',
+      success: 'bg-[#00C853]/10',
     };
-    return bgs[level as keyof typeof bgs] || 'bg-slate-800';
+    return bgs[level as keyof typeof bgs] || 'bg-[#181F32]';
   };
 
   const handleRefresh = () => {
@@ -111,23 +111,23 @@ export function TaskRunMonitor() {
   };
 
   return (
-    <div className="p-8">
+    <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">任务运行监控</h1>
-        <p className="text-slate-400">实时监控任务执行进度和日志</p>
+        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务运行监控</h1>
+        <p className="text-[#9CA3AF]">实时监控任务执行进度和日志</p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-6">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-lg font-semibold text-white">防火墙配置同步任务</h3>
-            <p className="text-slate-400 text-sm">RUN-20240601-0001</p>
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">防火墙配置同步任务</h3>
+            <p className="text-[#9CA3AF] text-sm">RUN-20240601-0001</p>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setAutoRefresh(!autoRefresh)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                autoRefresh ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                autoRefresh ? 'bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6]' : 'bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB]'
               }`}
             >
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
@@ -136,7 +136,7 @@ export function TaskRunMonitor() {
             {!isRunning && progress < 100 && (
               <button
                 onClick={handleStart}
-                className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors"
               >
                 <Play className="w-4 h-4" />
                 继续
@@ -146,14 +146,14 @@ export function TaskRunMonitor() {
               <>
                 <button
                   onClick={handlePause}
-                  className="flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#FF9100] hover:bg-[#FF9100] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   <Pause className="w-4 h-4" />
                   暂停
                 </button>
                 <button
                   onClick={handleStop}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6] rounded-lg transition-colors"
                 >
                   <StopCircle className="w-4 h-4" />
                   停止
@@ -166,12 +166,12 @@ export function TaskRunMonitor() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-blue-400" />
-              <span className="text-slate-300">执行进度</span>
+              <Activity className="w-5 h-5 text-[#0066FF]" />
+              <span className="text-[#D1D5DB]">执行进度</span>
             </div>
-            <span className="text-2xl font-bold text-white">{Math.round(progress)}%</span>
+            <span className="text-2xl font-bold text-[#F3F4F6]">{Math.round(progress)}%</span>
           </div>
-          <div className="w-full bg-slate-800 rounded-full h-4 overflow-hidden">
+          <div className="w-full bg-[#181F32] rounded-full h-4 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-500"
               style={{ width: `${progress}%` }}
@@ -180,34 +180,34 @@ export function TaskRunMonitor() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-slate-800/50 rounded-lg p-4">
-            <div className="flex items-center gap-2 text-slate-400 text-sm mb-1">
+          <div className="bg-[#181F32]/50 rounded-lg p-4">
+            <div className="flex items-center gap-2 text-[#9CA3AF] text-sm mb-1">
               <Clock className="w-4 h-4" />
               已运行时间
             </div>
-            <div className="text-xl font-semibold text-white">15分 32秒</div>
+            <div className="text-xl font-semibold text-[#F3F4F6]">15分 32秒</div>
           </div>
-          <div className="bg-slate-800/50 rounded-lg p-4">
-            <div className="text-slate-400 text-sm mb-1">当前状态</div>
-            <div className={`text-xl font-semibold ${isRunning ? 'text-green-400' : 'text-yellow-400'}`}>
+          <div className="bg-[#181F32]/50 rounded-lg p-4">
+            <div className="text-[#9CA3AF] text-sm mb-1">当前状态</div>
+            <div className={`text-xl font-semibold ${isRunning ? 'text-[#00C853]' : 'text-[#FF9100]'}`}>
               {isRunning ? '运行中' : progress >= 100 ? '已完成' : '已暂停'}
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-lg p-4">
-            <div className="text-slate-400 text-sm mb-1">预计剩余时间</div>
-            <div className="text-xl font-semibold text-white">{isRunning ? '8分 15秒' : '-'}</div>
+          <div className="bg-[#181F32]/50 rounded-lg p-4">
+            <div className="text-[#9CA3AF] text-sm mb-1">预计剩余时间</div>
+            <div className="text-xl font-semibold text-[#F3F4F6]">{isRunning ? '8分 15秒' : '-'}</div>
           </div>
         </div>
 
         <div>
-          <h4 className="text-sm font-medium text-slate-300 mb-3">执行甘特图</h4>
+          <h4 className="text-sm font-medium text-[#D1D5DB] mb-3">执行甘特图</h4>
           <div className="space-y-2">
             {ganttData.map((item, index) => {
               const itemProgress = Math.max(0, Math.min(100, (progress - item.start) / (item.end - item.start) * 100));
               return (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="w-28 text-sm text-slate-300 flex-shrink-0">{item.name}</div>
-                  <div className="flex-1 h-6 bg-slate-800 rounded-full overflow-hidden relative">
+                  <div className="w-28 text-sm text-[#D1D5DB] flex-shrink-0">{item.name}</div>
+                  <div className="flex-1 h-6 bg-[#181F32] rounded-full overflow-hidden relative">
                     <div
                       className="h-full transition-all duration-500"
                       style={{
@@ -224,33 +224,33 @@ export function TaskRunMonitor() {
         </div>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
           <div className="flex items-center gap-2">
-            <Terminal className="w-5 h-5 text-slate-400" />
-            <h3 className="text-lg font-semibold text-white">执行日志</h3>
+            <Terminal className="w-5 h-5 text-[#9CA3AF]" />
+            <h3 className="text-lg font-semibold text-[#F3F4F6]">执行日志</h3>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={handleRefresh}
-              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="p-2 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded-lg transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
           </div>
         </div>
-        <div className="p-4 h-96 overflow-y-auto bg-slate-950 font-mono text-sm">
+        <div className="p-4 h-96 overflow-y-auto bg-[#111625] font-mono text-sm">
           <div className="space-y-1">
             {logs.map((log) => (
               <div
                 key={log.id}
                 className={`flex items-start gap-3 px-3 py-2 rounded ${getLevelBg(log.level)}`}
               >
-                <span className="text-slate-500 flex-shrink-0">[{log.timestamp}]</span>
+                <span className="text-[#6B7280] flex-shrink-0">[{log.timestamp}]</span>
                 <span className={`flex-shrink-0 font-medium ${getLevelColor(log.level)}`}>
                   {log.level.toUpperCase()}
                 </span>
-                <span className="text-slate-300">{log.message}</span>
+                <span className="text-[#D1D5DB]">{log.message}</span>
               </div>
             ))}
           </div>
