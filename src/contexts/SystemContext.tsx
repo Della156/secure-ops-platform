@@ -1,8 +1,27 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { SystemContextValue, HighPriorityTodo, AccountPermission } from '@/types';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
+import {
+  SystemContextValue,
+  HighPriorityTodo,
+  AccountPermission,
+} from '@/types';
+import {
+  RiskScoreSnapshot,
+  RiskScoreHistory,
+} from '@/types/risk';
 import { defaultHighPriorityTodos } from '@/data/menuData';
+import {
+  calculateRiskScore,
+  RiskTrigger,
+} from '@/services/riskEngine';
 
 const defaultPermissions: AccountPermission[] = [
   { module: '网络安全自动任务配置', permissions: ['view', 'edit', 'admin'] },
@@ -15,12 +34,80 @@ const defaultPermissions: AccountPermission[] = [
 
 const SystemContext = createContext<SystemContextValue | undefined>(undefined);
 
-export function SystemProvider({ children }: { children: React.ReactNode }) {
-  const [riskScore, setRiskScore] = useState<number>(87);
+interface SystemProviderProps {
+  children: React.ReactNode;
+  /** 自动重算间隔（毫秒），0 = 不自动重算 */
+  autoRecalcInterval?: number;
+}
+
+export function SystemProvider({
+  children,
+  autoRecalcInterval = 30000, // 默认 30 秒
+}: SystemProviderProps) {
+  const [riskSnapshot, setRiskSnapshot] = useState<RiskScoreSnapshot | null>(null);
+  const [riskHistory, setRiskHistory] = useState<RiskScoreHistory>({ snapshots: [] });
+  const [isCalculating, setIsCalculating] = useState(false);
+
   const [accountPermissions] = useState<AccountPermission[]>(defaultPermissions);
   const [highPriorityTodos, setHighPriorityTodos] = useState<HighPriorityTodo[]>(defaultHighPriorityTodos);
   const [activeMenu, setActiveMenu] = useState<string>('auto-task-config');
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+
+  const previousScoreRef = useRef<number | undefined>(undefined);
+
+  /**
+   * 动态计算风险评分
+   */
+  const recalculateRiskScore = useCallback(
+    (trigger: RiskTrigger = 'manual') => {
+      setIsCalculating(true);
+
+      // 模拟计算耗时（实际可能是异步的）
+      // 在生产环境，这里会调用真实 API
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          const previousScore = previousScoreRef.current;
+          const newSnapshot = calculateRiskScore(trigger, previousScore);
+
+          setRiskSnapshot(newSnapshot);
+          previousScoreRef.current = newSnapshot.totalScore;
+
+          // 添加到历史记录（保留最近 50 条）
+          setRiskHistory((prev) => ({
+            snapshots: [
+              {
+                score: newSnapshot.totalScore,
+                timestamp: newSnapshot.calculatedAt,
+                trigger: newSnapshot.trigger,
+                level: newSnapshot.level,
+              },
+              ...prev.snapshots,
+            ].slice(0, 50),
+          }));
+
+          setIsCalculating(false);
+          resolve();
+        }, 300); // 模拟 300ms 计算耗时
+      });
+    },
+    []
+  );
+
+  /**
+   * 初始计算 + 自动定时重算
+   */
+  useEffect(() => {
+    // 初始计算
+    recalculateRiskScore('initial');
+
+    // 定时重算
+    if (autoRecalcInterval > 0) {
+      const interval = setInterval(() => {
+        recalculateRiskScore('scheduled');
+      }, autoRecalcInterval);
+      return () => clearInterval(interval);
+    }
+  }, [recalculateRiskScore, autoRecalcInterval]);
 
   const toggleSidebar = useCallback(() => {
     setSidebarCollapsed((prev) => !prev);
@@ -35,12 +122,18 @@ export function SystemProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value: SystemContextValue = {
-    riskScore,
+    // 风险评分（动态）
+    riskScore: riskSnapshot?.totalScore ?? 0,
+    riskSnapshot,
+    riskHistory,
+    isCalculatingRisk: isCalculating,
+    recalculateRiskScore,
+
+    // 原有状态
     accountPermissions,
     highPriorityTodos,
     activeMenu,
     sidebarCollapsed,
-    setRiskScore,
     setActiveMenu,
     toggleSidebar,
     addHighPriorityTodo,
