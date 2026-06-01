@@ -8,20 +8,133 @@ export const menuData: MenuItem[] = [
     id: 'menu-1',
     label: '网络安全自动任务配置',
     children: [
-      { id: 'menu-1-1', label: '自动化任务注册与接入' },
-      { id: 'menu-1-2', label: '自动化任务仓库与管理' },
-      { id: 'menu-1-3', label: '自动化任务运行状态监控' },
-      { id: 'menu-1-4', label: '可编排任务目录' },
-      { id: 'menu-1-5', label: '自动化流程编排器' },
-      { id: 'menu-1-6', label: '任务模板管理' },
-      { id: 'menu-1-7', label: '任务调度引擎' },
-      { id: 'menu-1-8', label: '任务执行与监控' },
-      { id: 'menu-1-9', label: '安全设备资源管理' },
-      { id: 'menu-1-10', label: '安全系统资源管理' },
-      { id: 'menu-1-11', label: '主机资源管理' },
-      { id: 'menu-1-12', label: '终端资源管理' },
-      { id: 'menu-1-13', label: '数据接口对接管理' },
-      { id: 'menu-1-14', label: '自动化服务接口配置管理' },
+      {
+        id: 'menu-1-1', label: '自动化任务注册与接入',
+        children: [
+          { id: 'menu-1-1-1', label: '任务接入管理' },
+          { id: 'menu-1-1-2', label: '任务在线注册管理' },
+          { id: 'menu-1-1-3', label: '任务接入状态管理' },
+        ],
+      },
+      {
+        id: 'menu-1-2', label: '自动化任务仓库与管理',
+        children: [
+          { id: 'menu-1-2-1', label: '任务版本管理' },
+          { id: 'menu-1-2-2', label: '任务上下架管理' },
+        ],
+      },
+      {
+        id: 'menu-1-3', label: '自动化任务运行状态监控',
+        children: [
+          { id: 'menu-1-3-1', label: '任务运行状态列表' },
+          { id: 'menu-1-3-2', label: '任务运行统计分析' },
+          { id: 'menu-1-3-3', label: '任务运行监控' },
+          { id: 'menu-1-3-4', label: '任务资源使用率监控' },
+          { id: 'menu-1-3-5', label: '任务异常事件分析' },
+          { id: 'menu-1-3-6', label: '任务告警管理与推送' },
+        ],
+      },
+      {
+        id: 'menu-1-4', label: '可编排任务目录',
+        children: [
+          { id: 'menu-1-4-1', label: '自动化能力可视化检索与浏览' },
+          { id: 'menu-1-4-2', label: '任务服务接口授权配置' },
+          { id: 'menu-1-4-3', label: '任务接口描述与文档查看' },
+        ],
+      },
+      {
+        id: 'menu-1-5', label: '自动化流程编排器',
+        children: [
+          { id: 'menu-1-5-1', label: '自动化剧本/流程编排管理' },
+          { id: 'menu-1-5-2', label: '自动化能力节点库' },
+          { id: 'menu-1-5-3', label: '流程逻辑控制节点' },
+          { id: 'menu-1-5-4', label: '流程调试与模拟运行' },
+        ],
+      },
+      {
+        id: 'menu-1-6', label: '任务模板管理',
+        children: [
+          { id: 'menu-1-6-1', label: '任务流程模板创建与保存' },
+          { id: 'menu-1-6-2', label: '模板参数化变量配置' },
+          { id: 'menu-1-6-3', label: '模板分类打标与检索' },
+          { id: 'menu-1-6-4', label: '模板一键导入与任务实例化' },
+        ],
+      },
+      {
+        id: 'menu-1-7', label: '任务调度引擎',
+        children: [
+          { id: 'menu-1-7-1', label: '任务自动、手动、事件多模式触发' },
+          { id: 'menu-1-7-2', label: '任务优先级管理' },
+          { id: 'menu-1-7-3', label: '任务调度资源池负载配置管理' },
+        ],
+      },
+      {
+        id: 'menu-1-8', label: '任务执行与监控',
+        children: [
+          { id: 'menu-1-8-1', label: '任务执行进度全局视图' },
+          { id: 'menu-1-8-2', label: '任务节点执行日志查看' },
+          { id: 'menu-1-8-3', label: '任务运行控制(启/停/重试)' },
+          { id: 'menu-1-8-4', label: '任务执行监控与审计' },
+        ],
+      },
+      {
+        id: 'menu-1-9', label: '安全设备资源管理',
+        children: [
+          { id: 'menu-1-9-1', label: '安全设备列表管理' },
+          { id: 'menu-1-9-2', label: '设备连接与认证测试' },
+          { id: 'menu-1-9-3', label: '设备访问授权管理' },
+          { id: 'menu-1-9-4', label: '设备可用服务/指令视图' },
+          { id: 'menu-1-9-5', label: '设备访问日志查询' },
+        ],
+      },
+      {
+        id: 'menu-1-10', label: '安全系统资源管理',
+        children: [
+          { id: 'menu-1-10-1', label: '安全系统列表管理' },
+          { id: 'menu-1-10-2', label: '系统连接与认证测试' },
+          { id: 'menu-1-10-3', label: '系统访问授权管理' },
+          { id: 'menu-1-10-4', label: '系统可用API/能力视图' },
+          { id: 'menu-1-10-5', label: '系统访问日志查询' },
+        ],
+      },
+      {
+        id: 'menu-1-11', label: '主机资源管理',
+        children: [
+          { id: 'menu-1-11-1', label: '主机列表管理' },
+          { id: 'menu-1-11-2', label: '主机连接与认证测试' },
+          { id: 'menu-1-11-3', label: '主机访问授权管理' },
+          { id: 'menu-1-11-4', label: '主机可用指令/服务视图' },
+          { id: 'menu-1-11-5', label: '主机访问日志查询' },
+        ],
+      },
+      {
+        id: 'menu-1-12', label: '终端资源管理',
+        children: [
+          { id: 'menu-1-12-1', label: '终端列表管理' },
+          { id: 'menu-1-12-2', label: '终端连接与认证测试' },
+          { id: 'menu-1-12-3', label: '终端访问授权管理' },
+          { id: 'menu-1-12-4', label: '终端可用指令/服务视图' },
+          { id: 'menu-1-12-5', label: '终端访问日志查询' },
+        ],
+      },
+      {
+        id: 'menu-1-13', label: '数据接口对接管理',
+        children: [
+          { id: 'menu-1-13-1', label: '数据接口配置管理' },
+          { id: 'menu-1-13-2', label: '数据接口连接测试验证' },
+          { id: 'menu-1-13-3', label: '数据接口调用日志查询' },
+          { id: 'menu-1-13-4', label: '数据接口调用性能分析' },
+        ],
+      },
+      {
+        id: 'menu-1-14', label: '自动化服务接口配置管理',
+        children: [
+          { id: 'menu-1-14-1', label: '任务API接口配置' },
+          { id: 'menu-1-14-2', label: '任务API访问授权管理' },
+          { id: 'menu-1-14-3', label: '任务API调用日志查询' },
+          { id: 'menu-1-14-4', label: '任务API接口调用分析与统计' },
+        ],
+      },
     ],
   },
   {
