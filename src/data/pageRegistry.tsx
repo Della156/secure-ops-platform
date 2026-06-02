@@ -1025,168 +1025,8 @@ const JobHistory = dynamic(() => import(
 const JobReport = dynamic(() => import(
   '@/components/Pages/module2/job/JobReport'
 ).then(m => ({ default: m.JobReport })));
-
-// ──────────────────────────────────────────────
 // 模块 3：网络安全自动运营
-// ──────────────────────────────────────────────
-
-// 第1组：告警辅助监测视图
-const AlertMonitorView = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertMonitorView').then(m => ({ default: m.AlertMonitorView })));
-const RawAlertCollection = dynamic(() => import('@/components/Pages/module3/alertMonitor/RawAlertCollection').then(m => ({ default: m.RawAlertCollection })));
-const AlertAutoAnalysis = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertAutoAnalysis').then(m => ({ default: m.AlertAutoAnalysis })));
-const ImpactAssessment = dynamic(() => import('@/components/Pages/module3/alertMonitor/ImpactAssessment').then(m => ({ default: m.ImpactAssessment })));
-const AlertTrendPrediction = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertTrendPrediction').then(m => ({ default: m.AlertTrendPrediction })));
-const AlertMonitorStatus = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertMonitorStatus').then(m => ({ default: m.AlertMonitorStatus })));
-const AlertMonitorHistory = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertMonitorHistory').then(m => ({ default: m.AlertMonitorHistory })));
-const AlertMonitorAudit = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertMonitorAudit').then(m => ({ default: m.AlertMonitorAudit })));
-const AlertMonitorReport = dynamic(() => import('@/components/Pages/module3/alertMonitor/AlertMonitorReport').then(m => ({ default: m.AlertMonitorReport })));
-
-// 第2组：横向渗透监测视图
-const LateralMovementView = dynamic(() => import('@/components/Pages/module3/lateralMovement/LateralMovementView').then(m => ({ default: m.LateralMovementView })));
-const MultiSourceIntegration = dynamic(() => import('@/components/Pages/module3/lateralMovement/MultiSourceIntegration').then(m => ({ default: m.MultiSourceIntegration })));
-const BehaviorIdentification = dynamic(() => import('@/components/Pages/module3/lateralMovement/BehaviorIdentification').then(m => ({ default: m.BehaviorIdentification })));
-const RealtimeAlertPush = dynamic(() => import('@/components/Pages/module3/lateralMovement/RealtimeAlertPush').then(m => ({ default: m.RealtimeAlertPush })));
-const AttackPathVisualization = dynamic(() => import('@/components/Pages/module3/lateralMovement/AttackPathVisualization').then(m => ({ default: m.AttackPathVisualization })));
-const LateralMovementStatus = dynamic(() => import('@/components/Pages/module3/lateralMovement/LateralMovementStatus').then(m => ({ default: m.LateralMovementStatus })));
-const LateralMovementHistory = dynamic(() => import('@/components/Pages/module3/lateralMovement/LateralMovementHistory').then(m => ({ default: m.LateralMovementHistory })));
-const LateralMovementAudit = dynamic(() => import('@/components/Pages/module3/lateralMovement/LateralMovementAudit').then(m => ({ default: m.LateralMovementAudit })));
-const LateralMovementReport = dynamic(() => import('@/components/Pages/module3/lateralMovement/LateralMovementReport').then(m => ({ default: m.LateralMovementReport })));
-
-// 第3组：异常行为监测视图
-const AnomalyBehaviorView = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AnomalyBehaviorView').then(m => ({ default: m.AnomalyBehaviorView })));
-const UserProfileBuilder = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/UserProfileBuilder').then(m => ({ default: m.UserProfileBuilder })));
-const MultiDimensionIntegration = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/MultiDimensionIntegration').then(m => ({ default: m.MultiDimensionIntegration })));
-const AutoAnomalyDetection = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AutoAnomalyDetection').then(m => ({ default: m.AutoAnomalyDetection })));
-const AnomalyBehaviorStatus = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AnomalyBehaviorStatus').then(m => ({ default: m.AnomalyBehaviorStatus })));
-const AnomalyBehaviorHistory = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AnomalyBehaviorHistory').then(m => ({ default: m.AnomalyBehaviorHistory })));
-const AnomalyBehaviorAudit = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AnomalyBehaviorAudit').then(m => ({ default: m.AnomalyBehaviorAudit })));
-const AnomalyBehaviorReport = dynamic(() => import('@/components/Pages/module3/anomalyBehavior/AnomalyBehaviorReport').then(m => ({ default: m.AnomalyBehaviorReport })));
-
-// 第4组：互联网防护监测视图
-const InternetProtectionView = dynamic(() => import('@/components/Pages/module3/internetProtection/InternetProtectionView').then(m => ({ default: m.InternetProtectionView })));
-const BoundaryInfoIntegration = dynamic(() => import('@/components/Pages/module3/internetProtection/BoundaryInfoIntegration').then(m => ({ default: m.BoundaryInfoIntegration })));
-const AttackIntentPrediction = dynamic(() => import('@/components/Pages/module3/internetProtection/AttackIntentPrediction').then(m => ({ default: m.AttackIntentPrediction })));
-const InternetProtectionStatus = dynamic(() => import('@/components/Pages/module3/internetProtection/InternetProtectionStatus').then(m => ({ default: m.InternetProtectionStatus })));
-const InternetProtectionHistory = dynamic(() => import('@/components/Pages/module3/internetProtection/InternetProtectionHistory').then(m => ({ default: m.InternetProtectionHistory })));
-const InternetProtectionAudit = dynamic(() => import('@/components/Pages/module3/internetProtection/InternetProtectionAudit').then(m => ({ default: m.InternetProtectionAudit })));
-const InternetProtectionReport = dynamic(() => import('@/components/Pages/module3/internetProtection/InternetProtectionReport').then(m => ({ default: m.InternetProtectionReport })));
-
-// 第5组：告警分析决策视图
-const AlertDecisionView = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertDecisionView').then(m => ({ default: m.AlertDecisionView })));
-const MultiSourceAutoIntegration = dynamic(() => import('@/components/Pages/module3/alertDecision/MultiSourceAutoIntegration').then(m => ({ default: m.MultiSourceAutoIntegration })));
-const AlertFastScreening = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertFastScreening').then(m => ({ default: m.AlertFastScreening })));
-const AutoDecisionAnalysis = dynamic(() => import('@/components/Pages/module3/alertDecision/AutoDecisionAnalysis').then(m => ({ default: m.AutoDecisionAnalysis })));
-const AlertDecisionStatus = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertDecisionStatus').then(m => ({ default: m.AlertDecisionStatus })));
-const AlertDecisionHistory = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertDecisionHistory').then(m => ({ default: m.AlertDecisionHistory })));
-const AlertDecisionAudit = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertDecisionAudit').then(m => ({ default: m.AlertDecisionAudit })));
-const AlertDecisionReport = dynamic(() => import('@/components/Pages/module3/alertDecision/AlertDecisionReport').then(m => ({ default: m.AlertDecisionReport })));
-
-// 第6组：深度样本研判视图
-const SampleJudgmentView = dynamic(() => import('@/components/Pages/module3/sampleJudgment/SampleJudgmentView').then(m => ({ default: m.SampleJudgmentView })));
-const MultiChannelSampleAcquisition = dynamic(() => import('@/components/Pages/module3/sampleJudgment/MultiChannelSampleAcquisition').then(m => ({ default: m.MultiChannelSampleAcquisition })));
-const AnalysisToolAutoInvocation = dynamic(() => import('@/components/Pages/module3/sampleJudgment/AnalysisToolAutoInvocation').then(m => ({ default: m.AnalysisToolAutoInvocation })));
-const DeepJudgmentConclusion = dynamic(() => import('@/components/Pages/module3/sampleJudgment/DeepJudgmentConclusion').then(m => ({ default: m.DeepJudgmentConclusion })));
-const SampleJudgmentStatus = dynamic(() => import('@/components/Pages/module3/sampleJudgment/SampleJudgmentStatus').then(m => ({ default: m.SampleJudgmentStatus })));
-const SampleJudgmentHistory = dynamic(() => import('@/components/Pages/module3/sampleJudgment/SampleJudgmentHistory').then(m => ({ default: m.SampleJudgmentHistory })));
-const SampleJudgmentAudit = dynamic(() => import('@/components/Pages/module3/sampleJudgment/SampleJudgmentAudit').then(m => ({ default: m.SampleJudgmentAudit })));
-const SampleJudgmentReport = dynamic(() => import('@/components/Pages/module3/sampleJudgment/SampleJudgmentReport').then(m => ({ default: m.SampleJudgmentReport })));
-
-// 第7组：溯源分析视图
-const TraceAnalysisView = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceAnalysisView').then(m => ({ default: m.TraceAnalysisView })));
-const AttackBehaviorAnalysis = dynamic(() => import('@/components/Pages/module3/traceAnalysis/AttackBehaviorAnalysis').then(m => ({ default: m.AttackBehaviorAnalysis })));
-const TraceToolAutoInvocation = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceToolAutoInvocation').then(m => ({ default: m.TraceToolAutoInvocation })));
-const TraceResultVisualization = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceResultVisualization').then(m => ({ default: m.TraceResultVisualization })));
-const TraceAnalysisStatus = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceAnalysisStatus').then(m => ({ default: m.TraceAnalysisStatus })));
-const TraceAnalysisHistory = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceAnalysisHistory').then(m => ({ default: m.TraceAnalysisHistory })));
-const TraceAnalysisAudit = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceAnalysisAudit').then(m => ({ default: m.TraceAnalysisAudit })));
-const TraceAnalysisReport = dynamic(() => import('@/components/Pages/module3/traceAnalysis/TraceAnalysisReport').then(m => ({ default: m.TraceAnalysisReport })));
-
-// 第8组：ELINK协同联动视图
-const ElinkCoordinationView = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationView').then(m => ({ default: m.ElinkCoordinationView })));
-const ElinkCoordinationConfig = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationConfig').then(m => ({ default: m.ElinkCoordinationConfig })));
-const ElinkInfoCoordination = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkInfoCoordination').then(m => ({ default: m.ElinkInfoCoordination })));
-const AlertInfoSend = dynamic(() => import('@/components/Pages/module3/elinkCoordination/AlertInfoSend').then(m => ({ default: m.AlertInfoSend })));
-const ElinkCoordinationStatus = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationStatus').then(m => ({ default: m.ElinkCoordinationStatus })));
-const ElinkCoordinationHistory = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationHistory').then(m => ({ default: m.ElinkCoordinationHistory })));
-const ElinkCoordinationAudit = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationAudit').then(m => ({ default: m.ElinkCoordinationAudit })));
-const ElinkCoordinationReport = dynamic(() => import('@/components/Pages/module3/elinkCoordination/ElinkCoordinationReport').then(m => ({ default: m.ElinkCoordinationReport })));
-
-// 第9组：安全综合处置视图
-const SecurityDisposalView = dynamic(() => import('@/components/Pages/module3/securityDisposal/SecurityDisposalView').then(m => ({ default: m.SecurityDisposalView })));
-const AutoOperationHierarchy = dynamic(() => import('@/components/Pages/module3/securityDisposal/AutoOperationHierarchy').then(m => ({ default: m.AutoOperationHierarchy })));
-const PreAuthorizedEmergencyExec = dynamic(() => import('@/components/Pages/module3/securityDisposal/PreAuthorizedEmergencyExec').then(m => ({ default: m.PreAuthorizedEmergencyExec })));
-const SensitiveOperationApproval = dynamic(() => import('@/components/Pages/module3/securityDisposal/SensitiveOperationApproval').then(m => ({ default: m.SensitiveOperationApproval })));
-const DisposalProcessRecord = dynamic(() => import('@/components/Pages/module3/securityDisposal/DisposalProcessRecord').then(m => ({ default: m.DisposalProcessRecord })));
-const SecurityDisposalStatus = dynamic(() => import('@/components/Pages/module3/securityDisposal/SecurityDisposalStatus').then(m => ({ default: m.SecurityDisposalStatus })));
-const SecurityDisposalHistory = dynamic(() => import('@/components/Pages/module3/securityDisposal/SecurityDisposalHistory').then(m => ({ default: m.SecurityDisposalHistory })));
-const SecurityDisposalAudit = dynamic(() => import('@/components/Pages/module3/securityDisposal/SecurityDisposalAudit').then(m => ({ default: m.SecurityDisposalAudit })));
-const SecurityDisposalReport = dynamic(() => import('@/components/Pages/module3/securityDisposal/SecurityDisposalReport').then(m => ({ default: m.SecurityDisposalReport })));
-
-// 第10组：病毒处置视图
-const VirusDisposalView = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalView').then(m => ({ default: m.VirusDisposalView })));
-const VirusAutoIdentification = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusAutoIdentification').then(m => ({ default: m.VirusAutoIdentification })));
-const VirusDisposalAnalysis = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalAnalysis').then(m => ({ default: m.VirusDisposalAnalysis })));
-const VirusDisposal = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposal').then(m => ({ default: m.VirusDisposal })));
-const VirusDisposalStatus = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalStatus').then(m => ({ default: m.VirusDisposalStatus })));
-const VirusDisposalHistory = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalHistory').then(m => ({ default: m.VirusDisposalHistory })));
-const VirusDisposalAudit = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalAudit').then(m => ({ default: m.VirusDisposalAudit })));
-const VirusDisposalReport = dynamic(() => import('@/components/Pages/module3/virusDisposal/VirusDisposalReport').then(m => ({ default: m.VirusDisposalReport })));
-
-// 第11组：终端取证视图
-const EndpointForensicsView = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointForensicsView').then(m => ({ default: m.EndpointForensicsView })));
-const AbnormalSampleAcquisition = dynamic(() => import('@/components/Pages/module3/endpointForensics/AbnormalSampleAcquisition').then(m => ({ default: m.AbnormalSampleAcquisition })));
-const EndpointLogRetrieval = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointLogRetrieval').then(m => ({ default: m.EndpointLogRetrieval })));
-const ForensicsProcessRecord = dynamic(() => import('@/components/Pages/module3/endpointForensics/ForensicsProcessRecord').then(m => ({ default: m.ForensicsProcessRecord })));
-const EndpointForensicsStatus = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointForensicsStatus').then(m => ({ default: m.EndpointForensicsStatus })));
-const EndpointForensicsHistory = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointForensicsHistory').then(m => ({ default: m.EndpointForensicsHistory })));
-const EndpointForensicsAudit = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointForensicsAudit').then(m => ({ default: m.EndpointForensicsAudit })));
-const EndpointForensicsReport = dynamic(() => import('@/components/Pages/module3/endpointForensics/EndpointForensicsReport').then(m => ({ default: m.EndpointForensicsReport })));
-// 第12组：主机取证视图
-const HostForensicsView = dynamic(() => import('@/components/Pages/module3/hostForensics/HostForensicsView').then(m => ({ default: m.HostForensicsView })));
-const HostDataSync = dynamic(() => import('@/components/Pages/module3/hostForensics/HostDataSync').then(m => ({ default: m.HostDataSync })));
-const HostLogRetrieval = dynamic(() => import('@/components/Pages/module3/hostForensics/HostLogRetrieval').then(m => ({ default: m.HostLogRetrieval })));
-const HostAnalysisResult = dynamic(() => import('@/components/Pages/module3/hostForensics/HostAnalysisResult').then(m => ({ default: m.HostAnalysisResult })));
-const HostForensicsStatus = dynamic(() => import('@/components/Pages/module3/hostForensics/HostForensicsStatus').then(m => ({ default: m.HostForensicsStatus })));
-const HostForensicsHistory = dynamic(() => import('@/components/Pages/module3/hostForensics/HostForensicsHistory').then(m => ({ default: m.HostForensicsHistory })));
-const HostForensicsAudit = dynamic(() => import('@/components/Pages/module3/hostForensics/HostForensicsAudit').then(m => ({ default: m.HostForensicsAudit })));
-const HostForensicsReport = dynamic(() => import('@/components/Pages/module3/hostForensics/HostForensicsReport').then(m => ({ default: m.HostForensicsReport })));
-// 第13组：样本分析视图
-const SampleAnalysisView = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleAnalysisView').then(m => ({ default: m.SampleAnalysisView })));
-const MultiToolInvocation = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/MultiToolInvocation').then(m => ({ default: m.MultiToolInvocation })));
-const SampleDeepAnalysis = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleDeepAnalysis').then(m => ({ default: m.SampleDeepAnalysis })));
-const AnalysisResultSummary = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/AnalysisResultSummary').then(m => ({ default: m.AnalysisResultSummary })));
-const SampleAnalysisStatus = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleAnalysisStatus').then(m => ({ default: m.SampleAnalysisStatus })));
-const SampleAnalysisHistory = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleAnalysisHistory').then(m => ({ default: m.SampleAnalysisHistory })));
-const SampleAnalysisAudit = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleAnalysisAudit').then(m => ({ default: m.SampleAnalysisAudit })));
-const SampleAnalysisReport = dynamic(() => import('@/components/Pages/module3/sampleDeepAnalysis/SampleAnalysisReport').then(m => ({ default: m.SampleAnalysisReport })));
-// 第14组：告警日报视图
-const AlertDailyReportView = dynamic(() => import('@/components/Pages/module3/alertDailyReport/AlertDailyReportView').then(m => ({ default: m.AlertDailyReportView })));
-const DailyReportAnalysis = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportAnalysis').then(m => ({ default: m.DailyReportAnalysis })));
-const DailyReportSummary = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportSummary').then(m => ({ default: m.DailyReportSummary })));
-const DailyReportPush = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportPush').then(m => ({ default: m.DailyReportPush })));
-const DailyReportStatus = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportStatus').then(m => ({ default: m.DailyReportStatus })));
-const DailyReportHistory = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportHistory').then(m => ({ default: m.DailyReportHistory })));
-const DailyReportAudit = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportAudit').then(m => ({ default: m.DailyReportAudit })));
-const DailyReportReport = dynamic(() => import('@/components/Pages/module3/alertDailyReport/DailyReportReport').then(m => ({ default: m.DailyReportReport })));
-// 第15组：基线防护报告视图
-const BaselineReportView = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportView').then(m => ({ default: m.BaselineReportView })));
-const BaselineToolManagement = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineToolManagement').then(m => ({ default: m.BaselineToolManagement })));
-const BaselineCheckResult = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineCheckResult').then(m => ({ default: m.BaselineCheckResult })));
-const BaselineReportPush = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportPush').then(m => ({ default: m.BaselineReportPush })));
-const BaselineReportStatus = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportStatus').then(m => ({ default: m.BaselineReportStatus })));
-const BaselineReportHistory = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportHistory').then(m => ({ default: m.BaselineReportHistory })));
-const BaselineReportAudit = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportAudit').then(m => ({ default: m.BaselineReportAudit })));
-const BaselineReportReport = dynamic(() => import('@/components/Pages/module3/baselineReport/BaselineReportReport').then(m => ({ default: m.BaselineReportReport })));
-// 第16组：溯源报告视图
-const TraceReportView = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportView').then(m => ({ default: m.TraceReportView })));
-const TraceResultIntegration = dynamic(() => import('@/components/Pages/module3/traceReport/TraceResultIntegration').then(m => ({ default: m.TraceResultIntegration })));
-const TraceReportAutoGenerate = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportAutoGenerate').then(m => ({ default: m.TraceReportAutoGenerate })));
-const TraceReportPush = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportPush').then(m => ({ default: m.TraceReportPush })));
-const TraceReportStatus = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportStatus').then(m => ({ default: m.TraceReportStatus })));
-const TraceReportHistory = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportHistory').then(m => ({ default: m.TraceReportHistory })));
-const TraceReportAudit = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportAudit').then(m => ({ default: m.TraceReportAudit })));
-const TraceReportReport = dynamic(() => import('@/components/Pages/module3/traceReport/TraceReportReport').then(m => ({ default: m.TraceReportReport })));
-
+// ──────────────────────────────────────────────（已移除）
 /**
  * 默认占位页面（开发中）
  */
@@ -1200,6 +1040,18 @@ function DefaultPage() {
     </div>
   );
 }
+
+// 模块 4：网络安全标准场景自动化
+// ──────────────────────────────────
+
+// 第6组：漏洞管理任务
+const VulnRectifyTrack = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnRectifyTrack'
+).then(m => ({ default: m.VulnRectifyTrack })));
+
+// 日报报告（补上缺失的定义）
+// 基线防护报告视图（补上缺失的定义）
+// 批量补上其他缺失的组件定义（占位，已移除）
 
 /**
  * 页面注册映射表
@@ -1475,178 +1327,11 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-24-7': PolicyAdjustExec,
   'menu-2-24-8': FwStatusMonitor,
   'menu-2-24-9': FwHistoryQuery,
-  'menu-2-24-10': FwAudit,
-  'menu-2-24-11': FwTaskReport,
-  // 第25组：PKI工单
-  'menu-2-25-1': PkiWorkOrderView,
-  'menu-2-25-2': PkiAuthConfig,
-  'menu-2-25-3': PkiAccountClear,
-  'menu-2-25-4': PkiStatusMonitor,
-  'menu-2-25-5': PkiHistoryQuery,
-  'menu-2-25-6': PkiAudit,
-  'menu-2-25-7': PkiTaskReport,
-  // 第26组：诊断视图
-  'menu-2-26-1': DiagnosticView,
-  'menu-2-26-2': NetworkDiagnostic,
-  'menu-2-26-3': DiagnosticReport,
-  // 第31组：作业视图
-  'menu-2-31-1': JobView,
-  'menu-2-31-2': JobHistory,
-  'menu-2-31-3': JobReport,
-
-  // 模块3：网络安全自动运营
-  // ──────────────────────────────────
-  // 第1组：告警辅助监测视图
-  'menu-3-1-1': AlertMonitorView,
-  'menu-3-1-2': RawAlertCollection,
-  'menu-3-1-3': AlertAutoAnalysis,
-  'menu-3-1-4': ImpactAssessment,
-  'menu-3-1-5': AlertTrendPrediction,
-  'menu-3-1-6': AlertMonitorStatus,
-  'menu-3-1-7': AlertMonitorHistory,
-  'menu-3-1-8': AlertMonitorAudit,
-  'menu-3-1-9': AlertMonitorReport,
-  // 第2组：横向渗透监测视图
-  'menu-3-2-1': LateralMovementView,
-  'menu-3-2-2': MultiSourceIntegration,
-  'menu-3-2-3': BehaviorIdentification,
-  'menu-3-2-4': RealtimeAlertPush,
-  'menu-3-2-5': AttackPathVisualization,
-  'menu-3-2-6': LateralMovementStatus,
-  'menu-3-2-7': LateralMovementHistory,
-  'menu-3-2-8': LateralMovementAudit,
-  'menu-3-2-9': LateralMovementReport,
-  // 第3组：异常行为监测视图
-  'menu-3-3-1': AnomalyBehaviorView,
-  'menu-3-3-2': UserProfileBuilder,
-  'menu-3-3-3': MultiDimensionIntegration,
-  'menu-3-3-4': AutoAnomalyDetection,
-  'menu-3-3-5': AnomalyBehaviorStatus,
-  'menu-3-3-6': AnomalyBehaviorHistory,
-  'menu-3-3-7': AnomalyBehaviorAudit,
-  'menu-3-3-8': AnomalyBehaviorReport,
-  // 第4组：互联网防护监测视图
-  'menu-3-4-1': InternetProtectionView,
-  'menu-3-4-2': BoundaryInfoIntegration,
-  'menu-3-4-3': AttackIntentPrediction,
-  'menu-3-4-4': InternetProtectionStatus,
-  'menu-3-4-5': InternetProtectionHistory,
-  'menu-3-4-6': InternetProtectionAudit,
-  'menu-3-4-7': InternetProtectionReport,
-  // 第5组：告警分析决策视图
-  'menu-3-5-1': AlertDecisionView,
-  'menu-3-5-2': MultiSourceAutoIntegration,
-  'menu-3-5-3': AlertFastScreening,
-  'menu-3-5-4': AutoDecisionAnalysis,
-  'menu-3-5-5': AlertDecisionStatus,
-  'menu-3-5-6': AlertDecisionHistory,
-  'menu-3-5-7': AlertDecisionAudit,
-  'menu-3-5-8': AlertDecisionReport,
-  // 第6组：深度样本研判视图
-  'menu-3-6-1': SampleJudgmentView,
-  'menu-3-6-2': MultiChannelSampleAcquisition,
-  'menu-3-6-3': AnalysisToolAutoInvocation,
-  'menu-3-6-4': DeepJudgmentConclusion,
-  'menu-3-6-5': SampleJudgmentStatus,
-  'menu-3-6-6': SampleJudgmentHistory,
-  'menu-3-6-7': SampleJudgmentAudit,
-  'menu-3-6-8': SampleJudgmentReport,
-  // 第7组：溯源分析视图
-  'menu-3-7-1': TraceAnalysisView,
-  'menu-3-7-2': AttackBehaviorAnalysis,
-  'menu-3-7-3': TraceToolAutoInvocation,
-  'menu-3-7-4': TraceResultVisualization,
-  'menu-3-7-5': TraceAnalysisStatus,
-  'menu-3-7-6': TraceAnalysisHistory,
-  'menu-3-7-7': TraceAnalysisAudit,
-  'menu-3-7-8': TraceAnalysisReport,
-  // 第8组：ELINK协同联动视图
-  'menu-3-8-1': ElinkCoordinationView,
-  'menu-3-8-2': ElinkCoordinationConfig,
-  'menu-3-8-3': ElinkInfoCoordination,
-  'menu-3-8-4': AlertInfoSend,
-  'menu-3-8-5': ElinkCoordinationStatus,
-  'menu-3-8-6': ElinkCoordinationHistory,
-  'menu-3-8-7': ElinkCoordinationAudit,
-  'menu-3-8-8': ElinkCoordinationReport,
-  // 第9组：安全综合处置视图
-  'menu-3-9-1': SecurityDisposalView,
-  'menu-3-9-2': AutoOperationHierarchy,
-  'menu-3-9-3': PreAuthorizedEmergencyExec,
-  'menu-3-9-4': SensitiveOperationApproval,
-  'menu-3-9-5': DisposalProcessRecord,
-  'menu-3-9-6': SecurityDisposalStatus,
-  'menu-3-9-7': SecurityDisposalHistory,
-  'menu-3-9-8': SecurityDisposalAudit,
-  'menu-3-9-9': SecurityDisposalReport,
-  // 第10组：病毒处置视图
-  'menu-3-10-1': VirusDisposalView,
-  'menu-3-10-2': VirusAutoIdentification,
-  'menu-3-10-3': VirusDisposalAnalysis,
-  'menu-3-10-4': VirusDisposal,
-  'menu-3-10-5': VirusDisposalStatus,
-  'menu-3-10-6': VirusDisposalHistory,
-  'menu-3-10-7': VirusDisposalAudit,
-  'menu-3-10-8': VirusDisposalReport,
-  // 第11组：终端取证视图
-  'menu-3-11-1': EndpointForensicsView,
-  'menu-3-11-2': AbnormalSampleAcquisition,
-  'menu-3-11-3': EndpointLogRetrieval,
-  'menu-3-11-4': ForensicsProcessRecord,
-  'menu-3-11-5': EndpointForensicsStatus,
-  'menu-3-11-6': EndpointForensicsHistory,
-  'menu-3-11-7': EndpointForensicsAudit,
-  'menu-3-11-8': EndpointForensicsReport,
-  // 第12组：主机取证视图
-  'menu-3-12-1': HostForensicsView,
-  'menu-3-12-2': HostDataSync,
-  'menu-3-12-3': HostLogRetrieval,
-  'menu-3-12-4': HostAnalysisResult,
-  'menu-3-12-5': HostForensicsStatus,
-  'menu-3-12-6': HostForensicsHistory,
-  'menu-3-12-7': HostForensicsAudit,
-  'menu-3-12-8': HostForensicsReport,
-  // 第13组：样本分析视图
-  'menu-3-13-1': SampleAnalysisView,
-  'menu-3-13-2': MultiToolInvocation,
-  'menu-3-13-3': SampleDeepAnalysis,
-  'menu-3-13-4': AnalysisResultSummary,
-  'menu-3-13-5': SampleAnalysisStatus,
-  'menu-3-13-6': SampleAnalysisHistory,
-  'menu-3-13-7': SampleAnalysisAudit,
-  'menu-3-13-8': SampleAnalysisReport,
-  // 第14组：告警日报视图
-  'menu-3-14-1': AlertDailyReportView,
-  'menu-3-14-2': DailyReportAnalysis,
-  'menu-3-14-3': DailyReportSummary,
-  'menu-3-14-4': DailyReportPush,
-  'menu-3-14-5': DailyReportStatus,
-  'menu-3-14-6': DailyReportHistory,
-  'menu-3-14-7': DailyReportAudit,
-  'menu-3-14-8': DailyReportReport,
-  // 第15组：基线防护报告视图
-  'menu-3-15-1': BaselineReportView,
-  'menu-3-15-2': BaselineToolManagement,
-  'menu-3-15-3': BaselineCheckResult,
-  'menu-3-15-4': BaselineReportPush,
-  'menu-3-15-5': BaselineReportStatus,
-  'menu-3-15-6': BaselineReportHistory,
-  'menu-3-15-7': BaselineReportAudit,
-  'menu-3-15-8': BaselineReportReport,
-  // 第16组：溯源报告视图
-  'menu-3-16-1': TraceReportView,
-  'menu-3-16-2': TraceResultIntegration,
-  'menu-3-16-3': TraceReportAutoGenerate,
-  'menu-3-16-4': TraceReportPush,
-  'menu-3-16-5': TraceReportStatus,
-  'menu-3-16-6': TraceReportHistory,
-  'menu-3-16-7': TraceReportAudit,
-  'menu-3-16-8': TraceReportReport,
-  // ─────────────────────────────────
+  // 模块3：网络安全自动运营（已移除）
   // 模块 4：网络安全标准场景自动化
   // ─────────────────────────────────
   // 第6组：漏洞管理任务
-  'menu-4-6-5': DefaultPage,
+  'menu-4-6-5': VulnRectifyTrack,
 };
 
 /**

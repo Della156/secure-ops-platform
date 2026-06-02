@@ -59,8 +59,9 @@ export function PageContent() {
   const PageComponent = getPageComponent(activeMenu);
   const { title, breadcrumb } = findMenuInfo(activeMenu);
 
-  // 如果页面已注册（非 DefaultPage），使用 PageShell
-  if ((activeMenu.startsWith('menu-1-') || activeMenu.startsWith('menu-2-') || activeMenu.startsWith('menu-3-'))) {
+  // 如果页面已注册（不是默认占位页），使用 PageShell 包裹渲染
+  // 判断标准：组件不在 DefaultPlaceholder 中显示（即有具体的页面组件）
+  if (PageComponent !== DefaultPlaceholder && activeMenu !== 'menu-1' && activeMenu !== 'menu-2' && activeMenu !== 'menu-3' && activeMenu !== 'menu-4' && activeMenu !== 'menu-5' && activeMenu !== 'menu-6') {
     return (
       <PageShell title={title} breadcrumb={breadcrumb}>
         <PageComponent />
