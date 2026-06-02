@@ -36,14 +36,23 @@ export function RealtimeMonitor() {
   useEffect(() => {
     if (!autoRefresh) return;
     const interval = setInterval(() => {
-      setMetrics(prev => prev.map(m => ({
-        ...m,
-        cpu: m.status === 'offline' ? 0 : Math.min(100, Math.max(0, m.cpu + (Math.random() - 0.5) * 10)),
-        memory: m.status === 'offline' ? 0 : Math.min(100, Math.max(0, m.memory + (Math.random() - 0.5) * 5)),
-        network: m.status === 'offline' ? 0 : Math.min(100, Math.max(0, m.network + (Math.random() - 0.5) * 15)),
-        lastUpdate: new Date().toLocaleTimeString(),
-        status: m.cpu > 90 || m.memory > 90 ? 'error' : m.cpu > 70 || m.memory > 70 ? 'warning' : m.status === 'offline' ? 'offline' : 'healthy',
-      })));
+      setMetrics(prev => prev.map(m => {
+        if (m.status === 'offline') {
+          return { ...m, lastUpdate: new Date().toLocaleTimeString() };
+        }
+        const newCpu = Math.min(100, Math.max(0, m.cpu + (Math.random() - 0.5) * 10));
+        const newMemory = Math.min(100, Math.max(0, m.memory + (Math.random() - 0.5) * 5));
+        const newNetwork = Math.min(100, Math.max(0, m.network + (Math.random() - 0.5) * 15));
+        const newStatus = newCpu > 90 || newMemory > 90 ? 'error' : newCpu > 70 || newMemory > 70 ? 'warning' : 'healthy';
+        return {
+          ...m,
+          cpu: newCpu,
+          memory: newMemory,
+          network: newNetwork,
+          status: newStatus,
+          lastUpdate: new Date().toLocaleTimeString(),
+        };
+      }));
     }, refreshInterval * 1000);
     return () => clearInterval(interval);
   }, [autoRefresh, refreshInterval]);

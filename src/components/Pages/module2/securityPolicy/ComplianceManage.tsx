@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Plus, Edit, Trash2, CheckCircle, XCircle, Eye, Settings } from 'lucide-react';
+import { useToast } from '@/components/ui/Toast';
 
 interface CompliancePolicy {
   id: string;
@@ -28,6 +29,11 @@ export function ComplianceManage() {
   const [filterDeviceType, setFilterDeviceType] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingPolicy, setEditingPolicy] = useState<CompliancePolicy | null>(null);
+  const toast = useToast();
+  const [formName, setFormName] = useState('');
+  const [formDeviceType, setFormDeviceType] = useState('防火墙');
+  const [formVersion, setFormVersion] = useState('v1.0');
+  const [formPolicyType, setFormPolicyType] = useState('');
 
   const filteredData = data.filter(d => {
     const matchKeyword = !searchKeyword || d.name.toLowerCase().includes(searchKeyword.toLowerCase());
@@ -40,9 +46,37 @@ export function ComplianceManage() {
   };
 
   const handleDelete = (policy: CompliancePolicy) => {
-    if (confirm(`确定要删除基线策略 "${policy.name}" 吗？`)) {
-      setData(prev => prev.filter(p => p.id !== policy.id));
+    setData(prev => prev.filter(p => p.id !== policy.id));
+    toast.success(`已删除基线策略 "${policy.name}"`);
+  };
+
+  const handleSaveModal = () => {
+    if (!formName.trim()) {
+      toast.warning('请输入基线名称');
+      return;
     }
+    if (editingPolicy) {
+      setData(prev => prev.map(p =>
+        p.id === editingPolicy.id
+          ? { ...p, name: formName, deviceType: formDeviceType, version: formVersion, policyType: formPolicyType, updateTime: new Date().toLocaleString() }
+          : p
+      ));
+      toast.success('基线策略已更新');
+    } else {
+      const newPolicy: CompliancePolicy = {
+        id: `CP-${Date.now()}`,
+        name: formName,
+        deviceType: formDeviceType,
+        policyType: formPolicyType,
+        version: formVersion,
+        checkItems: 0,
+        status: 'enabled',
+        updateTime: new Date().toLocaleString(),
+      };
+      setData(prev => [...prev, newPolicy]);
+      toast.success('基线策略已创建');
+    }
+    setShowModal(false);
   };
 
   return (
@@ -83,7 +117,14 @@ export function ComplianceManage() {
               <option value="IDS/IPS">IDS/IPS</option>
             </select>
           </div>
-          <button onClick={() => { setEditingPolicy(null); setShowModal(true); }} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+          <button onClick={() => { 
+            setEditingPolicy(null); 
+            setFormName('');
+            setFormDeviceType('防火墙');
+            setFormVersion('v1.0');
+            setFormPolicyType('');
+            setShowModal(true); 
+          }} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
             <Plus className="w-4 h-4" />
             新增基线策略
           </button>
@@ -123,7 +164,14 @@ export function ComplianceManage() {
                   <td className="px-4 py-3 text-sm text-gray-400">{policy.updateTime}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <button onClick={() => { setEditingPolicy(policy); setShowModal(true); }} className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title="编辑"><Edit className="w-4 h-4" /></button>
+                      <button onClick={() => { 
+                        setEditingPolicy(policy); 
+                        setFormName(policy.name);
+                        setFormDeviceType(policy.deviceType);
+                        setFormVersion(policy.version);
+                        setFormPolicyType(policy.policyType);
+                        setShowModal(true); 
+                      }} className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title="编辑"><Edit className="w-4 h-4" /></button>
                       <button onClick={() => handleToggle(policy)} className="p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-500/10 rounded transition-colors" title={policy.status === 'enabled' ? '禁用' : '启用'}>{policy.status === 'enabled' ? <XCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}</button>
                       <button className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title="检查项配置"><Settings className="w-4 h-4" /></button>
                       <button onClick={() => handleDelete(policy)} className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="删除"><Trash2 className="w-4 h-4" /></button>
@@ -147,12 +195,12 @@ export function ComplianceManage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm text-gray-400 mb-1">基线名称</label>
-                <input type="text" defaultValue={editingPolicy?.name || ''} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">设备类型</label>
-                  <select defaultValue={editingPolicy?.deviceType || '防火墙'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select value={formDeviceType} onChange={(e) => setFormDeviceType(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>防火墙</option>
                     <option>路由器</option>
                     <option>交换机</option>
@@ -162,17 +210,17 @@ export function ComplianceManage() {
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">版本号</label>
-                  <input type="text" defaultValue={editingPolicy?.version || 'v1.0'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input type="text" value={formVersion} onChange={(e) => setFormVersion(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">策略类型（逗号分隔）</label>
-                <input type="text" defaultValue={editingPolicy?.policyType || ''} placeholder="如: 访问控制,NAT" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formPolicyType} onChange={(e) => setFormPolicyType(e.target.value)} placeholder="如: 访问控制,NAT" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
             </div>
             <div className="flex justify-end gap-3 mt-6">
               <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm text-gray-400 hover:text-white">取消</button>
-              <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
+              <button onClick={handleSaveModal} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
             </div>
           </div>
         </div>

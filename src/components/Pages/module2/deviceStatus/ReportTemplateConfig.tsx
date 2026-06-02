@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Plus, Edit, Trash2, Copy, Eye, Settings, CheckCircle } from 'lucide-react';
+import { useToast } from '@/components/ui/Toast';
 
 interface ReportTemplate {
   id: string;
@@ -32,6 +33,13 @@ export function ReportTemplateConfig() {
   const [filterType, setFilterType] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<ReportTemplate | null>(null);
+  const toast = useToast();
+  const [formName, setFormName] = useState('');
+  const [formType, setFormType] = useState('运行状态');
+  const [formLayout, setFormLayout] = useState('标准布局');
+  const [formDesc, setFormDesc] = useState('');
+  const [formIndicators, setFormIndicators] = useState('');
+  const [formCharts, setFormCharts] = useState<string[]>([]);
 
   const filteredData = data.filter(d => {
     const matchKeyword = !searchKeyword || d.name.toLowerCase().includes(searchKeyword.toLowerCase()) || d.description.includes(searchKeyword);
@@ -50,20 +58,64 @@ export function ReportTemplateConfig() {
   };
 
   const handleDelete = (template: ReportTemplate) => {
-    if (confirm(`确定要删除模板 "${template.name}" 吗？`)) {
-      setData(prev => prev.filter(t => t.id !== template.id));
-    }
+    setData(prev => prev.filter(t => t.id !== template.id));
+    toast.success(`已删除模板 "${template.name}"`);
   };
 
   const handleEdit = (template: ReportTemplate) => {
     setEditingTemplate(template);
+    setFormName(template.name);
+    setFormType(template.type);
+    setFormLayout(template.layoutStyle);
+    setFormDesc(template.description);
+    setFormIndicators(template.indicators.join(', '));
+    setFormCharts(template.chartTypes);
     setShowModal(true);
   };
 
   const handleCopy = (template: ReportTemplate) => {
     const newTemplate = { ...template, id: `TPL-${Date.now()}`, name: `${template.name} (副本)`, usageCount: 0, createTime: new Date().toLocaleString(), updateTime: new Date().toLocaleString() };
     setData(prev => [...prev, newTemplate]);
-    alert(`已复制模板 "${template.name}"`);
+    toast.success(`已复制模板 "${template.name}"`);
+  };
+
+  const handleSaveModal = () => {
+    if (!formName.trim()) {
+      toast.warning('请输入模板名称');
+      return;
+    }
+    const chartTypes = formCharts.length > 0 ? formCharts : ['折线图'];
+    const indicators = formIndicators.split(',').map(s => s.trim()).filter(Boolean);
+    if (indicators.length === 0) {
+      toast.warning('请至少输入一个展示指标');
+      return;
+    }
+    if (editingTemplate) {
+      setData(prev => prev.map(t => 
+        t.id === editingTemplate.id 
+          ? { ...t, name: formName, type: formType, layoutStyle: formLayout, description: formDesc, indicators, chartTypes, updateTime: new Date().toLocaleString() }
+          : t
+      ));
+      toast.success('模板已更新');
+    } else {
+      const newTemplate: ReportTemplate = {
+        id: `TPL-${Date.now()}`,
+        name: formName,
+        type: formType,
+        description: formDesc,
+        indicators,
+        chartTypes,
+        layoutStyle: formLayout,
+        status: 'enabled',
+        usageCount: 0,
+        createdBy: 'admin',
+        createTime: new Date().toLocaleString(),
+        updateTime: new Date().toLocaleString(),
+      };
+      setData(prev => [...prev, newTemplate]);
+      toast.success('模板已创建');
+    }
+    setShowModal(false);
   };
 
   return (
@@ -115,7 +167,16 @@ export function ReportTemplateConfig() {
             </select>
           </div>
           <button
-            onClick={() => { setEditingTemplate(null); setShowModal(true); }}
+            onClick={() => { 
+              setEditingTemplate(null); 
+              setFormName('');
+              setFormType('运行状态');
+              setFormLayout('标准布局');
+              setFormDesc('');
+              setFormIndicators('');
+              setFormCharts([]);
+              setShowModal(true);
+            }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
@@ -205,12 +266,12 @@ export function ReportTemplateConfig() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm text-gray-400 mb-1">模板名称</label>
-                <input type="text" defaultValue={editingTemplate?.name || ''} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">模板类型</label>
-                  <select defaultValue={editingTemplate?.type || '运行状态'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select value={formType} onChange={(e) => setFormType(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>运行状态</option>
                     <option>安全检查</option>
                     <option>基线检查</option>
@@ -220,7 +281,7 @@ export function ReportTemplateConfig() {
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">布局样式</label>
-                  <select defaultValue={editingTemplate?.layoutStyle || '标准布局'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select value={formLayout} onChange={(e) => setFormLayout(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>标准布局</option>
                     <option>紧凑布局</option>
                     <option>详细布局</option>
@@ -231,18 +292,18 @@ export function ReportTemplateConfig() {
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">模板描述</label>
-                <textarea defaultValue={editingTemplate?.description || ''} rows={2} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <textarea value={formDesc} onChange={(e) => setFormDesc(e.target.value)} rows={2} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">展示指标（逗号分隔）</label>
-                <input type="text" defaultValue={editingTemplate?.indicators.join(', ') || ''} placeholder="如: 设备总数, CPU使用率, 内存使用率" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formIndicators} onChange={(e) => setFormIndicators(e.target.value)} placeholder="如: 设备总数, CPU使用率, 内存使用率" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">图表类型</label>
                 <div className="flex flex-wrap gap-2">
                   {['折线图', '柱状图', '饼图', '面积图', '雷达图', '仪表盘'].map(chart => (
                     <label key={chart} className="flex items-center gap-2 px-3 py-2 bg-[#111827] rounded-lg cursor-pointer hover:bg-[#2A354D]">
-                      <input type="checkbox" defaultChecked={editingTemplate?.chartTypes.includes(chart) || false} className="w-4 h-4 rounded border-gray-500 bg-[#111827] text-blue-500" />
+                      <input type="checkbox" checked={formCharts.includes(chart)} onChange={(e) => { setFormCharts(prev => e.target.checked ? [...prev, chart] : prev.filter(c => c !== chart)); }} className="w-4 h-4 rounded border-gray-500 bg-[#111827] text-blue-500" />
                       <span className="text-white text-sm">{chart}</span>
                     </label>
                   ))}
@@ -251,11 +312,12 @@ export function ReportTemplateConfig() {
             </div>
             <div className="flex justify-end gap-3 mt-6">
               <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm text-gray-400 hover:text-white">取消</button>
-              <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
+              <button onClick={handleSaveModal} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
             </div>
           </div>
         </div>
       )}
+      {toast.ToastContainer()}
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Send, Eye, AlertTriangle, CheckCircle, Clock, MessageSquare } from 'lucide-react';
+import { useToast } from '@/components/ui/Toast';
 
 interface AbnormalPolicy {
   id: string;
@@ -31,6 +32,7 @@ export function OneKeyPushFix() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [filterRisk, setFilterRisk] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
+  const toast = useToast();
 
   const filteredData = data.filter(d => {
     const matchKeyword = !searchKeyword || d.policyName.toLowerCase().includes(searchKeyword.toLowerCase()) || d.deviceName.includes(searchKeyword);
@@ -67,10 +69,8 @@ export function OneKeyPushFix() {
   };
 
   const handleOneKeyPush = (item: AbnormalPolicy) => {
-    if (confirm(`确定要一键推送整改通知给 "${item.responsible}" 吗？\n联系方式: ${item.contact}`)) {
-      setData(prev => prev.map(d => d.id === item.id ? { ...d, status: 'pushed', pushTime: new Date().toLocaleString() } : d));
-      alert(`已发送整改通知给 ${item.responsible}`);
-    }
+    setData(prev => prev.map(d => d.id === item.id ? { ...d, status: 'pushed', pushTime: new Date().toLocaleString() } : d));
+    toast.success(`已发送整改通知给 ${item.responsible}`);
   };
 
   return (
@@ -178,6 +178,7 @@ export function OneKeyPushFix() {
         </div>
         {filteredData.length === 0 && <p className="text-gray-500 text-center py-8">暂无数据</p>}
       </div>
+      {toast.ToastContainer()}
     </div>
   );
 }

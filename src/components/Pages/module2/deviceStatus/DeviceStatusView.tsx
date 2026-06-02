@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Download, Eye, RefreshCw, Filter, CheckCircle, XCircle, Clock, AlertTriangle } from 'lucide-react';
+import { useToast } from '@/components/ui/Toast';
 
 interface DeviceStatusItem {
   id: string;
@@ -32,6 +33,7 @@ export function DeviceStatusView() {
   const [filterStatus, setFilterStatus] = useState('');
   const [filterType, setFilterType] = useState('');
   const [filterVendor, setFilterVendor] = useState('');
+  const toast = useToast();
 
   const filteredData = data.filter(item => {
     const matchKeyword = !searchKeyword || 
@@ -70,10 +72,10 @@ export function DeviceStatusView() {
     );
   };
 
-  const handleExport = () => alert('正在导出设备运行状态列表...');
-  const handleViewDetail = (item: DeviceStatusItem) => alert(`查看设备 "${item.name}" 详情`);
-  const handleViewProcess = (item: DeviceStatusItem) => alert(`查看 "${item.name}" 检查过程`);
-  const handleViewResult = (item: DeviceStatusItem) => alert(`查看 "${item.name}" 检查结果`);
+  const handleExport = () => toast.info('正在导出设备运行状态列表...');
+  const handleViewDetail = (item: DeviceStatusItem) => toast.info(`查看设备 "${item.name}" 详情`);
+  const handleViewProcess = (item: DeviceStatusItem) => toast.info(`查看 "${item.name}" 检查过程`);
+  const handleViewResult = (item: DeviceStatusItem) => toast.info(`查看 "${item.name}" 检查结果`);
 
   return (
     <div>
@@ -257,6 +259,7 @@ export function DeviceStatusView() {
         <button className="px-3 py-1 bg-[#1E2736] hover:bg-[#2A354D] text-gray-400 rounded text-sm transition-colors">3</button>
         <button className="px-3 py-1 bg-[#1E2736] hover:bg-[#2A354D] text-gray-400 rounded text-sm transition-colors">下一页</button>
       </div>
+      {toast.ToastContainer()}
     </div>
   );
 }

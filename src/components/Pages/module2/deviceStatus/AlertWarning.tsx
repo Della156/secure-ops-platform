@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, Plus, Edit, Trash2, Bell, Eye, AlertTriangle, CheckCircle, XCircle, Settings } from 'lucide-react';
+import { useToast } from '@/components/ui/Toast';
 
 interface AlertRule {
   id: string;
@@ -52,6 +53,11 @@ export function AlertWarning() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingRule, setEditingRule] = useState<AlertRule | null>(null);
+  const toast = useToast();
+  const [formName, setFormName] = useState('');
+  const [formMetric, setFormMetric] = useState('CPU使用率');
+  const [formSeverity, setFormSeverity] = useState<'high' | 'medium' | 'low'>('medium');
+  const [formThreshold, setFormThreshold] = useState('');
 
   const filteredRules = rules.filter(r =>
     !searchKeyword || r.name.toLowerCase().includes(searchKeyword.toLowerCase()) || r.metric.includes(searchKeyword)
@@ -92,9 +98,44 @@ export function AlertWarning() {
   };
 
   const handleDeleteRule = (rule: AlertRule) => {
-    if (confirm(`确定要删除规则 "${rule.name}" 吗？`)) {
-      setRules(prev => prev.filter(r => r.id !== rule.id));
+    setRules(prev => prev.filter(r => r.id !== rule.id));
+    toast.success(`已删除规则 "${rule.name}"`);
+  };
+
+  const handleSaveRule = () => {
+    if (!formName.trim()) {
+      toast.warning('请输入规则名称');
+      return;
     }
+    if (!formThreshold.trim()) {
+      toast.warning('请输入告警阈值');
+      return;
+    }
+    if (editingRule) {
+      setRules(prev => prev.map(r =>
+        r.id === editingRule.id
+          ? { ...r, name: formName, metric: formMetric, severity: formSeverity, threshold: formThreshold }
+          : r
+      ));
+      toast.success('告警规则已更新');
+    } else {
+      const newRule: AlertRule = {
+        id: `RULE-${Date.now()}`,
+        name: formName,
+        metric: formMetric,
+        condition: '>',
+        threshold: formThreshold,
+        severity: formSeverity,
+        status: 'enabled',
+        targets: [],
+        notifyChannels: ['邮件'],
+        createdBy: 'admin',
+        createTime: new Date().toLocaleString(),
+      };
+      setRules(prev => [...prev, newRule]);
+      toast.success('告警规则已创建');
+    }
+    setShowModal(false);
   };
 
   return (
@@ -175,7 +216,14 @@ export function AlertWarning() {
                 />
               </div>
               <button
-                onClick={() => { setEditingRule(null); setShowModal(true); }}
+                onClick={() => { 
+                  setEditingRule(null); 
+                  setFormName('');
+                  setFormMetric('CPU使用率');
+                  setFormSeverity('medium');
+                  setFormThreshold('');
+                  setShowModal(true); 
+                }}
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               >
                 <Plus className="w-4 h-4" />
@@ -212,7 +260,14 @@ export function AlertWarning() {
                           <button onClick={() => handleToggleRule(rule)} className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title={rule.status === 'enabled' ? '禁用' : '启用'}>
                             {rule.status === 'enabled' ? <XCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
                           </button>
-                          <button onClick={() => { setEditingRule(rule); setShowModal(true); }} className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title="编辑">
+                          <button onClick={() => { 
+                            setEditingRule(rule); 
+                            setFormName(rule.name);
+                            setFormMetric(rule.metric);
+                            setFormSeverity(rule.severity);
+                            setFormThreshold(rule.threshold);
+                            setShowModal(true); 
+                          }} className="p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded transition-colors" title="编辑">
                             <Edit className="w-4 h-4" />
                           </button>
                           <button onClick={() => handleDeleteRule(rule)} className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="删除">
@@ -292,12 +347,12 @@ export function AlertWarning() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm text-gray-400 mb-1">规则名称</label>
-                <input type="text" defaultValue={editingRule?.name || ''} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">监控指标</label>
-                  <select defaultValue={editingRule?.metric || 'CPU使用率'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select value={formMetric} onChange={(e) => setFormMetric(e.target.value)} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>CPU使用率</option>
                     <option>内存使用率</option>
                     <option>磁盘使用率</option>
@@ -307,7 +362,7 @@ export function AlertWarning() {
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-1">严重程度</label>
-                  <select defaultValue={editingRule?.severity || 'medium'} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <select value={formSeverity} onChange={(e) => setFormSeverity(e.target.value as 'high' | 'medium' | 'low')} className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="high">高危</option>
                     <option value="medium">中危</option>
                     <option value="low">低危</option>
@@ -316,16 +371,17 @@ export function AlertWarning() {
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">告警阈值</label>
-                <input type="text" defaultValue={editingRule?.threshold || ''} placeholder="如: 90%" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="text" value={formThreshold} onChange={(e) => setFormThreshold(e.target.value)} placeholder="如: 90%" className="w-full px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
             </div>
             <div className="flex justify-end gap-3 mt-6">
               <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm text-gray-400 hover:text-white">取消</button>
-              <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
+              <button onClick={handleSaveRule} className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg">保存</button>
             </div>
           </div>
         </div>
       )}
+      {toast.ToastContainer()}
     </div>
   );
 }

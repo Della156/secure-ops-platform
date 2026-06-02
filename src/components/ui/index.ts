@@ -6,3 +6,4 @@ export { Modal } from './Modal';
 export { Card } from './Card';
 export { Empty } from './Empty';
 export { Loading } from './Loading';
+export { useToast } from './Toast';
