@@ -265,6 +265,71 @@ const ApiCallAnalysis = dynamic(() => import(
   '@/components/Pages/module1/apiService/ApiCallAnalysis'
 ).then(m => ({ default: m.ApiCallAnalysis })));
 
+// 模块 2：网络安全自动运维
+// ──────────────────────────────────
+
+// 第1组：设备运行状态检查
+const DeviceStatusView = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/DeviceStatusView'
+).then(m => ({ default: m.DeviceStatusView })));
+
+const RealtimeMonitor = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/RealtimeMonitor'
+).then(m => ({ default: m.RealtimeMonitor })));
+
+const AlertWarning = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/AlertWarning'
+).then(m => ({ default: m.AlertWarning })));
+
+const HealthAnalysis = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/HealthAnalysis'
+).then(m => ({ default: m.HealthAnalysis })));
+
+const StatusReport = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/StatusReport'
+).then(m => ({ default: m.StatusReport })));
+
+const ReportTemplateConfig = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/ReportTemplateConfig'
+).then(m => ({ default: m.ReportTemplateConfig })));
+
+const HistoryArchive = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/HistoryArchive'
+).then(m => ({ default: m.HistoryArchive })));
+
+const HistoryCompare = dynamic(() => import(
+  '@/components/Pages/module2/deviceStatus/HistoryCompare'
+).then(m => ({ default: m.HistoryCompare })));
+
+// 第2组：安全策略检查
+const SecurityPolicyView = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/SecurityPolicyView'
+).then(m => ({ default: m.SecurityPolicyView })));
+
+const ComplianceManage = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/ComplianceManage'
+).then(m => ({ default: m.ComplianceManage })));
+
+const AutoPolicyCheck = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/AutoPolicyCheck'
+).then(m => ({ default: m.AutoPolicyCheck })));
+
+const RiskLevelAssess = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/RiskLevelAssess'
+).then(m => ({ default: m.RiskLevelAssess })));
+
+const RiskPolicyReport = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/RiskPolicyReport'
+).then(m => ({ default: m.RiskPolicyReport })));
+
+const OneKeyPushFix = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/OneKeyPushFix'
+).then(m => ({ default: m.OneKeyPushFix })));
+
+const PolicyChangeTrack = dynamic(() => import(
+  '@/components/Pages/module2/securityPolicy/PolicyChangeTrack'
+).then(m => ({ default: m.PolicyChangeTrack })));
+
 /**
  * 默认占位页面（开发中）
  */
@@ -356,6 +421,26 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-1-14-2': ApiAccessAuth,
   'menu-1-14-3': ApiCallLog,
   'menu-1-14-4': ApiCallAnalysis,
+
+  // 模块2：网络安全自动运维
+  // ──────────────────────────────────
+  // 第1组：设备运行状态检查
+  'menu-2-1-1': DeviceStatusView,
+  'menu-2-1-2': RealtimeMonitor,
+  'menu-2-1-3': AlertWarning,
+  'menu-2-1-4': HealthAnalysis,
+  'menu-2-1-5': StatusReport,
+  'menu-2-1-6': ReportTemplateConfig,
+  'menu-2-1-7': HistoryArchive,
+  'menu-2-1-8': HistoryCompare,
+  // 第2组：安全策略检查
+  'menu-2-2-1': SecurityPolicyView,
+  'menu-2-2-2': ComplianceManage,
+  'menu-2-2-3': AutoPolicyCheck,
+  'menu-2-2-4': RiskLevelAssess,
+  'menu-2-2-5': RiskPolicyReport,
+  'menu-2-2-6': OneKeyPushFix,
+  'menu-2-2-7': PolicyChangeTrack,
 };
 
 /**
