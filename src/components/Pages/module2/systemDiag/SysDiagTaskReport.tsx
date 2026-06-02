@@ -5,33 +5,25 @@ import { Download, Calendar, BarChart2, FileText, TrendingUp, AlertTriangle, Che
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 
 const taskData = [
-  { date: '05-28', total: 25, success: 23, failed: 2 },
-  { date: '05-29', total: 32, success: 30, failed: 2 },
-  { date: '05-30', total: 18, success: 17, failed: 1 },
-  { date: '05-31', total: 40, success: 38, failed: 2 },
-  { date: '06-01', total: 35, success: 34, failed: 1 },
-  { date: '06-02', total: 28, success: 27, failed: 1 },
+  { date: '05-28', total: 18, success: 15, failed: 3 },
+  { date: '05-29', total: 22, success: 20, failed: 2 },
+  { date: '05-30', total: 15, success: 13, failed: 2 },
+  { date: '05-31', total: 25, success: 22, failed: 3 },
+  { date: '06-01', total: 20, success: 18, failed: 2 },
+  { date: '06-02', total: 16, success: 15, failed: 1 },
 ];
 
-const changeTypeData = [
-  { name: '策略新增', value: 45 },
-  { name: '策略修改', value: 35 },
-  { name: '策略删除', value: 15 },
-  { name: '策略查询', value: 5 },
+const faultTypeData = [
+  { name: '服务异常', value: 35 },
+  { name: '进程问题', value: 25 },
+  { name: '资源不足', value: 20 },
+  { name: '网络故障', value: 15 },
+  { name: '其他', value: 5 },
 ];
 
-const deviceData = [
-  { date: '05-28', bj: 12, sh: 8, gz: 5 },
-  { date: '05-29', bj: 15, sh: 10, gz: 7 },
-  { date: '05-30', bj: 8, sh: 6, gz: 4 },
-  { date: '05-31', bj: 20, sh: 12, gz: 8 },
-  { date: '06-01', bj: 18, sh: 10, gz: 7 },
-  { date: '06-02', bj: 14, sh: 8, gz: 6 },
-];
+const COLORS = ['#3B82F6', '#EF4444', '#F59E0B', '#10B981', '#6B7280'];
 
-const COLORS = ['#3B82F6', '#EF4444', '#F59E0B', '#10B981'];
-
-export function FwTaskReport() {
+export function SysDiagTaskReport() {
   const [dateRange, setDateRange] = useState({ start: '2026-06-01', end: '2026-06-02' });
 
   const stats = {
@@ -44,7 +36,7 @@ export function FwTaskReport() {
   const handleExport = () => {
     const data = taskData.map(d => ({
       '日期': d.date,
-      '总工单数': d.total,
+      '总任务数': d.total,
       '成功': d.success,
       '失败': d.failed,
       '成功率': `${Math.round((d.success / d.total) * 100)}%`
@@ -54,15 +46,15 @@ export function FwTaskReport() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `firewall-report-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `system-diag-report-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
   };
 
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">防火墙策略工单任务报告</h2>
-        <p className="text-sm text-gray-400 mt-1">时间段内工单任务统计分析、策略变更统计报告导出</p>
+        <h2 className="text-xl font-semibold text-white">系统故障诊断任务报告</h2>
+        <p className="text-sm text-gray-400 mt-1">时间段内诊断任务统计分析、故障类型分布统计、报告导出</p>
       </div>
 
       <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4 mb-6">
@@ -100,7 +92,7 @@ export function FwTaskReport() {
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-blue-400" />
             <div>
-              <p className="text-gray-400 text-xs">总工单数</p>
+              <p className="text-gray-400 text-xs">诊断任务总数</p>
               <p className="text-xl font-semibold text-white">{stats.total}</p>
             </div>
           </div>
@@ -109,7 +101,7 @@ export function FwTaskReport() {
           <div className="flex items-center gap-2">
             <CheckCircle className="w-5 h-5 text-green-400" />
             <div>
-              <p className="text-gray-400 text-xs">成功工单</p>
+              <p className="text-gray-400 text-xs">成功诊断</p>
               <p className="text-xl font-semibold text-green-400">{stats.success}</p>
             </div>
           </div>
@@ -118,7 +110,7 @@ export function FwTaskReport() {
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-red-400" />
             <div>
-              <p className="text-gray-400 text-xs">失败工单</p>
+              <p className="text-gray-400 text-xs">诊断失败</p>
               <p className="text-xl font-semibold text-red-400">{stats.failed}</p>
             </div>
           </div>
@@ -134,17 +126,17 @@ export function FwTaskReport() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-4">工单数量趋势</h3>
-          <ResponsiveContainer width="100%" height={250}>
+          <h3 className="text-sm font-medium text-gray-300 mb-4">诊断任务趋势</h3>
+          <ResponsiveContainer width="100%" height={300}>
             <LineChart data={taskData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2A354D" />
               <XAxis dataKey="date" stroke="#6B7280" />
               <YAxis stroke="#6B7280" />
               <Tooltip contentStyle={{ backgroundColor: '#1E2736', border: '1px solid #2A354D' }} />
               <Legend />
-              <Line type="monotone" dataKey="total" name="总工单" stroke="#3B82F6" strokeWidth={2} />
+              <Line type="monotone" dataKey="total" name="总任务" stroke="#3B82F6" strokeWidth={2} />
               <Line type="monotone" dataKey="success" name="成功" stroke="#10B981" strokeWidth={2} />
               <Line type="monotone" dataKey="failed" name="失败" stroke="#EF4444" strokeWidth={2} />
             </LineChart>
@@ -152,20 +144,20 @@ export function FwTaskReport() {
         </div>
 
         <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-4">策略变更类型分布</h3>
-          <ResponsiveContainer width="100%" height={250}>
+          <h3 className="text-sm font-medium text-gray-300 mb-4">故障类型分布</h3>
+          <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
-                data={changeTypeData}
+                data={faultTypeData}
                 cx="50%"
                 cy="50%"
-                innerRadius={50}
-                outerRadius={90}
+                innerRadius={60}
+                outerRadius={100}
                 paddingAngle={2}
                 dataKey="value"
                 label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
               >
-                {changeTypeData.map((entry, index) => (
+                {faultTypeData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -173,32 +165,16 @@ export function FwTaskReport() {
             </PieChart>
           </ResponsiveContainer>
         </div>
-
-        <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-4">各地区工单分布</h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={deviceData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#2A354D" />
-              <XAxis dataKey="date" stroke="#6B7280" />
-              <YAxis stroke="#6B7280" />
-              <Tooltip contentStyle={{ backgroundColor: '#1E2736', border: '1px solid #2A354D' }} />
-              <Legend />
-              <Bar dataKey="bj" name="北京" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="sh" name="上海" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="gz" name="广州" fill="#10B981" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
       </div>
 
       <div className="mt-6 bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-        <h3 className="text-sm font-medium text-gray-300 mb-4">工单统计明细</h3>
+        <h3 className="text-sm font-medium text-gray-300 mb-4">诊断任务统计明细</h3>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="bg-[#111827]">
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">日期</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">总工单</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">总任务</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">成功</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">失败</th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">成功率</th>

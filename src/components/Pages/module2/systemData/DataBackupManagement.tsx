@@ -24,7 +24,7 @@ const mockData: BackupTask[] = [
 ];
 
 export function DataBackupManagement() {
-  const [data] = useState<BackpackTask[]>(mockData);
+  const [data] = useState<BackupTask[]>(mockData);
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const filteredData = data.filter(d =>

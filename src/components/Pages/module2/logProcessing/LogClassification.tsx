@@ -109,7 +109,7 @@ export function LogClassification() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <Tag className="w-4 h-4" className={getTypeColor(item.type)} />
+                      <Tag className={`w-4 h-4 ${getTypeColor(item.type)}`} />
                       <span className={`text-sm ${getTypeColor(item.type)}`}>{item.type}</span>
                     </div>
                   </td>

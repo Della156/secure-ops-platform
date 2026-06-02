@@ -4,19 +4,18 @@
 
 这是一个**网络安全智能化运维平台**的前端项目，使用 Next.js + TailwindCSS + TypeScript 构建。
 当前需要你开发 **模块5：网络安全人机协同工作台** 下的所有三级页面。该模块的目标是：
-> 建设统一协同工作界面，提供网络安全自动化数据聚合、可视化分析与协同功能，涵盖任务效能分析、智能运维可视化、待办任务管理、事件回溯与知识库支持，提升协同效率与数据驱动决策能力。
+> 建设统一协同工作界面，提供网络安全自动化数据聚合、可视化分析与协同功能，涵盖任务效能分析、智能运维可视化、待办任务管理、事件回溯与知识库支持。
 
 ## 你的任务
 
 根据本文档中的功能描述，在已有项目中创建 **模块5** 的以下页面组件。
 该模块共有 **9 个二级菜单**，每个对应一个目录和若干三级页面。
 你需要：
-1. 在 `src/pages/module{module_num}/` 目录下创建所有三级页面组件
+1. 在 `src/pages/module5/` 目录下创建所有三级页面组件
 2. 在 `src/data/menuData.ts` 的 `menu-5` 下补充三级菜单配置
 3. 每个页面使用 'use client'，遵循深色主题设计规范
 
 ## 系统已有文件结构
-
 ```
 src/
   data/menuData.ts              ← 菜单数据（含三级菜单结构）
@@ -56,7 +55,6 @@ src/
 
 ### 1. 色彩体系
 ```css
-/* 使用 Tailwind 预设色板，主色为蓝色 */
 --primary: #3b82f6    /* blue-500 */
 --primary-light: #60a5fa  /* blue-400 */
 --primary-dark: #2563eb   /* blue-600 */
@@ -107,8 +105,6 @@ src/
 - **查询**：顶部搜索框 + 筛选条件 → 点击「查询」→ 更新列表
 - **导出**：列表顶部「导出」按钮 → 导出为 Excel/CSV
 - **详情查看**：点击行或「详情」按钮 → 弹出详情 Modal 或跳转详情页
-- **状态/结果相关页面**：展示任务状态列表、历史记录、审计日志、统计报告等
-- **监控/视图页面**：图表可视化（推荐 recharts）、实时数据展示、趋势分析
 
 ---
 
@@ -372,10 +368,10 @@ src/
 **功能说明**：实现我的工作台中的快捷操作入口与常用功能收藏相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
-- 详情查看
+- 常用功能收藏
+- 快捷入口管理
+- 个性化排序
+- 收藏分类管理
 
 ### 第7组：事件回溯分析（6页）
 
@@ -421,7 +417,7 @@ src/
 
 #### 7.5 回溯过程报告生成
 
-**功能说明**：统计分析和生成事件回溯分析相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现事件回溯分析中的回溯过程报告生成相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -444,7 +440,7 @@ src/
 
 #### 8.1 报告归档管理
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告归档管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -456,7 +452,7 @@ src/
 
 #### 8.2 报告检索
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告检索相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -467,7 +463,7 @@ src/
 
 #### 8.3 报告在线预览
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告在线预览相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -478,7 +474,7 @@ src/
 
 #### 8.4 报告批注
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告批注相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -489,7 +485,7 @@ src/
 
 #### 8.5 报告导出
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告导出相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -500,7 +496,7 @@ src/
 
 #### 8.6 报告模板管理与版本控制
 
-**功能说明**：统计分析和生成分析报告中心相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现分析报告中心中的报告模板管理与版本控制相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -517,10 +513,10 @@ src/
 **功能说明**：实现决策知识库中的典型安全事件处置案例库相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
+- 案例/知识条目管理
+- 分类检索
 - 详情查看
+- 收藏与分享
 
 #### 9.2 专家研判规则与逻辑模型库
 
@@ -537,20 +533,20 @@ src/
 **功能说明**：实现决策知识库中的威胁情报知识库相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
+- 案例/知识条目管理
+- 分类检索
 - 详情查看
+- 收藏与分享
 
 #### 9.4 知识关联检索库
 
 **功能说明**：实现决策知识库中的知识关联检索库相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
-- 详情查看
+- 多维度检索
+- 全文搜索
+- 高级筛选
+- 检索结果导出
 
 ## 技术要求
 
@@ -569,54 +565,54 @@ src/
 
 ```
 src/
-  pages/module5/                    ← 模块5所有页面组件
-    自动任务运行/                   ← 第1组 自动任务运行分析
-      Page7206.tsx
-      Page3766.tsx
-      Page4349.tsx
-    knowledgeOptimization/                   ← 第2组 知识沉淀与优化建议
+  pages/module5/
+    autoTaskAnalysis/                  ← 自动任务运行分析（3页）
+      AutoTaskStatistics.tsx
+      ResponseTimeAnalysis.tsx
+      TaskRunDashboard.tsx
+    knowledgeOptimization/                  ← 知识沉淀与优化建议（2页）
       FailureCaseAnalysis.tsx
       OptimizationSuggestions.tsx
-    securitySituationDashboard/                   ← 第3组 综合安全态势大屏
+    securitySituationDashboard/                  ← 综合安全态势大屏（5页）
       SecurityRiskScore.tsx
       ThreatEventTrend.tsx
       DisposalEfficiencyMetrics.tsx
       AssetComplianceCoverage.tsx
       DashboardLayoutConfig.tsx
-    topicAnalysis/                   ← 第4组 专题分析视图
+    topicAnalysis/                  ← 专题分析视图（5页）
       AttackSourceTypeAnalysis.tsx
       AttackChainVisualization.tsx
       AssetRiskProfile.tsx
       VulnLifecycleAnalysis.tsx
       CustomMultiDimAnalysis.tsx
-    customDashboard/                   ← 第5组 自定义仪表盘
+    customDashboard/                  ← 自定义仪表盘（4页）
       ChartComponentLibrary.tsx
       DataSourceDragBind.tsx
       DashboardLayoutCustom.tsx
       PersonalDashboard.tsx
-    myWorkbench/                   ← 第6组 我的工作台
+    myWorkbench/                  ← 我的工作台（5页）
       MyTodos.tsx
       MyParticipations.tsx
       MyInitiatedTasks.tsx
       PersonalNotifications.tsx
       QuickActionsFavorites.tsx
-    eventTraceback/                   ← 第7组 事件回溯分析
+    eventTraceback/                  ← 事件回溯分析（6页）
       EventTimelineAnalysis.tsx
       EventMultiDimAnalysis.tsx
       EvidenceLogLinkView.tsx
       TracebackMarkers.tsx
       TracebackReportGenerate.tsx
       SimilarEventPatternCompare.tsx
-    reportCenter/                   ← 第8组 分析报告中心
+    reportCenter/                  ← 分析报告中心（6页）
       ReportArchiveManagement.tsx
       ReportSearch.tsx
       ReportPreview.tsx
       ReportAnnotation.tsx
       ReportExport.tsx
       ReportTemplateManagement.tsx
-    decisionKnowledgeBase/                   ← 第9组 决策知识库
-      SecurityIncidentCaseLibrary.tsx
-      ExpertRuleModelLibrary.tsx
+    decisionKnowledgeBase/                  ← 决策知识库（4页）
+      CaseLibrary.tsx
+      ExpertRuleLibrary.tsx
       ThreatIntelLibrary.tsx
       KnowledgeSearchLibrary.tsx
 ```

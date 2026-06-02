@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Network, Pin, Wifi, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { Search, Network, Pin, Wifi, CheckCircle, XCircle, AlertTriangle, Activity } from 'lucide-react';
 
 interface NetworkNode {
   id: string;
@@ -114,7 +114,7 @@ export function NetworkDiagnostic() {
                   <td className="px-4 py-3 text-sm text-gray-300">{item.type}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <Ping className="w-4 h-4 text-gray-400" />
+                      <Activity className="w-4 h-4 text-gray-400" />
                       <span className={`text-sm ${item.latency >= 10 ? 'text-yellow-400' : 'text-green-400'}`}>
                         {item.latency >= 0 ? `${item.latency}ms` : '-'}
                       </span>

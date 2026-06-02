@@ -4,19 +4,18 @@
 
 这是一个**网络安全智能化运维平台**的前端项目，使用 Next.js + TailwindCSS + TypeScript 构建。
 当前需要你开发 **模块4：网络安全标准场景自动化** 下的所有三级页面。该模块的目标是：
-> 建设省级个性化网络安全标准场景自动化功能，支持漏洞自动复测验证、安全基线合规自动核查、网络安全资产指纹辅助更新、主机安全防护覆盖率指标自动提升场景功能。实现漏洞自动化流转处置，将验证、派单、复测等人工独立环节串联为一体化自动场景；基线合规检查与整改复核的标准自动流转；落地网络安全资产辅助确认；构建主机安全防护覆盖率自动核查与驱动。
+> 建设省级个性化网络安全标准场景自动化功能，支持漏洞自动复测验证、安全基线合规自动核查、网络安全资产指纹辅助更新、主机安全防护覆盖率指标自动提升场景功能。
 
 ## 你的任务
 
 根据本文档中的功能描述，在已有项目中创建 **模块4** 的以下页面组件。
 该模块共有 **10 个二级菜单**，每个对应一个目录和若干三级页面。
 你需要：
-1. 在 `src/pages/module{module_num}/` 目录下创建所有三级页面组件
+1. 在 `src/pages/module4/` 目录下创建所有三级页面组件
 2. 在 `src/data/menuData.ts` 的 `menu-4` 下补充三级菜单配置
 3. 每个页面使用 'use client'，遵循深色主题设计规范
 
 ## 系统已有文件结构
-
 ```
 src/
   data/menuData.ts              ← 菜单数据（含三级菜单结构）
@@ -57,7 +56,6 @@ src/
 
 ### 1. 色彩体系
 ```css
-/* 使用 Tailwind 预设色板，主色为蓝色 */
 --primary: #3b82f6    /* blue-500 */
 --primary-light: #60a5fa  /* blue-400 */
 --primary-dark: #2563eb   /* blue-600 */
@@ -108,8 +106,6 @@ src/
 - **查询**：顶部搜索框 + 筛选条件 → 点击「查询」→ 更新列表
 - **导出**：列表顶部「导出」按钮 → 导出为 Excel/CSV
 - **详情查看**：点击行或「详情」按钮 → 弹出详情 Modal 或跳转详情页
-- **状态/结果相关页面**：展示任务状态列表、历史记录、审计日志、统计报告等
-- **监控/视图页面**：图表可视化（推荐 recharts）、实时数据展示、趋势分析
 
 ---
 
@@ -193,7 +189,7 @@ src/
 
 #### 1.7 资产发现任务历史查询
 
-**功能说明**：查询资产发现任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现资产发现任务中的资产发现任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 按时间范围筛选
@@ -204,7 +200,7 @@ src/
 
 #### 1.8 资产发现任务审计
 
-**功能说明**：记录和查询资产发现任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现资产发现任务中的资产发现任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 审计日志列表展示（表格）
@@ -214,7 +210,7 @@ src/
 
 #### 1.9 资产发现任务报告
 
-**功能说明**：统计分析和生成资产发现任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现资产发现任务中的资产发现任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -282,7 +278,7 @@ src/
 
 #### 2.6 资产核对任务历史查询
 
-**功能说明**：查询资产核对任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现资产核对任务中的资产核对任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 按时间范围筛选
@@ -293,7 +289,7 @@ src/
 
 #### 2.7 资产核对任务审计
 
-**功能说明**：记录和查询资产核对任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现资产核对任务中的资产核对任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 审计日志列表展示（表格）
@@ -303,7 +299,7 @@ src/
 
 #### 2.8 资产核对任务报告
 
-**功能说明**：统计分析和生成资产核对任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现资产核对任务中的资产核对任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -339,7 +335,7 @@ src/
 
 #### 3.3 资产标签管理
 
-**功能说明**：对资产确认任务相关的配置项进行增删改查管理
+**功能说明**：实现资产确认任务中的资产标签管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -363,7 +359,7 @@ src/
 
 #### 3.5 资产确认任务历史查询
 
-**功能说明**：查询资产确认任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现资产确认任务中的资产确认任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 按时间范围筛选
@@ -374,7 +370,7 @@ src/
 
 #### 3.6 资产确认任务审计
 
-**功能说明**：记录和查询资产确认任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现资产确认任务中的资产确认任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 审计日志列表展示（表格）
@@ -384,7 +380,7 @@ src/
 
 #### 3.7 资产确认任务报告
 
-**功能说明**：统计分析和生成资产确认任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现资产确认任务中的资产确认任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -462,7 +458,7 @@ src/
 
 #### 4.7 资产分析任务历史查询
 
-**功能说明**：查询资产分析任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现资产分析任务中的资产分析任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 按时间范围筛选
@@ -473,7 +469,7 @@ src/
 
 #### 4.8 资产分析任务审计
 
-**功能说明**：记录和查询资产分析任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现资产分析任务中的资产分析任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 审计日志列表展示（表格）
@@ -483,7 +479,7 @@ src/
 
 #### 4.9 资产分析任务报告
 
-**功能说明**：统计分析和生成资产分析任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现资产分析任务中的资产分析任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -509,7 +505,7 @@ src/
 
 #### 5.2 基线扫描任务管理
 
-**功能说明**：对基线管理任务相关的配置项进行增删改查管理
+**功能说明**：实现基线管理任务中的基线扫描任务管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -524,10 +520,10 @@ src/
 **功能说明**：实现基线管理任务中的基线扫描执行相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
-- 详情查看
+- 自动检测/评估执行
+- 检测结果展示
+- 风险/合规等级标识
+- 详情下钻查看
 
 #### 5.4 基线整改跟踪
 
@@ -563,7 +559,7 @@ src/
 
 #### 5.7 无法整改基线清单管理
 
-**功能说明**：对基线管理任务相关的配置项进行增删改查管理
+**功能说明**：实现基线管理任务中的无法整改基线清单管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -587,7 +583,7 @@ src/
 
 #### 5.9 基线管理任务历史查询
 
-**功能说明**：查询基线管理任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现基线管理任务中的基线管理任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -599,7 +595,7 @@ src/
 
 #### 5.10 基线管理任务审计
 
-**功能说明**：记录和查询基线管理任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现基线管理任务中的基线管理任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -611,7 +607,7 @@ src/
 
 #### 5.11 基线管理任务报告
 
-**功能说明**：统计分析和生成基线管理任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现基线管理任务中的基线管理任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -638,7 +634,7 @@ src/
 
 #### 6.2 漏洞扫描工具管理
 
-**功能说明**：对漏洞管理任务相关的配置项进行增删改查管理
+**功能说明**：实现漏洞管理任务中的漏洞扫描工具管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -653,10 +649,10 @@ src/
 **功能说明**：实现漏洞管理任务中的漏洞扫描执行相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 数据列表展示（表格）
-- 搜索与筛选
-- 新增/编辑/删除操作
-- 详情查看
+- 自动检测/评估执行
+- 检测结果展示
+- 风险/合规等级标识
+- 详情下钻查看
 
 #### 6.4 漏洞分析
 
@@ -702,7 +698,7 @@ src/
 
 #### 6.8 无法整改漏洞清单管理
 
-**功能说明**：对漏洞管理任务相关的配置项进行增删改查管理
+**功能说明**：实现漏洞管理任务中的无法整改漏洞清单管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -726,7 +722,7 @@ src/
 
 #### 6.10 漏洞管理任务历史查询
 
-**功能说明**：查询漏洞管理任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现漏洞管理任务中的漏洞管理任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -738,7 +734,7 @@ src/
 
 #### 6.11 漏洞管理任务审计
 
-**功能说明**：记录和查询漏洞管理任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现漏洞管理任务中的漏洞管理任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -750,7 +746,7 @@ src/
 
 #### 6.12 漏洞管理任务报告
 
-**功能说明**：统计分析和生成漏洞管理任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现漏洞管理任务中的漏洞管理任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -839,7 +835,7 @@ src/
 
 #### 7.8 补丁管理任务历史查询
 
-**功能说明**：查询补丁管理任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现补丁管理任务中的补丁管理任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -851,7 +847,7 @@ src/
 
 #### 7.9 补丁管理任务审计
 
-**功能说明**：记录和查询补丁管理任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现补丁管理任务中的补丁管理任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -863,7 +859,7 @@ src/
 
 #### 7.10 补丁管理任务报告
 
-**功能说明**：统计分析和生成补丁管理任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现补丁管理任务中的补丁管理任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -893,10 +889,12 @@ src/
 **功能说明**：实现主机合规管理任务中的工具状态监测相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 状态实时展示（标签/徽章）
-- 状态变更记录
-- 异常状态告警提示
-- 手动刷新状态
+- 核心指标数据展示（数字卡片、进度条）
+- 趋势图表展示（折线图、柱状图）
+- 状态分布统计（饼图、环形图）
+- 列表/表格数据展示
+- 按条件筛选与搜索
+- 数据自动刷新
 
 #### 8.3 工具策略有效性评估
 
@@ -942,7 +940,7 @@ src/
 
 #### 8.7 主机合规管理任务历史查询
 
-**功能说明**：查询主机合规管理任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现主机合规管理任务中的主机合规管理任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -954,7 +952,7 @@ src/
 
 #### 8.8 主机合规管理任务审计
 
-**功能说明**：记录和查询主机合规管理任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现主机合规管理任务中的主机合规管理任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -966,7 +964,7 @@ src/
 
 #### 8.9 主机合规管理任务报告
 
-**功能说明**：统计分析和生成主机合规管理任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现主机合规管理任务中的主机合规管理任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1003,7 +1001,7 @@ src/
 
 #### 9.3 安全软件版本管理
 
-**功能说明**：对终端合规管理任务相关的配置项进行增删改查管理
+**功能说明**：实现终端合规管理任务中的安全软件版本管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1028,10 +1026,12 @@ src/
 **功能说明**：实现终端合规管理任务中的终端合规状态监测相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
-- 状态实时展示（标签/徽章）
-- 状态变更记录
-- 异常状态告警提示
-- 手动刷新状态
+- 核心指标数据展示（数字卡片、进度条）
+- 趋势图表展示（折线图、柱状图）
+- 状态分布统计（饼图、环形图）
+- 列表/表格数据展示
+- 按条件筛选与搜索
+- 数据自动刷新
 
 #### 9.6 终端合规管理任务状态监控
 
@@ -1047,7 +1047,7 @@ src/
 
 #### 9.7 终端合规管理任务历史查询
 
-**功能说明**：查询终端合规管理任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现终端合规管理任务中的终端合规管理任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1059,7 +1059,7 @@ src/
 
 #### 9.8 终端合规管理任务审计
 
-**功能说明**：记录和查询终端合规管理任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现终端合规管理任务中的终端合规管理任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1071,7 +1071,7 @@ src/
 
 #### 9.9 终端合规管理任务报告
 
-**功能说明**：统计分析和生成终端合规管理任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现终端合规管理任务中的终端合规管理任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1098,7 +1098,7 @@ src/
 
 #### 10.2 渗透测试任务管理
 
-**功能说明**：对渗透测试任务相关的配置项进行增删改查管理
+**功能说明**：实现渗透测试任务中的渗透测试任务管理相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 新增配置（Modal表单）
@@ -1140,7 +1140,7 @@ src/
 
 #### 10.6 渗透测试报告生成
 
-**功能说明**：统计分析和生成渗透测试任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现渗透测试任务中的渗透测试报告生成相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -1163,7 +1163,7 @@ src/
 
 #### 10.8 渗透测试任务历史查询
 
-**功能说明**：查询渗透测试任务相关的历史执行记录，支持按时间、状态等多维度筛选和详情查看
+**功能说明**：实现渗透测试任务中的渗透测试任务历史查询相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 按时间范围筛选
@@ -1174,7 +1174,7 @@ src/
 
 #### 10.9 渗透测试任务审计
 
-**功能说明**：记录和查询渗透测试任务相关的操作审计日志，支持按操作人、时间范围检索
+**功能说明**：实现渗透测试任务中的渗透测试任务审计相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 审计日志列表展示（表格）
@@ -1184,7 +1184,7 @@ src/
 
 #### 10.10 渗透测试任务报告
 
-**功能说明**：统计分析和生成渗透测试任务相关的综合报告，支持图表展示和报告导出
+**功能说明**：实现渗透测试任务中的渗透测试任务报告相关功能，支持数据的查询、展示和管理操作
 
 **核心功能**：
 - 统计报表生成
@@ -1210,107 +1210,107 @@ src/
 
 ```
 src/
-  pages/module4/                    ← 模块4所有页面组件
-    资产发现任务/                   ← 第1组 资产发现任务
-      Page5074.tsx
-      Page5350.tsx
-      Page1911.tsx
-      Page6012.tsx
-      Page1667.tsx
-      Page4835.tsx
-      Page209.tsx
-      Page872.tsx
-      Page5679.tsx
-    assetCheckTask/                   ← 第2组 资产核对任务
+  pages/module4/
+    assetDiscovery/                  ← 资产发现任务（9页）
+      AssetDiscoveryView.tsx
+      AutoDiscovery.tsx
+      AssetTypeIdentify.tsx
+      AssetInfoCollect.tsx
+      AssetLocation.tsx
+      DiscoveryStatusMonitor.tsx
+      DiscoveryHistory.tsx
+      DiscoveryAudit.tsx
+      DiscoveryReport.tsx
+    assetCheck/                  ← 资产核对任务（8页）
       AssetCheckView.tsx
       AssetInfoCompare.tsx
       AssetInfoUpdate.tsx
       AssetChangeRecord.tsx
-      AssetCheckStatusMonitor.tsx
-      AssetCheckHistory.tsx
-      AssetCheckAudit.tsx
-      AssetCheckReport.tsx
-    assetConfirmTask/                   ← 第3组 资产确认任务
+      CheckStatusMonitor.tsx
+      CheckHistory.tsx
+      CheckAudit.tsx
+      CheckReport.tsx
+    assetConfirm/                  ← 资产确认任务（7页）
       AssetConfirmView.tsx
-      AssetOwnerConfirm.tsx
+      OwnerConfirm.tsx
       AssetTagManagement.tsx
-      AssetConfirmStatusMonitor.tsx
-      AssetConfirmHistory.tsx
-      AssetConfirmAudit.tsx
-      AssetConfirmReport.tsx
-    assetAnalysisTask/                   ← 第4组 资产分析任务
+      ConfirmStatusMonitor.tsx
+      ConfirmHistory.tsx
+      ConfirmAudit.tsx
+      ConfirmReport.tsx
+    assetAnalysis/                  ← 资产分析任务（9页）
       AssetAnalysisView.tsx
-      AssetTrendAnalysis.tsx
-      AssetRiskAssessment.tsx
-      AssetEfficiencyAnalysis.tsx
-      AssetOptimizationSuggest.tsx
-      AssetAnalysisStatusMonitor.tsx
-      AssetAnalysisHistory.tsx
-      AssetAnalysisAudit.tsx
-      AssetAnalysisReport.tsx
-    baselineManagement/                   ← 第5组 基线管理任务
+      TrendAnalysis.tsx
+      RiskAssessment.tsx
+      EfficiencyAnalysis.tsx
+      OptimizationSuggest.tsx
+      AnalysisStatusMonitor.tsx
+      AnalysisHistory.tsx
+      AnalysisAudit.tsx
+      AnalysisReport.tsx
+    baselineManagement/                  ← 基线管理任务（11页）
       BaselineView.tsx
-      BaselineScanTask.tsx
-      BaselineScanExecute.tsx
-      BaselineRemediationTrack.tsx
-      BaselineRetestClose.tsx
-      BaselineLibraryMaintain.tsx
-      BaselineExceptionList.tsx
+      ScanTaskManagement.tsx
+      ScanExecute.tsx
+      RemediationTrack.tsx
+      RetestClose.tsx
+      LibraryMaintain.tsx
+      ExceptionList.tsx
       BaselineStatusMonitor.tsx
       BaselineHistory.tsx
       BaselineAudit.tsx
       BaselineReport.tsx
-    vulnerabilityManagement/                   ← 第6组 漏洞管理任务
+    vulnerabilityManagement/                  ← 漏洞管理任务（12页）
       VulnerabilityView.tsx
-      VulnScanToolManagement.tsx
-      VulnScanExecute.tsx
+      ScanToolManagement.tsx
+      ScanExecute.tsx
       VulnAnalysis.tsx
-      VulnRemediationTrack.tsx
-      VulnRetestClose.tsx
-      VulnLibraryMaintain.tsx
-      VulnExceptionList.tsx
+      RemediationTrack.tsx
+      RetestClose.tsx
+      LibraryMaintain.tsx
+      ExceptionList.tsx
       VulnStatusMonitor.tsx
       VulnHistory.tsx
       VulnAudit.tsx
       VulnReport.tsx
-    patchManagement/                   ← 第7组 补丁管理任务
+    patchManagement/                  ← 补丁管理任务（10页）
       PatchView.tsx
-      PatchInfoCollect.tsx
-      PatchCompatibilityAnalysis.tsx
-      PatchUpgradePlan.tsx
-      PatchUpgradeExecute.tsx
-      PatchUpgradeVerify.tsx
+      InfoCollect.tsx
+      CompatibilityAnalysis.tsx
+      UpgradePlan.tsx
+      UpgradeExecute.tsx
+      UpgradeVerify.tsx
       PatchStatusMonitor.tsx
       PatchHistory.tsx
       PatchAudit.tsx
       PatchReport.tsx
-    hostCompliance/                   ← 第8组 主机合规管理任务
+    hostCompliance/                  ← 主机合规管理任务（9页）
       HostComplianceView.tsx
       ToolStatusMonitor.tsx
       ToolPolicyEvaluation.tsx
-      ToolCoverageStatistics.tsx
+      ToolCoverageStats.tsx
       ToolOptimizationSuggest.tsx
       HostComplianceStatusMonitor.tsx
       HostComplianceHistory.tsx
       HostComplianceAudit.tsx
       HostComplianceReport.tsx
-    endpointCompliance/                   ← 第9组 终端合规管理任务
+    endpointCompliance/                  ← 终端合规管理任务（9页）
       EndpointComplianceView.tsx
-      EndpointSecurityHardening.tsx
-      SecuritySoftwareVersion.tsx
-      SecuritySoftwareInstall.tsx
-      EndpointComplianceStatus.tsx
-      EndpointComplianceStatusMonitor.tsx
-      EndpointComplianceHistory.tsx
-      EndpointComplianceAudit.tsx
-      EndpointComplianceReport.tsx
-    penetrationTest/                   ← 第10组 渗透测试任务
+      SecurityHardening.tsx
+      SoftwareVersionMgmt.tsx
+      SoftwareInstallUpgrade.tsx
+      ComplianceStatusMonitor.tsx
+      EndpointStatusMonitor.tsx
+      EndpointHistory.tsx
+      EndpointAudit.tsx
+      EndpointReport.tsx
+    penetrationTest/                  ← 渗透测试任务（10页）
       PenetrationTestView.tsx
-      PenTestTaskManagement.tsx
+      TaskManagement.tsx
       AttackPathPlanning.tsx
       AttackSimulation.tsx
-      PenTestResultAnalysis.tsx
-      PenTestReportGenerate.tsx
+      ResultAnalysis.tsx
+      ReportGenerate.tsx
       PenTestStatusMonitor.tsx
       PenTestHistory.tsx
       PenTestAudit.tsx

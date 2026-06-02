@@ -2227,6 +2227,31 @@ const DiagnosticView = dynamic(() => import(
   '@/components/Pages/module2/diagnostic/DiagnosticView'
 ).then(m => ({ default: m.DiagnosticView })));
 
+// 第27组：系统故障诊断
+const SystemDiagView = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SystemDiagView'
+).then(m => ({ default: m.SystemDiagView })));
+
+const SystemFaultDiag = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SystemFaultDiag'
+).then(m => ({ default: m.SystemFaultDiag })));
+
+const SysDiagStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SysDiagStatusMonitor'
+).then(m => ({ default: m.SysDiagStatusMonitor })));
+
+const SysDiagHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SysDiagHistoryQuery'
+).then(m => ({ default: m.SysDiagHistoryQuery })));
+
+const SysDiagAudit = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SysDiagAudit'
+).then(m => ({ default: m.SysDiagAudit })));
+
+const SysDiagTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/systemDiag/SysDiagTaskReport'
+).then(m => ({ default: m.SysDiagTaskReport })));
+
 const NetworkDiagnostic = dynamic(() => import(
   '@/components/Pages/module2/diagnostic/NetworkDiagnostic'
 ).then(m => ({ default: m.NetworkDiagnostic })));
@@ -2977,13 +3002,13 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-26-6': NetDiagAudit,
   'menu-2-26-7': NetDiagTaskReport,
 
-  // menu-2-27 (6 个)
-  'menu-2-27-1': Stub_2_27_1,
-  'menu-2-27-2': Stub_2_27_2,
-  'menu-2-27-3': Stub_2_27_3,
-  'menu-2-27-4': Stub_2_27_4,
-  'menu-2-27-5': Stub_2_27_5,
-  'menu-2-27-6': Stub_2_27_6,
+  // 第27组：系统故障诊断
+  'menu-2-27-1': SystemDiagView,
+  'menu-2-27-2': SystemFaultDiag,
+  'menu-2-27-3': SysDiagStatusMonitor,
+  'menu-2-27-4': SysDiagHistoryQuery,
+  'menu-2-27-5': SysDiagAudit,
+  'menu-2-27-6': SysDiagTaskReport,
 
   // menu-2-28 (7 个)
   'menu-2-28-1': Stub_2_28_1,
