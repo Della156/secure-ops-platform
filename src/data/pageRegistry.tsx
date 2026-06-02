@@ -20,6 +20,224 @@ import type { ComponentType } from 'react';
  *   })
  */
 
+// ==========================================================
+// 模块 2 补全 71 个占位（PKI / 网络故障 / 系统故障 / 性能 / 安全阻断 / 综合 / 作业等）
+// 共享 GenericStub 通用占位组件，业务深度实现后续按 menuId 单独替换
+// ==========================================================
+const Stub_2_24_10 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-24-10" {...props} />) })));
+const Stub_2_24_11 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-24-11" {...props} />) })));
+const Stub_2_25_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-1" {...props} />) })));
+const Stub_2_25_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-2" {...props} />) })));
+const Stub_2_25_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-3" {...props} />) })));
+const Stub_2_25_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-4" {...props} />) })));
+const Stub_2_25_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-5" {...props} />) })));
+const Stub_2_25_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-6" {...props} />) })));
+const Stub_2_25_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-7" {...props} />) })));
+const Stub_2_26_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-1" {...props} />) })));
+const Stub_2_26_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-2" {...props} />) })));
+const Stub_2_26_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-3" {...props} />) })));
+const Stub_2_26_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-4" {...props} />) })));
+const Stub_2_26_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-5" {...props} />) })));
+const Stub_2_26_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-6" {...props} />) })));
+const Stub_2_26_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-7" {...props} />) })));
+const Stub_2_27_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-1" {...props} />) })));
+const Stub_2_27_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-2" {...props} />) })));
+const Stub_2_27_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-3" {...props} />) })));
+const Stub_2_27_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-4" {...props} />) })));
+const Stub_2_27_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-5" {...props} />) })));
+const Stub_2_27_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-6" {...props} />) })));
+const Stub_2_28_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-1" {...props} />) })));
+const Stub_2_28_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-2" {...props} />) })));
+const Stub_2_28_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-3" {...props} />) })));
+const Stub_2_28_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-4" {...props} />) })));
+const Stub_2_28_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-5" {...props} />) })));
+const Stub_2_28_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-6" {...props} />) })));
+const Stub_2_28_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-7" {...props} />) })));
+const Stub_2_29_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-1" {...props} />) })));
+const Stub_2_29_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-2" {...props} />) })));
+const Stub_2_29_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-3" {...props} />) })));
+const Stub_2_29_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-4" {...props} />) })));
+const Stub_2_29_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-5" {...props} />) })));
+const Stub_2_29_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-6" {...props} />) })));
+const Stub_2_30_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-1" {...props} />) })));
+const Stub_2_30_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-2" {...props} />) })));
+const Stub_2_30_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-3" {...props} />) })));
+const Stub_2_30_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-4" {...props} />) })));
+const Stub_2_30_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-5" {...props} />) })));
+const Stub_2_30_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-6" {...props} />) })));
+const Stub_2_31_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-1" {...props} />) })));
+const Stub_2_31_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-2" {...props} />) })));
+const Stub_2_31_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-3" {...props} />) })));
+const Stub_2_31_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-4" {...props} />) })));
+const Stub_2_31_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-5" {...props} />) })));
+const Stub_2_31_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-6" {...props} />) })));
+const Stub_2_31_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-7" {...props} />) })));
+const Stub_2_31_8 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-8" {...props} />) })));
+const Stub_2_32_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-1" {...props} />) })));
+const Stub_2_32_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-2" {...props} />) })));
+const Stub_2_32_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-3" {...props} />) })));
+const Stub_2_32_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-4" {...props} />) })));
+const Stub_2_32_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-5" {...props} />) })));
+const Stub_2_32_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-6" {...props} />) })));
+const Stub_2_32_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-7" {...props} />) })));
+const Stub_2_33_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-1" {...props} />) })));
+const Stub_2_33_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-2" {...props} />) })));
+const Stub_2_33_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-3" {...props} />) })));
+const Stub_2_33_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-4" {...props} />) })));
+const Stub_2_33_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-5" {...props} />) })));
+const Stub_2_33_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-6" {...props} />) })));
+const Stub_2_33_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-7" {...props} />) })));
+const Stub_2_33_8 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-8" {...props} />) })));
+const Stub_2_34_1 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-1" {...props} />) })));
+const Stub_2_34_2 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-2" {...props} />) })));
+const Stub_2_34_3 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-3" {...props} />) })));
+const Stub_2_34_4 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-4" {...props} />) })));
+const Stub_2_34_5 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-5" {...props} />) })));
+const Stub_2_34_6 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-6" {...props} />) })));
+const Stub_2_34_7 = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-7" {...props} />) })));
+
 // 模块 1：网络安全自动任务配置
 // ──────────────────────────────────
 
@@ -1327,11 +1545,107 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-24-7': PolicyAdjustExec,
   'menu-2-24-8': FwStatusMonitor,
   'menu-2-24-9': FwHistoryQuery,
+  // ===========================================================
+  // 模块 2 补全 71 个占位注册
+  // ===========================================================
+  // menu-2-24 (2 个)
+  'menu-2-24-10': Stub_2_24_10,
+  'menu-2-24-11': Stub_2_24_11,
+
+  // menu-2-25 (7 个)
+  'menu-2-25-1': Stub_2_25_1,
+  'menu-2-25-2': Stub_2_25_2,
+  'menu-2-25-3': Stub_2_25_3,
+  'menu-2-25-4': Stub_2_25_4,
+  'menu-2-25-5': Stub_2_25_5,
+  'menu-2-25-6': Stub_2_25_6,
+  'menu-2-25-7': Stub_2_25_7,
+
+  // menu-2-26 (7 个)
+  'menu-2-26-1': Stub_2_26_1,
+  'menu-2-26-2': Stub_2_26_2,
+  'menu-2-26-3': Stub_2_26_3,
+  'menu-2-26-4': Stub_2_26_4,
+  'menu-2-26-5': Stub_2_26_5,
+  'menu-2-26-6': Stub_2_26_6,
+  'menu-2-26-7': Stub_2_26_7,
+
+  // menu-2-27 (6 个)
+  'menu-2-27-1': Stub_2_27_1,
+  'menu-2-27-2': Stub_2_27_2,
+  'menu-2-27-3': Stub_2_27_3,
+  'menu-2-27-4': Stub_2_27_4,
+  'menu-2-27-5': Stub_2_27_5,
+  'menu-2-27-6': Stub_2_27_6,
+
+  // menu-2-28 (7 个)
+  'menu-2-28-1': Stub_2_28_1,
+  'menu-2-28-2': Stub_2_28_2,
+  'menu-2-28-3': Stub_2_28_3,
+  'menu-2-28-4': Stub_2_28_4,
+  'menu-2-28-5': Stub_2_28_5,
+  'menu-2-28-6': Stub_2_28_6,
+  'menu-2-28-7': Stub_2_28_7,
+
+  // menu-2-29 (6 个)
+  'menu-2-29-1': Stub_2_29_1,
+  'menu-2-29-2': Stub_2_29_2,
+  'menu-2-29-3': Stub_2_29_3,
+  'menu-2-29-4': Stub_2_29_4,
+  'menu-2-29-5': Stub_2_29_5,
+  'menu-2-29-6': Stub_2_29_6,
+
+  // menu-2-30 (6 个)
+  'menu-2-30-1': Stub_2_30_1,
+  'menu-2-30-2': Stub_2_30_2,
+  'menu-2-30-3': Stub_2_30_3,
+  'menu-2-30-4': Stub_2_30_4,
+  'menu-2-30-5': Stub_2_30_5,
+  'menu-2-30-6': Stub_2_30_6,
+
+  // menu-2-31 (8 个)
+  'menu-2-31-1': Stub_2_31_1,
+  'menu-2-31-2': Stub_2_31_2,
+  'menu-2-31-3': Stub_2_31_3,
+  'menu-2-31-4': Stub_2_31_4,
+  'menu-2-31-5': Stub_2_31_5,
+  'menu-2-31-6': Stub_2_31_6,
+  'menu-2-31-7': Stub_2_31_7,
+  'menu-2-31-8': Stub_2_31_8,
+
+  // menu-2-32 (7 个)
+  'menu-2-32-1': Stub_2_32_1,
+  'menu-2-32-2': Stub_2_32_2,
+  'menu-2-32-3': Stub_2_32_3,
+  'menu-2-32-4': Stub_2_32_4,
+  'menu-2-32-5': Stub_2_32_5,
+  'menu-2-32-6': Stub_2_32_6,
+  'menu-2-32-7': Stub_2_32_7,
+
+  // menu-2-33 (8 个)
+  'menu-2-33-1': Stub_2_33_1,
+  'menu-2-33-2': Stub_2_33_2,
+  'menu-2-33-3': Stub_2_33_3,
+  'menu-2-33-4': Stub_2_33_4,
+  'menu-2-33-5': Stub_2_33_5,
+  'menu-2-33-6': Stub_2_33_6,
+  'menu-2-33-7': Stub_2_33_7,
+  'menu-2-33-8': Stub_2_33_8,
+
+  // menu-2-34 (7 个)
+  'menu-2-34-1': Stub_2_34_1,
+  'menu-2-34-2': Stub_2_34_2,
+  'menu-2-34-3': Stub_2_34_3,
+  'menu-2-34-4': Stub_2_34_4,
+  'menu-2-34-5': Stub_2_34_5,
+  'menu-2-34-6': Stub_2_34_6,
+  'menu-2-34-7': Stub_2_34_7,
+
   // 模块3：网络安全自动运营（已移除）
   // 模块 4：网络安全标准场景自动化
   // ─────────────────────────────────
   // 第6组：漏洞管理任务
-  'menu-4-6-5': DefaultPage,
+  'menu-4-6-5': VulnRectifyTrack,
 };
 
 /**
