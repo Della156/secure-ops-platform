@@ -27,11 +27,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // 跳过 ESLint 错误（同上）
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
   // 注意：静态导出不支持自定义 headers（请在 nginx 中配置）
 };
 

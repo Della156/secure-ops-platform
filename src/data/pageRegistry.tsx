@@ -1331,7 +1331,7 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   // 模块 4：网络安全标准场景自动化
   // ─────────────────────────────────
   // 第6组：漏洞管理任务
-  'menu-4-6-5': VulnRectifyTrack,
+  'menu-4-6-5': DefaultPage,
 };
 
 /**
