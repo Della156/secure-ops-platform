@@ -60,7 +60,7 @@ export function PageContent() {
   const { title, breadcrumb } = findMenuInfo(activeMenu);
 
   // 如果页面已注册（非 DefaultPage），使用 PageShell
-  if ((activeMenu.startsWith('menu-1-') || activeMenu.startsWith('menu-2-'))) {
+  if ((activeMenu.startsWith('menu-1-') || activeMenu.startsWith('menu-2-') || activeMenu.startsWith('menu-3-'))) {
     return (
       <PageShell title={title} breadcrumb={breadcrumb}>
         <PageComponent />

@@ -1,0 +1,27 @@
+'use client'; import React, { useState } from 'react';
+import { Search, Eye, Download } from 'lucide-react';
+const hData = [{ id:'VDH-001', name:'全网病毒查杀-20260601', execTime:'2026-06-01 08:00:00', status:'completed', disposed:20 }];
+const aData = [{ id:'VDA-001', operator:'admin', opType:'执行', opTime:'2026-06-02 14:05:00', opTarget:'病毒查杀', opContent:'查杀Trojan.Generic', ipAddr:'10.0.1.100' }];
+const rData = [{ id:'VDR-001', name:'病毒处置日报-20260602', period:'2026-06-02', generateTime:'2026-06-02 18:00:00', status:'completed' }];
+
+export function VirusDisposalHistory() {
+  const [data]=useState(hData); const [s,setS]=useState(''); const f=data.filter(d=>!s||d.name.includes(s));
+  return (<div><div className="mb-6"><h2 className="text-xl font-semibold text-white">病毒处置任务历史查询</h2></div>
+    <div className="flex items-center gap-3 mb-6"><div className="flex-1 relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" /><input type="text" placeholder="搜索..." value={s} onChange={e=>setS(e.target.value)} className="w-full bg-[#1E2736] border border-[#2A354D] rounded-lg pl-10 pr-4 py-2 text-white text-sm" /></div></div>
+    <div className="overflow-x-auto"><table className="w-full border-collapse"><thead><tr className="bg-[#1E2736]/50 text-gray-400 text-sm"><th className="text-left py-3 px-4 font-medium">名称</th><th className="text-left py-3 px-4 font-medium">时间</th><th className="text-left py-3 px-4 font-medium">状态</th><th className="text-left py-3 px-4 font-medium">已处置</th><th className="text-left py-3 px-4 font-medium">操作</th></tr></thead>
+      <tbody>{f.map(r=>(<tr key={r.id} className="border-t border-[#2A354D] text-sm"><td className="py-3 px-4 text-white">{r.name}</td><td className="py-3 px-4 text-gray-400">{r.execTime}</td><td className="py-3 px-4"><span className="px-2 py-0.5 text-xs rounded-full bg-green-500/20 text-green-400">已完成</span></td><td className="py-3 px-4">{r.disposed}</td><td className="py-3 px-4"><Eye className="w-3.5 h-3.5 text-blue-400" /></td></tr>))}</tbody></table></div></div>);
+}
+export function VirusDisposalAudit() {
+  const [data]=useState(aData); const [s,setS]=useState(''); const f=data.filter(d=>!s||d.operator.includes(s));
+  return (<div><div className="mb-6"><h2 className="text-xl font-semibold text-white">病毒处置任务审计</h2></div>
+    <div className="flex items-center gap-3 mb-6"><div className="flex-1 relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" /><input type="text" placeholder="搜索..." value={s} onChange={e=>setS(e.target.value)} className="w-full bg-[#1E2736] border border-[#2A354D] rounded-lg pl-10 pr-4 py-2 text-white text-sm" /></div><button className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm"><Download className="w-4 h-4" /> 导出</button></div>
+    <div className="overflow-x-auto"><table className="w-full border-collapse"><thead><tr className="bg-[#1E2736]/50 text-gray-400 text-sm"><th className="text-left py-3 px-4 font-medium">操作人</th><th className="text-left py-3 px-4 font-medium">操作类型</th><th className="text-left py-3 px-4 font-medium">时间</th><th className="text-left py-3 px-4 font-medium">对象</th><th className="text-left py-3 px-4 font-medium">内容</th><th className="text-left py-3 px-4 font-medium">IP</th></tr></thead>
+      <tbody>{f.map(l=>(<tr key={l.id} className="border-t border-[#2A354D] text-sm"><td className="py-3 px-4 text-white">{l.operator}</td><td className="py-3 px-4"><span className="px-2 py-0.5 text-xs rounded-full bg-blue-500/20 text-blue-400">{l.opType}</span></td><td className="py-3 px-4 text-gray-400">{l.opTime}</td><td className="py-3 px-4 text-gray-300">{l.opTarget}</td><td className="py-3 px-4 text-gray-400">{l.opContent}</td><td className="py-3 px-4 text-gray-400">{l.ipAddr}</td></tr>))}</tbody></table></div></div>);
+}
+export function VirusDisposalReport() {
+  const [data]=useState(rData); const [s,setS]=useState(''); const f=data.filter(d=>!s||d.name.includes(s));
+  return (<div><div className="mb-6"><h2 className="text-xl font-semibold text-white">病毒处置任务报告</h2></div>
+    <div className="flex items-center gap-3 mb-6"><div className="flex-1 relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" /><input type="text" placeholder="搜索..." value={s} onChange={e=>setS(e.target.value)} className="w-full bg-[#1E2736] border border-[#2A354D] rounded-lg pl-10 pr-4 py-2 text-white text-sm" /></div></div>
+    <div className="overflow-x-auto"><table className="w-full border-collapse"><thead><tr className="bg-[#1E2736]/50 text-gray-400 text-sm"><th className="text-left py-3 px-4 font-medium">名称</th><th className="text-left py-3 px-4 font-medium">周期</th><th className="text-left py-3 px-4 font-medium">生成时间</th><th className="text-left py-3 px-4 font-medium">状态</th><th className="text-left py-3 px-4 font-medium">操作</th></tr></thead>
+      <tbody>{f.map(r=>(<tr key={r.id} className="border-t border-[#2A354D] text-sm"><td className="py-3 px-4 text-white">{r.name}</td><td className="py-3 px-4 text-gray-400">{r.period}</td><td className="py-3 px-4 text-gray-400">{r.generateTime}</td><td className="py-3 px-4"><span className="px-2 py-0.5 text-xs rounded-full bg-green-500/20 text-green-400">已完成</span></td><td className="py-3 px-4"><div className="flex items-center gap-2"><Eye className="w-3.5 h-3.5 text-blue-400" /><Download className="w-3.5 h-3.5 text-gray-400" /></div></td></tr>))}</tbody></table></div></div>);
+}
