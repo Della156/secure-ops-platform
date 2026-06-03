@@ -5,7 +5,7 @@ import {
   Search, Download, Plus, Edit3, Trash2, Settings, Play, Pause,
   RefreshCw, Maximize2, Filter, X, Server, Wifi, Cloud, Database,
   CheckCircle2, XCircle, AlertCircle, Clock, Activity, Cpu,
-  HardDrive, Network, ChevronRight, Shield, Zap, Globe
+  HardDrive, Network, ChevronRight, Shield, Zap, Globe, Layers
 } from 'lucide-react';
 
 /**
