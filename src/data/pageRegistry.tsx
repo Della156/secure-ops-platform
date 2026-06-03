@@ -2295,6 +2295,22 @@ function DefaultPage() {
 const VulnRectifyTrack = dynamic(() => import(
   '@/components/Pages/module4/vulnManage/VulnRectifyTrack'
 ).then(m => ({ default: m.VulnRectifyTrack })));
+// === 模块 5 安全大屏 5 个深度页面 ===
+const RiskScoreDashboard = dynamic(() => import(
+  '@/components/Pages/module5/securityDashboard/RiskScoreDashboard'
+).then(m => ({ default: m.RiskScoreDashboard })));
+const RealtimeThreatTrend = dynamic(() => import(
+  '@/components/Pages/module5/securityDashboard/RealtimeThreatTrend'
+).then(m => ({ default: m.RealtimeThreatTrend })));
+const IncidentResolutionKPI = dynamic(() => import(
+  '@/components/Pages/module5/securityDashboard/IncidentResolutionKPI'
+).then(m => ({ default: m.IncidentResolutionKPI })));
+const AssetComplianceStatus = dynamic(() => import(
+  '@/components/Pages/module5/securityDashboard/AssetComplianceStatus'
+).then(m => ({ default: m.AssetComplianceStatus })));
+const DashboardCustomConfig = dynamic(() => import(
+  '@/components/Pages/module5/securityDashboard/DashboardCustomConfig'
+).then(m => ({ default: m.DashboardCustomConfig })));
 
 // 日报报告（补上缺失的定义）
 // 基线防护报告视图（补上缺失的定义）
@@ -2864,12 +2880,12 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-5-2-1': Stub_5_2_1,
   'menu-5-2-2': Stub_5_2_2,
 
-  // menu-5-3 (5 个)
-  'menu-5-3-1': Stub_5_3_1,
-  'menu-5-3-2': Stub_5_3_2,
-  'menu-5-3-3': Stub_5_3_3,
-  'menu-5-3-4': Stub_5_3_4,
-  'menu-5-3-5': Stub_5_3_5,
+  // menu-5-3 (5 个) - 安全大屏深度实现
+  'menu-5-3-1': RiskScoreDashboard,
+  'menu-5-3-2': RealtimeThreatTrend,
+  'menu-5-3-3': IncidentResolutionKPI,
+  'menu-5-3-4': AssetComplianceStatus,
+  'menu-5-3-5': DashboardCustomConfig,
 
   // menu-5-4 (5 个)
   'menu-5-4-1': Stub_5_4_1,
