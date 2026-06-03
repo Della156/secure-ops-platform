@@ -2337,13 +2337,13 @@ const VulnUnfixableList = dynamic(() => import(
 const VulnTaskMonitor = dynamic(() => import(
   '@/components/Pages/module4/vulnManage/VulnTaskMonitor'
 ).then(m => ({ default: m.VulnTaskMonitor })));
-const VulnHistoryQuery = dynamic(() => import(
+const V4_VulnHistoryQuery = dynamic(() => import(
   '@/components/Pages/module4/vulnManage/VulnHistoryQuery'
 ).then(m => ({ default: m.VulnHistoryQuery })));
-const VulnTaskAudit = dynamic(() => import(
+const V4_VulnTaskAudit = dynamic(() => import(
   '@/components/Pages/module4/vulnManage/VulnTaskAudit'
 ).then(m => ({ default: m.VulnTaskAudit })));
-const VulnTaskReport = dynamic(() => import(
+const V4_VulnTaskReport = dynamic(() => import(
   '@/components/Pages/module4/vulnManage/VulnTaskReport'
 ).then(m => ({ default: m.VulnTaskReport })));
 
@@ -2803,9 +2803,9 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-4-6-7': VulnDatabase,
   'menu-4-6-8': VulnUnfixableList,
   'menu-4-6-9': VulnTaskMonitor,
-  'menu-4-6-10': VulnHistoryQuery,
-  'menu-4-6-11': VulnTaskAudit,
-  'menu-4-6-12': VulnTaskReport,
+  'menu-4-6-10': V4_VulnHistoryQuery,
+  'menu-4-6-11': V4_VulnTaskAudit,
+  'menu-4-6-12': V4_VulnTaskReport,
 
   // menu-4-1 (9 个)
   'menu-4-1-1': Stub_4_1_1,
