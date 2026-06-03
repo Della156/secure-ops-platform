@@ -1822,16 +1822,16 @@ const RestoreTaskReport = dynamic(() => import(
   '@/components/Pages/module2/restoreTask/RestoreTaskReport'
 ).then(m => ({ default: m.RestoreTaskReport })));
 
-// 第14组：定时任务
-const ScheduledTaskView = dynamic(() => import(
+// 第14组：备份恢复演练
+const BackupDrillView = dynamic(() => import(
   '@/components/Pages/module2/scheduledTask/ScheduledTaskView'
 ).then(m => ({ default: m.ScheduledTaskView })));
 
-const ScheduledTaskConfig = dynamic(() => import(
+const DrillScenarioEdit = dynamic(() => import(
   '@/components/Pages/module2/scheduledTask/ScheduledTaskConfig'
 ).then(m => ({ default: m.ScheduledTaskConfig })));
 
-const ScheduledTaskReport = dynamic(() => import(
+const DrillStatusMonitor = dynamic(() => import(
   '@/components/Pages/module2/scheduledTask/ScheduledTaskReport'
 ).then(m => ({ default: m.ScheduledTaskReport })));
 
@@ -1855,20 +1855,20 @@ const DrillTaskReport = dynamic(() => import(
   '@/components/Pages/module2/scheduledTask/DrillTaskReport'
 ).then(m => ({ default: m.DrillTaskReport })));
 
-// 第15组：运维操作视图
-const OperationView = dynamic(() => import(
+// 第15组：系统启停
+const SystemStartStopView = dynamic(() => import(
   '@/components/Pages/module2/operation/OperationView'
 ).then(m => ({ default: m.OperationView })));
 
-const TaskScheduling = dynamic(() => import(
+const StartStopStrategyConfig = dynamic(() => import(
   '@/components/Pages/module2/operation/TaskScheduling'
 ).then(m => ({ default: m.TaskScheduling })));
 
-const JobQueue = dynamic(() => import(
+const StartStopExec = dynamic(() => import(
   '@/components/Pages/module2/operation/JobQueue'
 ).then(m => ({ default: m.JobQueue })));
 
-const OperationReport = dynamic(() => import(
+const StartStopStatusMonitor = dynamic(() => import(
   '@/components/Pages/module2/operation/OperationReport'
 ).then(m => ({ default: m.OperationReport })));
 
@@ -1880,16 +1880,16 @@ const StartStopTaskReport = dynamic(() => import(
   '@/components/Pages/module2/operation/StartStopTaskReport'
 ).then(m => ({ default: m.StartStopTaskReport })));
 
-// 第16组：故障处理
-const FaultHandleView = dynamic(() => import(
+// 第16组：系统配置调优
+const SystemTuningView = dynamic(() => import(
   '@/components/Pages/module2/faultHandle/FaultHandleView'
 ).then(m => ({ default: m.FaultHandleView })));
 
-const FaultLocation = dynamic(() => import(
+const TuningStrategyConfig = dynamic(() => import(
   '@/components/Pages/module2/faultHandle/FaultLocation'
 ).then(m => ({ default: m.FaultLocation })));
 
-const FaultProcessing = dynamic(() => import(
+const TuningExec = dynamic(() => import(
   '@/components/Pages/module2/faultHandle/FaultProcessing'
 ).then(m => ({ default: m.FaultProcessing })));
 
@@ -1905,16 +1905,16 @@ const TuningTaskReport = dynamic(() => import(
   '@/components/Pages/module2/faultHandle/TuningTaskReport'
 ).then(m => ({ default: m.TuningTaskReport })));
 
-// 第17组：安全扫描任务
-const SecurityScanView = dynamic(() => import(
+// 第17组：权限分配任务
+const PermAssignView = dynamic(() => import(
   '@/components/Pages/module2/securityScan/SecurityScanView'
 ).then(m => ({ default: m.SecurityScanView })));
 
-const ScanConfig = dynamic(() => import(
+const PermAssignStatusMonitor = dynamic(() => import(
   '@/components/Pages/module2/securityScan/ScanConfig'
 ).then(m => ({ default: m.ScanConfig })));
 
-const ScanResult = dynamic(() => import(
+const PermAssignValidate = dynamic(() => import(
   '@/components/Pages/module2/securityScan/ScanResult'
 ).then(m => ({ default: m.ScanResult })));
 
@@ -2023,6 +2023,14 @@ const InspectionConfig = dynamic(() => import(
 ).then(m => ({ default: m.InspectionConfig })));
 
 // 第21组：安全漏洞加固
+const VulnHardeningView = dynamic(() => import(
+  '@/components/Pages/module2/vulnHardening/VulnHardeningView'
+).then(m => ({ default: m.VulnHardeningView })));
+
+const VulnDbSync = dynamic(() => import(
+  '@/components/Pages/module2/vulnHardening/VulnDbSync'
+).then(m => ({ default: m.VulnDbSync })));
+
 const VulnStrategyConfig = dynamic(() => import(
   '@/components/Pages/module2/vulnHardening/VulnStrategyConfig'
 ).then(m => ({ default: m.VulnStrategyConfig })));
@@ -2051,24 +2059,23 @@ const VulnAlertNotify = dynamic(() => import(
   '@/components/Pages/module2/vulnHardening/VulnAlertNotify'
 ).then(m => ({ default: m.VulnAlertNotify })));
 
-// 第22组：安全加固视图
-const SecurityHardeningView = dynamic(() => import(
+// 第22组：安全客服
+const HelpdeskView = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/SecurityHardeningView'
 ).then(m => ({ default: m.SecurityHardeningView })));
 
-const AccountHardening = dynamic(() => import(
+const QaAnalysis = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/AccountHardening'
 ).then(m => ({ default: m.AccountHardening })));
 
-const AccessControlHardening = dynamic(() => import(
+const QaAnswer = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/AccessControlHardening'
 ).then(m => ({ default: m.AccessControlHardening })));
 
-const SecurityHardeningReport = dynamic(() => import(
+const ProcessGuide = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/SecurityHardeningReport'
 ).then(m => ({ default: m.SecurityHardeningReport })));
 
-// 第22组：安全客服
 const HelpdeskStatusMonitor = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/HelpdeskStatusMonitor'
 ).then(m => ({ default: m.HelpdeskStatusMonitor })));
@@ -2085,20 +2092,19 @@ const HelpdeskTaskReport = dynamic(() => import(
   '@/components/Pages/module2/securityHardening/HelpdeskTaskReport'
 ).then(m => ({ default: m.HelpdeskTaskReport })));
 
-// 第23组：漏洞管理视图
-const VulnerabilityView = dynamic(() => import(
+// 第23组：准入工单
+const AccessWorkOrderView = dynamic(() => import(
   '@/components/Pages/module2/vulnerability/VulnerabilityView'
 ).then(m => ({ default: m.VulnerabilityView })));
 
-const VulnerabilityScan = dynamic(() => import(
+const AccessAuthConfig = dynamic(() => import(
   '@/components/Pages/module2/vulnerability/VulnerabilityScan'
 ).then(m => ({ default: m.VulnerabilityScan })));
 
-const VulnerabilityReport = dynamic(() => import(
+const AccessDisableTask = dynamic(() => import(
   '@/components/Pages/module2/vulnerability/VulnerabilityReport'
 ).then(m => ({ default: m.VulnerabilityReport })));
 
-// 第23组：准入工单任务
 const AccessExtendTask = dynamic(() => import(
   '@/components/Pages/module2/vulnerability/AccessExtendTask'
 ).then(m => ({ default: m.AccessExtendTask })));
@@ -2251,6 +2257,209 @@ const SysDiagAudit = dynamic(() => import(
 const SysDiagTaskReport = dynamic(() => import(
   '@/components/Pages/module2/systemDiag/SysDiagTaskReport'
 ).then(m => ({ default: m.SysDiagTaskReport })));
+
+// 第28组：性能诊断
+const PerfDiagView = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfDiagView'
+).then(m => ({ default: m.PerfDiagView })));
+
+const PerfMonitor = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfMonitor'
+).then(m => ({ default: m.PerfMonitor })));
+
+const PerfAnalysis = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfAnalysis'
+).then(m => ({ default: m.PerfAnalysis })));
+
+const PerfDiagStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfDiagStatusMonitor'
+).then(m => ({ default: m.PerfDiagStatusMonitor })));
+
+const PerfDiagHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfDiagHistoryQuery'
+).then(m => ({ default: m.PerfDiagHistoryQuery })));
+
+const PerfDiagAudit = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfDiagAudit'
+).then(m => ({ default: m.PerfDiagAudit })));
+
+const PerfDiagTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/perfDiag/PerfDiagTaskReport'
+).then(m => ({ default: m.PerfDiagTaskReport })));
+
+// 第29组：安全阻断诊断
+const BlockDiagView = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagView'
+).then(m => ({ default: m.BlockDiagView })));
+
+const BlockDiagAnalysis = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagAnalysis'
+).then(m => ({ default: m.BlockDiagAnalysis })));
+
+const BlockDiagStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagStatusMonitor'
+).then(m => ({ default: m.BlockDiagStatusMonitor })));
+
+const BlockDiagHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagHistoryQuery'
+).then(m => ({ default: m.BlockDiagHistoryQuery })));
+
+const BlockDiagAudit = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagAudit'
+).then(m => ({ default: m.BlockDiagAudit })));
+
+const BlockDiagTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/blockDiag/BlockDiagTaskReport'
+).then(m => ({ default: m.BlockDiagTaskReport })));
+
+// 第30组：综合故障诊断
+const CompDiagView = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompDiagView'
+).then(m => ({ default: m.CompDiagView })));
+
+const CompFaultDiag = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompFaultDiag'
+).then(m => ({ default: m.CompFaultDiag })));
+
+const CompDiagStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompDiagStatusMonitor'
+).then(m => ({ default: m.CompDiagStatusMonitor })));
+
+const CompDiagHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompDiagHistoryQuery'
+).then(m => ({ default: m.CompDiagHistoryQuery })));
+
+const CompDiagAudit = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompDiagAudit'
+).then(m => ({ default: m.CompDiagAudit })));
+
+const CompDiagTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/comprehensiveDiag/CompDiagTaskReport'
+).then(m => ({ default: m.CompDiagTaskReport })));
+
+// 第31组：作业审核
+const JobAuditView = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobAuditView'
+).then(m => ({ default: m.JobAuditView })));
+
+const AutoJobAudit = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/AutoJobAudit'
+).then(m => ({ default: m.AutoJobAudit })));
+
+const QualComplianceCheck = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/QualComplianceCheck'
+).then(m => ({ default: m.QualComplianceCheck })));
+
+const JobRiskLevelAssess = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobRiskLevelAssess'
+).then(m => ({ default: m.JobRiskLevelAssess })));
+
+const JobAuditStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobAuditStatusMonitor'
+).then(m => ({ default: m.JobAuditStatusMonitor })));
+
+const JobAuditHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobAuditHistoryQuery'
+).then(m => ({ default: m.JobAuditHistoryQuery })));
+
+const JobAuditAudit = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobAuditAudit'
+).then(m => ({ default: m.JobAuditAudit })));
+
+const JobAuditTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/jobAudit/JobAuditTaskReport'
+).then(m => ({ default: m.JobAuditTaskReport })));
+
+// 第32组：作业方案审核
+const JobPlanAuditView = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/JobPlanAuditView'
+).then(m => ({ default: m.JobPlanAuditView })));
+
+const PlanComplianceCheck = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanComplianceCheck'
+).then(m => ({ default: m.PlanComplianceCheck })));
+
+const PlanIntegrityCheck = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanIntegrityCheck'
+).then(m => ({ default: m.PlanIntegrityCheck })));
+
+const PlanAuditStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanAuditStatusMonitor'
+).then(m => ({ default: m.PlanAuditStatusMonitor })));
+
+const PlanAuditHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanAuditHistoryQuery'
+).then(m => ({ default: m.PlanAuditHistoryQuery })));
+
+const PlanAuditAudit = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanAuditAudit'
+).then(m => ({ default: m.PlanAuditAudit })));
+
+const PlanAuditTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/jobPlanAudit/PlanAuditTaskReport'
+).then(m => ({ default: m.PlanAuditTaskReport })));
+
+// 第33组：作业问题检查
+const JobIssueCheckView = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/JobIssueCheckView'
+).then(m => ({ default: m.JobIssueCheckView })));
+
+const ConfigDiffCompare = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/ConfigDiffCompare'
+).then(m => ({ default: m.ConfigDiffCompare })));
+
+const IssueAutoLocation = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueAutoLocation'
+).then(m => ({ default: m.IssueAutoLocation })));
+
+const IssueSeverityGrade = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueSeverityGrade'
+).then(m => ({ default: m.IssueSeverityGrade })));
+
+const IssueCheckStatusMonitor = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueCheckStatusMonitor'
+).then(m => ({ default: m.IssueCheckStatusMonitor })));
+
+const IssueCheckHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueCheckHistoryQuery'
+).then(m => ({ default: m.IssueCheckHistoryQuery })));
+
+const IssueCheckAudit = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueCheckAudit'
+).then(m => ({ default: m.IssueCheckAudit })));
+
+const IssueCheckTaskReport = dynamic(() => import(
+  '@/components/Pages/module2/jobIssueCheck/IssueCheckTaskReport'
+).then(m => ({ default: m.IssueCheckTaskReport })));
+
+// 第34组：作业综合辅助
+const JobAssistantView = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-1" {...props} />) })));
+
+const JobQualityEval = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-2" {...props} />) })));
+
+const StandardReportGen = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-3" {...props} />) })));
+
+const JobAssistStatusMonitor = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-4" {...props} />) })));
+
+const JobAssistHistoryQuery = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-5" {...props} />) })));
+
+const JobAssistAudit = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-6" {...props} />) })));
+
+const JobAssistTaskReport = dynamic(() => import(
+  '@/components/Pages/_shared/GenericStub'
+).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-7" {...props} />) })));
 
 const NetworkDiagnostic = dynamic(() => import(
   '@/components/Pages/module2/diagnostic/NetworkDiagnostic'
@@ -2531,33 +2740,33 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-13-5': RestoreExceptionHandle,
   'menu-2-13-6': RestoreLogRecord,
   'menu-2-13-7': RestoreTaskReport,
-  // 第14组：定时任务
-  'menu-2-14-1': ScheduledTaskView,
-  'menu-2-14-2': ScheduledTaskConfig,
+  // 第14组：备份恢复演练
+  'menu-2-14-1': BackupDrillView,
+  'menu-2-14-2': DrillScenarioEdit,
   'menu-2-14-3': DrillTaskExec,
   'menu-2-14-4': DrillProcessRecord,
-  'menu-2-14-5': ScheduledTaskReport,
+  'menu-2-14-5': DrillStatusMonitor,
   'menu-2-14-6': DrillReportGen,
   'menu-2-14-7': DrillKnowledgeBase,
   'menu-2-14-8': DrillTaskReport,
-  // 第15组：运维操作视图
-  'menu-2-15-1': OperationView,
-  'menu-2-15-2': TaskScheduling,
-  'menu-2-15-3': JobQueue,
-  'menu-2-15-4': OperationReport,
+  // 第15组：系统启停
+  'menu-2-15-1': SystemStartStopView,
+  'menu-2-15-2': StartStopStrategyConfig,
+  'menu-2-15-3': StartStopExec,
+  'menu-2-15-4': StartStopStatusMonitor,
   'menu-2-15-5': StartStopAudit,
   'menu-2-15-6': StartStopTaskReport,
-  // 第16组：故障处理
-  'menu-2-16-1': FaultHandleView,
-  'menu-2-16-2': FaultLocation,
-  'menu-2-16-3': FaultProcessing,
+  // 第16组：系统配置调优
+  'menu-2-16-1': SystemTuningView,
+  'menu-2-16-2': TuningStrategyConfig,
+  'menu-2-16-3': TuningExec,
   'menu-2-16-4': TuningStatusMonitor,
   'menu-2-16-5': TuningAudit,
   'menu-2-16-6': TuningTaskReport,
-  // 第17组：安全扫描任务
-  'menu-2-17-1': SecurityScanView,
-  'menu-2-17-2': ScanConfig,
-  'menu-2-17-3': ScanResult,
+  // 第17组：权限分配任务
+  'menu-2-17-1': PermAssignView,
+  'menu-2-17-2': PermAssignStatusMonitor,
+  'menu-2-17-3': PermAssignValidate,
   'menu-2-17-4': AutoRetryAlert,
   'menu-2-17-5': PermAssignReport,
   // 第18组：权限回收任务
@@ -2584,10 +2793,9 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-20-5': HardeningHistoryQuery,
   'menu-2-20-6': HardeningAudit,
   'menu-2-20-7': HardeningTaskReport,
-  // 第21组：设备巡检任务
-  'menu-2-21-1': DeviceInspectionView,
-  'menu-2-21-2': InspectionConfig,
   // 第21组：安全漏洞加固
+  'menu-2-21-1': VulnHardeningView,
+  'menu-2-21-2': VulnDbSync,
   'menu-2-21-3': VulnStrategyConfig,
   'menu-2-21-4': VulnRepairExec,
   'menu-2-21-5': VulnStatusMonitor,
@@ -2595,21 +2803,19 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-21-7': VulnAudit,
   'menu-2-21-8': VulnTaskReport,
   'menu-2-21-9': VulnAlertNotify,
-  // 第22组：安全加固视图
-  'menu-2-22-1': SecurityHardeningView,
-  'menu-2-22-2': AccountHardening,
-  'menu-2-22-3': AccessControlHardening,
-  'menu-2-22-4': SecurityHardeningReport,
   // 第22组：安全客服
+  'menu-2-22-1': HelpdeskView,
+  'menu-2-22-2': QaAnalysis,
+  'menu-2-22-3': QaAnswer,
+  'menu-2-22-4': ProcessGuide,
   'menu-2-22-5': HelpdeskStatusMonitor,
   'menu-2-22-6': HelpdeskHistoryQuery,
   'menu-2-22-7': HelpdeskAudit,
   'menu-2-22-8': HelpdeskTaskReport,
-  // 第23组：漏洞管理视图
-  'menu-2-23-1': VulnerabilityView,
-  'menu-2-23-2': VulnerabilityScan,
-  'menu-2-23-3': VulnerabilityReport,
-  // 第23组：准入工单任务
+  // 第23组：准入工单
+  'menu-2-23-1': AccessWorkOrderView,
+  'menu-2-23-2': AccessAuthConfig,
+  'menu-2-23-3': AccessDisableTask,
   'menu-2-23-4': AccessExtendTask,
   'menu-2-23-5': AccessStatusMonitor,
   'menu-2-23-6': AccessHistoryQuery,
@@ -3062,68 +3268,68 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-2-27-5': SysDiagAudit,
   'menu-2-27-6': SysDiagTaskReport,
 
-  // menu-2-28 (7 个)
-  'menu-2-28-1': Stub_2_28_1,
-  'menu-2-28-2': Stub_2_28_2,
-  'menu-2-28-3': Stub_2_28_3,
-  'menu-2-28-4': Stub_2_28_4,
-  'menu-2-28-5': Stub_2_28_5,
-  'menu-2-28-6': Stub_2_28_6,
-  'menu-2-28-7': Stub_2_28_7,
+  // 第28组：性能诊断
+  'menu-2-28-1': PerfDiagView,
+  'menu-2-28-2': PerfMonitor,
+  'menu-2-28-3': PerfAnalysis,
+  'menu-2-28-4': PerfDiagStatusMonitor,
+  'menu-2-28-5': PerfDiagHistoryQuery,
+  'menu-2-28-6': PerfDiagAudit,
+  'menu-2-28-7': PerfDiagTaskReport,
 
-  // menu-2-29 (6 个)
-  'menu-2-29-1': Stub_2_29_1,
-  'menu-2-29-2': Stub_2_29_2,
-  'menu-2-29-3': Stub_2_29_3,
-  'menu-2-29-4': Stub_2_29_4,
-  'menu-2-29-5': Stub_2_29_5,
-  'menu-2-29-6': Stub_2_29_6,
+  // 第29组：安全阻断诊断
+  'menu-2-29-1': BlockDiagView,
+  'menu-2-29-2': BlockDiagAnalysis,
+  'menu-2-29-3': BlockDiagStatusMonitor,
+  'menu-2-29-4': BlockDiagHistoryQuery,
+  'menu-2-29-5': BlockDiagAudit,
+  'menu-2-29-6': BlockDiagTaskReport,
 
-  // menu-2-30 (6 个)
-  'menu-2-30-1': Stub_2_30_1,
-  'menu-2-30-2': Stub_2_30_2,
-  'menu-2-30-3': Stub_2_30_3,
-  'menu-2-30-4': Stub_2_30_4,
-  'menu-2-30-5': Stub_2_30_5,
-  'menu-2-30-6': Stub_2_30_6,
+  // 第30组：综合故障诊断
+  'menu-2-30-1': CompDiagView,
+  'menu-2-30-2': CompFaultDiag,
+  'menu-2-30-3': CompDiagStatusMonitor,
+  'menu-2-30-4': CompDiagHistoryQuery,
+  'menu-2-30-5': CompDiagAudit,
+  'menu-2-30-6': CompDiagTaskReport,
 
-  // menu-2-31 (8 个)
-  'menu-2-31-1': Stub_2_31_1,
-  'menu-2-31-2': Stub_2_31_2,
-  'menu-2-31-3': Stub_2_31_3,
-  'menu-2-31-4': Stub_2_31_4,
-  'menu-2-31-5': Stub_2_31_5,
-  'menu-2-31-6': Stub_2_31_6,
-  'menu-2-31-7': Stub_2_31_7,
-  'menu-2-31-8': Stub_2_31_8,
+  // 第31组：作业审核
+  'menu-2-31-1': JobAuditView,
+  'menu-2-31-2': AutoJobAudit,
+  'menu-2-31-3': QualComplianceCheck,
+  'menu-2-31-4': JobRiskLevelAssess,
+  'menu-2-31-5': JobAuditStatusMonitor,
+  'menu-2-31-6': JobAuditHistoryQuery,
+  'menu-2-31-7': JobAuditAudit,
+  'menu-2-31-8': JobAuditTaskReport,
 
-  // menu-2-32 (7 个)
-  'menu-2-32-1': Stub_2_32_1,
-  'menu-2-32-2': Stub_2_32_2,
-  'menu-2-32-3': Stub_2_32_3,
-  'menu-2-32-4': Stub_2_32_4,
-  'menu-2-32-5': Stub_2_32_5,
-  'menu-2-32-6': Stub_2_32_6,
-  'menu-2-32-7': Stub_2_32_7,
+  // 第32组：作业方案审核
+  'menu-2-32-1': JobPlanAuditView,
+  'menu-2-32-2': PlanComplianceCheck,
+  'menu-2-32-3': PlanIntegrityCheck,
+  'menu-2-32-4': PlanAuditStatusMonitor,
+  'menu-2-32-5': PlanAuditHistoryQuery,
+  'menu-2-32-6': PlanAuditAudit,
+  'menu-2-32-7': PlanAuditTaskReport,
 
-  // menu-2-33 (8 个)
-  'menu-2-33-1': Stub_2_33_1,
-  'menu-2-33-2': Stub_2_33_2,
-  'menu-2-33-3': Stub_2_33_3,
-  'menu-2-33-4': Stub_2_33_4,
-  'menu-2-33-5': Stub_2_33_5,
-  'menu-2-33-6': Stub_2_33_6,
-  'menu-2-33-7': Stub_2_33_7,
-  'menu-2-33-8': Stub_2_33_8,
+  // 第33组：作业问题检查
+  'menu-2-33-1': JobIssueCheckView,
+  'menu-2-33-2': ConfigDiffCompare,
+  'menu-2-33-3': IssueAutoLocation,
+  'menu-2-33-4': IssueSeverityGrade,
+  'menu-2-33-5': IssueCheckStatusMonitor,
+  'menu-2-33-6': IssueCheckHistoryQuery,
+  'menu-2-33-7': IssueCheckAudit,
+  'menu-2-33-8': IssueCheckTaskReport,
 
-  // menu-2-34 (7 个)
-  'menu-2-34-1': Stub_2_34_1,
-  'menu-2-34-2': Stub_2_34_2,
-  'menu-2-34-3': Stub_2_34_3,
-  'menu-2-34-4': Stub_2_34_4,
-  'menu-2-34-5': Stub_2_34_5,
-  'menu-2-34-6': Stub_2_34_6,
-  'menu-2-34-7': Stub_2_34_7,
+  // 第34组：作业综合辅助
+  'menu-2-34-1': JobAssistantView,
+  'menu-2-34-2': JobQualityEval,
+  'menu-2-34-3': StandardReportGen,
+  'menu-2-34-4': JobAssistStatusMonitor,
+  'menu-2-34-5': JobAssistHistoryQuery,
+  'menu-2-34-6': JobAssistAudit,
+  'menu-2-34-7': JobAssistTaskReport,
 
   // 模块3：网络安全自动运营（已移除）
   // 模块 4：网络安全标准场景自动化

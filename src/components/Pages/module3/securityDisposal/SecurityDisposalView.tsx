@@ -1,189 +1,308 @@
 'use client';
-import React, { useState } from 'react';
-import { Search, Eye, RefreshCw, Download, Activity, AlertTriangle, CheckCircle, Clock, Play, StopCircle, RotateCcw } from 'lucide-react';
-import { useAsyncData, mockApi } from '@/hooks/useAsyncData';
-import { useTable } from '@/hooks/useTable';
-import { useInteraction } from '@/hooks/useInteraction';
-import { StatsCard, StatsCardGrid } from '@/components/Common/StatsCard';
-import { DataTable, Pagination } from '@/components/Common/DataTable';
-import { StatusBadge } from '@/components/Common/StatusBadge';
-import { SearchBar, FilterTabs } from '@/components/Common/SearchBar';
-import { PageHeader, LoadingState, ErrorState, EmptyState } from '@/components/Common/PageStates';
 
-/* --- Type --- */
-interface Item {
+import React, { useState, useMemo } from 'react';
+import {
+  Search, Plus, Download, RefreshCw, Filter, Eye, Shield,
+  AlertCircle, CheckCircle2, Clock, Activity, Zap, ChevronRight,
+  Server, Cpu, Network, FileText, Key, User, Lock,
+  TrendingUp, ChevronDown, ArrowRight, XCircle, MoreVertical
+} from 'lucide-react';
+
+interface DisposalCase {
   id: string;
-  name: string;
-  status: string;
-  pendingEvents: number;
-  completed: number;
-  autoRate: number;
-  pendingApproval: number;
+  title: string;
+  alertId: string;
+  alertType: '恶意软件' | '钓鱼邮件' | '数据泄露' | '越权访问' | '漏洞利用' | '暴力破解' | '内网异常';
+  severity: 'critical' | 'high' | 'medium';
+  level: 'L1-自动' | 'L2-半自动' | 'L3-审批' | 'L4-人工';
+  status: 'pending' | 'auto-running' | 'awaiting-approval' | 'executing' | 'completed' | 'failed';
+  assets: number;
+  actions: { name: string; status: 'pending' | 'running' | 'success' | 'failed' | 'skipped'; duration?: string }[];
+  startTime: string;
+  completedTime: string | null;
+  operator: string;
+  approver: string | null;
 }
 
-/* --- Mock Data --- */
-const mockData: Item[] = [
-{ id:'SD-001', name:'核心网安全综合处置', status:'running', pendingEvents:8, completed:45, autoRate:92, pendingApproval:3 },
-  { id:'SD-002', name:'办公网安全处置任务', status:'completed', pendingEvents:0, completed:23, autoRate:88, pendingApproval:0 },
-  { id:'SD-003', name:'数据中心应急处置', status:'running', pendingEvents:5, completed:67, autoRate:95, pendingApproval:2 },
-  { id:'SD-004', name:'云平台安全处置', status:'failed', pendingEvents:3, completed:12, autoRate:76, pendingApproval:1 },
-  { id:'SD-005', name:'勒索病毒应急处置', status:'running', pendingEvents:12, completed:34, autoRate:85, pendingApproval:5 }
+const cases: DisposalCase[] = [
+  { id: 'SD-2026060301', title: 'CVE-2024-3094 XZ Utils 后门处置', alertId: 'AL-99821', alertType: '漏洞利用', severity: 'critical', level: 'L1-自动', status: 'auto-running', assets: 23, actions: [
+    { name: '隔离受影响主机', status: 'success', duration: '12s' },
+    { name: '收集证据', status: 'success', duration: '45s' },
+    { name: '推送补丁', status: 'running', duration: '1m 24s' },
+    { name: '重启服务', status: 'pending' },
+    { name: '验证修复', status: 'pending' },
+    { name: '通知业务方', status: 'pending' },
+  ], startTime: '09:42:18', completedTime: null, operator: '系统自动', approver: null },
+  { id: 'SD-2026060302', title: '挖矿木马处置 (Kinsing)', alertId: 'AL-99808', alertType: '恶意软件', severity: 'high', level: 'L1-自动', status: 'completed', assets: 1, actions: [
+    { name: '隔离挖矿主机', status: 'success', duration: '8s' },
+    { name: '杀进程', status: 'success', duration: '3s' },
+    { name: '清除持久化', status: 'success', duration: '18s' },
+    { name: '杀挖矿文件', status: 'success', duration: '12s' },
+    { name: '系统加固', status: 'success', duration: '32s' },
+    { name: '恢复业务', status: 'success', duration: '15s' },
+  ], startTime: '07:30:12', completedTime: '07:32:40', operator: '系统自动', approver: null },
+  { id: 'SD-2026060303', title: '横向移动账号冻结', alertId: 'AL-99815', alertType: '内网异常', severity: 'high', level: 'L2-半自动', status: 'awaiting-approval', assets: 5, actions: [
+    { name: '检测异常', status: 'success', duration: '5s' },
+    { name: '建议处置动作', status: 'success', duration: '2s' },
+    { name: '审批', status: 'running' },
+    { name: '冻结账号 zhang.wei', status: 'pending' },
+    { name: '强制注销会话', status: 'pending' },
+  ], startTime: '09:18:42', completedTime: null, operator: 'AI 推荐', approver: '李工' },
+  { id: 'SD-2026060304', title: '数据库 SQL 注入处置', alertId: 'AL-99812', alertType: '漏洞利用', severity: 'critical', level: 'L3-审批', status: 'awaiting-approval', assets: 1, actions: [
+    { name: 'WAF 拦截规则', status: 'success', duration: '3s' },
+    { name: 'SQL 审计开启', status: 'success', duration: '5s' },
+    { name: '回滚注入数据', status: 'pending' },
+    { name: '修改 sa 密码', status: 'pending' },
+    { name: '补丁更新', status: 'pending' },
+  ], startTime: '08:20:15', completedTime: null, operator: 'DBA', approver: '王经理' },
+  { id: 'SD-2026060305', title: '钓鱼邮件批量处置', alertId: 'AL-99805', alertType: '钓鱼邮件', severity: 'medium', level: 'L1-自动', status: 'completed', assets: 142, actions: [
+    { name: '从所有邮箱删除', status: 'success', duration: '2m 18s' },
+    { name: '重置点击用户密码', status: 'success', duration: '1m 45s' },
+    { name: '扫描终端落地的附件', status: 'success', duration: '3m 12s' },
+    { name: '推送告警', status: 'success', duration: '8s' },
+  ], startTime: '06:00:00', completedTime: '06:08:23', operator: '系统自动', approver: null },
+  { id: 'SD-2026060306', title: 'DDoS 攻击流量清洗', alertId: 'AL-99802', alertType: '暴力破解', severity: 'high', level: 'L1-自动', status: 'auto-running', assets: 8, actions: [
+    { name: '流量牵引', status: 'success', duration: '4s' },
+    { name: '清洗中心引流', status: 'running' },
+    { name: '黑名单更新', status: 'pending' },
+    { name: '回注流量', status: 'pending' },
+  ], startTime: '09:38:00', completedTime: null, operator: '系统自动', approver: null },
 ];
 
-/* --- Detail Modal --- */
-function DetailContent({ row }: { row: Item }) {
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        {Object.entries(row).filter(([k])=>k!=='id').slice(0,6).map(([k,v]) => (
-          <div key={k} className="bg-[#131B2A] p-3 rounded-lg">
-            <p className="text-gray-500 text-xs mb-1">{k}</p>
-            {k==='status' ? <StatusBadge status={v as string} pulse={v==='running'} /> : <p className="text-white text-sm">{String(v)}</p>}
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-[#2A354D] pt-4">
-        <h4 className="text-sm font-medium text-gray-300 mb-3">执行记录</h4>
-        <div className="space-y-2">
-          {[1,2,3].map(i => (
-            <div key={i} className="flex items-center gap-3 bg-[#131B2A] p-3 rounded-lg text-sm">
-              <div className="w-2 h-2 rounded-full bg-blue-400" />
-              <span className="text-gray-400">步骤 {i}：{['初始化分析引擎','加载规则库','执行分析任务','生成报告'][i-1] || '完成'}</span>
-              <span className="text-xs text-gray-600 ml-auto">2026-06-02 08:0{i}:00</span>
-              <CheckCircle className="w-4 h-4 text-green-500" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+const levelColor = {
+  'L1-自动': 'bg-green-500/20 text-green-400 border-green-500/40',
+  'L2-半自动': 'bg-blue-500/20 text-blue-400 border-blue-500/40',
+  'L3-审批': 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40',
+  'L4-人工': 'bg-red-500/20 text-red-400 border-red-500/40',
+};
 
-/* --- Main Component --- */
+const statusConfig = {
+  pending: { label: '待执行', color: 'text-slate-400', bg: 'bg-slate-500/20' },
+  'auto-running': { label: '执行中', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+  'awaiting-approval': { label: '待审批', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+  executing: { label: '执行中', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+  completed: { label: '已完成', color: 'text-green-400', bg: 'bg-green-500/20' },
+  failed: { label: '失败', color: 'text-red-400', bg: 'bg-red-500/20' },
+};
+
+const actionIcon = (status: string) => {
+  if (status === 'success') return <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />;
+  if (status === 'running') return <Activity className="w-3.5 h-3.5 text-blue-400 animate-pulse" />;
+  if (status === 'failed') return <XCircle className="w-3.5 h-3.5 text-red-400" />;
+  if (status === 'skipped') return <ChevronRight className="w-3.5 h-3.5 text-slate-500" />;
+  return <Clock className="w-3.5 h-3.5 text-slate-500" />;
+};
+
 export function SecurityDisposalView() {
-  const interaction = useInteraction();
-  const { showModal, showConfirm, showToast, ConfirmDialog, DetailModal, Toast } = interaction;
+  const [search, setSearch] = useState('');
+  const [levelFilter, setLevelFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedId, setSelectedId] = useState<string | null>('SD-2026060301');
 
-  const { data, isLoading, isError, isEmpty, refresh } = useAsyncData(
-    () => mockApi(mockData, 0.05), []
-  );
-
-  const table = useTable({
-    data: data || [],
-    defaultPageSize: 5,
-    defaultSort: { key: 'id', direction: 'desc' },
+  const filtered = cases.filter(c => {
+    if (search && !c.title.includes(search) && !c.id.includes(search)) return false;
+    if (levelFilter !== 'all' && c.level !== levelFilter) return false;
+    if (statusFilter !== 'all' && c.status !== statusFilter) return false;
+    return true;
   });
 
-  const items = data || [];
+  const selected = selectedId ? cases.find(c => c.id === selectedId) : null;
   const stats = {
-    total: items.length,
-    running: items.filter(d => d.status === 'running').length,
-    completed: items.filter(d => d.status === 'completed').length,
-    failed: items.filter(d => d.status === 'failed').length,
-    pending: items.filter(d => d.status === 'pending').length,
+    total: cases.length,
+    auto: cases.filter(c => c.level === 'L1-自动').length,
+    awaiting: cases.filter(c => c.status === 'awaiting-approval').length,
+    running: cases.filter(c => c.status === 'auto-running' || c.status === 'executing').length,
+    completed: cases.filter(c => c.status === 'completed').length,
   };
-
-  const statusLabels = [
-    { label: '全部', value: '', count: items.length },
-    { label: '运行中', value: 'running', count: stats.running },
-    { label: '已完成', value: 'completed', count: stats.completed },
-    { label: '失败', value: 'failed', count: stats.failed },
-    { label: '待执行', value: 'pending', count: stats.pending },
-  ];
-
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const toggleSelect = (id: string) => {
-    setSelectedIds(prev => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id]);
-  };
-
-  const handleAction = (row: Item) => {
-    if (row.status === 'failed') {
-      showConfirm({ title: '重试任务', message: `确定要重试任务「${row.name}」吗？`, type: 'warning', confirmText: '重试',
-        onConfirm: () => { showToast('重试请求已提交', 'success'); },
-      });
-    } else if (row.status === 'running') {
-      showConfirm({ title: '暂停任务', message: `确定要暂停任务「${row.name}」吗？`, type: 'warning',
-        onConfirm: () => { showToast('任务已暂停', 'info'); },
-      });
-    } else {
-      showToast('正在查看任务详情', 'info');
-    }
-  };
-
-  if (isLoading) return <LoadingState message="正在加载数据..." />;
-  if (isError) return <ErrorState message="加载失败" onRetry={refresh} />;
-  if (isEmpty) return <EmptyState message="暂无数据" />;
 
   return (
-    <div>
-      <PageHeader title="安全综合处置视图" description="自动化安全处置操作，分级管理，审批驱动"
-        actions={[
-          <button key="refresh" onClick={refresh} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
-            <RefreshCw className="w-4 h-4" /> 刷新
-          </button>,
-          <button key="export" onClick={(e)=>{ e.stopPropagation(); showToast('导出任务已提交', 'success'); }} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
-            <Download className="w-4 h-4" /> 导出
-          </button>,
-          selectedIds.length > 0 && (
-            <button key="batch" onClick={()=>{ showConfirm({title:'批量操作',message:`确定要对 ${selectedIds.length} 条数据执行批量处理吗？`,type:'warning',onConfirm:()=>{showToast('批量处理已完成','success');setSelectedIds([]);}}); }} className="flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm hover:bg-yellow-500/30">
-              <RotateCcw className="w-4 h-4" /> 批量处理 ({selectedIds.length})
+    <div className="p-6 space-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <StatBox label="处置案例" value={stats.total} color="#0066FF" icon={<Shield className="w-4 h-4" />} />
+        <StatBox label="全自动" value={stats.auto} color="#22C55E" icon={<Zap className="w-4 h-4" />} />
+        <StatBox label="待审批" value={stats.awaiting} color="#EAB308" icon={<Clock className="w-4 h-4" />} />
+        <StatBox label="执行中" value={stats.running} color="#0066FF" icon={<Activity className="w-4 h-4" />} pulse />
+        <StatBox label="已完成" value={stats.completed} color="#9333EA" icon={<CheckCircle2 className="w-4 h-4" />} />
+      </div>
+
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 className="text-lg font-semibold text-white">安全综合处置视图</h2>
+            <p className="text-xs text-slate-500 mt-1">告警 → 自动化分级处置 → 闭环验证 · L1 自动 / L2 半自动 / L3 审批 / L4 人工</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
+              <Plus className="w-3.5 h-3.5" />新建案例
             </button>
-          ),
-        ].filter(Boolean)}
-      />
-
-      <StatsCardGrid cols={5}>
-        <StatsCard title="总任务" value={stats.total} />
-        <StatsCard title="运行中" value={stats.running} icon={<Activity className="w-5 h-5" />} color="blue" />
-        <StatsCard title="已完成" value={stats.completed} icon={<CheckCircle className="w-5 h-5" />} color="green" />
-        <StatsCard title="失败" value={stats.failed} icon={<AlertTriangle className="w-5 h-5" />} color="red" subtitle="需人工介入" />
-        <StatsCard title="待执行" value={stats.pending} icon={<Clock className="w-5 h-5" />} color="yellow" />
-      </StatsCardGrid>
-
-      <div className="flex flex-col gap-4 mb-6">
-        <FilterTabs options={statusLabels} value={table.filters.find(f=>f.key==='status')?.value||''}
-          onChange={(v) => table.setFilter('status', v)} />
-        <div className="flex items-center gap-3">
-          <SearchBar value={table.search} onChange={table.setSearch} placeholder="搜索任务名称..." />
-          {table.hasFilters && (
-            <button onClick={table.resetFilters} className="text-xs text-gray-500 hover:text-gray-300 whitespace-nowrap">清除筛选</button>
-          )}
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <RefreshCw className="w-3.5 h-3.5" />刷新
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <Download className="w-3.5 h-3.5" />导出
+            </button>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <input
+              type="text" placeholder="搜索案例/告警"
+              value={search} onChange={e => setSearch(e.target.value)}
+              className="w-full pl-8 pr-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
+            />
+          </div>
+          <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)} className="px-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md">
+            <option value="all">全部等级</option>
+            <option value="L1-自动">L1-自动</option>
+            <option value="L2-半自动">L2-半自动</option>
+            <option value="L3-审批">L3-审批</option>
+            <option value="L4-人工">L4-人工</option>
+          </select>
+          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="px-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md">
+            <option value="all">全部状态</option>
+            <option value="pending">待执行</option>
+            <option value="auto-running">执行中</option>
+            <option value="awaiting-approval">待审批</option>
+            <option value="completed">已完成</option>
+            <option value="failed">失败</option>
+          </select>
         </div>
       </div>
 
-      <DataTable
-        columns={[
-          { key:'_select', title:<input type="checkbox" onChange={(e)=>{if(e.target.checked)setSelectedIds(items.map(d=>d.id));else setSelectedIds([]);}} checked={selectedIds.length===items.length&&items.length>0} className="accent-blue-500" />, width:'40px', render:(_,row) => (
-            <input type="checkbox" onChange={()=>toggleSelect(row.id)} checked={selectedIds.includes(row.id)} className="accent-blue-500" onClick={e=>e.stopPropagation()} />
-          )},
-          { key:'id', title:'ID', width:'100px' },
-          { key:'name', title:'任务名称', sortable:true },
-          { key:'status', title:'状态', render:(v) => <StatusBadge status={v} pulse={v==='running'} /> },
-  { key:'pendingEvents', title:'待处置' },
-  { key:'completed', title:'已处置', sortable:true },
-  { key:'autoRate', title:'自动处置率', render:(v) => <span className={'text-'+ (v>=90?'green':v>=80?'yellow':'red') +'-400'}>{v}%</span> },
-  { key:'pendingApproval', title:'待审批', render:(v) => <span className={'px-2 py-0.5 text-xs rounded-full bg-yellow-500/20 text-yellow-400'}>{v}</span> },
-          { key:'_actions', title:'操作', width:'160px', render:(_,row) => (
-            <div className="flex items-center gap-2" onClick={e=>e.stopPropagation()}>
-              <button onClick={()=>showModal({title:'任务详情',content:<DetailContent row={row} />})} className="text-blue-400 hover:text-blue-300 text-xs flex items-center gap-1"><Eye className="w-3.5 h-3.5" /> 详情</button>
-              <button onClick={()=>handleAction(row)} className={`text-xs flex items-center gap-1 ${row.status==='failed'?'text-yellow-400 hover:text-yellow-300':'text-gray-400 hover:text-gray-300'}`}>
-                {row.status==='running'?<StopCircle className="w-3.5 h-3.5" />:row.status==='failed'?<RotateCcw className="w-3.5 h-3.5" />:<Play className="w-3.5 h-3.5" />}
-                {row.status==='running'?'暂停':row.status==='failed'?'重试':'执行'}
-              </button>
-            </div>
-          )},
-        ]}
-        data={table.data}
-        sort={table.sort}
-        onSort={table.toggleSort}
-        onRowClick={(row) => showModal({title:`${row.name} 详情`,content:<DetailContent row={row} />})}
-      />
-      <Pagination page={table.page} totalPages={table.totalPages} total={table.total} pageSize={table.pageSize}
-        onPageChange={table.setPage} onPageSizeChange={table.setPageSize} />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* 案例列表 */}
+        <div className="lg:col-span-2 bg-[#20293F] border border-[#2A354D] rounded-lg overflow-hidden">
+          <div className="px-4 py-3 border-b border-[#2A354D] flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-white">处置案例 ({filtered.length})</h3>
+          </div>
+          <div className="max-h-[560px] overflow-y-auto">
+            {filtered.map(c => {
+              const sc = statusConfig[c.status];
+              return (
+                <div
+                  key={c.id}
+                  onClick={() => setSelectedId(c.id)}
+                  className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === c.id ? 'bg-[#111625]' : ''}`}
+                >
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs text-blue-400 font-mono">{c.id}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 border rounded ${levelColor[c.level]}`}>
+                      {c.level}
+                    </span>
+                    <span className={`text-[10px] px-1.5 py-0.5 border rounded ${
+                      c.severity === 'critical' ? 'bg-red-500/20 text-red-400 border-red-500/40' :
+                      c.severity === 'high' ? 'bg-orange-500/20 text-orange-400 border-orange-500/40' :
+                      'bg-yellow-500/20 text-yellow-400 border-yellow-500/40'
+                    }`}>
+                      {c.severity === 'critical' ? '严重' : c.severity === 'high' ? '高' : '中'}
+                    </span>
+                    <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${sc.bg} ${sc.color}`}>
+                      {sc.label}
+                    </span>
+                  </div>
+                  <div className="text-sm text-white font-medium mb-1">{c.title}</div>
+                  <div className="flex items-center gap-3 text-xs text-slate-500">
+                    <span>告警 <span className="font-mono text-blue-300">{c.alertId}</span></span>
+                    <span>·</span>
+                    <span>资产 <span className="text-slate-300">{c.assets}</span> 个</span>
+                    <span>·</span>
+                    <span>操作人 <span className="text-slate-300">{c.operator}</span></span>
+                    {c.approver && <><span>·</span><span>审批人 <span className="text-yellow-300">{c.approver}</span></span></>}
+                  </div>
+                  {/* 动作进度条 */}
+                  <div className="flex items-center gap-1 mt-2">
+                    {c.actions.map((a, i) => (
+                      <React.Fragment key={i}>
+                        <div className={`flex-1 h-1 rounded ${
+                          a.status === 'success' ? 'bg-green-500' :
+                          a.status === 'running' ? 'bg-blue-500 animate-pulse' :
+                          a.status === 'failed' ? 'bg-red-500' :
+                          'bg-slate-700'
+                        }`} />
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-      {ConfirmDialog}
-      {DetailModal}
-      {Toast}
+        {/* 详情 */}
+        {selected ? (
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4 space-y-3">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 border rounded ${levelColor[selected.level]}`}>{selected.level}</span>
+              </div>
+              <h3 className="text-base font-semibold text-white mb-1">{selected.title}</h3>
+              <div className="text-xs text-slate-500">告警 <span className="text-blue-300 font-mono">{selected.alertId}</span> · {selected.alertType}</div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">状态</div>
+                <div className={statusConfig[selected.status].color}>{statusConfig[selected.status].label}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">影响资产</div>
+                <div className="text-slate-200 font-mono">{selected.assets}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">开始时间</div>
+                <div className="text-slate-200 font-mono text-[10px]">{selected.startTime}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">完成时间</div>
+                <div className="text-slate-200 font-mono text-[10px]">{selected.completedTime || '进行中'}</div>
+              </div>
+            </div>
+
+            <div>
+              <div className="text-xs text-slate-500 mb-1.5">处置动作链 ({selected.actions.filter(a => a.status === 'success').length}/{selected.actions.length})</div>
+              <div className="space-y-1.5 max-h-[200px] overflow-y-auto">
+                {selected.actions.map((a, i) => (
+                  <div key={i} className="flex items-center gap-2 p-1.5 bg-[#111625] rounded">
+                    {actionIcon(a.status)}
+                    <span className={`text-xs flex-1 ${a.status === 'success' ? 'text-slate-200' : a.status === 'running' ? 'text-blue-300' : 'text-slate-500'}`}>{a.name}</span>
+                    {a.duration && <span className="text-[10px] text-slate-500 font-mono">{a.duration}</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              {selected.status === 'awaiting-approval' ? (
+                <>
+                  <button className="flex-1 px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-xs rounded-md">批准</button>
+                  <button className="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-xs rounded-md">驳回</button>
+                </>
+              ) : (
+                <>
+                  <button className="flex-1 px-3 py-2 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-xs rounded-md">查看详情</button>
+                  <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-md">追溯</button>
+                </>
+              )}
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
+
+function StatBox({ label, value, color, icon, pulse }: { label: string; value: any; color: string; icon: React.ReactNode; pulse?: boolean }) {
+  return (
+    <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs text-slate-400">{label}</span>
+        <span style={{ color }} className={pulse ? 'animate-pulse' : ''}>{icon}</span>
+      </div>
+      <div className="text-xl font-semibold text-white">{value}</div>
+    </div>
+  );
+}
+
+export default SecurityDisposalView;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Settings, GitDiff, FileCheck, Download, Plus, Minus, Eye, Calendar } from 'lucide-react';
+import { Settings, GitBranch, FileCheck, Download, Plus, Minus, Eye, Calendar } from 'lucide-react';
 
 interface DiffItem {
   id: string;
@@ -60,7 +60,7 @@ export function ConfigDiffCompare() {
               <div key={item.id} className="p-4 hover:bg-[#253042] cursor-pointer transition-colors" onClick={() => { setSelectedTarget(item.target); setShowDiff(true); }}>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
-                    <GitDiff className="w-5 h-5 text-blue-400 mt-0.5" />
+                    <GitBranch className="w-5 h-5 text-blue-400 mt-0.5" />
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-white font-medium">{item.target}</span>
@@ -95,7 +95,7 @@ export function ConfigDiffCompare() {
           <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg">
             <div className="p-4 border-b border-[#2A354D] flex items-center justify-between">
               <h3 className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                <GitDiff className="w-4 h-4" />
+                <GitBranch className="w-4 h-4" />
                 配置差异详情 - {selectedTarget}
               </h3>
               <button onClick={() => setShowDiff(false)} className="text-gray-400 hover:text-white text-xs">

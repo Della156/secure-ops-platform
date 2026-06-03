@@ -1,261 +1,288 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { RefreshCw, Play, Pause, StopCircle, Terminal, Activity, Clock } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Terminal, Pause, Play, XCircle, RotateCcw, Download, Maximize2,
+  Clock, Server, Activity, ChevronRight, Filter, RefreshCw, Cpu,
+  HardDrive, Wifi, Database, CheckCircle2, AlertCircle
+} from 'lucide-react';
 
-interface LogEntry {
+interface NodeStep {
   id: string;
-  timestamp: string;
-  level: 'info' | 'warn' | 'error' | 'success';
-  message: string;
+  name: string;
+  status: 'success' | 'running' | 'pending' | 'failed';
+  startTime: string;
+  endTime: string | null;
+  duration: string;
+  host: string;
 }
 
-const initialLogs: LogEntry[] = [
-  { id: '1', timestamp: '10:30:15', level: 'info', message: '任务 "防火墙配置同步" 开始执行' },
-  { id: '2', timestamp: '10:30:16', level: 'info', message: '连接到防火墙设备 192.168.1.1' },
-  { id: '3', timestamp: '10:30:18', level: 'success', message: '认证成功' },
-  { id: '4', timestamp: '10:30:20', level: 'info', message: '正在获取当前配置...' },
-  { id: '5', timestamp: '10:30:25', level: 'success', message: '配置获取完成' },
-  { id: '6', timestamp: '10:30:26', level: 'info', message: '正在应用新配置...' },
-  { id: '7', timestamp: '10:30:30', level: 'warn', message: '配置验证警告：端口 8080 已被占用' },
-  { id: '8', timestamp: '10:30:32', level: 'info', message: '继续执行...' },
+interface LogEntry {
+  ts: string;
+  level: 'INFO' | 'WARN' | 'ERROR' | 'DEBUG';
+  node: string;
+  msg: string;
+}
+
+const currentNodes: NodeStep[] = [
+  { id: 'N1', name: '任务初始化', status: 'success', startTime: '09:42:18', endTime: '09:42:19', duration: '1.2s', host: 'scheduler-01' },
+  { id: 'N2', name: '目标资产发现', status: 'success', startTime: '09:42:19', endTime: '09:43:05', duration: '46s', host: 'controller-01' },
+  { id: 'N3', name: '凭据校验', status: 'success', startTime: '09:43:05', endTime: '09:43:12', duration: '7s', host: 'auth-svc' },
+  { id: 'N4', name: 'SSH 连接建立', status: 'success', startTime: '09:43:12', endTime: '09:43:18', duration: '6s', host: 'agent-01' },
+  { id: 'N5', name: '基线规则下发', status: 'success', startTime: '09:43:18', endTime: '09:43:24', duration: '6s', host: 'agent-01' },
+  { id: 'N6', name: '基线检查执行', status: 'running', startTime: '09:43:24', endTime: null, duration: '进行中 17m', host: 'agent-01' },
+  { id: 'N7', name: '结果采集', status: 'pending', startTime: '-', endTime: null, duration: '未开始', host: '-' },
+  { id: 'N8', name: '结果聚合', status: 'pending', startTime: '-', endTime: null, duration: '未开始', host: '-' },
+  { id: 'N9', name: '报告生成', status: 'pending', startTime: '-', endTime: null, duration: '未开始', host: '-' },
+  { id: 'N10', name: '通知推送', status: 'pending', startTime: '-', endTime: null, duration: '未开始', host: '-' },
 ];
 
-const ganttData = [
-  { name: '初始化', start: 0, end: 15, color: '#3b82f6' },
-  { name: '连接设备', start: 15, end: 25, color: '#06b6d4' },
-  { name: '获取配置', start: 25, end: 45, color: '#22c55e' },
-  { name: '应用配置', start: 45, end: 70, color: '#eab308' },
-  { name: '验证配置', start: 70, end: 85, color: '#8b5cf6' },
-  { name: '完成', start: 85, end: 100, color: '#22c55e' },
+const initialLogs: LogEntry[] = [
+  { ts: '09:42:18.142', level: 'INFO', node: 'scheduler', msg: 'Task RUN-2026060301 started by system scheduler' },
+  { ts: '09:42:18.235', level: 'DEBUG', node: 'scheduler', msg: 'Loading task definition from registry: baseline_check_v2' },
+  { ts: '09:42:18.872', level: 'INFO', node: 'controller', msg: 'Task graph initialized, 10 nodes total' },
+  { ts: '09:42:19.001', level: 'INFO', node: 'controller', msg: 'Node N1 [任务初始化] started' },
+  { ts: '09:42:19.243', level: 'INFO', node: 'controller', msg: 'Node N1 [任务初始化] completed in 1.2s' },
+  { ts: '09:43:05.412', level: 'INFO', node: 'controller', msg: 'Discovered 12 target hosts in subnet 192.168.2.0/24' },
+  { ts: '09:43:05.618', level: 'INFO', node: 'auth', msg: 'Validating credentials for 12 hosts...' },
+  { ts: '09:43:12.039', level: 'INFO', node: 'auth', msg: 'All 12 hosts credentials validated successfully' },
+  { ts: '09:43:12.512', level: 'INFO', node: 'agent-01', msg: 'Establishing SSH connection to 12 hosts' },
+  { ts: '09:43:18.847', level: 'INFO', node: 'agent-01', msg: 'All 12 SSH connections established' },
+  { ts: '09:43:24.103', level: 'INFO', node: 'agent-01', msg: 'Loading baseline rules: CIS-CentOS-Linux-7-v3.0.0' },
+  { ts: '09:43:24.518', level: 'INFO', node: 'agent-01', msg: 'Rule set has 247 rules, distributing to hosts...' },
+  { ts: '09:50:12.331', level: 'INFO', node: 'agent-01', msg: 'host server-01: 235/247 rules checked' },
+  { ts: '09:52:48.602', level: 'WARN', node: 'agent-01', msg: 'host server-08: rule cis-1.4.2 (audit log config) timeout after 30s, skipping' },
+  { ts: '09:55:32.114', level: 'WARN', node: 'agent-01', msg: 'host server-08: 218/247 rules checked (3 timeouts)' },
+  { ts: '10:00:18.241', level: 'INFO', node: 'agent-01', msg: 'Progress: 67% (8/12 hosts completed)' },
+  { ts: '10:00:18.502', level: 'INFO', node: 'agent-01', msg: 'Estimated time remaining: 8m 24s' },
+  { ts: '10:00:45.123', level: 'ERROR', node: 'agent-01', msg: 'host server-05: rule cis-2.2.1 (NTP sync) check failed' },
+  { ts: '10:00:45.341', level: 'INFO', node: 'agent-01', msg: 'Retrying rule cis-2.2.1 (attempt 2/3)...' },
+  { ts: '10:01:15.778', level: 'INFO', node: 'agent-01', msg: 'host server-05: rule cis-2.2.1 succeeded on retry' },
+];
+
+const targetHosts = [
+  { name: 'server-01', ip: '192.168.2.10', status: 'completed', progress: 100, time: '1m 24s' },
+  { name: 'server-02', ip: '192.168.2.11', status: 'completed', progress: 100, time: '1m 18s' },
+  { name: 'server-03', ip: '192.168.2.12', status: 'completed', progress: 100, time: '1m 32s' },
+  { name: 'server-04', ip: '192.168.2.13', status: 'completed', progress: 100, time: '1m 21s' },
+  { name: 'server-05', ip: '192.168.2.14', status: 'completed', progress: 100, time: '1m 56s' },
+  { name: 'server-06', ip: '192.168.2.15', status: 'completed', progress: 100, time: '1m 29s' },
+  { name: 'server-07', ip: '192.168.2.16', status: 'completed', progress: 100, time: '1m 33s' },
+  { name: 'server-08', ip: '192.168.2.17', status: 'running', progress: 88, time: '1m 45s' },
+  { name: 'server-09', ip: '192.168.2.18', status: 'running', progress: 72, time: '1m 12s' },
+  { name: 'server-10', ip: '192.168.2.19', status: 'running', progress: 65, time: '1m 08s' },
+  { name: 'server-11', ip: '192.168.2.20', status: 'running', progress: 45, time: '0m 52s' },
+  { name: 'server-12', ip: '192.168.2.21', status: 'pending', progress: 0, time: '等待中' },
+];
+
+const resourceMetrics = [
+  { label: 'CPU 使用率', value: 68, icon: <Cpu className="w-3.5 h-3.5" />, color: '#0066FF' },
+  { label: '内存使用率', value: 45, icon: <HardDrive className="w-3.5 h-3.5" />, color: '#00C853' },
+  { label: '网络 IO', value: 32, icon: <Wifi className="w-3.5 h-3.5" />, color: '#9333EA' },
+  { label: '磁盘 IO', value: 18, icon: <Database className="w-3.5 h-3.5" />, color: '#EAB308' },
 ];
 
 export function TaskRunMonitor() {
-  const [logs, setLogs] = useState<LogEntry[]>(initialLogs);
-  const [progress, setProgress] = useState(65);
-  const [isRunning, setIsRunning] = useState(true);
-  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [logs, setLogs] = useState(initialLogs);
+  const [running, setRunning] = useState(true);
+  const [logFilter, setLogFilter] = useState<string>('all');
+  const logsEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isRunning || !autoRefresh) return;
-
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = Math.min(prev + Math.random() * 3, 100);
-        if (newProgress >= 100) {
-          setIsRunning(false);
-        }
-        return newProgress;
-      });
-
-      const newLogEntries: LogEntry[] = [];
-      const random = Math.random();
-      if (random < 0.3) {
-        newLogEntries.push({
-          id: Date.now().toString(),
-          timestamp: new Date().toLocaleTimeString('zh-CN'),
-          level: 'info',
-          message: `处理步骤 ${Math.floor(progress / 20) + 1}...`
-        });
-      } else if (random < 0.5) {
-        newLogEntries.push({
-          id: Date.now().toString(),
-          timestamp: new Date().toLocaleTimeString('zh-CN'),
-          level: 'success',
-          message: `子任务 ${Math.floor(progress / 10) + 1} 完成`
-        });
-      }
-
-      if (newLogEntries.length > 0) {
-        setLogs(prev => [...prev, ...newLogEntries]);
-      }
+    if (!running) return;
+    const timer = setInterval(() => {
+      const next: LogEntry = {
+        ts: new Date().toISOString().slice(11, 23),
+        level: ['INFO', 'DEBUG', 'WARN'][Math.floor(Math.random() * 3)] as any,
+        node: 'agent-01',
+        msg: [
+          'Processing rule cis-1.5.2 on host server-08...',
+          'host server-09: rule check batch completed (50/247)',
+          'Progress: 68% (8/12 hosts completed)',
+          'host server-10: checking password policy rules...',
+          'Resource usage: CPU 68%, MEM 45%',
+          'host server-11: starting rule execution...',
+        ][Math.floor(Math.random() * 6)],
+      };
+      setLogs(prev => [...prev.slice(-200), next]);
     }, 2000);
+    return () => clearInterval(timer);
+  }, [running]);
 
-    return () => clearInterval(interval);
-  }, [isRunning, autoRefresh, progress]);
+  useEffect(() => {
+    logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
 
-  const getLevelColor = (level: string) => {
-    const colors = {
-      info: 'text-[#0066FF]',
-      warn: 'text-[#FF9100]',
-      error: 'text-[#FF3B30]',
-      success: 'text-[#00C853]',
-    };
-    return colors[level as keyof typeof colors] || 'text-[#9CA3AF]';
-  };
-
-  const getLevelBg = (level: string) => {
-    const bgs = {
-      info: 'bg-[#0066FF]/10',
-      warn: 'bg-[#FF9100]/10',
-      error: 'bg-[#FF3B30]/10',
-      success: 'bg-[#00C853]/10',
-    };
-    return bgs[level as keyof typeof bgs] || 'bg-[#181F32]';
-  };
-
-  const handleRefresh = () => {
-    setProgress(prev => Math.min(prev + 5, 100));
-  };
-
-  const handleStart = () => {
-    setIsRunning(true);
-  };
-
-  const handlePause = () => {
-    setIsRunning(false);
-  };
-
-  const handleStop = () => {
-    setIsRunning(false);
-  };
+  const filteredLogs = logs.filter(l => logFilter === 'all' || l.level === logFilter);
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-lg font-semibold text-[#F3F4F6] mb-4">任务运行监控</h1>
-        <p className="text-[#9CA3AF]">实时监控任务执行进度和日志</p>
+    <div className="p-6 space-y-4">
+      {/* 头部 */}
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-white">任务运行监控 — RUN-2026060301</h2>
+            <p className="text-xs text-slate-500 mt-1">核心服务器基线检查 · 12 台主机 · 已运行 18 分 42 秒</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5 text-xs text-green-400 px-2 py-1 bg-green-500/10 rounded">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />运行中
+            </span>
+            <button
+              onClick={() => setRunning(!running)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-white text-sm rounded-md ${running ? 'bg-orange-600 hover:bg-orange-700' : 'bg-green-600 hover:bg-green-700'}`}
+            >
+              {running ? <><Pause className="w-3.5 h-3.5" />暂停</> : <><Play className="w-3.5 h-3.5" />继续</>}
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <RotateCcw className="w-3.5 h-3.5" />重试
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <XCircle className="w-3.5 h-3.5" />停止
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <Maximize2 className="w-3.5 h-3.5" />全屏
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h3 className="text-lg font-semibold text-[#F3F4F6]">防火墙配置同步任务</h3>
-            <p className="text-[#9CA3AF] text-sm">RUN-20240601-0001</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                autoRefresh ? 'bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6]' : 'bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB]'
-              }`}
-            >
-              <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'animate-spin' : ''}`} />
-              {autoRefresh ? '自动刷新中' : '开启自动刷新'}
-            </button>
-            {!isRunning && progress < 100 && (
-              <button
-                onClick={handleStart}
-                className="flex items-center gap-2 px-4 py-2 bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] rounded-lg transition-colors"
-              >
-                <Play className="w-4 h-4" />
-                继续
-              </button>
-            )}
-            {isRunning && (
-              <>
-                <button
-                  onClick={handlePause}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#FF9100] hover:bg-[#FF9100] text-[#F3F4F6] rounded-lg transition-colors"
-                >
-                  <Pause className="w-4 h-4" />
-                  暂停
-                </button>
-                <button
-                  onClick={handleStop}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#FF3B30] hover:bg-[#CC2F26] text-[#F3F4F6] rounded-lg transition-colors"
-                >
-                  <StopCircle className="w-4 h-4" />
-                  停止
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-[#0066FF]" />
-              <span className="text-[#D1D5DB]">执行进度</span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* 左侧：执行节点甘特图 + 资源 */}
+        <div className="lg:col-span-2 space-y-4">
+          {/* 节点甘特图 */}
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-white">执行节点甘特图</h3>
+              <span className="text-xs text-slate-500">5/10 节点已完成</span>
             </div>
-            <span className="text-2xl font-bold text-[#F3F4F6]">{Math.round(progress)}%</span>
-          </div>
-          <div className="w-full bg-[#181F32] rounded-full h-4 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#181F32]/50 rounded-lg p-4">
-            <div className="flex items-center gap-2 text-[#9CA3AF] text-sm mb-1">
-              <Clock className="w-4 h-4" />
-              已运行时间
-            </div>
-            <div className="text-xl font-semibold text-[#F3F4F6]">15分 32秒</div>
-          </div>
-          <div className="bg-[#181F32]/50 rounded-lg p-4">
-            <div className="text-[#9CA3AF] text-sm mb-1">当前状态</div>
-            <div className={`text-xl font-semibold ${isRunning ? 'text-[#00C853]' : 'text-[#FF9100]'}`}>
-              {isRunning ? '运行中' : progress >= 100 ? '已完成' : '已暂停'}
-            </div>
-          </div>
-          <div className="bg-[#181F32]/50 rounded-lg p-4">
-            <div className="text-[#9CA3AF] text-sm mb-1">预计剩余时间</div>
-            <div className="text-xl font-semibold text-[#F3F4F6]">{isRunning ? '8分 15秒' : '-'}</div>
-          </div>
-        </div>
-
-        <div>
-          <h4 className="text-sm font-medium text-[#D1D5DB] mb-3">执行甘特图</h4>
-          <div className="space-y-2">
-            {ganttData.map((item, index) => {
-              const itemProgress = Math.max(0, Math.min(100, (progress - item.start) / (item.end - item.start) * 100));
-              return (
-                <div key={index} className="flex items-center gap-3">
-                  <div className="w-28 text-sm text-[#D1D5DB] flex-shrink-0">{item.name}</div>
-                  <div className="flex-1 h-6 bg-[#181F32] rounded-full overflow-hidden relative">
-                    <div
-                      className="h-full transition-all duration-500"
-                      style={{
-                        width: `${Math.min(100, itemProgress > 0 ? 100 : 0)}%`,
-                        backgroundColor: item.color,
-                        opacity: itemProgress > 0 ? 1 : 0.3,
-                      }}
-                    />
+            <div className="space-y-1.5">
+              {currentNodes.map(node => (
+                <div key={node.id} className="flex items-center gap-2 text-xs">
+                  <div className="w-24 text-slate-300 truncate">{node.name}</div>
+                  <div className="flex-1 h-6 bg-[#111625] rounded relative overflow-hidden">
+                    {node.status === 'success' && (
+                      <div className="absolute inset-y-0 left-0 bg-green-500/30 border-l-2 border-green-500" style={{ width: '100%' }} />
+                    )}
+                    {node.status === 'running' && (
+                      <div className="absolute inset-y-0 left-0 bg-blue-500/30 border-l-2 border-blue-500" style={{ width: '68%' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-500/20 animate-pulse" />
+                      </div>
+                    )}
+                    {node.status === 'pending' && (
+                      <div className="absolute inset-y-0 left-0 bg-slate-700/20 border-l-2 border-slate-600" style={{ width: '2%' }} />
+                    )}
+                    {node.status === 'failed' && (
+                      <div className="absolute inset-y-0 left-0 bg-red-500/30 border-l-2 border-red-500" style={{ width: '40%' }} />
+                    )}
+                    <div className="absolute inset-0 flex items-center px-2 text-[10px] text-slate-300">
+                      {node.duration}
+                    </div>
+                  </div>
+                  <div className="w-32 text-slate-500 text-right">
+                    {node.status === 'success' && <span className="text-green-400">✓ {node.endTime}</span>}
+                    {node.status === 'running' && <span className="text-blue-400">⟳ {node.startTime}</span>}
+                    {node.status === 'pending' && <span className="text-slate-600">未开始</span>}
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div className="bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
-          <div className="flex items-center gap-2">
-            <Terminal className="w-5 h-5 text-[#9CA3AF]" />
-            <h3 className="text-lg font-semibold text-[#F3F4F6]">执行日志</h3>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleRefresh}
-              className="p-2 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] rounded-lg transition-colors"
-            >
-              <RefreshCw className="w-4 h-4" />
-            </button>
+          {/* 目标主机执行情况 */}
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-white mb-3">目标主机执行情况</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {targetHosts.map(h => (
+                <div key={h.name} className="bg-[#111625] border border-[#2A354D] rounded p-2.5 flex items-center gap-2">
+                  <Server className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-200 truncate">{h.name}</span>
+                      <span className={`text-[10px] ${
+                        h.status === 'completed' ? 'text-green-400' :
+                        h.status === 'running' ? 'text-blue-400' : 'text-slate-500'
+                      }`}>
+                        {h.status === 'completed' ? '完成' : h.status === 'running' ? '执行中' : '等待'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <div className="flex-1 h-1 bg-[#20293F] rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${h.status === 'completed' ? 'bg-green-500' : 'bg-blue-500'}`}
+                          style={{ width: `${h.progress}%` }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-slate-500 w-7 text-right">{h.progress}%</span>
+                    </div>
+                    <div className="text-[10px] text-slate-500 mt-0.5 font-mono">{h.ip} · {h.time}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="p-4 h-96 overflow-y-auto bg-[#111625] font-mono text-sm">
-          <div className="space-y-1">
-            {logs.map((log) => (
-              <div
-                key={log.id}
-                className={`flex items-start gap-3 px-3 py-2 rounded ${getLevelBg(log.level)}`}
-              >
-                <span className="text-[#6B7280] flex-shrink-0">[{log.timestamp}]</span>
-                <span className={`flex-shrink-0 font-medium ${getLevelColor(log.level)}`}>
-                  {log.level.toUpperCase()}
-                </span>
-                <span className="text-[#D1D5DB]">{log.message}</span>
+
+        {/* 右侧：终端日志 + 资源 */}
+        <div className="space-y-4">
+          {/* 资源使用 */}
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-white mb-3">执行资源</h3>
+            <div className="space-y-3">
+              {resourceMetrics.map(m => (
+                <div key={m.label}>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="flex items-center gap-1.5 text-slate-300">
+                      {m.icon}{m.label}
+                    </span>
+                    <span className="font-mono" style={{ color: m.color }}>{m.value}%</span>
+                  </div>
+                  <div className="h-1.5 bg-[#111625] rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${m.value}%`, background: m.color }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 终端日志 */}
+          <div className="bg-[#111625] border border-[#2A354D] rounded-lg overflow-hidden">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-[#2A354D] bg-[#20293F]">
+              <h3 className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
+                <Terminal className="w-3.5 h-3.5 text-green-400" />实时执行日志
+              </h3>
+              <div className="flex items-center gap-1">
+                {(['all', 'INFO', 'WARN', 'ERROR'] as const).map(f => (
+                  <button
+                    key={f}
+                    onClick={() => setLogFilter(f)}
+                    className={`px-1.5 py-0.5 text-[10px] rounded ${logFilter === f ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                  >
+                    {f === 'all' ? '全部' : f}
+                  </button>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="h-[480px] overflow-y-auto p-2 font-mono text-[11px] leading-relaxed">
+              {filteredLogs.map((l, i) => (
+                <div key={i} className="flex gap-2 hover:bg-[#20293F]/50 px-1">
+                  <span className="text-slate-500 shrink-0">{l.ts}</span>
+                  <span className={`shrink-0 w-12 ${
+                    l.level === 'ERROR' ? 'text-red-400' :
+                    l.level === 'WARN' ? 'text-yellow-400' :
+                    l.level === 'INFO' ? 'text-blue-400' : 'text-slate-500'
+                  }`}>{l.level}</span>
+                  <span className="text-purple-400 shrink-0">[{l.node}]</span>
+                  <span className="text-slate-300 break-all">{l.msg}</span>
+                </div>
+              ))}
+              <div ref={logsEndRef} />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default TaskRunMonitor;
