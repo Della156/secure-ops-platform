@@ -1,80 +1,62 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Activity, CheckCircle, Clock, FileText } from 'lucide-react';
+import React from 'react';
+import { TaskMonitor } from '@/components/Common/TaskMonitor';
+import type { TaskItem } from '@/components/Common/TaskMonitor/types';
 
-interface TaskItem {
-  id: string;
-  title: string;
-  status: 'pending' | 'processing' | 'completed';
-  progress: number;
-  assignee: string;
-}
-
-const mockTasks: TaskItem[] = [
-  { id: 'FW-001', title: '新增访问策略', status: 'processing', progress: 65, assignee: '张三' },
-  { id: 'FW-002', title: '删除过期策略', status: 'completed', progress: 100, assignee: '李四' },
-  { id: 'FW-003', title: '修改端口范围', status: 'pending', progress: 0, assignee: '王五' },
+const MOCK_TASKS: TaskItem[] = [
+  {
+    id: 'FW-WO-001', title: '新增 Web 服务访问策略', target: '防火墙 FW-EDGE-01',
+    status: 'processing', phase: 'verifying', progress: 65, priority: 'urgent',
+    slaStatus: 'normal', assignee: '张三', startTime: '09:00:00', duration: 45,
+  },
+  {
+    id: 'FW-WO-002', title: '删除过期 VPN 策略', target: '防火墙 FW-DMZ-02',
+    status: 'processing', phase: 'dispatching', progress: 30, priority: 'high',
+    slaStatus: 'normal', assignee: '李四', startTime: '09:15:00', duration: 30,
+  },
+  {
+    id: 'FW-WO-003', title: '修改内部访问端口范围', target: '防火墙 FW-INTERNAL-01',
+    status: 'pending', phase: 'submitted', progress: 0, priority: 'medium',
+    slaStatus: 'normal', assignee: '王五', startTime: '10:00:00', duration: 0,
+  },
+  {
+    id: 'FW-WO-004', title: '数据库访问策略加固', target: '防火墙 FW-DB-01',
+    status: 'failed', phase: 'dispatching', progress: 50, priority: 'urgent',
+    slaStatus: 'breached', assignee: '赵六', startTime: '08:30:00', duration: 120,
+    failureReason: '网络超时：无法连接到防火墙 FW-DB-01 (Connection timeout after 30s)',
+  },
+  {
+    id: 'FW-WO-005', title: 'API 网关 IP 白名单更新', target: '防火墙 FW-API-01',
+    status: 'completed', phase: 'done', progress: 100, priority: 'high',
+    slaStatus: 'normal', assignee: '钱七', startTime: '08:00:00', duration: 25,
+  },
+  {
+    id: 'FW-WO-006', title: '办公网访问策略调整', target: '防火墙 FW-OFFICE-01',
+    status: 'completed', phase: 'done', progress: 100, priority: 'low',
+    slaStatus: 'normal', assignee: '孙八', startTime: '07:30:00', duration: 15,
+  },
+  {
+    id: 'FW-WO-007', title: '修复 SSH 端口开放', target: '防火墙 FW-MGMT-01',
+    status: 'rolledback', phase: 'verifying', progress: 70, priority: 'high',
+    slaStatus: 'warning', assignee: '周九', startTime: '06:00:00', duration: 180,
+    failureReason: '策略冲突：与现有 22 端口策略重叠，已自动回滚',
+  },
+  {
+    id: 'FW-WO-008', title: '高危端口批量关闭', target: '防火墙 FW-ALL',
+    status: 'pending', phase: 'reviewing', progress: 0, priority: 'medium',
+    slaStatus: 'normal', assignee: '吴十', startTime: '11:00:00', duration: 0,
+  },
 ];
 
 export function FwStatusMonitor() {
-  const [tasks] = useState(mockTasks);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // 模拟状态更新
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div>
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">防火墙策略工单任务状态监控</h2>
-        <p className="text-sm text-gray-400 mt-1">工单处理状态的实时监控</p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {tasks.map((task) => (
-          <div key={task.id} className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-blue-400" />
-                <span className="text-white font-medium">{task.title}</span>
-              </div>
-              {task.status === 'processing' && <Activity className="w-5 h-5 text-blue-400 animate-pulse" />}
-              {task.status === 'completed' && <CheckCircle className="w-5 h-5 text-green-400" />}
-            </div>
-            
-            <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
-              <span>{task.id}</span>
-              <span>处理人: {task.assignee}</span>
-            </div>
-
-            {task.status !== 'pending' && (
-              <div className="mb-3">
-                <div className="w-full bg-[#111827] rounded-full h-2">
-                  <div 
-                    className={`h-2 rounded-full transition-all ${
-                      task.status === 'completed' ? 'bg-green-500' : 'bg-blue-500'
-                    }`} 
-                    style={{ width: `${task.progress}%` }} 
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-1">{Math.round(task.progress)}%</p>
-              </div>
-            )}
-
-            <span className={`text-xs px-2 py-0.5 rounded ${
-              task.status === 'processing' ? 'bg-blue-500/20 text-blue-400' :
-              task.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-              'bg-gray-500/20 text-gray-400'
-            }`}>
-              {task.status === 'processing' ? '处理中' : task.status === 'completed' ? '已完成' : '待处理'}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <TaskMonitor
+      title="防火墙策略工单任务状态监控"
+      subtitle="工单处理状态的实时监控，阶段进度跟踪、失败归因、SLA 监控、批量操作"
+      tasks={MOCK_TASKS}
+    />
   );
 }
+
+export default FwStatusMonitor;
