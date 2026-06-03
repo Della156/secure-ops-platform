@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import {
   Search, Plus, Download, RefreshCw, Shield, AlertCircle, Clock,
   CheckCircle2, XCircle, Zap, Activity, ChevronRight, Filter,
-  User, Calendar, Key, FileText, Eye, Edit, Trash2, Power,
+  User, Calendar, Key, FileText, Eye, Edit, Trash2, Power, Pause,
   Server, Database, Network, Lock, Unlock, ArrowRight, Award,
   TrendingUp, AlertTriangle
 } from 'lucide-react';
