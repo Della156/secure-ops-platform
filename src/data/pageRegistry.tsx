@@ -20,224 +20,6 @@ import type { ComponentType } from 'react';
  *   })
  */
 
-// ==========================================================
-// 模块 2 补全 71 个占位（PKI / 网络故障 / 系统故障 / 性能 / 安全阻断 / 综合 / 作业等）
-// 共享 GenericStub 通用占位组件，业务深度实现后续按 menuId 单独替换
-// ==========================================================
-const Stub_2_24_10 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-24-10" {...props} />) })));
-const Stub_2_24_11 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-24-11" {...props} />) })));
-const Stub_2_25_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-1" {...props} />) })));
-const Stub_2_25_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-2" {...props} />) })));
-const Stub_2_25_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-3" {...props} />) })));
-const Stub_2_25_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-4" {...props} />) })));
-const Stub_2_25_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-5" {...props} />) })));
-const Stub_2_25_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-6" {...props} />) })));
-const Stub_2_25_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-25-7" {...props} />) })));
-const Stub_2_26_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-1" {...props} />) })));
-const Stub_2_26_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-2" {...props} />) })));
-const Stub_2_26_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-3" {...props} />) })));
-const Stub_2_26_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-4" {...props} />) })));
-const Stub_2_26_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-5" {...props} />) })));
-const Stub_2_26_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-6" {...props} />) })));
-const Stub_2_26_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-26-7" {...props} />) })));
-const Stub_2_27_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-1" {...props} />) })));
-const Stub_2_27_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-2" {...props} />) })));
-const Stub_2_27_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-3" {...props} />) })));
-const Stub_2_27_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-4" {...props} />) })));
-const Stub_2_27_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-5" {...props} />) })));
-const Stub_2_27_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-27-6" {...props} />) })));
-const Stub_2_28_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-1" {...props} />) })));
-const Stub_2_28_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-2" {...props} />) })));
-const Stub_2_28_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-3" {...props} />) })));
-const Stub_2_28_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-4" {...props} />) })));
-const Stub_2_28_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-5" {...props} />) })));
-const Stub_2_28_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-6" {...props} />) })));
-const Stub_2_28_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-28-7" {...props} />) })));
-const Stub_2_29_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-1" {...props} />) })));
-const Stub_2_29_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-2" {...props} />) })));
-const Stub_2_29_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-3" {...props} />) })));
-const Stub_2_29_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-4" {...props} />) })));
-const Stub_2_29_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-5" {...props} />) })));
-const Stub_2_29_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-29-6" {...props} />) })));
-const Stub_2_30_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-1" {...props} />) })));
-const Stub_2_30_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-2" {...props} />) })));
-const Stub_2_30_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-3" {...props} />) })));
-const Stub_2_30_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-4" {...props} />) })));
-const Stub_2_30_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-5" {...props} />) })));
-const Stub_2_30_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-30-6" {...props} />) })));
-const Stub_2_31_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-1" {...props} />) })));
-const Stub_2_31_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-2" {...props} />) })));
-const Stub_2_31_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-3" {...props} />) })));
-const Stub_2_31_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-4" {...props} />) })));
-const Stub_2_31_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-5" {...props} />) })));
-const Stub_2_31_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-6" {...props} />) })));
-const Stub_2_31_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-7" {...props} />) })));
-const Stub_2_31_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-31-8" {...props} />) })));
-const Stub_2_32_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-1" {...props} />) })));
-const Stub_2_32_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-2" {...props} />) })));
-const Stub_2_32_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-3" {...props} />) })));
-const Stub_2_32_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-4" {...props} />) })));
-const Stub_2_32_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-5" {...props} />) })));
-const Stub_2_32_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-6" {...props} />) })));
-const Stub_2_32_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-32-7" {...props} />) })));
-const Stub_2_33_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-1" {...props} />) })));
-const Stub_2_33_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-2" {...props} />) })));
-const Stub_2_33_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-3" {...props} />) })));
-const Stub_2_33_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-4" {...props} />) })));
-const Stub_2_33_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-5" {...props} />) })));
-const Stub_2_33_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-6" {...props} />) })));
-const Stub_2_33_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-7" {...props} />) })));
-const Stub_2_33_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-33-8" {...props} />) })));
-const Stub_2_34_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-1" {...props} />) })));
-const Stub_2_34_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-2" {...props} />) })));
-const Stub_2_34_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-3" {...props} />) })));
-const Stub_2_34_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-4" {...props} />) })));
-const Stub_2_34_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-5" {...props} />) })));
-const Stub_2_34_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-6" {...props} />) })));
-const Stub_2_34_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-7" {...props} />) })));
-
 // --- menu-4-6 漏洞管理任务（除 5 之外）---
 const Stub_4_6_1 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
@@ -316,8 +98,8 @@ const Stub_3_2_3 = dynamic(() => import(
   '@/components/Pages/module3/lateralMovement/BehaviorIdentification'
 ).then(m => ({ default: m.BehaviorIdentification })));
 const Stub_3_2_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-2-4" {...props} /> })));
+  '@/components/Pages/module3/lateralMovement/RealtimeAlertPush'
+).then(m => ({ default: m.RealtimeAlertPush })));
 const Stub_3_2_5 = dynamic(() => import(
   '@/components/Pages/module3/lateralMovement/AttackPathVisualization'
 ).then(m => ({ default: m.AttackPathVisualization })));
@@ -360,73 +142,73 @@ const Stub_3_3_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-3-8" {...props} /> })));
 // --- 模块 3: menu-3-4 ---
 const Stub_3_4_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-1" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/InternetProtectionView'
+).then(m => ({ default: m.InternetProtectionView })));
 const Stub_3_4_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-2" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/BoundaryInfoIntegration'
+).then(m => ({ default: m.BoundaryInfoIntegration })));
 const Stub_3_4_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-3" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/AttackIntentPrediction'
+).then(m => ({ default: m.AttackIntentPrediction })));
 const Stub_3_4_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-4" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/InternetProtectionStatus'
+).then(m => ({ default: m.InternetProtectionStatus })));
 const Stub_3_4_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-5" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/InternetProtectionHistory'
+).then(m => ({ default: m.InternetProtectionHistory })));
 const Stub_3_4_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-6" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/InternetProtectionAudit'
+).then(m => ({ default: m.InternetProtectionAudit })));
 const Stub_3_4_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-4-7" {...props} /> })));
+  '@/components/Pages/module3/internetProtection/InternetProtectionReport'
+).then(m => ({ default: m.InternetProtectionReport })));
 // --- 模块 3: menu-3-5 ---
 const Stub_3_5_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-1" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertDecisionView'
+).then(m => ({ default: m.AlertDecisionView })));
 const Stub_3_5_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-2" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/MultiSourceAutoIntegration'
+).then(m => ({ default: m.MultiSourceAutoIntegration })));
 const Stub_3_5_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-3" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertFastScreening'
+).then(m => ({ default: m.AlertFastScreening })));
 const Stub_3_5_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-4" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AutoDecisionAnalysis'
+).then(m => ({ default: m.AutoDecisionAnalysis })));
 const Stub_3_5_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-5" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertDecisionStatus'
+).then(m => ({ default: m.AlertDecisionStatus })));
 const Stub_3_5_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-6" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertDecisionHistory'
+).then(m => ({ default: m.AlertDecisionHistory })));
 const Stub_3_5_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-7" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertDecisionAudit'
+).then(m => ({ default: m.AlertDecisionAudit })));
 const Stub_3_5_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-5-8" {...props} /> })));
+  '@/components/Pages/module3/alertDecision/AlertDecisionReport'
+).then(m => ({ default: m.AlertDecisionReport })));
 // --- 模块 3: menu-3-6 ---
 const Stub_3_6_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-1" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentView'
+).then(m => ({ default: m.SampleJudgmentView })));
 const Stub_3_6_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-2" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentOrchestration'
+).then(m => ({ default: m.SampleJudgmentOrchestration })));
 const Stub_3_6_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-3" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentResult'
+).then(m => ({ default: m.SampleJudgmentResult })));
 const Stub_3_6_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-4" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentStatus'
+).then(m => ({ default: m.SampleJudgmentStatus })));
 const Stub_3_6_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-5" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentHistory'
+).then(m => ({ default: m.SampleJudgmentHistory })));
 const Stub_3_6_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-6" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentAudit'
+).then(m => ({ default: m.SampleJudgmentAudit })));
 const Stub_3_6_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-7" {...props} /> })));
+  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentReport'
+).then(m => ({ default: m.SampleJudgmentReport })));
 const Stub_3_6_8 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-6-8" {...props} /> })));
@@ -444,42 +226,42 @@ const Stub_3_7_4 = dynamic(() => import(
   '@/components/Pages/module3/traceAnalysis/TraceResultVisualization'
 ).then(m => ({ default: m.TraceResultVisualization })));
 const Stub_3_7_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-7-5" {...props} /> })));
+  '@/components/Pages/module3/traceAnalysis/TraceAnalysisStatus'
+).then(m => ({ default: m.TraceAnalysisStatus })));
 const Stub_3_7_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-7-6" {...props} /> })));
+  '@/components/Pages/module3/traceAnalysis/TraceAnalysisHistory'
+).then(m => ({ default: m.TraceAnalysisHistory })));
 const Stub_3_7_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-7-7" {...props} /> })));
+  '@/components/Pages/module3/traceAnalysis/TraceAnalysisAudit'
+).then(m => ({ default: m.TraceAnalysisAudit })));
 const Stub_3_7_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-7-8" {...props} /> })));
+  '@/components/Pages/module3/traceAnalysis/TraceAnalysisReport'
+).then(m => ({ default: m.TraceAnalysisReport })));
 // --- 模块 3: menu-3-8 ---
 const Stub_3_8_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-1" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkView'
+).then(m => ({ default: m.ElinkView })));
 const Stub_3_8_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-2" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkConfig'
+).then(m => ({ default: m.ElinkConfig })));
 const Stub_3_8_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-3" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkInfoCollaboration'
+).then(m => ({ default: m.ElinkInfoCollaboration })));
 const Stub_3_8_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-4" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkAlertSend'
+).then(m => ({ default: m.ElinkAlertSend })));
 const Stub_3_8_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-5" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkStatus'
+).then(m => ({ default: m.ElinkStatus })));
 const Stub_3_8_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-6" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkHistory'
+).then(m => ({ default: m.ElinkHistory })));
 const Stub_3_8_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-7" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkAudit'
+).then(m => ({ default: m.ElinkAudit })));
 const Stub_3_8_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-8-8" {...props} /> })));
+  '@/components/Pages/module3/elink/ElinkReport'
+).then(m => ({ default: m.ElinkReport })));
 // --- 模块 3: menu-3-9 ---
 const Stub_3_9_1 = dynamic(() => import(
   '@/components/Pages/module3/securityDisposal/SecurityDisposalView'
@@ -491,39 +273,39 @@ const Stub_3_9_3 = dynamic(() => import(
   '@/components/Pages/module3/securityDisposal/PreAuthorizedEmergencyExec'
 ).then(m => ({ default: m.PreAuthorizedEmergencyExec })));
 const Stub_3_9_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-4" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/SensitiveOperationApproval'
+).then(m => ({ default: m.SensitiveOperationApproval })));
 const Stub_3_9_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-5" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/DisposalProcessAudit'
+).then(m => ({ default: m.DisposalProcessAudit })));
 const Stub_3_9_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-6" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/DisposalStatusMonitor'
+).then(m => ({ default: m.DisposalStatusMonitor })));
 const Stub_3_9_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-7" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/DisposalHistory'
+).then(m => ({ default: m.DisposalHistory })));
 const Stub_3_9_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-8" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/DisposalAudit'
+).then(m => ({ default: m.DisposalAudit })));
 const Stub_3_9_9 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-9-9" {...props} /> })));
+  '@/components/Pages/module3/securityDisposal/DisposalReport'
+).then(m => ({ default: m.DisposalReport })));
 // --- 模块 3: menu-3-10 ---
 const Stub_3_10_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-1" {...props} /> })));
+  '@/components/Pages/module3/securityDashboard/SecurityDashboardView'
+).then(m => ({ default: m.SecurityDashboardView })));
 const Stub_3_10_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-2" {...props} /> })));
+  '@/components/Pages/module3/securityDashboard/RealTimeAlertMonitor'
+).then(m => ({ default: m.RealTimeAlertMonitor })));
 const Stub_3_10_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-3" {...props} /> })));
+  '@/components/Pages/module3/securityDashboard/ThreatSituationDashboard'
+).then(m => ({ default: m.ThreatSituationDashboard })));
 const Stub_3_10_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-4" {...props} /> })));
+  '@/components/Pages/module3/securityDashboard/AssetStatusDashboard'
+).then(m => ({ default: m.AssetStatusDashboard })));
 const Stub_3_10_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-5" {...props} /> })));
+  '@/components/Pages/module3/securityDashboard/SecurityEventOverview'
+).then(m => ({ default: m.SecurityEventOverview })));
 const Stub_3_10_6 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-6" {...props} /> })));
@@ -535,17 +317,17 @@ const Stub_3_10_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-10-8" {...props} /> })));
 // --- 模块 3: menu-3-11 ---
 const Stub_3_11_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-1" {...props} /> })));
+  '@/components/Pages/module3/assetManagement/AssetManagementView'
+).then(m => ({ default: m.AssetManagementView })));
 const Stub_3_11_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-2" {...props} /> })));
+  '@/components/Pages/module3/assetManagement/AssetClassification'
+).then(m => ({ default: m.AssetClassification })));
 const Stub_3_11_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-3" {...props} /> })));
+  '@/components/Pages/module3/assetManagement/AssetRiskAssessment'
+).then(m => ({ default: m.AssetRiskAssessment })));
 const Stub_3_11_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-4" {...props} /> })));
+  '@/components/Pages/module3/assetManagement/AssetChangeHistory'
+).then(m => ({ default: m.AssetChangeHistory })));
 const Stub_3_11_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-5" {...props} /> })));
@@ -560,17 +342,17 @@ const Stub_3_11_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-11-8" {...props} /> })));
 // --- 模块 3: menu-3-12 ---
 const Stub_3_12_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-1" {...props} /> })));
+  '@/components/Pages/module3/policyManagement/SecurityPolicyView'
+).then(m => ({ default: m.SecurityPolicyView })));
 const Stub_3_12_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-2" {...props} /> })));
+  '@/components/Pages/module3/policyManagement/PolicyConfiguration'
+).then(m => ({ default: m.PolicyConfiguration })));
 const Stub_3_12_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-3" {...props} /> })));
+  '@/components/Pages/module3/policyManagement/PolicyAuditLog'
+).then(m => ({ default: m.PolicyAuditLog })));
 const Stub_3_12_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-4" {...props} /> })));
+  '@/components/Pages/module3/policyManagement/PolicyCompliance'
+).then(m => ({ default: m.PolicyCompliance })));
 const Stub_3_12_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-5" {...props} /> })));
@@ -585,17 +367,17 @@ const Stub_3_12_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-12-8" {...props} /> })));
 // --- 模块 3: menu-3-13 ---
 const Stub_3_13_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-1" {...props} /> })));
+  '@/components/Pages/module3/systemSettings/SystemSettingsView'
+).then(m => ({ default: m.SystemSettingsView })));
 const Stub_3_13_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-2" {...props} /> })));
+  '@/components/Pages/module3/systemSettings/UserManagement'
+).then(m => ({ default: m.UserManagement })));
 const Stub_3_13_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-3" {...props} /> })));
+  '@/components/Pages/module3/systemSettings/RoleManagement'
+).then(m => ({ default: m.RoleManagement })));
 const Stub_3_13_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-4" {...props} /> })));
+  '@/components/Pages/module3/systemSettings/SystemLog'
+).then(m => ({ default: m.SystemLog })));
 const Stub_3_13_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-5" {...props} /> })));
@@ -610,17 +392,17 @@ const Stub_3_13_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-13-8" {...props} /> })));
 // --- 模块 3: menu-3-14 ---
 const Stub_3_14_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-1" {...props} /> })));
+  '@/components/Pages/module3/dataAsset/DataAssetManagementView'
+).then(m => ({ default: m.DataAssetManagementView })));
 const Stub_3_14_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-2" {...props} /> })));
+  '@/components/Pages/module3/dataAsset/DataClassification'
+).then(m => ({ default: m.DataClassification })));
 const Stub_3_14_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-3" {...props} /> })));
+  '@/components/Pages/module3/dataAsset/DataAccessControl'
+).then(m => ({ default: m.DataAccessControl })));
 const Stub_3_14_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-4" {...props} /> })));
+  '@/components/Pages/module3/dataAsset/DataBackupManagement'
+).then(m => ({ default: m.DataBackupManagement })));
 const Stub_3_14_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-5" {...props} /> })));
@@ -635,11 +417,11 @@ const Stub_3_14_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-14-8" {...props} /> })));
 // --- 模块 3: menu-3-15 ---
 const Stub_3_15_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-1" {...props} /> })));
+  '@/components/Pages/module3/securityMetrics/SecurityMetricsDashboard'
+).then(m => ({ default: m.SecurityMetricsDashboard })));
 const Stub_3_15_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-2" {...props} /> })));
+  '@/components/Pages/module3/securityMetrics/MetricsReport'
+).then(m => ({ default: m.MetricsReport })));
 const Stub_3_15_3 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-3" {...props} /> })));
@@ -660,11 +442,11 @@ const Stub_3_15_8 = dynamic(() => import(
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-8" {...props} /> })));
 // --- 模块 3: menu-3-16 ---
 const Stub_3_16_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-16-1" {...props} /> })));
+  '@/components/Pages/module3/systemMonitor/SystemMonitorView'
+).then(m => ({ default: m.SystemMonitorView })));
 const Stub_3_16_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-16-2" {...props} /> })));
+  '@/components/Pages/module3/systemMonitor/ResourceMonitor'
+).then(m => ({ default: m.ResourceMonitor })));
 const Stub_3_16_3 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-16-3" {...props} /> })));
@@ -1824,16 +1606,16 @@ const RestoreTaskReport = dynamic(() => import(
 
 // 第14组：备份恢复演练
 const BackupDrillView = dynamic(() => import(
-  '@/components/Pages/module2/scheduledTask/ScheduledTaskView'
-).then(m => ({ default: m.ScheduledTaskView })));
+  '@/components/Pages/module2/backupDrill/BackupDrillView'
+).then(m => ({ default: m.BackupDrillView })));
 
 const DrillScenarioEdit = dynamic(() => import(
-  '@/components/Pages/module2/scheduledTask/ScheduledTaskConfig'
-).then(m => ({ default: m.ScheduledTaskConfig })));
+  '@/components/Pages/module2/scheduledTask/DrillScenarioEdit'
+).then(m => ({ default: m.DrillScenarioEdit })));
 
 const DrillStatusMonitor = dynamic(() => import(
-  '@/components/Pages/module2/scheduledTask/ScheduledTaskReport'
-).then(m => ({ default: m.ScheduledTaskReport })));
+  '@/components/Pages/module2/backupDrill/DrillStatusMonitor'
+).then(m => ({ default: m.DrillStatusMonitor })));
 
 const DrillProcessRecord = dynamic(() => import(
   '@/components/Pages/module2/scheduledTask/DrillProcessRecord'
@@ -1857,16 +1639,16 @@ const DrillTaskReport = dynamic(() => import(
 
 // 第15组：系统启停
 const SystemStartStopView = dynamic(() => import(
-  '@/components/Pages/module2/operation/OperationView'
-).then(m => ({ default: m.OperationView })));
+  '@/components/Pages/module2/systemStartStop/SystemStartStopView'
+).then(m => ({ default: m.SystemStartStopView })));
 
 const StartStopStrategyConfig = dynamic(() => import(
-  '@/components/Pages/module2/operation/TaskScheduling'
-).then(m => ({ default: m.TaskScheduling })));
+  '@/components/Pages/module2/systemStartStop/StartStopStrategyConfig'
+).then(m => ({ default: m.StartStopStrategyConfig })));
 
 const StartStopExec = dynamic(() => import(
-  '@/components/Pages/module2/operation/JobQueue'
-).then(m => ({ default: m.JobQueue })));
+  '@/components/Pages/module2/systemStartStop/StartStopExec'
+).then(m => ({ default: m.StartStopExec })));
 
 const StartStopStatusMonitor = dynamic(() => import(
   '@/components/Pages/module2/operation/OperationReport'
