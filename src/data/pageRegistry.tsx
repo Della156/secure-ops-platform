@@ -2312,6 +2312,41 @@ const DashboardCustomConfig = dynamic(() => import(
   '@/components/Pages/module5/securityDashboard/DashboardCustomConfig'
 ).then(m => ({ default: m.DashboardCustomConfig })));
 
+// === 模块 4.6 漏洞管理全套 11 个深度页面（除 4-6-5 已实现）===
+const VulnManageOverview = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnManageOverview'
+).then(m => ({ default: m.VulnManageOverview })));
+const VulnScannerManager = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnScannerManager'
+).then(m => ({ default: m.VulnScannerManager })));
+const VulnScanExecute = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnScanExecute'
+).then(m => ({ default: m.VulnScanExecute })));
+const VulnAnalysis = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnAnalysis'
+).then(m => ({ default: m.VulnAnalysis })));
+const VulnRetestClose = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnRetestClose'
+).then(m => ({ default: m.VulnRetestClose })));
+const VulnDatabase = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnDatabase'
+).then(m => ({ default: m.VulnDatabase })));
+const VulnUnfixableList = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnUnfixableList'
+).then(m => ({ default: m.VulnUnfixableList })));
+const VulnTaskMonitor = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnTaskMonitor'
+).then(m => ({ default: m.VulnTaskMonitor })));
+const VulnHistoryQuery = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnHistoryQuery'
+).then(m => ({ default: m.VulnHistoryQuery })));
+const VulnTaskAudit = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnTaskAudit'
+).then(m => ({ default: m.VulnTaskAudit })));
+const VulnTaskReport = dynamic(() => import(
+  '@/components/Pages/module4/vulnManage/VulnTaskReport'
+).then(m => ({ default: m.VulnTaskReport })));
+
 // 日报报告（补上缺失的定义）
 // 基线防护报告视图（补上缺失的定义）
 // 批量补上其他缺失的组件定义（占位，已移除）
@@ -2759,17 +2794,18 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   'menu-3-9-9': Stub_3_9_9,
 
   // menu-4-6 (11 个)
-  'menu-4-6-1': Stub_4_6_1,
-  'menu-4-6-2': Stub_4_6_2,
-  'menu-4-6-3': Stub_4_6_3,
-  'menu-4-6-4': Stub_4_6_4,
-  'menu-4-6-6': Stub_4_6_6,
-  'menu-4-6-7': Stub_4_6_7,
-  'menu-4-6-8': Stub_4_6_8,
-  'menu-4-6-9': Stub_4_6_9,
-  'menu-4-6-10': Stub_4_6_10,
-  'menu-4-6-11': Stub_4_6_11,
-  'menu-4-6-12': Stub_4_6_12,
+  // menu-4-6 漏洞管理全套 12 个（5 已实现）
+  'menu-4-6-1': VulnManageOverview,
+  'menu-4-6-2': VulnScannerManager,
+  'menu-4-6-3': VulnScanExecute,
+  'menu-4-6-4': VulnAnalysis,
+  'menu-4-6-6': VulnRetestClose,
+  'menu-4-6-7': VulnDatabase,
+  'menu-4-6-8': VulnUnfixableList,
+  'menu-4-6-9': VulnTaskMonitor,
+  'menu-4-6-10': VulnHistoryQuery,
+  'menu-4-6-11': VulnTaskAudit,
+  'menu-4-6-12': VulnTaskReport,
 
   // menu-4-1 (9 个)
   'menu-4-1-1': Stub_4_1_1,
