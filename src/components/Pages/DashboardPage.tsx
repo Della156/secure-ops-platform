@@ -7,6 +7,19 @@ import {
   ArrowUpRight, ChevronRight, RefreshCw, Zap, Users, FileText,
   Bug, Lock, Globe, Wifi, Layers, BarChart3, Target,
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useSystem } from '@/contexts/SystemContext';
+
+// 4 个大屏 widget 动态加载（首页首屏更轻）
+const WidgetSkeleton = () => (
+  <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 h-[260px] flex items-center justify-center">
+    <div className="animate-pulse text-[10px] text-slate-500">加载大屏组件...</div>
+  </div>
+);
+const RealtimeThreatWidget = dynamic(() => import('@/components/Dashboard/RealtimeThreatWidget').then(m => m.RealtimeThreatWidget), { ssr: false, loading: WidgetSkeleton });
+const RiskScoreWidget = dynamic(() => import('@/components/Dashboard/RiskScoreWidget').then(m => m.RiskScoreWidget), { ssr: false, loading: WidgetSkeleton });
+const IncidentKPIWidget = dynamic(() => import('@/components/Dashboard/IncidentKPIWidget').then(m => m.IncidentKPIWidget), { ssr: false, loading: WidgetSkeleton });
+const AssetComplianceWidget = dynamic(() => import('@/components/Dashboard/AssetComplianceWidget').then(m => m.AssetComplianceWidget), { ssr: false, loading: WidgetSkeleton });
 
 // ─── Mock Data ────────────────────────────────────────────────
 
@@ -166,6 +179,7 @@ function BarChart() {
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState('');
   const [alertFilter, setAlertFilter] = useState<string>('all');
+  const { setActiveMenu } = useSystem();
 
   useEffect(() => {
     const now = new Date();
@@ -213,6 +227,14 @@ export default function DashboardPage() {
           <MetricCard title="今日任务" value="1,043" subtitle="已完成 987" icon={Activity} color="text-blue-400" trend={{ value: '8.3%', up: true }} />
           <MetricCard title="自动化率" value="94.7%" subtitle="较昨日 +2.1%" icon={Zap} color="text-emerald-400" trend={{ value: '2.1%', up: true }} />
           <MetricCard title="在线资产" value="2,847" subtitle="覆盖率 96.3%" icon={Server} color="text-purple-400" />
+        </div>
+
+        {/* ── 4 大屏 Widget（2x2 网格，动态加载） ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <RealtimeThreatWidget />
+          <RiskScoreWidget />
+          <IncidentKPIWidget />
+          <AssetComplianceWidget />
         </div>
 
         {/* ── Main Grid ── */}
@@ -302,6 +324,7 @@ export default function DashboardPage() {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {modules.map(mod => (
                   <button key={mod.id}
+                    onClick={() => setActiveMenu(mod.id)}
                     className="group relative bg-[#1A2332]/50 border border-[#2A354D]/40 rounded-xl p-4 hover:border-[#3A4560] transition-all duration-300 text-left overflow-hidden"
                   >
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
