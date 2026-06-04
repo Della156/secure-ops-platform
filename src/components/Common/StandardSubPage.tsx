@@ -119,24 +119,15 @@ export function StandardSubPage({ title, description, mockData, columns: extraCo
   if (isError) return <ErrorState message={`加载${title}失败`} onRetry={refresh} />;
   if (isEmpty) return <EmptyState message={`暂无${title}数据`} />;
 
+  const refreshBtn = <button key="refresh" onClick={refresh} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]"><RefreshCw className="w-4 h-4" /> 刷新</button>;
+  const exportBtn = <button key="export" onClick={() => showToast('导出任务已提交', 'success')} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]"><Download className="w-4 h-4" /> 导出</button>;
+  const batchBtn = selectedIds.length > 0 ? (
+    <button key="batch" onClick={() => showConfirm({ title: '批量操作', message: `确定要对 ${selectedIds.length} 条数据执行批量处理吗？`, type: 'warning', onConfirm: () => { showToast('批量处理已完成', 'success'); setSelectedIds([]); } })} className="flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm hover:bg-yellow-500/30"><AlertTriangle className="w-4 h-4" /> 批量处理 ({selectedIds.length})</button>
+  ) : null;
+
   return (
     <div>
-      <PageHeader title={title} description={description}
-        actions={[
-          <button key="refresh" onClick={refresh} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
-            <RefreshCw className="w-4 h-4" /> 刷新
-          </button>,
-          <button key="export" onClick={() => showToast('导出任务已提交', 'success')} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
-            <Download className="w-4 h-4" /> 导出
-          </button>,
-          selectedIds.length > 0 && (
-            <button key="batch" onClick={() => showConfirm({ title: '批量操作', message: `确定要对 ${selectedIds.length} 条数据执行批量处理吗？`, type: 'warning', onConfirm: () => { showToast('批量处理已完成', 'success'); setSelectedIds([]); } })}
-              className="flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm hover:bg-yellow-500/30">
-              <AlertTriangle className="w-4 h-4" /> 批量处理 ({selectedIds.length})
-            </button>
-          ),
-        ].filter(Boolean)}
-      />
+      <PageHeader title={title} description={description} actions={[refreshBtn, exportBtn, batchBtn].filter(Boolean)} />
 
       <StatsCardGrid cols={Math.min(5, 3 + (extraStats ? extraStats(items).length : 0))}>
         <StatsCard title="总记录" value={statusCounts.total} />

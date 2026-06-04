@@ -192,8 +192,8 @@ const Stub_3_6_1 = dynamic(() => import(
   '@/components/Pages/module3/sampleAnalysis/SampleJudgmentView'
 ).then(m => ({ default: m.SampleJudgmentView })));
 const Stub_3_6_2 = dynamic(() => import(
-  '@/components/Pages/module3/sampleAnalysis/SampleJudgmentOrchestration'
-).then(m => ({ default: m.SampleJudgmentOrchestration })));
+  '@/components/Pages/module3/sampleJudgment/MultiChannelSampleAcquisition'
+).then(m => ({ default: m.MultiChannelSampleAcquisition })));
 const Stub_3_6_3 = dynamic(() => import(
   '@/components/Pages/module3/sampleAnalysis/SampleJudgmentResult'
 ).then(m => ({ default: m.SampleJudgmentResult })));
