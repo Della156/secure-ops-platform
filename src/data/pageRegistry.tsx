@@ -897,16 +897,16 @@ const Stub_4_7_6 = dynamic(() => import(
 ).then(m => ({ default: m.PatchUpgradeVerify })));
 const Stub_4_7_7 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-7-7" {...props} /> })));
+).then(m => ({ default: m.PatchManagementMonitor })));
 const Stub_4_7_8 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-7-8" {...props} /> })));
+).then(m => ({ default: m.PatchManagementHistory })));
 const Stub_4_7_9 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-7-9" {...props} /> })));
+).then(m => ({ default: m.PatchManagementAudit })));
 const Stub_4_7_10 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-7-10" {...props} /> })));
+).then(m => ({ default: m.PatchManagementReport })));
 // --- 模块 4: menu-4-8 主机合规管理任务 ---
 const Stub_4_8_1 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
@@ -925,16 +925,16 @@ const Stub_4_8_5 = dynamic(() => import(
 ).then(m => ({ default: m.ToolOptimizationSuggest })));
 const Stub_4_8_6 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-8-6" {...props} /> })));
+).then(m => ({ default: m.HostComplianceMonitor })));
 const Stub_4_8_7 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-8-7" {...props} /> })));
+).then(m => ({ default: m.HostComplianceHistory })));
 const Stub_4_8_8 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-8-8" {...props} /> })));
+).then(m => ({ default: m.HostComplianceAudit })));
 const Stub_4_8_9 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-8-9" {...props} /> })));
+).then(m => ({ default: m.HostComplianceReport })));
 // --- 模块 4: menu-4-9 终端合规管理任务 ---
 const Stub_4_9_1 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
@@ -947,16 +947,16 @@ const Stub_4_9_3 = dynamic(() => import(
 ).then(m => ({ default: m.EndpointComplianceScan })));
 const Stub_4_9_4 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-4" {...props} /> })));
+).then(m => ({ default: m.EndpointComplianceMonitor })));
 const Stub_4_9_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-5" {...props} /> })));
+).then(m => ({ default: m.EndpointComplianceHistory })));
 const Stub_4_9_6 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-6" {...props} /> })));
+).then(m => ({ default: m.EndpointComplianceAudit })));
 const Stub_4_9_7 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-7" {...props} /> })));
+).then(m => ({ default: m.EndpointComplianceReport })));
 const Stub_4_9_8 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-8" {...props} /> })));
@@ -2216,16 +2216,16 @@ const IssueCheckTaskReport = dynamic(() => import(
 
 // 第34组：作业综合辅助
 const JobAssistantView = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-1" {...props} />) })));
+  '@/components/Pages/module2/jobAssistant/JobAssistantView'
+).then(m => ({ default: m.JobAssistantView })));
 
 const JobQualityEval = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-2" {...props} />) })));
+  '@/components/Pages/module2/jobAssistant/JobQualityEval'
+).then(m => ({ default: m.JobQualityEval })));
 
 const StandardReportGen = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => (<m.GenericStub menuId="menu-2-34-3" {...props} />) })));
+  '@/components/Pages/module2/jobAssistant/StandardReportGen'
+).then(m => ({ default: m.StandardReportGen })));
 
 const JobAssistStatusMonitor = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
