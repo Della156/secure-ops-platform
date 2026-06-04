@@ -33,3 +33,12 @@ export function Card({ children, className = '', padding = 'md', hover = false, 
     </div>
   );
 }
+
+/** Shadcn-style CardContent — renders a padded content area inside Card */
+export function CardContent({ className = '', children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+}

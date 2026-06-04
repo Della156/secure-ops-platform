@@ -1,0 +1,139 @@
+'use client';
+import React, { useState, useEffect } from 'react';
+import { RefreshCw, AlertCircle, CheckCircle2, Clock, Activity, Server, Shield } from 'lucide-react';
+import { PageHeader } from '@/components/Common/PageStates';
+import { StatusBadge } from '@/components/Common/StatusBadge';
+
+const tasks = [
+  { id: 'SCAN-001', name: '每日基线扫描', status: 'running', progress: 65, startedAt: '08:00', estimatedTime: '08:15' },
+  { id: 'SCAN-002', name: '数据库基线扫描', status: 'completed', progress: 100, startedAt: '09:00', estimatedTime: '09:20' },
+  { id: 'SCAN-003', name: '网络设备扫描', status: 'pending', progress: 0, startedAt: '-', estimatedTime: '10:00' },
+  { id: 'SCAN-004', name: '应用基线扫描', status: 'completed', progress: 100, startedAt: '08:15', estimatedTime: '08:30' },
+];
+
+export function BaselineMonitor() {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    setTimeout(() => setIsRefreshing(false), 1000);
+  };
+
+  const runningTasks = tasks.filter(t => t.status === 'running').length;
+  const completedTasks = tasks.filter(t => t.status === 'completed').length;
+  const pendingTasks = tasks.filter(t => t.status === 'pending').length;
+
+  return (
+    <div className="p-6 space-y-6">
+      <PageHeader title="基线管理任务监控" description="实时监控基线扫描任务状态"
+        actions={[
+          <button key="refresh" onClick={handleRefresh} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} /> 刷新
+          </button>,
+        ]}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-slate-400">运行中任务</div>
+              <div className="text-2xl font-bold text-blue-400">{runningTasks}</div>
+            </div>
+            <div className="p-2 bg-blue-500/20 rounded-lg">
+              <Activity className="w-5 h-5 text-blue-400" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-slate-400">已完成任务</div>
+              <div className="text-2xl font-bold text-green-400">{completedTasks}</div>
+            </div>
+            <div className="p-2 bg-green-500/20 rounded-lg">
+              <CheckCircle2 className="w-5 h-5 text-green-400" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-slate-400">待执行任务</div>
+              <div className="text-2xl font-bold text-yellow-400">{pendingTasks}</div>
+            </div>
+            <div className="p-2 bg-yellow-500/20 rounded-lg">
+              <Clock className="w-5 h-5 text-yellow-400" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-slate-400">系统状态</div>
+              <div className="text-2xl font-bold text-green-400">正常</div>
+            </div>
+            <div className="p-2 bg-green-500/20 rounded-lg">
+              <Shield className="w-5 h-5 text-green-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-white font-medium">实时时间</h3>
+          <div className="text-lg font-mono text-blue-400">
+            {currentTime.toLocaleTimeString('zh-CN', { hour12: false })}
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {tasks.map(task => (
+          <div key={task.id} className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg ${task.status === 'running' ? 'bg-blue-500/20' : task.status === 'completed' ? 'bg-green-500/20' : 'bg-gray-500/20'}`}>
+                  <Server className={`w-5 h-5 ${task.status === 'running' ? 'text-blue-400' : task.status === 'completed' ? 'text-green-400' : 'text-gray-400'}`} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white font-medium">{task.name}</span>
+                    <StatusBadge status={task.status} pulse={task.status === 'running'} />
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">{task.id}</div>
+                </div>
+              </div>
+              {task.status === 'running' && (
+                <div className="flex items-center gap-2 text-sm">
+                  <Activity className="w-4 h-4 text-blue-400 animate-pulse" />
+                  <span className="text-blue-400">{task.progress}%</span>
+                </div>
+              )}
+            </div>
+            {task.status !== 'pending' && (
+              <div className="mt-3">
+                <div className="h-2 bg-[#111625] rounded-full overflow-hidden">
+                  <div className={`h-full rounded-full transition-all duration-300 ${task.status === 'completed' ? 'bg-green-500' : 'bg-blue-500'}`} style={{ width: `${task.progress}%` }} />
+                </div>
+                <div className="flex justify-between text-xs text-slate-400 mt-1">
+                  <span>开始: {task.startedAt}</span>
+                  <span>预计完成: {task.estimatedTime}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default BaselineMonitor;

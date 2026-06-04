@@ -1,188 +1,182 @@
 'use client';
+
 import React, { useState } from 'react';
-import { Search, Eye, RefreshCw, Download, Activity, AlertTriangle, CheckCircle, Clock, Play, StopCircle, RotateCcw } from 'lucide-react';
-import { useAsyncData, mockApi } from '@/hooks/useAsyncData';
-import { useTable } from '@/hooks/useTable';
-import { useInteraction } from '@/hooks/useInteraction';
+import { Search, Filter, RefreshCw, Plus, Eye, Calendar, CheckCircle2, Clock, AlertTriangle } from 'lucide-react';
 import { StatsCard, StatsCardGrid } from '@/components/Common/StatsCard';
-import { DataTable, Pagination } from '@/components/Common/DataTable';
 import { StatusBadge } from '@/components/Common/StatusBadge';
-import { SearchBar, FilterTabs } from '@/components/Common/SearchBar';
-import { PageHeader, LoadingState, ErrorState, EmptyState } from '@/components/Common/PageStates';
+import { PageHeader, LoadingState } from '@/components/Common/PageStates';
 
-/* --- Type --- */
-interface Item {
-  id: string;
-  name: string;
-  status: string;
-  toolCount: number;
-  checkPass: number;
-  checkFail: number;
-  reportTime: string;
-}
-
-/* --- Mock Data --- */
-const mockData: Item[] = [
-{ id:'BR-001', name:'主机安全基线检查', status:'completed', toolCount:12, checkPass:89, checkFail:11, reportTime:'2026-06-01 08:00' },
-  { id:'BR-002', name:'网络安全基线检查', status:'running', toolCount:8, checkPass:45, checkFail:23, reportTime:'2026-06-02 08:00' },
-  { id:'BR-003', name:'应用安全基线检查', status:'pending', toolCount:0, checkPass:0, checkFail:0, reportTime:'2026-06-03 00:00' },
-  { id:'BR-004', name:'数据库基线检查', status:'failed', toolCount:6, checkPass:34, checkFail:12, reportTime:'2026-06-02 06:00' }
+const reports = [
+  { id: 'BR-001', name: '主机安全基线检查', status: 'completed', totalItems: 100, compliant: 89, nonCompliant: 11, reportTime: '2026-06-01 08:00' },
+  { id: 'BR-002', name: '网络安全基线检查', status: 'running', totalItems: 80, compliant: 45, nonCompliant: 23, reportTime: '2026-06-02 08:00' },
+  { id: 'BR-003', name: '应用安全基线检查', status: 'pending', totalItems: 60, compliant: 0, nonCompliant: 0, reportTime: '2026-06-03 00:00' },
+  { id: 'BR-004', name: '数据库基线检查', status: 'failed', totalItems: 46, compliant: 34, nonCompliant: 12, reportTime: '2026-06-02 06:00' },
+  { id: 'BR-005', name: '系统安全基线检查', status: 'completed', totalItems: 120, compliant: 115, nonCompliant: 5, reportTime: '2026-06-03 08:00' },
 ];
 
-/* --- Detail Modal --- */
-function DetailContent({ row }: { row: Item }) {
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        {Object.entries(row).filter(([k])=>k!=='id').slice(0,6).map(([k,v]) => (
-          <div key={k} className="bg-[#131B2A] p-3 rounded-lg">
-            <p className="text-gray-500 text-xs mb-1">{k}</p>
-            {k==='status' ? <StatusBadge status={v as string} pulse={v==='running'} /> : <p className="text-white text-sm">{String(v)}</p>}
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-[#2A354D] pt-4">
-        <h4 className="text-sm font-medium text-gray-300 mb-3">执行记录</h4>
-        <div className="space-y-2">
-          {[1,2,3].map(i => (
-            <div key={i} className="flex items-center gap-3 bg-[#131B2A] p-3 rounded-lg text-sm">
-              <div className="w-2 h-2 rounded-full bg-blue-400" />
-              <span className="text-gray-400">步骤 {i}：{['初始化分析引擎','加载规则库','执行分析任务','生成报告'][i-1] || '完成'}</span>
-              <span className="text-xs text-gray-600 ml-auto">2026-06-02 08:0{i}:00</span>
-              <CheckCircle className="w-4 h-4 text-green-500" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* --- Main Component --- */
 export function BaselineReportView() {
-  const interaction = useInteraction();
-  const { showModal, showConfirm, showToast, ConfirmDialog, DetailModal, Toast } = interaction;
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [isLoading] = useState(false);
 
-  const { data, isLoading, isError, isEmpty, refresh } = useAsyncData(
-    () => mockApi(mockData, 0.05), []
-  );
-
-  const table = useTable({
-    data: data || [],
-    defaultPageSize: 5,
-    defaultSort: { key: 'id', direction: 'desc' },
+  const filteredReports = reports.filter(report => {
+    if (search && !report.name.includes(search) && !report.id.includes(search)) return false;
+    if (statusFilter && report.status !== statusFilter) return false;
+    return true;
   });
 
-  const items = data || [];
   const stats = {
-    total: items.length,
-    running: items.filter(d => d.status === 'running').length,
-    completed: items.filter(d => d.status === 'completed').length,
-    failed: items.filter(d => d.status === 'failed').length,
-    pending: items.filter(d => d.status === 'pending').length,
+    totalTasks: reports.length,
+    totalItems: reports.reduce((sum, r) => sum + r.totalItems, 0),
+    totalCompliant: reports.reduce((sum, r) => sum + r.compliant, 0),
+    totalNonCompliant: reports.reduce((sum, r) => sum + r.nonCompliant, 0),
   };
 
-  const statusLabels = [
-    { label: '全部', value: '', count: items.length },
-    { label: '运行中', value: 'running', count: stats.running },
-    { label: '已完成', value: 'completed', count: stats.completed },
-    { label: '失败', value: 'failed', count: stats.failed },
-    { label: '待执行', value: 'pending', count: stats.pending },
-  ];
+  const complianceRate = stats.totalItems > 0 ? Math.round((stats.totalCompliant / stats.totalItems) * 100) : 0;
 
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const toggleSelect = (id: string) => {
-    setSelectedIds(prev => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id]);
-  };
-
-  const handleAction = (row: Item) => {
-    if (row.status === 'failed') {
-      showConfirm({ title: '重试任务', message: `确定要重试任务「${row.name}」吗？`, type: 'warning', confirmText: '重试',
-        onConfirm: () => { showToast('重试请求已提交', 'success'); },
-      });
-    } else if (row.status === 'running') {
-      showConfirm({ title: '暂停任务', message: `确定要暂停任务「${row.name}」吗？`, type: 'warning',
-        onConfirm: () => { showToast('任务已暂停', 'info'); },
-      });
-    } else {
-      showToast('正在查看任务详情', 'info');
-    }
-  };
-
-  if (isLoading) return <LoadingState message="正在加载数据..." />;
-  if (isError) return <ErrorState message="加载失败" onRetry={refresh} />;
-  if (isEmpty) return <EmptyState message="暂无数据" />;
+  if (isLoading) return <LoadingState message="加载基线报告数据..." />;
 
   return (
-    <div>
-      <PageHeader title="基线防护报告视图" description="基线检查工具管理与报告生成"
+    <div className="p-6 space-y-6">
+      <PageHeader title="基线防护报告视图" description="管理和监控基线检查任务与报告"
         actions={[
-          <button key="refresh" onClick={refresh} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
+          <button key="refresh" className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
             <RefreshCw className="w-4 h-4" /> 刷新
           </button>,
-          <button key="export" onClick={(e)=>{ e.stopPropagation(); showToast('导出任务已提交', 'success'); }} className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042]">
-            <Download className="w-4 h-4" /> 导出
+          <button key="add" className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg">
+            <Plus className="w-4 h-4" /> 新建检查任务
           </button>,
-          selectedIds.length > 0 && (
-            <button key="batch" onClick={()=>{ showConfirm({title:'批量操作',message:`确定要对 ${selectedIds.length} 条数据执行批量处理吗？`,type:'warning',onConfirm:()=>{showToast('批量处理已完成','success');setSelectedIds([]);}}); }} className="flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm hover:bg-yellow-500/30">
-              <RotateCcw className="w-4 h-4" /> 批量处理 ({selectedIds.length})
-            </button>
-          ),
-        ].filter(Boolean)}
+        ]}
       />
 
-      <StatsCardGrid cols={5}>
-        <StatsCard title="总任务" value={stats.total} />
-        <StatsCard title="运行中" value={stats.running} icon={<Activity className="w-5 h-5" />} color="blue" />
-        <StatsCard title="已完成" value={stats.completed} icon={<CheckCircle className="w-5 h-5" />} color="green" />
-        <StatsCard title="失败" value={stats.failed} icon={<AlertTriangle className="w-5 h-5" />} color="red" subtitle="需人工介入" />
-        <StatsCard title="待执行" value={stats.pending} icon={<Clock className="w-5 h-5" />} color="yellow" />
+      <StatsCardGrid cols={4}>
+        <StatsCard title="总报告任务" value={stats.totalTasks} icon={<Calendar className="w-5 h-5" />} />
+        <StatsCard title="基线检查项总数" value={stats.totalItems} icon={<CheckCircle2 className="w-5 h-5" />} color="yellow" />
+        <StatsCard title="合规项数" value={stats.totalCompliant} icon={<CheckCircle2 className="w-5 h-5" />} color="green" />
+        <StatsCard title="不合规项数" value={stats.totalNonCompliant} icon={<AlertTriangle className="w-5 h-5" />} color="red" />
       </StatsCardGrid>
 
-      <div className="flex flex-col gap-4 mb-6">
-        <FilterTabs options={statusLabels} value={table.filters.find(f=>f.key==='status')?.value||''}
-          onChange={(v) => table.setFilter('status', v)} />
-        <div className="flex items-center gap-3">
-          <SearchBar value={table.search} onChange={table.setSearch} placeholder="搜索任务名称..." />
-          {table.hasFilters && (
-            <button onClick={table.resetFilters} className="text-xs text-gray-500 hover:text-gray-300 whitespace-nowrap">清除筛选</button>
-          )}
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-1">整体合规率</h4>
+            <p className="text-xs text-slate-400">所有基线检查任务的综合合规情况</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full" />
+              <span className="text-xs text-slate-400">合规</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full" />
+              <span className="text-xs text-slate-400">不合规</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center">
+          <div className="relative w-40 h-40">
+            <svg className="w-full h-full transform -rotate-90">
+              <circle cx="80" cy="80" r="70" stroke="#111625" strokeWidth="12" fill="none" />
+              <circle cx="80" cy="80" r="70" stroke="#4F46E5" strokeWidth="12" fill="none" strokeDasharray={`${complianceRate * 4.4} 440`} />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-white">{complianceRate}%</div>
+                <div className="text-xs text-slate-400">合规率</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <DataTable
-        columns={[
-          { key:'_select', title:<input type="checkbox" onChange={(e)=>{if(e.target.checked)setSelectedIds(items.map(d=>d.id));else setSelectedIds([]);}} checked={selectedIds.length===items.length&&items.length>0} className="accent-blue-500" />, width:'40px', render:(_,row) => (
-            <input type="checkbox" onChange={()=>toggleSelect(row.id)} checked={selectedIds.includes(row.id)} className="accent-blue-500" onClick={e=>e.stopPropagation()} />
-          )},
-          { key:'id', title:'ID', width:'100px' },
-          { key:'name', title:'任务名称', sortable:true },
-          { key:'status', title:'状态', render:(v) => <StatusBadge status={v} pulse={v==='running'} /> },
-  { key:'toolCount', title:'工具数' },
-  { key:'checkPass', title:'通过数', sortable:true, render:(v) => <span className='text-green-400'>{v}</span> },
-  { key:'checkFail', title:'失败数', render:(v) => <span className='text-red-400'>{v}</span> },
-  { key:'reportTime', title:'报告时间' },
-          { key:'_actions', title:'操作', width:'160px', render:(_,row) => (
-            <div className="flex items-center gap-2" onClick={e=>e.stopPropagation()}>
-              <button onClick={()=>showModal({title:'任务详情',content:<DetailContent row={row} />})} className="text-blue-400 hover:text-blue-300 text-xs flex items-center gap-1"><Eye className="w-3.5 h-3.5" /> 详情</button>
-              <button onClick={()=>handleAction(row)} className={`text-xs flex items-center gap-1 ${row.status==='failed'?'text-yellow-400 hover:text-yellow-300':'text-gray-400 hover:text-gray-300'}`}>
-                {row.status==='running'?<StopCircle className="w-3.5 h-3.5" />:row.status==='failed'?<RotateCcw className="w-3.5 h-3.5" />:<Play className="w-3.5 h-3.5" />}
-                {row.status==='running'?'暂停':row.status==='failed'?'重试':'执行'}
-              </button>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg overflow-hidden">
+        <div className="px-4 py-3 border-b border-[#2A354D] flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <input
+                type="text" placeholder="搜索报告名称或ID..."
+                value={search} onChange={e => setSearch(e.target.value)}
+                className="pl-8 pr-4 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none w-64"
+              />
             </div>
-          )},
-        ]}
-        data={table.data}
-        sort={table.sort}
-        onSort={table.toggleSort}
-        onRowClick={(row) => showModal({title:`${row.name} 详情`,content:<DetailContent row={row} />})}
-      />
-      <Pagination page={table.page} totalPages={table.totalPages} total={table.total} pageSize={table.pageSize}
-        onPageChange={table.setPage} onPageSizeChange={table.setPageSize} />
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-slate-500" />
+              <select
+                value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
+                className="bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md px-3 py-1.5 focus:border-blue-500 outline-none"
+              >
+                <option value="">全部状态</option>
+                <option value="pending">待执行</option>
+                <option value="running">执行中</option>
+                <option value="completed">已完成</option>
+                <option value="failed">失败</option>
+              </select>
+            </div>
+          </div>
+          <div className="text-xs text-slate-500">共 {filteredReports.length} 条记录</div>
+        </div>
 
-      {ConfirmDialog}
-      {DetailModal}
-      {Toast}
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-[#111625]">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">报告ID</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">报告名称</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">检查项总数</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">合规项</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">不合规项</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">合规率</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">状态</th>
+                <th className="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#2A354D]">
+              {filteredReports.map(report => {
+                const rate = report.totalItems > 0 ? Math.round((report.compliant / report.totalItems) * 100) : 0;
+                return (
+                  <tr key={report.id} className="hover:bg-[#111625]/50">
+                    <td className="px-4 py-3 text-sm text-blue-400 font-mono">{report.id}</td>
+                    <td className="px-4 py-3 text-sm text-white">{report.name}</td>
+                    <td className="px-4 py-3 text-sm text-slate-300">{report.totalItems}</td>
+                    <td className="px-4 py-3 text-sm text-green-400">{report.compliant}</td>
+                    <td className="px-4 py-3 text-sm text-red-400">{report.nonCompliant}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-16 h-1.5 bg-[#111625] rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full ${rate >= 90 ? 'bg-green-500' : rate >= 70 ? 'bg-yellow-500' : 'bg-red-500'}`} style={{ width: `${rate}%` }} />
+                        </div>
+                        <span className="text-sm text-slate-300">{rate}%</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={report.status} pulse={report.status === 'running'} />
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center justify-end">
+                        <button className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300">
+                          <Eye className="w-3 h-3" />详情
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="px-4 py-3 border-t border-[#2A354D] flex items-center justify-between">
+          <div className="text-xs text-slate-500">显示 1-{filteredReports.length} 条，共 {reports.length} 条</div>
+          <div className="flex items-center gap-1">
+            <button className="px-3 py-1 bg-[#2A354D] text-slate-400 text-xs rounded hover:bg-[#364360] disabled:opacity-50" disabled>上一页</button>
+            <button className="px-3 py-1 bg-blue-600 text-white text-xs rounded">1</button>
+            <button className="px-3 py-1 bg-[#2A354D] text-slate-400 text-xs rounded hover:bg-[#364360] disabled:opacity-50" disabled>下一页</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default BaselineReportView;

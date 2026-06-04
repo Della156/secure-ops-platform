@@ -1,0 +1,158 @@
+'use client';
+import React, { useState } from 'react';
+import { Search, Plus, Eye, Edit2, Trash2, X, Save, Play, Calendar, Shield } from 'lucide-react';
+import { PageHeader } from '@/components/Common/PageStates';
+import { StatusBadge } from '@/components/Common/StatusBadge';
+
+const tasks = [
+  { id: 'SCAN-001', name: '每日基线扫描', baseline: '操作系统安全基线', scanType: '定时扫描', status: 'completed', lastRun: '2026-06-03 08:00', nextRun: '2026-06-04 08:00', assets: 45 },
+  { id: 'SCAN-002', name: '数据库基线扫描', baseline: '数据库安全基线', scanType: '手动扫描', status: 'running', lastRun: '2026-06-03 09:00', nextRun: '-', assets: 23 },
+  { id: 'SCAN-003', name: '网络设备扫描', baseline: '网络设备安全基线', scanType: '定时扫描', status: 'pending', lastRun: '-', nextRun: '2026-06-03 10:00', assets: 18 },
+  { id: 'SCAN-004', name: '应用基线扫描', baseline: '应用安全基线', scanType: '定时扫描', status: 'completed', lastRun: '2026-06-03 08:15', nextRun: '2026-06-04 08:15', assets: 60 },
+];
+
+export function BaselineScanTask() {
+  const [search, setSearch] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [editingTask, setEditingTask] = useState<typeof tasks[0] | null>(null);
+
+  const filteredTasks = tasks.filter(task => {
+    if (search && !task.name.includes(search) && !task.id.includes(search)) return false;
+    return true;
+  });
+
+  const handleEdit = (task: typeof tasks[0]) => {
+    setEditingTask({ ...task });
+    setShowModal(true);
+  };
+
+  return (
+    <div className="p-6 space-y-6">
+      <PageHeader title="基线扫描任务管理" description="管理基线扫描任务"
+        actions={[
+          <button key="add" onClick={() => { setEditingTask(null); setShowModal(true); }} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg">
+            <Plus className="w-4 h-4" /> 新增扫描任务
+          </button>,
+        ]}
+      />
+
+      <div className="relative w-64">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+        <input
+          type="text" placeholder="搜索任务名称..."
+          value={search} onChange={e => setSearch(e.target.value)}
+          className="pl-10 pr-4 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-lg focus:border-blue-500 outline-none"
+        />
+      </div>
+
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-[#111625]">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">任务ID</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">任务名称</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">关联基线</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">扫描类型</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">状态</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">下次执行</th>
+                <th className="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#2A354D]">
+              {filteredTasks.map(task => (
+                <tr key={task.id} className="hover:bg-[#111625]/50">
+                  <td className="px-4 py-3 text-sm text-blue-400 font-mono">{task.id}</td>
+                  <td className="px-4 py-3 text-sm text-white">{task.name}</td>
+                  <td className="px-4 py-3 text-sm text-slate-300">{task.baseline}</td>
+                  <td className="px-4 py-3">
+                    <span className={`text-xs px-2 py-1 rounded ${task.scanType === '定时扫描' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>
+                      {task.scanType}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <StatusBadge status={task.status} pulse={task.status === 'running'} />
+                  </td>
+                  <td className="px-4 py-3 text-sm text-slate-300">{task.nextRun}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-end gap-2">
+                      <button onClick={() => handleEdit(task)} className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300">
+                        <Edit2 className="w-3 h-3" />编辑
+                      </button>
+                      <button className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300">
+                        <Trash2 className="w-3 h-3" />删除
+                      </button>
+                      <button className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300">
+                        <Play className="w-3 h-3" />执行
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A354D]">
+              <h3 className="text-lg font-semibold text-white">{editingTask ? '编辑扫描任务' : '新增扫描任务'}</h3>
+              <button onClick={() => setShowModal(false)} className="text-gray-400 hover:text-gray-300">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">任务名称</label>
+                <input
+                  type="text"
+                  value={editingTask?.name || ''}
+                  onChange={e => setEditingTask(prev => prev ? { ...prev, name: e.target.value } : { id: '', name: e.target.value, baseline: '', scanType: '定时扫描', status: 'pending', lastRun: '-', nextRun: '-', assets: 0 })}
+                  className="w-full px-4 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-lg focus:border-blue-500 outline-none"
+                  placeholder="输入任务名称"
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">关联基线</label>
+                <select
+                  value={editingTask?.baseline || ''}
+                  onChange={e => setEditingTask(prev => prev ? { ...prev, baseline: e.target.value } : { id: '', name: '', baseline: e.target.value, scanType: '定时扫描', status: 'pending', lastRun: '-', nextRun: '-', assets: 0 })}
+                  className="w-full px-4 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-lg focus:border-blue-500 outline-none"
+                >
+                  <option value="">选择基线</option>
+                  <option value="操作系统安全基线">操作系统安全基线</option>
+                  <option value="数据库安全基线">数据库安全基线</option>
+                  <option value="网络设备安全基线">网络设备安全基线</option>
+                  <option value="应用安全基线">应用安全基线</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">扫描类型</label>
+                <select
+                  value={editingTask?.scanType || '定时扫描'}
+                  onChange={e => setEditingTask(prev => prev ? { ...prev, scanType: e.target.value } : { id: '', name: '', baseline: '', scanType: e.target.value, status: 'pending', lastRun: '-', nextRun: '-', assets: 0 })}
+                  className="w-full px-4 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-lg focus:border-blue-500 outline-none"
+                >
+                  <option value="定时扫描">定时扫描</option>
+                  <option value="手动扫描">手动扫描</option>
+                </select>
+              </div>
+              <div className="flex justify-end gap-3 pt-4">
+                <button onClick={() => setShowModal(false)} className="px-4 py-2 bg-[#2A354D] hover:bg-[#364360] text-gray-300 text-sm rounded-lg">
+                  取消
+                </button>
+                <button onClick={() => { setShowModal(false); }} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg flex items-center gap-2">
+                  <Save className="w-4 h-4" /> {editingTask ? '保存修改' : '创建任务'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default BaselineScanTask;

@@ -1,215 +1,227 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Activity, Bell, Clock, AlertTriangle, CheckCircle, XCircle, Eye, Search, Filter } from 'lucide-react';
+import {
+  Search, Download, RefreshCw, Filter, Eye, Play, Pause, CheckCircle2,
+  XCircle, Clock, Activity, User, FileText, AlertCircle, BarChart3, ChevronRight
+} from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 interface AuditTask {
-  id: string;
-  name: string;
-  applicant: string;
-  applyTime: string;
-  status: 'pending' | 'auditing' | 'approved' | 'rejected' | 'timeout';
-  auditor: string | null;
-  auditTime: string | null;
-  priority: 'high' | 'medium' | 'low';
-  waitingTime: number;
+  id: string; name: string; jobType: string; status: 'running' | 'pending' | 'paused' | 'success' | 'failed' | 'queued';
+  progress: number; startTime: string; duration: string; estimatedEnd: string;
+  currentStep: string; totalSteps: number; completedSteps: number; executor: string;
+  riskScore: number; autoChecks: number; autoPassed: number;
 }
 
-const mockTasks: AuditTask[] = [
-  { id: 'AUD-001', name: '核心数据库备份', applicant: '张三', applyTime: '2026-06-02 10:30:00', status: 'pending', auditor: null, auditTime: null, priority: 'high', waitingTime: 45 },
-  { id: 'AUD-002', name: '应用服务器重启', applicant: '李四', applyTime: '2026-06-02 09:15:00', status: 'auditing', auditor: '审核员A', auditTime: '2026-06-02 10:00:00', priority: 'medium', waitingTime: 30 },
-  { id: 'AUD-003', name: '网络配置调整', applicant: '王五', applyTime: '2026-06-02 08:45:00', status: 'approved', auditor: '审核员B', auditTime: '2026-06-02 09:00:00', priority: 'low', waitingTime: 15 },
-  { id: 'AUD-004', name: '安全策略更新', applicant: '赵六', applyTime: '2026-06-01 18:00:00', status: 'timeout', auditor: null, auditTime: null, priority: 'high', waitingTime: 1020 },
-  { id: 'AUD-005', name: '日志清理作业', applicant: '钱七', applyTime: '2026-06-02 07:30:00', status: 'rejected', auditor: '审核员A', auditTime: '2026-06-02 08:00:00', priority: 'low', waitingTime: 30 },
+const tasks: AuditTask[] = [
+  { id: 'JA-M-99821', name: '生产防火墙策略变更审核', jobType: '配置变更', status: 'running', progress: 65, startTime: '11:25:00', duration: '00:18:42', estimatedEnd: '12:00:00', currentStep: '人工复核', totalSteps: 6, completedSteps: 4, executor: '张伟', riskScore: 78, autoChecks: 12, autoPassed: 10 },
+  { id: 'JA-M-99820', name: 'Oracle 表结构变更审核', jobType: '数据操作', status: 'running', progress: 42, startTime: '10:48:18', duration: '00:24:18', estimatedEnd: '12:00:00', currentStep: '合规检查', totalSteps: 8, completedSteps: 3, executor: '陈磊', riskScore: 92, autoChecks: 18, autoPassed: 18 },
+  { id: 'JA-M-99819', name: 'Web 集群补丁安装审核', jobType: '漏洞修复', status: 'paused', progress: 38, startTime: '09:32:00', duration: '00:12:00', estimatedEnd: '10:00:00', currentStep: '影响分析', totalSteps: 5, completedSteps: 2, executor: '李娜', riskScore: 82, autoChecks: 15, autoPassed: 14 },
+  { id: 'JA-M-99818', name: 'AD 域账号权限调整审核', jobType: '配置变更', status: 'success', progress: 100, startTime: '08:15:00', duration: '00:18:00', estimatedEnd: '08:33:00', currentStep: '完成', totalSteps: 4, completedSteps: 4, executor: '张伟', riskScore: 65, autoChecks: 10, autoPassed: 10 },
+  { id: 'JA-M-99817', name: '慢 SQL 优化申请审核', jobType: '日常维护', status: 'failed', progress: 56, startTime: '22:48:00', duration: '00:32:00', estimatedEnd: '23:20:00', currentStep: '驳回', totalSteps: 6, completedSteps: 3, executor: '陈磊', riskScore: 58, autoChecks: 8, autoPassed: 5 },
+  { id: 'JA-M-99816', name: 'APT 应急处置审核', jobType: '应急处置', status: 'success', progress: 100, startTime: '18:30:00', duration: '00:08:00', estimatedEnd: '18:38:00', currentStep: '完成', totalSteps: 3, completedSteps: 3, executor: 'CISO', riskScore: 96, autoChecks: 20, autoPassed: 20 },
+  { id: 'JA-M-99815', name: 'Redis 集群重启审核', jobType: '日常维护', status: 'queued', progress: 0, startTime: '--:--', duration: '--', estimatedEnd: '--:--', currentStep: '队列中', totalSteps: 3, completedSteps: 0, executor: '陈磊', riskScore: 32, autoChecks: 5, autoPassed: 0 },
+];
+
+const statusConfig = {
+  running: { label: '审核中', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+  pending: { label: '准备中', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+  paused: { label: '已暂停', color: 'text-orange-400', bg: 'bg-orange-500/20' },
+  success: { label: '已通过', color: 'text-green-400', bg: 'bg-green-500/20' },
+  failed: { label: '已驳回', color: 'text-red-400', bg: 'bg-red-500/20' },
+  queued: { label: '队列中', color: 'text-purple-400', bg: 'bg-purple-500/20' },
+};
+
+const jobTypeColor: Record<string, string> = {
+  '配置变更': '#EAB308', '数据操作': '#22C55E', '漏洞修复': '#FF6D00',
+  '应急处置': '#EF4444', '日常维护': '#0066FF', '安全加固': '#9333EA',
+};
+
+const trend = [
+  { time: '08:00', running: 2, success: 1, failed: 0 },
+  { time: '10:00', running: 3, success: 3, failed: 1 },
+  { time: '12:00', running: 2, success: 5, failed: 1 },
+  { time: '14:00', running: 1, success: 8, failed: 1 },
 ];
 
 export function JobAuditStatusMonitor() {
-  const [tasks] = useState(mockTasks);
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedId, setSelectedId] = useState<string | null>('JA-M-99821');
 
-  const filteredTasks = tasks.filter(task => {
-    const matchSearch = !searchKeyword || task.name.includes(searchKeyword) || task.applicant.includes(searchKeyword);
-    const matchStatus = statusFilter === 'all' || task.status === statusFilter;
-    return matchSearch && matchStatus;
+  const filtered = tasks.filter(t => {
+    if (search && !t.name.includes(search) && !t.id.includes(search)) return false;
+    if (statusFilter !== 'all' && t.status !== statusFilter) return false;
+    return true;
   });
 
+  const selected = selectedId ? tasks.find(t => t.id === selectedId) : null;
   const stats = {
     total: tasks.length,
-    pending: tasks.filter(t => t.status === 'pending').length,
-    auditing: tasks.filter(t => t.status === 'auditing').length,
-    timeout: tasks.filter(t => t.status === 'timeout').length,
-  };
-
-  const getStatusDisplay = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return <span className="flex items-center gap-1 text-yellow-400 text-sm"><Clock className="w-4 h-4" />待审核</span>;
-      case 'auditing':
-        return <span className="flex items-center gap-1 text-blue-400 text-sm"><Activity className="w-4 h-4" />审核中</span>;
-      case 'approved':
-        return <span className="flex items-center gap-1 text-green-400 text-sm"><CheckCircle className="w-4 h-4" />已通过</span>;
-      case 'rejected':
-        return <span className="flex items-center gap-1 text-red-400 text-sm"><XCircle className="w-4 h-4" />已驳回</span>;
-      case 'timeout':
-        return <span className="flex items-center gap-1 text-orange-400 text-sm"><AlertTriangle className="w-4 h-4" />已超时</span>;
-      default:
-        return status;
-    }
-  };
-
-  const getPriorityBadge = (priority: string) => {
-    switch (priority) {
-      case 'high':
-        return <span className="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400">高</span>;
-      case 'medium':
-        return <span className="px-2 py-0.5 rounded text-xs bg-yellow-500/20 text-yellow-400">中</span>;
-      case 'low':
-        return <span className="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400">低</span>;
-      default:
-        return priority;
-    }
-  };
-
-  const formatWaitingTime = (minutes: number) => {
-    if (minutes < 60) return `${minutes}分钟`;
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return mins > 0 ? `${hours}小时${mins}分钟` : `${hours}小时`;
-  };
-
-  const isUrgent = (task: AuditTask) => {
-    return (task.status === 'pending' || task.status === 'auditing') && task.waitingTime > 30;
+    running: tasks.filter(t => t.status === 'running').length,
+    success: tasks.filter(t => t.status === 'success').length,
+    failed: tasks.filter(t => t.status === 'failed').length,
   };
 
   return (
-    <div>
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">作业审核任务状态监控</h2>
-        <p className="text-sm text-gray-400 mt-1">状态监控、待审提醒、超时告警</p>
+    <div className="p-6 space-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <StatBox label="审核任务" value={stats.total} color="#0066FF" icon={<FileText className="w-4 h-4" />} />
+        <StatBox label="审核中" value={stats.running} color="#22C55E" icon={<Activity className="w-4 h-4" />} />
+        <StatBox label="已通过" value={stats.success} color="#10B981" icon={<CheckCircle2 className="w-4 h-4" />} />
+        <StatBox label="已驳回" value={stats.failed} color="#EF4444" icon={<XCircle className="w-4 h-4" />} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Activity className="w-5 h-5 text-gray-400" />
-            <p className="text-gray-400 text-xs">任务总数</p>
-          </div>
-          <p className="text-xl font-semibold text-white">{stats.total}</p>
-        </div>
-        <div className="bg-[#1E2736] border border-yellow-500/30 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-5 h-5 text-yellow-400" />
-            <p className="text-gray-400 text-xs">待审核</p>
-          </div>
-          <p className="text-xl font-semibold text-yellow-400">{stats.pending}</p>
-        </div>
-        <div className="bg-[#1E2736] border border-blue-500/30 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Activity className="w-5 h-5 text-blue-400" />
-            <p className="text-gray-400 text-xs">审核中</p>
-          </div>
-          <p className="text-xl font-semibold text-blue-400">{stats.auditing}</p>
-        </div>
-        <div className="bg-[#1E2736] border border-orange-500/30 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-5 h-5 text-orange-400" />
-            <p className="text-gray-400 text-xs">已超时</p>
-          </div>
-          <p className="text-xl font-semibold text-orange-400">{stats.timeout}</p>
-        </div>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <h3 className="text-sm font-semibold text-white mb-3">今日审核任务趋势</h3>
+        <ResponsiveContainer width="100%" height={140}>
+          <AreaChart data={trend}>
+            <defs>
+              <linearGradient id="ar1" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#0066FF" stopOpacity={0.4} /><stop offset="95%" stopColor="#0066FF" stopOpacity={0} /></linearGradient>
+              <linearGradient id="ar2" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#22C55E" stopOpacity={0.4} /><stop offset="95%" stopColor="#22C55E" stopOpacity={0} /></linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#2A354D" />
+            <XAxis dataKey="time" tick={{ fill: '#94A3B8', fontSize: 11 }} />
+            <YAxis tick={{ fill: '#94A3B8', fontSize: 11 }} />
+            <Tooltip contentStyle={{ background: '#111625', border: '1px solid #2A354D', borderRadius: 6 }} />
+            <Area type="monotone" dataKey="running" stroke="#0066FF" fill="url(#ar1)" name="审核中" />
+            <Area type="monotone" dataKey="success" stroke="#22C55E" fill="url(#ar2)" name="已通过" />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
 
-      <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4 mb-6">
-        <div className="flex flex-wrap gap-4 items-center justify-between">
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="搜索任务名称或申请人..."
-                value={searchKeyword}
-                onChange={(e) => setSearchKeyword(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-400" />
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2 bg-[#111827] border border-[#2A354D] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">全部状态</option>
-                <option value="pending">待审核</option>
-                <option value="auditing">审核中</option>
-                <option value="approved">已通过</option>
-                <option value="rejected">已驳回</option>
-                <option value="timeout">已超时</option>
-              </select>
-            </div>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <h2 className="text-lg font-semibold text-white mb-3">作业审核任务状态监控</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <input type="text" placeholder="搜索任务/ID" value={search} onChange={e => setSearch(e.target.value)}
+              className="w-full pl-8 pr-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none" />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-[#111827] border border-[#2A354D] hover:bg-[#253042] text-gray-300 rounded-lg transition-colors">
-            <Bell className="w-4 h-4" />
-            提醒设置
-          </button>
+          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="px-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md">
+            <option value="all">全部状态</option>
+            <option value="running">审核中</option>
+            <option value="paused">已暂停</option>
+            <option value="success">已通过</option>
+            <option value="failed">已驳回</option>
+            <option value="queued">队列中</option>
+          </select>
         </div>
       </div>
 
-      <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg overflow-hidden">
-        <table className="w-full">
-          <thead>
-            <tr className="bg-[#111827]">
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">任务名称</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">申请人</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">申请时间</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">优先级</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">等待时长</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">审核人</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">状态</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-400">操作</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#2A354D]">
-            {filteredTasks.map((task) => (
-              <tr key={task.id} className={`hover:bg-[#2A354D]/30 ${isUrgent(task) ? 'bg-red-500/5' : ''}`}>
-                <td className="px-4 py-4">
-                  <div className="flex items-center gap-2">
-                    {isUrgent(task) && <Bell className="w-4 h-4 text-red-400 animate-pulse" />}
-                    <span className="text-sm text-gray-300">{task.name}</span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 bg-[#20293F] border border-[#2A354D] rounded-lg overflow-hidden">
+          <div className="px-4 py-3 border-b border-[#2A354D]"><h3 className="text-sm font-semibold text-white">任务列表 ({filtered.length})</h3></div>
+          <div className="max-h-[480px] overflow-y-auto">
+            {filtered.map(t => {
+              const sc = statusConfig[t.status];
+              return (
+                <div key={t.id} onClick={() => setSelectedId(t.id)}
+                  className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === t.id ? 'bg-[#111625]' : ''}`}>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs text-blue-400 font-mono">{t.id}</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${jobTypeColor[t.jobType] || '#0066FF'}20`, color: jobTypeColor[t.jobType] || '#0066FF' }}>{t.jobType}</span>
+                    <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${sc.bg} ${sc.color}`}>{sc.label}</span>
+                    <div className="flex-1" />
+                    <span className={`text-[10px] font-mono ${t.riskScore >= 80 ? 'text-red-400' : t.riskScore >= 60 ? 'text-orange-400' : 'text-green-400'}`}>风险 {t.riskScore}</span>
                   </div>
-                </td>
-                <td className="px-4 py-4">
-                  <span className="text-sm text-gray-300">{task.applicant}</span>
-                </td>
-                <td className="px-4 py-4">
-                  <span className="text-sm text-gray-400">{task.applyTime}</span>
-                </td>
-                <td className="px-4 py-4">
-                  {getPriorityBadge(task.priority)}
-                </td>
-                <td className="px-4 py-4">
-                  <span className={`text-sm ${isUrgent(task) ? 'text-red-400' : 'text-gray-300'}`}>
-                    {formatWaitingTime(task.waitingTime)}
-                  </span>
-                </td>
-                <td className="px-4 py-4">
-                  <span className="text-sm text-gray-300">{task.auditor || '-'}</span>
-                </td>
-                <td className="px-4 py-4">
-                  {getStatusDisplay(task.status)}
-                </td>
-                <td className="px-4 py-4">
-                  <button className="flex items-center gap-1 text-blue-400 hover:text-blue-300 text-xs">
-                    <Eye className="w-3.5 h-3.5" />
-                    查看
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <div className="text-sm text-white font-medium mb-1.5">{t.name}</div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-1.5 bg-[#111625] rounded-full overflow-hidden">
+                      <div className={`h-full rounded-full ${t.status === 'failed' ? 'bg-red-500' : t.status === 'success' ? 'bg-green-500' : 'bg-blue-500'}`} style={{ width: `${t.progress}%` }} />
+                    </div>
+                    <span className="text-[10px] text-slate-300 font-mono shrink-0">{t.completedSteps}/{t.totalSteps} · {t.progress}%</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {selected ? (
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4 space-y-3">
+            <div>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${jobTypeColor[selected.jobType] || '#0066FF'}20`, color: jobTypeColor[selected.jobType] || '#0066FF' }}>{selected.jobType}</span>
+              </div>
+              <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>
+            </div>
+
+            <div className="bg-[#111625] border border-blue-500/30 rounded p-2">
+              <div className="text-[10px] text-slate-500 mb-0.5">当前步骤</div>
+              <div className="text-xs text-blue-300">{selected.currentStep}</div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-slate-300">执行进度</span>
+                <span className="font-mono text-blue-300">{selected.progress}%</span>
+              </div>
+              <div className="h-2 bg-[#111625] rounded-full overflow-hidden">
+                <div className={`h-full rounded-full ${selected.status === 'failed' ? 'bg-red-500' : selected.status === 'success' ? 'bg-green-500' : 'bg-blue-500'}`} style={{ width: `${selected.progress}%` }} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">开始</div>
+                <div className="text-slate-200 font-mono text-[10px]">{selected.startTime}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">耗时</div>
+                <div className="text-blue-300 font-mono">{selected.duration}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">审核人</div>
+                <div className="text-yellow-300">{selected.executor}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">风险分</div>
+                <div className="text-red-300 font-mono">{selected.riskScore}</div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-slate-300">自动检查</span>
+                <span className={`font-mono ${selected.autoPassed === selected.autoChecks ? 'text-green-400' : 'text-yellow-400'}`}>{selected.autoPassed}/{selected.autoChecks}</span>
+              </div>
+              <div className="h-1.5 bg-[#111625] rounded-full overflow-hidden">
+                <div className={`h-full rounded-full ${selected.autoPassed === selected.autoChecks ? 'bg-green-500' : 'bg-yellow-500'}`} style={{ width: `${(selected.autoPassed / selected.autoChecks) * 100}%` }} />
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              {selected.status === 'running' ? (
+                <>
+                  <button className="flex-1 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-xs rounded-md flex items-center justify-center gap-1.5"><Pause className="w-3 h-3" />暂停</button>
+                  <button className="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-xs rounded-md flex items-center justify-center gap-1.5"><XCircle className="w-3 h-3" />驳回</button>
+                </>
+              ) : selected.status === 'queued' ? (
+                <button className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-md flex items-center justify-center gap-1.5"><Play className="w-3 h-3" />立即审核</button>
+              ) : (
+                <button className="w-full px-3 py-2 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-xs rounded-md flex items-center justify-center gap-1.5"><Eye className="w-3 h-3" />查看详情</button>
+              )}
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
+
+function StatBox({ label, value, color, icon }: { label: string; value: any; color: string; icon: React.ReactNode }) {
+  return (
+    <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs text-slate-400">{label}</span>
+        <span style={{ color }}>{icon}</span>
+      </div>
+      <div className="text-xl font-semibold text-white">{value}</div>
+    </div>
+  );
+}
+
+export default JobAuditStatusMonitor;

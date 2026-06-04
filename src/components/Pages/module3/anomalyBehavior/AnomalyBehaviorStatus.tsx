@@ -1,39 +1,33 @@
 'use client';
+
 import React from 'react';
-import { Search as SearchIcon, Eye, RefreshCw, Download, Activity, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
-import { StandardSubPage, SubPageColumn } from '@/components/Common/StandardSubPage';
+import { TaskMonitor } from '@/components/Common/TaskMonitor';
+import type { TaskItem } from '@/components/Common/TaskMonitor/types';
 
-const mockData = [
-{ id:'TS-001', name:'异常行为-核心网络', status:'running', progress:75, duration:'00:45:30' },
-  { id:'TS-002', name:'异常行为-办公网络', status:'completed', progress:100, duration:'02:15:00' },
-  { id:'TS-003', name:'异常行为-数据中心', status:'failed', progress:30, duration:'00:12:00' },
-  { id:'TS-004', name:'异常行为-分支机构', status:'pending', progress:0, duration:'-' },
-  { id:'TS-005', name:'异常行为-云平台', status:'running', progress:60, duration:'01:30:00' }
+const MOCK_TASKS: TaskItem[] = [
+  { id: 'AB-20260604001', title: '用户行为基线建模 - 财务部', target: '财务部 45 人', status: 'processing', phase: 'verifying', progress: 62, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '10:00:00', duration: 35 },
+  { id: 'AB-20260604002', title: '异常登录检测', target: '全网 800 个域账号', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '08:00:00', duration: 25 },
+  { id: 'AB-20260604003', title: '数据外泄检测 - 研发部', target: '研发部 320 人', status: 'failed', phase: 'reviewing', progress: 38, priority: 'urgent', slaStatus: 'breached', assignee: '系统自动', startTime: '09:00:00', duration: 42, failureReason: 'DLP Agent 在 8 台开发机上未运行，无法采集数据外泄事件。已自动通知桌面运维组补装。' },
+  { id: 'AB-20260604004', title: '工作时间外访问检测', target: '全网 800 人', status: 'processing', phase: 'reviewing', progress: 78, priority: 'medium', slaStatus: 'normal', assignee: '系统自动', startTime: '10:30:00', duration: 18 },
+  { id: 'AB-20260604005', title: '特权账号异常使用检测', target: '域管/SA 等 28 个特权账号', status: 'processing', phase: 'dispatching', progress: 55, priority: 'urgent', slaStatus: 'warning', assignee: '系统自动', startTime: '11:00:00', duration: 12 },
+  { id: 'AB-20260604006', title: '异常下载行为检测', target: '文件服务器', status: 'pending', phase: 'submitted', progress: 0, priority: 'medium', slaStatus: 'normal', assignee: '系统自动', startTime: '14:00:00', duration: 0 },
+  { id: 'AB-20260603007', title: '批量文件删除告警', target: '文件服务器集群', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '22:00:00', duration: 8 },
+  { id: 'AB-20260603008', title: '异常地理位置登录', target: '全网账号', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '20:00:00', duration: 15 },
 ];
 
-const extraColumns: SubPageColumn[] = [
-
-    { key:'progress', title:'进度', render:(v:number) => (
-      <div className='flex items-center gap-2 w-32'>
-        <div className='flex-1 bg-[#0F1729] rounded-full h-2'>
-          <div className={'h-2 rounded-full transition-all '+(v>=90?'bg-green-500':v>=50?'bg-blue-500':v>0?'bg-yellow-500':'bg-gray-500')} style={{width:v+'%'}} />
-        </div>
-        <span className='text-gray-400 text-xs w-8'>{v}%</span>
-      </div>
-    ) },
-    { key:'duration', title:'运行时长' },
-];
-
-const extraStats = (data: any[]) => [];
-
+/**
+ * 3-3-5 异常行为监测 - 任务状态监控
+ *
+ * 100% 复用 TaskMonitor 共享组件
+ */
 export function AnomalyBehaviorStatus() {
   return (
-    <StandardSubPage
-      title="异常行为任务状态监控"
-      description="实时监控任务的运行状态 - 异常行为任务状态监控"
-      mockData={mockData}
-      columns={extraColumns}
-      extraStats={extraStats}
+    <TaskMonitor
+      title="异常行为监测任务状态监控"
+      subtitle="用户行为基线 · 异常登录 · 数据外泄 · 特权账号监控 · 失败归因 · SLA 监控"
+      tasks={MOCK_TASKS}
     />
   );
 }
+
+export default AnomalyBehaviorStatus;

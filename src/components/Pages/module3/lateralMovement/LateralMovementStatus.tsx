@@ -1,39 +1,33 @@
 'use client';
+
 import React from 'react';
-import { Search as SearchIcon, Eye, RefreshCw, Download, Activity, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
-import { StandardSubPage, SubPageColumn } from '@/components/Common/StandardSubPage';
+import { TaskMonitor } from '@/components/Common/TaskMonitor';
+import type { TaskItem } from '@/components/Common/TaskMonitor/types';
 
-const mockData = [
-{ id:'TS-001', name:'横向渗透-核心网络', status:'running', progress:75, duration:'00:45:30' },
-  { id:'TS-002', name:'横向渗透-办公网络', status:'completed', progress:100, duration:'02:15:00' },
-  { id:'TS-003', name:'横向渗透-数据中心', status:'failed', progress:30, duration:'00:12:00' },
-  { id:'TS-004', name:'横向渗透-分支机构', status:'pending', progress:0, duration:'-' },
-  { id:'TS-005', name:'横向渗透-云平台', status:'running', progress:60, duration:'01:30:00' }
+const MOCK_TASKS: TaskItem[] = [
+  { id: 'LM-20260604001', title: '横向渗透检测 - 核心网络域', target: 'DC01 / DC02 / 核心交换机', status: 'processing', phase: 'verifying', progress: 68, priority: 'urgent', slaStatus: 'normal', assignee: '系统自动', startTime: '10:30:00', duration: 32 },
+  { id: 'LM-20260604002', title: '横向渗透检测 - 办公网络', target: '办公网段 10.20.0.0/16', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '08:00:00', duration: 45 },
+  { id: 'LM-20260604003', title: '横向渗透检测 - 数据中心', target: 'DC-PROD-01 / DC-PROD-02', status: 'failed', phase: 'reviewing', progress: 42, priority: 'urgent', slaStatus: 'breached', assignee: '系统自动', startTime: '09:15:00', duration: 28, failureReason: 'EDR Agent 在 HOST-DB-007 上失联，扫描中断。已自动重试 3 次均失败。需运维人员现场检查 EDR 状态。' },
+  { id: 'LM-20260604004', title: '横向渗透检测 - 分支机构', target: 'BJ / SH / GZ 分支', status: 'completed', phase: 'done', progress: 100, priority: 'medium', slaStatus: 'normal', assignee: '系统自动', startTime: '07:00:00', duration: 38 },
+  { id: 'LM-20260604005', title: '攻击路径复现 - APT-29', target: 'HOST-FIN-002 → DC01', status: 'processing', phase: 'dispatching', progress: 35, priority: 'urgent', slaStatus: 'normal', assignee: '安全-张工', startTime: '11:00:00', duration: 15 },
+  { id: 'LM-20260604006', title: '凭据滥用检测', target: '全网 800 个域账号', status: 'processing', phase: 'reviewing', progress: 78, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '10:00:00', duration: 25 },
+  { id: 'LM-20260604007', title: 'SMB 异常连接检测', target: '生产网段', status: 'pending', phase: 'submitted', progress: 0, priority: 'medium', slaStatus: 'normal', assignee: '系统自动', startTime: '14:00:00', duration: 0 },
+  { id: 'LM-20260604008', title: 'Pass-the-Hash 检测', target: '域控 DC01', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '06:00:00', duration: 18 },
 ];
 
-const extraColumns: SubPageColumn[] = [
-
-    { key:'progress', title:'进度', render:(v:number) => (
-      <div className='flex items-center gap-2 w-32'>
-        <div className='flex-1 bg-[#0F1729] rounded-full h-2'>
-          <div className={'h-2 rounded-full transition-all '+(v>=90?'bg-green-500':v>=50?'bg-blue-500':v>0?'bg-yellow-500':'bg-gray-500')} style={{width:v+'%'}} />
-        </div>
-        <span className='text-gray-400 text-xs w-8'>{v}%</span>
-      </div>
-    ) },
-    { key:'duration', title:'运行时长' },
-];
-
-const extraStats = (data: any[]) => [];
-
+/**
+ * 3-2-6 横向渗透监测 - 任务状态监控
+ *
+ * 100% 复用 TaskMonitor 共享组件
+ */
 export function LateralMovementStatus() {
   return (
-    <StandardSubPage
-      title="横向渗透任务状态监控"
-      description="实时监控任务的运行状态 - 横向渗透任务状态监控"
-      mockData={mockData}
-      columns={extraColumns}
-      extraStats={extraStats}
+    <TaskMonitor
+      title="横向渗透监测任务状态监控"
+      subtitle="横向渗透检测任务实时监控 · 攻击路径复现 · 阶段进度 · 失败归因 · SLA 监控"
+      tasks={MOCK_TASKS}
     />
   );
 }
+
+export default LateralMovementStatus;

@@ -57,14 +57,46 @@ export function LoadingSkeleton({ rows = 3, cols = 5 }: { rows?: number; cols?: 
   );
 }
 
-export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: React.ReactNode }) {
+export interface ActionConfig {
+  icon: React.ComponentType<any>;
+  label: string;
+  onClick: () => void;
+  loading?: boolean;
+}
+
+export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: React.ReactNode | ActionConfig[] }) {
+  const renderActions = () => {
+    if (!actions) return null;
+    if (Array.isArray(actions) && actions.length > 0 && 'icon' in actions[0] && 'label' in actions[0] && 'onClick' in actions[0]) {
+      return (actions as ActionConfig[]).map((action, i) => {
+        const Icon = action.icon;
+        return (
+          <button
+            key={i}
+            onClick={action.onClick}
+            disabled={action.loading}
+            className="flex items-center gap-2 px-4 py-2 bg-[#1E2736] border border-[#2A354D] rounded-lg text-gray-300 text-sm hover:bg-[#253042] disabled:opacity-50"
+          >
+            {action.loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Icon className="w-4 h-4" />
+            )}
+            {action.label}
+          </button>
+        );
+      });
+    }
+    return actions;
+  };
+
   return (
     <div className="flex items-start justify-between mb-6">
       <div>
         <h2 className="text-xl font-semibold text-white">{title}</h2>
         {description && <p className="text-sm text-gray-400 mt-1">{description}</p>}
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
+      {actions && <div className="flex items-center gap-2">{renderActions()}</div>}
     </div>
   );
 }

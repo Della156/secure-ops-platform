@@ -1,242 +1,260 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CheckCircle, XCircle, AlertTriangle, User, Shield, Award, Clock, Ban } from 'lucide-react';
+import {
+  Search, Plus, Download, RefreshCw, Filter, Eye, CheckCircle2, XCircle,
+  Shield, Award, FileText, User, Calendar, AlertCircle, ChevronRight,
+  BarChart3, Activity, BookOpen, Clock, ListTree, Star, Lock
+} from 'lucide-react';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis
+} from 'recharts';
 
-interface Qualification {
+interface ComplianceCheck {
   id: string;
-  name: string;
-  type: string;
-  issueDate: string;
-  expiryDate: string;
-  status: 'valid' | 'expired' | 'revoked';
+  category: '等保 2.0' | 'ISO 27001' | 'GDPR' | 'PCI DSS' | '行业规范' | '内部规范';
+  standard: string;
+  clause: string;
+  description: string;
+  status: 'pass' | 'warn' | 'fail' | 'pending';
+  evidence: string;
+  lastChecked: string;
+  nextCheck: string;
+  responsible: string;
+  relatedJobs: number;
+  passRate: number;
 }
 
-interface Applicant {
-  id: string;
-  name: string;
-  department: string;
-  qualifications: Qualification[];
-  pendingJobs: { id: string; name: string }[];
-}
+const checks: ComplianceCheck[] = [
+  { id: 'CC-001', category: '等保 2.0', standard: 'GB/T 22239-2019', clause: '8.1.4.2 访问控制', description: '应授予管理用户所需的最小权限，实现管理用户的权限分离', status: 'pass', evidence: 'RBAC 策略已实施，最小权限验证通过', lastChecked: '2026-06-01', nextCheck: '2026-07-01', responsible: '安全部', relatedJobs: 56, passRate: 96 },
+  { id: 'CC-002', category: '等保 2.0', standard: 'GB/T 22239-2019', clause: '8.1.5.1 安全审计', description: '应启用安全审计功能，审计覆盖到每个用户', status: 'pass', evidence: '审计日志完整保留 180 天，覆盖所有用户', lastChecked: '2026-06-01', nextCheck: '2026-07-01', responsible: '安全部', relatedJobs: 142, passRate: 100 },
+  { id: 'CC-003', category: '等保 2.0', standard: 'GB/T 22239-2019', clause: '8.1.4.3 访问控制', description: '应授予不同账户不同的访问权限，并分离操作员与审计员角色', status: 'warn', evidence: '部分岗位未严格分离操作员与审计员', lastChecked: '2026-06-01', nextCheck: '2026-07-01', responsible: 'HR + 安全部', relatedJobs: 28, passRate: 78 },
+  { id: 'CC-004', category: 'ISO 27001', standard: 'A.9.2.1 用户注册与注销', description: '应有正式的用户注册和注销流程', status: 'pass', evidence: '账号生命周期管理流程已文档化', lastChecked: '2026-05-15', nextCheck: '2026-08-15', responsible: 'HR + IT', relatedJobs: 86, passRate: 94 },
+  { id: 'CC-005', category: 'ISO 27001', standard: 'A.12.1.2 变更管理', description: '应控制信息的变更', status: 'warn', evidence: '紧急变更流程需补充', lastChecked: '2026-05-20', nextCheck: '2026-08-20', responsible: '运维部', relatedJobs: 142, passRate: 88 },
+  { id: 'CC-006', category: 'ISO 27001', standard: 'A.16.1.2 事件报告', description: '应通过适当的管理渠道及时报告安全事件', status: 'pass', evidence: '事件响应流程 30 分钟内报告', lastChecked: '2026-05-25', nextCheck: '2026-08-25', responsible: '安全部', relatedJobs: 12, passRate: 100 },
+  { id: 'CC-007', category: 'GDPR', standard: 'Article 32', clause: '安全处理义务', description: '实施适当的技术和组织措施确保数据安全', status: 'pass', evidence: '数据加密、访问控制、审计日志完备', lastChecked: '2026-05-10', nextCheck: '2026-08-10', responsible: 'DPO + 法务', relatedJobs: 42, passRate: 95 },
+  { id: 'CC-008', category: 'PCI DSS', standard: 'v4.0 Requirement 7', clause: '按业务需要限制访问', status: 'fail', evidence: '部分账号权限过大，待整改', lastChecked: '2026-06-02', nextCheck: '2026-07-02', responsible: '安全部 + DBA', relatedJobs: 18, passRate: 62 },
+  { id: 'CC-009', category: '行业规范', standard: 'JR/T 0068-2020', clause: '网络安全等级保护', description: '金融行业网络安全规范', status: 'pass', evidence: '符合 JR/T 0068-2020 三级要求', lastChecked: '2026-05-30', nextCheck: '2026-11-30', responsible: '安全部', relatedJobs: 142, passRate: 92 },
+  { id: 'CC-010', category: '内部规范', standard: '内部 SOP-Q4', clause: '生产变更流程', description: '生产环境变更必须经过 3 级审批', status: 'pass', evidence: '审批流程已实施，平均审批时长 4.2 小时', lastChecked: '2026-06-01', nextCheck: '2026-09-01', responsible: '运维部', relatedJobs: 142, passRate: 96 },
+];
 
-const mockApplicants: Applicant[] = [
-  {
-    id: 'USER-001',
-    name: '张三',
-    department: '运维部',
-    qualifications: [
-      { id: 'QUAL-001', name: 'Linux系统管理员', type: '系统认证', issueDate: '2025-01-15', expiryDate: '2028-01-14', status: 'valid' },
-      { id: 'QUAL-002', name: '网络安全工程师', type: '安全认证', issueDate: '2024-06-20', expiryDate: '2027-06-19', status: 'valid' },
-    ],
-    pendingJobs: [
-      { id: 'AUD-001', name: '服务器维护作业' },
-      { id: 'AUD-002', name: '网络配置调整' },
-    ],
-  },
-  {
-    id: 'USER-002',
-    name: '李四',
-    department: '开发部',
-    qualifications: [
-      { id: 'QUAL-003', name: 'Java开发工程师', type: '开发认证', issueDate: '2023-03-10', expiryDate: '2026-03-09', status: 'valid' },
-      { id: 'QUAL-004', name: '数据库管理员', type: '数据库认证', issueDate: '2022-08-05', expiryDate: '2025-08-04', status: 'expired' },
-    ],
-    pendingJobs: [
-      { id: 'AUD-003', name: '数据库备份作业' },
-    ],
-  },
-  {
-    id: 'USER-003',
-    name: '王五',
-    department: '测试部',
-    qualifications: [
-      { id: 'QUAL-005', name: '软件测试工程师', type: '测试认证', issueDate: '2024-01-01', expiryDate: '2027-01-01', status: 'revoked' },
-    ],
-    pendingJobs: [],
-  },
+const categoryColor: Record<ComplianceCheck['category'], string> = {
+  '等保 2.0': '#0066FF',
+  'ISO 27001': '#9333EA',
+  'GDPR': '#22C55E',
+  'PCI DSS': '#FF6D00',
+  '行业规范': '#06B6D4',
+  '内部规范': '#EAB308',
+};
+
+const statusConfig = {
+  pass: { label: '符合', color: 'text-green-400', bg: 'bg-green-500/20' },
+  warn: { label: '部分符合', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+  fail: { label: '不符合', color: 'text-red-400', bg: 'bg-red-500/20' },
+  pending: { label: '待检查', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+};
+
+// 合规趋势
+const complianceTrend = [
+  { month: '1月', pass: 88, warn: 8, fail: 4 },
+  { month: '2月', pass: 90, warn: 7, fail: 3 },
+  { month: '3月', pass: 92, warn: 6, fail: 2 },
+  { month: '4月', pass: 93, warn: 5, fail: 2 },
+  { month: '5月', pass: 94, warn: 4, fail: 2 },
+  { month: '6月', pass: 96, warn: 3, fail: 1 },
 ];
 
 export function QualComplianceCheck() {
-  const [applicants] = useState(mockApplicants);
-  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(mockApplicants[0]);
+  const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedId, setSelectedId] = useState<string | null>('CC-001');
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'valid': return <CheckCircle className="w-4 h-4 text-green-400" />;
-      case 'expired': return <Clock className="w-4 h-4 text-yellow-400" />;
-      case 'revoked': return <Ban className="w-4 h-4 text-red-400" />;
-      default: return <AlertTriangle className="w-4 h-4 text-gray-400" />;
-    }
-  };
+  const filtered = checks.filter(c => {
+    if (search && !c.standard.includes(search) && !c.clause.includes(search)) return false;
+    if (categoryFilter !== 'all' && c.category !== categoryFilter) return false;
+    if (statusFilter !== 'all' && c.status !== statusFilter) return false;
+    return true;
+  });
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'valid': return '有效';
-      case 'expired': return '已过期';
-      case 'revoked': return '已撤销';
-      default: return status;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'valid': return 'text-green-400 bg-green-500/20';
-      case 'expired': return 'text-yellow-400 bg-yellow-500/20';
-      case 'revoked': return 'text-red-400 bg-red-500/20';
-      default: return 'text-gray-400 bg-gray-500/20';
-    }
-  };
-
-  const checkCompliance = (applicant: Applicant) => {
-    const hasExpired = applicant.qualifications.some(q => q.status === 'expired');
-    const hasRevoked = applicant.qualifications.some(q => q.status === 'revoked');
-    const hasValid = applicant.qualifications.some(q => q.status === 'valid');
-
-    if (hasRevoked) return { passed: false, reason: '存在已撤销的资质' };
-    if (hasExpired) return { passed: false, reason: '存在已过期的资质' };
-    if (!hasValid) return { passed: false, reason: '无有效资质' };
-    return { passed: true, reason: '资质合规' };
+  const selected = selectedId ? checks.find(c => c.id === selectedId) : null;
+  const stats = {
+    total: checks.length,
+    pass: checks.filter(c => c.status === 'pass').length,
+    warn: checks.filter(c => c.status === 'warn').length,
+    fail: checks.filter(c => c.status === 'fail').length,
   };
 
   return (
-    <div>
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">作业资质合规审核</h2>
-        <p className="text-sm text-gray-400 mt-1">资质校验、有效性校验、自动驳回</p>
+    <div className="p-6 space-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <StatBox label="合规检查" value={stats.total} color="#0066FF" icon={<Shield className="w-4 h-4" />} />
+        <StatBox label="符合" value={stats.pass} color="#22C55E" icon={<CheckCircle2 className="w-4 h-4" />} />
+        <StatBox label="部分符合" value={stats.warn} color="#FF6D00" icon={<AlertCircle className="w-4 h-4" />} />
+        <StatBox label="不符合" value={stats.fail} color="#EF4444" icon={<XCircle className="w-4 h-4" />} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1">
-          <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-            <h3 className="text-sm font-medium text-gray-300 mb-4">申请人列表</h3>
-            <div className="space-y-2">
-              {applicants.map((applicant) => {
-                const compliance = checkCompliance(applicant);
-                return (
-                  <div
-                    key={applicant.id}
-                    onClick={() => setSelectedApplicant(applicant)}
-                    className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                      selectedApplicant?.id === applicant.id
-                        ? 'bg-blue-500/20 border border-blue-500/50'
-                        : 'bg-[#111827] border border-[#2A354D] hover:bg-[#253042]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm text-white font-medium">{applicant.name}</span>
-                      {compliance.passed ? (
-                        <CheckCircle className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <XCircle className="w-4 h-4 text-red-400" />
-                      )}
-                    </div>
-                    <p className="text-xs text-gray-500">{applicant.department}</p>
-                    <p className="text-xs text-gray-500">{applicant.qualifications.length} 个资质</p>
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <h3 className="text-sm font-semibold text-white mb-3">合规趋势（6 月）</h3>
+        <ResponsiveContainer width="100%" height={140}>
+          <BarChart data={complianceTrend}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#2A354D" />
+            <XAxis dataKey="month" tick={{ fill: '#94A3B8', fontSize: 11 }} />
+            <YAxis tick={{ fill: '#94A3B8', fontSize: 11 }} />
+            <Tooltip contentStyle={{ background: '#111625', border: '1px solid #2A354D', borderRadius: 6 }} />
+            <Bar dataKey="pass" stackId="a" fill="#22C55E" name="符合" />
+            <Bar dataKey="warn" stackId="a" fill="#FF6D00" name="部分符合" />
+            <Bar dataKey="fail" stackId="a" fill="#EF4444" name="不符合" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 className="text-lg font-semibold text-white">作业资质合规审核</h2>
+            <p className="text-xs text-slate-500 mt-1">等保 2.0 / ISO 27001 / GDPR / PCI DSS / 行业 / 内部 — 6 大类合规标准</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
+              <Plus className="w-3.5 h-3.5" />新增检查
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2A354D] hover:bg-[#364360] text-slate-300 text-sm rounded-md">
+              <Download className="w-3.5 h-3.5" />导出
+            </button>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <input
+              type="text" placeholder="搜索标准/条款"
+              value={search} onChange={e => setSearch(e.target.value)}
+              className="w-full pl-8 pr-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
+            />
+          </div>
+          <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="px-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md">
+            <option value="all">全部标准</option>
+            <option value="等保 2.0">等保 2.0</option>
+            <option value="ISO 27001">ISO 27001</option>
+            <option value="GDPR">GDPR</option>
+            <option value="PCI DSS">PCI DSS</option>
+            <option value="行业规范">行业规范</option>
+            <option value="内部规范">内部规范</option>
+          </select>
+          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="px-3 py-1.5 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md">
+            <option value="all">全部结果</option>
+            <option value="pass">符合</option>
+            <option value="warn">部分符合</option>
+            <option value="fail">不符合</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 bg-[#20293F] border border-[#2A354D] rounded-lg overflow-hidden">
+          <div className="px-4 py-3 border-b border-[#2A354D]">
+            <h3 className="text-sm font-semibold text-white">合规检查项 ({filtered.length})</h3>
+          </div>
+          <div className="max-h-[480px] overflow-y-auto">
+            {filtered.map(c => {
+              const sc = statusConfig[c.status];
+              return (
+                <div
+                  key={c.id}
+                  onClick={() => setSelectedId(c.id)}
+                  className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === c.id ? 'bg-[#111625]' : ''}`}
+                >
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs text-blue-400 font-mono">{c.id}</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${categoryColor[c.category]}20`, color: categoryColor[c.category] }}>{c.category}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${sc.bg} ${sc.color}`}>{sc.label}</span>
+                    <div className="flex-1" />
+                    <span className="text-[10px] text-slate-500 font-mono">关联 {c.relatedJobs} 作业</span>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="text-sm text-white font-medium mb-1">{c.standard} · {c.clause}</div>
+                  <div className="text-xs text-slate-400 line-clamp-1 mb-1.5">{c.description}</div>
+                  <div className="flex items-center gap-3 text-[10px] text-slate-500">
+                    <span>上次 <span className="text-slate-300">{c.lastChecked}</span></span>
+                    <span>·</span>
+                    <span>下次 <span className="text-blue-300">{c.nextCheck}</span></span>
+                    <span>·</span>
+                    <span>通过率 <span className="text-green-300 font-mono">{c.passRate}%</span></span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <div className="lg:col-span-2 space-y-4">
-          {selectedApplicant && (
-            <>
-              <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                      <User className="w-6 h-6 text-blue-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-medium text-white">{selectedApplicant.name}</h3>
-                      <p className="text-sm text-gray-400">{selectedApplicant.department}</p>
-                    </div>
-                  </div>
-                  {(() => {
-                    const compliance = checkCompliance(selectedApplicant);
-                    return (
-                      <div className={`px-4 py-2 rounded-lg ${compliance.passed ? 'bg-green-500/20 border border-green-500/30' : 'bg-red-500/20 border border-red-500/30'}`}>
-                        <span className={`text-sm font-medium ${compliance.passed ? 'text-green-400' : 'text-red-400'}`}>
-                          {compliance.reason}
-                        </span>
-                      </div>
-                    );
-                  })()}
-                </div>
+        {selected ? (
+          <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4 space-y-3">
+            <div>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${categoryColor[selected.category]}20`, color: categoryColor[selected.category] }}>{selected.category}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>{statusConfig[selected.status].label}</span>
               </div>
+              <h3 className="text-base font-semibold text-white mb-1">{selected.standard}</h3>
+              <div className="text-[10px] text-blue-300 font-mono mb-1">{selected.clause}</div>
+              <p className="text-xs text-slate-400">{selected.description}</p>
+            </div>
 
-              <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-300 mb-4 flex items-center gap-2">
-                  <Award className="w-4 h-4 text-yellow-400" />
-                  资质证书
-                </h3>
-                <div className="space-y-3">
-                  {selectedApplicant.qualifications.map((qual) => (
-                    <div key={qual.id} className="bg-[#111827] border border-[#2A354D] rounded-lg p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h4 className="text-sm font-medium text-white">{qual.name}</h4>
-                          <p className="text-xs text-gray-500">{qual.type}</p>
-                        </div>
-                        <span className={`px-2 py-1 rounded text-xs flex items-center gap-1 ${getStatusColor(qual.status)}`}>
-                          {getStatusIcon(qual.status)}
-                          {getStatusText(qual.status)}
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 text-xs">
-                        <div>
-                          <span className="text-gray-500">发证日期: </span>
-                          <span className="text-gray-300">{qual.issueDate}</span>
-                        </div>
-                        <div>
-                          <span className="text-gray-500">有效期至: </span>
-                          <span className={`${qual.status === 'expired' ? 'text-red-400' : 'text-gray-300'}`}>{qual.expiryDate}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+            <div className="bg-[#111625] border border-green-500/30 rounded p-2">
+              <div className="text-[10px] text-slate-500 mb-0.5">证据 / 实施情况</div>
+              <div className="text-xs text-green-300">{selected.evidence}</div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">上次检查</div>
+                <div className="text-slate-200 font-mono text-[10px]">{selected.lastChecked}</div>
               </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">下次检查</div>
+                <div className="text-blue-300 font-mono text-[10px]">{selected.nextCheck}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">负责部门</div>
+                <div className="text-yellow-300">{selected.responsible}</div>
+              </div>
+              <div className="bg-[#111625] rounded p-2">
+                <div className="text-slate-500 mb-0.5">关联作业</div>
+                <div className="text-blue-300 font-mono">{selected.relatedJobs}</div>
+              </div>
+            </div>
 
-              {selectedApplicant.pendingJobs.length > 0 && (
-                <div className="bg-[#1E2736] border border-[#2A354D] rounded-lg p-4">
-                  <h3 className="text-sm font-medium text-gray-300 mb-4 flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-blue-400" />
-                    待审核作业
-                  </h3>
-                  <div className="space-y-2">
-                    {selectedApplicant.pendingJobs.map((job) => (
-                      <div key={job.id} className="bg-[#111827] border border-[#2A354D] rounded-lg p-3 flex items-center justify-between">
-                        <div>
-                          <span className="text-sm text-gray-300">{job.name}</span>
-                          <span className="text-xs text-gray-500 ml-2">{job.id}</span>
-                        </div>
-                        {(() => {
-                          const compliance = checkCompliance(selectedApplicant);
-                          return (
-                            <button
-                              disabled={!compliance.passed}
-                              className={`px-3 py-1 rounded text-xs ${
-                                compliance.passed
-                                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                  : 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                              }`}
-                            >
-                              {compliance.passed ? '通过审核' : '自动驳回'}
-                            </button>
-                          );
-                        })()}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-slate-300">通过率</span>
+                <span className={`font-mono ${selected.passRate >= 90 ? 'text-green-400' : selected.passRate >= 70 ? 'text-yellow-400' : 'text-red-400'}`}>{selected.passRate}%</span>
+              </div>
+              <div className="h-2 bg-[#111625] rounded-full overflow-hidden">
+                <div className={`h-full rounded-full ${selected.passRate >= 90 ? 'bg-green-500' : selected.passRate >= 70 ? 'bg-yellow-500' : 'bg-red-500'}`} style={{ width: `${selected.passRate}%` }} />
+              </div>
+            </div>
+
+            <button className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-md flex items-center justify-center gap-1.5">
+              <FileText className="w-3 h-3" />查看详细报告
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
+
+function StatBox({ label, value, color, icon }: { label: string; value: any; color: string; icon: React.ReactNode }) {
+  return (
+    <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs text-slate-400">{label}</span>
+        <span style={{ color }}>{icon}</span>
+      </div>
+      <div className="text-xl font-semibold text-white">{value}</div>
+    </div>
+  );
+}
+
+export default QualComplianceCheck;

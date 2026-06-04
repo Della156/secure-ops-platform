@@ -1,5 +1,19 @@
 'use client';
 
+/**
+ * 表格组件 — 数据驱动模式
+ *
+ * ✅ 正确用法：
+ * ```
+ * <Table columns={columns} data={dataList} rowKey="id" />
+ * ```
+ *
+ * ❌ 禁止（shadcn 风格）：
+ * ```
+ * <Table><TableHeader>...</TableHeader></Table>
+ * ```
+ */
+
 import React from 'react';
 import { Button } from './Button';
 
@@ -12,14 +26,15 @@ interface TableColumn<T> {
 }
 
 interface TableProps<T> {
-  columns: TableColumn<T>[];
-  data: T[];
-  rowKey: keyof T | ((item: T) => string);
+  columns?: TableColumn<T>[];
+  data?: T[];
+  rowKey?: keyof T | ((item: T) => string);
   loading?: boolean;
   emptyText?: string;
   onRowClick?: (item: T) => void;
   actions?: (item: T) => React.ReactNode;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export function Table<T extends Record<string, any>>({
@@ -31,10 +46,25 @@ export function Table<T extends Record<string, any>>({
   onRowClick,
   actions,
   className = '',
+  children,
 }: TableProps<T>) {
+  // shadcn 兼容模式：通过 children 自定义表格结构
+  if (children) {
+    return (
+      <div className={`bg-[#20293F] border border-[#2A354D] rounded-xl overflow-hidden ${className}`}>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            {children}
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  // 数据驱动模式：使用 columns / data 渲染
   const getKey = (item: T, index: number): string => {
     if (typeof rowKey === 'function') return rowKey(item);
-    return String(item[rowKey] ?? index);
+    return String(item[rowKey as keyof T] ?? index);
   };
 
   if (loading) {
@@ -103,5 +133,52 @@ export function Table<T extends Record<string, any>>({
         </table>
       </div>
     </div>
+  );
+}
+
+/* ========== shadcn 兼容的 Table 子组件 ========== */
+
+interface TableWrapperProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function TableHeader({ className = '', children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
+  return (
+    <thead className={`bg-slate-800/50 ${className}`} {...props}>
+      {children}
+    </thead>
+  );
+}
+
+export function TableBody({ className = '', children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
+  return (
+    <tbody className={`divide-y divide-[#2A354D] ${className}`} {...props}>
+      {children}
+    </tbody>
+  );
+}
+
+export function TableRow({ className = '', children, ...props }: React.HTMLAttributes<HTMLTableRowElement>) {
+  return (
+    <tr className={`hover:bg-slate-800/30 transition-colors ${className}`} {...props}>
+      {children}
+    </tr>
+  );
+}
+
+export function TableCell({ className = '', children, ...props }: React.HTMLAttributes<HTMLTableCellElement>) {
+  return (
+    <td className={`px-4 py-3 text-sm text-slate-300 whitespace-nowrap ${className}`} {...props}>
+      {children}
+    </td>
+  );
+}
+
+export function TableHead({ className = '', children, ...props }: React.HTMLAttributes<HTMLTableCellElement>) {
+  return (
+    <th className={`px-4 py-3 text-left text-xs font-medium text-slate-400 uppercase tracking-wider ${className}`} {...props}>
+      {children}
+    </th>
   );
 }
