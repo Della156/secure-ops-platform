@@ -423,11 +423,11 @@ const Stub_3_15_2 = dynamic(() => import(
   '@/components/Pages/module3/securityMetrics/MetricsReport'
 ).then(m => ({ default: m.MetricsReport })));
 const Stub_3_15_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-3" {...props} /> })));
+  '@/components/Pages/module3/baselineReport/BaselineCheckResult'
+).then(m => ({ default: m.BaselineCheckResult })));
 const Stub_3_15_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-15-4" {...props} /> })));
+  '@/components/Pages/module3/baselineReport/BaselineReportPush'
+).then(m => ({ default: m.BaselineReportPush })));
 const Stub_3_15_5 = dynamic(() => import(
   '@/components/Pages/module3/baselineReport/BaselineReportStatus'
 ).then(m => ({ default: m.BaselineReportStatus })));
@@ -448,11 +448,11 @@ const Stub_3_16_2 = dynamic(() => import(
   '@/components/Pages/module3/systemMonitor/ResourceMonitor'
 ).then(m => ({ default: m.ResourceMonitor })));
 const Stub_3_16_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-16-3" {...props} /> })));
+  '@/components/Pages/module3/traceReport/TraceReportAutoGenerate'
+).then(m => ({ default: m.TraceReportAutoGenerate })));
 const Stub_3_16_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-3-16-4" {...props} /> })));
+  '@/components/Pages/module3/traceReport/TraceReportPush'
+).then(m => ({ default: m.TraceReportPush })));
 const Stub_3_16_5 = dynamic(() => import(
   '@/components/Pages/module3/traceReport/TraceReportStatus'
 ).then(m => ({ default: m.TraceReportStatus })));
