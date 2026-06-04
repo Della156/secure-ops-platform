@@ -1,39 +1,33 @@
 'use client';
+
 import React from 'react';
-import { Search as SearchIcon, Eye, RefreshCw, Download, Activity, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
-import { StandardSubPage, SubPageColumn } from '@/components/Common/StandardSubPage';
+import { TaskMonitor } from '@/components/Common/TaskMonitor';
+import type { TaskItem } from '@/components/Common/TaskMonitor/types';
 
-const mockData = [
-{ id:'TS-001', name:'病毒处置-核心网络', status:'running', progress:75, duration:'00:45:30' },
-  { id:'TS-002', name:'病毒处置-办公网络', status:'completed', progress:100, duration:'02:15:00' },
-  { id:'TS-003', name:'病毒处置-数据中心', status:'failed', progress:30, duration:'00:12:00' },
-  { id:'TS-004', name:'病毒处置-分支机构', status:'pending', progress:0, duration:'-' },
-  { id:'TS-005', name:'病毒处置-云平台', status:'running', progress:60, duration:'01:30:00' }
+const MOCK_TASKS: TaskItem[] = [
+  { id: 'VD-20260604001', title: '病毒处置 - 勒索软件 LockBit', target: 'HOST-FIN-007 / LockBit v4', status: 'processing', phase: 'verifying', progress: 68, priority: 'urgent', slaStatus: 'normal', assignee: '安全-张工', startTime: '10:30:00', duration: 35 },
+  { id: 'VD-20260604002', title: '病毒处置 - 挖矿木马', target: 'HOST-DEV-022 / XMRig', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '08:00:00', duration: 18 },
+  { id: 'VD-20260604003', title: '病毒处置 - APT 后门', target: 'HOST-DB-007 / Cobalt Strike', status: 'failed', phase: 'reviewing', progress: 42, priority: 'urgent', slaStatus: 'breached', assignee: '安全-陈工', startTime: '09:15:00', duration: 28, failureReason: 'EDR Agent 在 HOST-DB-007 上失联，扫描中断。已自动重试 3 次均失败。需运维人员现场检查 EDR 状态。' },
+  { id: 'VD-20260604004', title: '病毒处置 - 蠕虫', target: 'HOST-DEV-013 / Conficker', status: 'processing', phase: 'reviewing', progress: 78, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '10:30:00', duration: 22 },
+  { id: 'VD-20260604005', title: '病毒处置 - 木马', target: 'HOST-FIN-002 / Emotet', status: 'processing', phase: 'dispatching', progress: 55, priority: 'medium', slaStatus: 'warning', assignee: '系统自动', startTime: '11:00:00', duration: 15 },
+  { id: 'VD-20260604006', title: '病毒处置 - 远控', target: 'HOST-DEV-008 / AgentTesla', status: 'pending', phase: 'submitted', progress: 0, priority: 'high', slaStatus: 'normal', assignee: '安全-王工', startTime: '14:00:00', duration: 0 },
+  { id: 'VD-20260603007', title: '病毒处置 - 间谍软件', target: 'HOST-DEV-005 / FormBook', status: 'completed', phase: 'done', progress: 100, priority: 'urgent', slaStatus: 'normal', assignee: '系统自动', startTime: '22:00:00', duration: 12 },
+  { id: 'VD-20260603008', title: '病毒处置 - 蠕虫变种', target: 'HOST-DEV-011 / WannaCry', status: 'completed', phase: 'done', progress: 100, priority: 'high', slaStatus: 'normal', assignee: '系统自动', startTime: '20:00:00', duration: 18 },
 ];
 
-const extraColumns: SubPageColumn[] = [
-
-    { key:'progress', title:'进度', render:(v:number) => (
-      <div className='flex items-center gap-2 w-32'>
-        <div className='flex-1 bg-[#0F1729] rounded-full h-2'>
-          <div className={'h-2 rounded-full transition-all '+(v>=90?'bg-green-500':v>=50?'bg-blue-500':v>0?'bg-yellow-500':'bg-gray-500')} style={{width:v+'%'}} />
-        </div>
-        <span className='text-gray-400 text-xs w-8'>{v}%</span>
-      </div>
-    ) },
-    { key:'duration', title:'运行时长' },
-];
-
-const extraStats = (data: any[]) => [];
-
+/**
+ * 3-10-5 病毒处置 - 任务状态监控
+ *
+ * 100% 复用 TaskMonitor 共享组件
+ */
 export function VirusDisposalStatus() {
   return (
-    <StandardSubPage
+    <TaskMonitor
       title="病毒处置任务状态监控"
-      description="实时监控任务的运行状态 - 病毒处置任务状态监控"
-      mockData={mockData}
-      columns={extraColumns}
-      extraStats={extraStats}
+      subtitle="病毒实时检测 · 自动隔离 · 清除验证 · 失败归因 · SLA 监控"
+      tasks={MOCK_TASKS}
     />
   );
 }
+
+export default VirusDisposalStatus;
