@@ -57,6 +57,10 @@ export interface SystemContextValue extends SystemState {
   setTheme: (theme: 'dark' | 'light' | 'system') => void;
   addHighPriorityTodo: (todo: HighPriorityTodo) => void;
   removeHighPriorityTodo: (id: string) => void;
+  // 事件总线
+  dispatchBusEvent: <T extends import('./eventBus').BusinessEvent>(event: Omit<T, 'id' | 'timestamp'>) => T;
+  subscribeBusEvent: <T extends import('./eventBus').BusinessEvent>(type: T['type'], handler: import('./eventBus').EventHandler<T>) => () => void;
+  getEventHistory: (filter?: { type?: import('./eventBus').EventType; bizId?: string; limit?: number }) => import('./eventBus').BusinessEvent[];
 }
 
 // 重新导出风险类型

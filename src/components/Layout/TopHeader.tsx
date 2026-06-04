@@ -6,6 +6,8 @@ import { useSystem } from '@/contexts/SystemContext';
 import { menuData } from '@/data/menuData';
 import { GlobalSearch } from '@/components/Common/GlobalSearch';
 import { ThemeSwitcher } from '@/components/Common/ThemeSwitcher';
+import { TodoCenter } from '@/components/Pages/_shared/TodoCenter';
+import { RiskScoreCenter } from '@/components/Pages/_shared/RiskScoreCenter';
 import { useGlobalShortcut } from '@/hooks/useGlobalShortcut';
 import { useMounted } from '@/hooks/useMounted';
 
@@ -43,9 +45,10 @@ function findMenuPath(menuId: string): { title: string; path: { id: string; labe
  * - 用户头像菜单
  */
 export function TopHeader() {
-  const { activeMenu, setActiveMenu, highPriorityTodos, isCalculatingRisk, recalculateRiskScore } = useSystem();
+  const { activeMenu, setActiveMenu, highPriorityTodos, isCalculatingRisk, recalculateRiskScore, riskScore } = useSystem();
   const [searchOpen, setSearchOpen] = useState(false);
   const [todoDrawerOpen, setTodoDrawerOpen] = useState(false);
+  const [riskOpen, setRiskOpen] = useState(false);
   const mounted = useMounted();
 
   const info = findMenuPath(activeMenu);
@@ -92,6 +95,24 @@ export function TopHeader() {
             </kbd>
           </button>
 
+          {/* 风险评分入口（点击打开风险评分中心） */}
+          {mounted && (
+            <button
+              onClick={() => setRiskOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 h-8 rounded-md text-xs hover:bg-app-bg-surface transition-colors"
+              title="打开风险评分中心"
+            >
+              <span className={`w-2 h-2 rounded-full ${
+                (riskScore ?? 0) >= 70 ? 'bg-red-400' :
+                (riskScore ?? 0) >= 50 ? 'bg-orange-400' :
+                (riskScore ?? 0) >= 30 ? 'bg-yellow-400' :
+                'bg-green-400'
+              } ${isCalculatingRisk ? 'animate-pulse' : ''}`} />
+              <span className="text-app-text-primary font-mono">{riskScore ?? 0}</span>
+              <span className="text-[10px] text-app-text-muted">分</span>
+            </button>
+          )}
+
           {/* 风险评分刷新 */}
           {mounted && (
             <button
@@ -137,36 +158,11 @@ export function TopHeader() {
       {/* 全局搜索弹窗 */}
       <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      {/* 高优待办抽屉（占位 - 阶段 3 完善） */}
-      {todoDrawerOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/50" onClick={() => setTodoDrawerOpen(false)}>
-          <div
-            className="absolute right-0 top-0 h-screen w-[400px] bg-[#20293F] border-l border-[#2A354D] p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">高优待办 · {highPriorityTodos.length} 项</h3>
-            <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-80px)]">
-              {highPriorityTodos.map((t) => (
-                <div key={t.id} className="p-2.5 bg-[#111625] rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${
-                      t.priority === 'critical' ? 'bg-red-500/20 text-red-400' :
-                      t.priority === 'high' ? 'bg-orange-500/20 text-orange-400' :
-                      'bg-yellow-500/20 text-yellow-400'
-                    }`}>
-                      {t.priority === 'critical' ? '紧急' : t.priority === 'high' ? '高' : '中'}
-                    </span>
-                    <span className="text-[10px] text-slate-500">{t.module}</span>
-                  </div>
-                  <p className="text-sm text-slate-200">{t.title}</p>
-                  <p className="text-[10px] text-slate-500 mt-1">{t.time}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-[10px] text-slate-500 mt-2 text-center">阶段 3 将支持点击跳转 / 一键处理</p>
-          </div>
-        </div>
-      )}
+      {/* 高优待办中心（阶段 3 完善） */}
+      <TodoCenter open={todoDrawerOpen} onClose={() => setTodoDrawerOpen(false)} />
+
+      {/* 风险评分中心（阶段 3 完善） */}
+      <RiskScoreCenter open={riskOpen} onClose={() => setRiskOpen(false)} />
     </>
   );
 }

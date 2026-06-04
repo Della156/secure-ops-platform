@@ -22,6 +22,8 @@ import {
   calculateRiskScore,
   RiskTrigger,
 } from '@/services/riskEngine';
+import { eventBus, dispatchEvent } from '@/lib/eventBus';
+import type { BusinessEvent, EventType, EventHandler } from '@/types/eventBus';
 
 const defaultPermissions: AccountPermission[] = [
   { module: '网络安全自动任务配置', permissions: ['view', 'edit', 'admin'] },
@@ -81,6 +83,27 @@ export function SystemProvider({
     }
     html.setAttribute('data-theme', resolved);
   }, [theme]);
+
+  // 事件总线状态同步（订阅者 onChange 触发 React 刷新）
+  const [eventVersion, setEventVersion] = useState(0);
+  useEffect(() => {
+    const off = eventBus.onChange(() => setEventVersion((v) => v + 1));
+    return off;
+  }, []);
+
+  const dispatchBusEvent = useCallback(<T extends BusinessEvent>(event: Omit<T, 'id' | 'timestamp'>) => {
+    return dispatchEvent<T>(event);
+  }, []);
+
+  const subscribeBusEvent = useCallback(<T extends BusinessEvent>(type: T['type'], handler: EventHandler<T>) => {
+    return eventBus.subscribe<T>(type, handler);
+  }, []);
+
+  const getEventHistory = useCallback((filter?: { type?: EventType; bizId?: string; limit?: number }) => {
+    // 依赖 eventVersion 让 history 变化时重算
+    void eventVersion;
+    return eventBus.getHistory(filter);
+  }, [eventVersion]);
 
   // 持久化 setter
   const setActiveMenu = useCallback((id: string) => {
@@ -196,6 +219,9 @@ export function SystemProvider({
     toggleSidebar,
     theme,
     setTheme,
+    dispatchBusEvent,
+    subscribeBusEvent,
+    getEventHistory,
     addHighPriorityTodo,
     removeHighPriorityTodo,
   };

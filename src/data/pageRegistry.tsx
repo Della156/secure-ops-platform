@@ -2353,7 +2353,35 @@ const V4_VulnTaskReport = dynamic(() => import(
  * key: 菜单ID (对应 menuData 中的 id)
  * value: 页面组件
  */
+
+// --- 阶段 3 流程闭环：6 模块统一工作台 ---
+const WB_menu_1 = dynamic(() => import(
+  '@/components/Pages/module1/Module1Workbench'
+).then(m => ({ default: m.Module1Workbench })));
+const WB_menu_2 = dynamic(() => import(
+  '@/components/Pages/module2/Module2Workbench'
+).then(m => ({ default: m.Module2Workbench })));
+const WB_menu_3 = dynamic(() => import(
+  '@/components/Pages/module3/Module3Workbench'
+).then(m => ({ default: m.Module3Workbench })));
+const WB_menu_4 = dynamic(() => import(
+  '@/components/Pages/module4/Module4Workbench'
+).then(m => ({ default: m.Module4Workbench })));
+const WB_menu_5 = dynamic(() => import(
+  '@/components/Pages/module5/Module5Workbench'
+).then(m => ({ default: m.Module5Workbench })));
+const WB_menu_6 = dynamic(() => import(
+  '@/components/Pages/module6/Module6Workbench'
+).then(m => ({ default: m.Module6Workbench })));
+
 export const pageRegistry: Record<string, ComponentType<any>> = {
+  // === 阶段 3：6 模块统一工作台 ===
+  'menu-1': WB_menu_1,
+  'menu-2': WB_menu_2,
+  'menu-3': WB_menu_3,
+  'menu-4': WB_menu_4,
+  'menu-5': WB_menu_5,
+  'menu-6': WB_menu_6,
   // 第1组
   'menu-1-1-1': TaskAccessManagement,
   'menu-1-1-2': TaskOnlineRegistration,
