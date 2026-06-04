@@ -50,8 +50,38 @@ export function SystemProvider({
 
   const [accountPermissions] = useState<AccountPermission[]>(defaultPermissions);
   const [highPriorityTodos, setHighPriorityTodos] = useState<HighPriorityTodo[]>(defaultHighPriorityTodos);
-  const [activeMenu, setActiveMenu] = useState<string>('dashboard');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const [activeMenu, setActiveMenuRaw] = useState<string>('dashboard');
+  const [sidebarCollapsed, setSidebarCollapsedRaw] = useState<boolean>(false);
+  const [persistedHydrated, setPersistedHydrated] = useState(false);
+
+  // 客户端挂载后从 localStorage 读取持久化值
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const savedMenu = window.localStorage.getItem('sys:activeMenu');
+      if (savedMenu) setActiveMenuRaw(savedMenu);
+      const savedCollapsed = window.localStorage.getItem('sys:sidebarCollapsed');
+      if (savedCollapsed !== null) setSidebarCollapsedRaw(savedCollapsed === '1');
+    } catch (e) {
+      // ignore
+    }
+    setPersistedHydrated(true);
+  }, []);
+
+  // 持久化 setter
+  const setActiveMenu = useCallback((id: string) => {
+    setActiveMenuRaw(id);
+    try {
+      if (typeof window !== 'undefined') window.localStorage.setItem('sys:activeMenu', id);
+    } catch (e) {}
+  }, []);
+
+  const setSidebarCollapsed = useCallback((v: boolean) => {
+    setSidebarCollapsedRaw(v);
+    try {
+      if (typeof window !== 'undefined') window.localStorage.setItem('sys:sidebarCollapsed', v ? '1' : '0');
+    } catch (e) {}
+  }, []);
 
   const previousScoreRef = useRef<number | undefined>(undefined);
 
@@ -110,7 +140,13 @@ export function SystemProvider({
   }, [recalculateRiskScore, autoRecalcInterval]);
 
   const toggleSidebar = useCallback(() => {
-    setSidebarCollapsed((prev) => !prev);
+    setSidebarCollapsedRaw((prev) => {
+      const next = !prev;
+      try {
+        if (typeof window !== 'undefined') window.localStorage.setItem('sys:sidebarCollapsed', next ? '1' : '0');
+      } catch (e) {}
+      return next;
+    });
   }, []);
 
   const addHighPriorityTodo = useCallback((todo: HighPriorityTodo) => {
@@ -135,6 +171,7 @@ export function SystemProvider({
     activeMenu,
     sidebarCollapsed,
     setActiveMenu,
+    setSidebarCollapsed,
     toggleSidebar,
     addHighPriorityTodo,
     removeHighPriorityTodo,

@@ -1,6 +1,7 @@
 'use client';
 
 import { Sidebar } from '@/components/Sidebar/Sidebar';
+import { TopHeader } from '@/components/Layout/TopHeader';
 import { useSystem } from '@/contexts/SystemContext';
 
 interface MainLayoutProps {
@@ -19,7 +20,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           ${sidebarCollapsed ? 'ml-[72px]' : 'ml-[280px]'}
         `}
       >
-        {children}
+        <TopHeader />
+        <div className="p-4">
+          {children}
+        </div>
       </main>
     </div>
   );

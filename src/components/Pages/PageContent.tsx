@@ -4,6 +4,7 @@ import { useSystem } from '@/contexts/SystemContext';
 import { menuData } from '@/data/menuData';
 import { getPageComponent } from '@/data/pageRegistry';
 import { PageShell } from '@/components/PageShell';
+import { Skeleton } from '@/components/Common/Skeleton';
 
 // 菜单信息查找工具
 function findMenuInfo(menuId: string) {
