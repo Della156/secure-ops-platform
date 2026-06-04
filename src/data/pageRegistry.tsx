@@ -594,102 +594,102 @@ const Stub_5_9_3 = dynamic(() => import(
 const Stub_5_9_4 = dynamic(() => import(
   '@/components/Pages/module5/knowledgeBase/KnowledgeSearchLibrary'
 ).then(m => ({ default: m.KnowledgeSearchLibrary })));
-// --- 模块 6: menu-6-1 ---
+// --- 模块 6: menu-6-1 运维数据同步配置 ---
 const Stub_6_1_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-1-1" {...props} /> })));
+  '@/components/Pages/module6/dataSyncConfig/DataSource'
+).then(m => ({ default: m.DataSource })));
 const Stub_6_1_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-1-2" {...props} /> })));
+  '@/components/Pages/module6/dataSyncConfig/SyncTaskConfig'
+).then(m => ({ default: m.SyncTaskConfig })));
 const Stub_6_1_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-1-3" {...props} /> })));
+  '@/components/Pages/module6/dataSyncConfig/SyncStrategySchedule'
+).then(m => ({ default: m.SyncStrategySchedule })));
 const Stub_6_1_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-1-4" {...props} /> })));
+  '@/components/Pages/module6/dataSyncConfig/SyncStatusMonitor'
+).then(m => ({ default: m.SyncStatusMonitor })));
 const Stub_6_1_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-1-5" {...props} /> })));
-// --- 模块 6: menu-6-2 ---
+  '@/components/Pages/module6/dataSyncConfig/SyncLogAudit'
+).then(m => ({ default: m.SyncLogAudit })));
+// --- 模块 6: menu-6-2 功能模块权限配置 ---
 const Stub_6_2_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-2-1" {...props} /> })));
+  '@/components/Pages/module6/permissionConfig/OrgTreeConfig'
+).then(m => ({ default: m.OrgTreeConfig })));
 const Stub_6_2_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-2-2" {...props} /> })));
+  '@/components/Pages/module6/permissionConfig/SystemRoleConfig'
+).then(m => ({ default: m.SystemRoleConfig })));
 const Stub_6_2_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-2-3" {...props} /> })));
+  '@/components/Pages/module6/permissionConfig/RolePermissionConfig'
+).then(m => ({ default: m.RolePermissionConfig })));
 const Stub_6_2_4 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-2-4" {...props} /> })));
 const Stub_6_2_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-2-5" {...props} /> })));
-// --- 模块 6: menu-6-3 ---
+  '@/components/Pages/module6/permissionConfig/PermissionAudit'
+).then(m => ({ default: m.PermissionAudit })));
+// --- 模块 6: menu-6-3 用户运行授权配置 ---
 const Stub_6_3_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-3-1" {...props} /> })));
+  '@/components/Pages/module6/userAuthConfig/UserAccountConfig'
+).then(m => ({ default: m.UserAccountConfig })));
 const Stub_6_3_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-3-2" {...props} /> })));
+  '@/components/Pages/module6/userAuthConfig/LoginSecurityPolicy'
+).then(m => ({ default: m.LoginSecurityPolicy })));
 const Stub_6_3_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-3-3" {...props} /> })));
+  '@/components/Pages/module6/userAuthConfig/AccountLifecycleConfig'
+).then(m => ({ default: m.AccountLifecycleConfig })));
 const Stub_6_3_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-3-4" {...props} /> })));
-// --- 模块 6: menu-6-4 ---
+  '@/components/Pages/module6/userAuthConfig/UserAttributePermission'
+).then(m => ({ default: m.UserAttributePermission })));
+// --- 模块 6: menu-6-4 运行参数配置 ---
 const Stub_6_4_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-4-1" {...props} /> })));
+  '@/components/Pages/module6/runParamConfig/ThemeStyleConfig'
+).then(m => ({ default: m.ThemeStyleConfig })));
 const Stub_6_4_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-4-2" {...props} /> })));
+  '@/components/Pages/module6/runParamConfig/SessionTimeoutConfig'
+).then(m => ({ default: m.SessionTimeoutConfig })));
 const Stub_6_4_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-4-3" {...props} /> })));
+  '@/components/Pages/module6/runParamConfig/ModuleToggleControl'
+).then(m => ({ default: m.ModuleToggleControl })));
 const Stub_6_4_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-4-4" {...props} /> })));
-// --- 模块 6: menu-6-5 ---
+  '@/components/Pages/module6/runParamConfig/GlobalParamConfig'
+).then(m => ({ default: m.GlobalParamConfig })));
+// --- 模块 6: menu-6-5 数据字典配置 ---
 const Stub_6_5_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-5-1" {...props} /> })));
+  '@/components/Pages/module6/dataDictConfig/DataDictCategory'
+).then(m => ({ default: m.DataDictCategory })));
 const Stub_6_5_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-5-2" {...props} /> })));
-// --- 模块 6: menu-6-6 ---
+  '@/components/Pages/module6/dataDictConfig/DataDictItems'
+).then(m => ({ default: m.DataDictItems })));
+// --- 模块 6: menu-6-6 数据供给配置 ---
 const Stub_6_6_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-6-1" {...props} /> })));
+  '@/components/Pages/module6/dataSupplyConfig/ApiAutoGenerate'
+).then(m => ({ default: m.ApiAutoGenerate })));
 const Stub_6_6_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-6-2" {...props} /> })));
+  '@/components/Pages/module6/dataSupplyConfig/ApiAccessPolicy'
+).then(m => ({ default: m.ApiAccessPolicy })));
 const Stub_6_6_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-6-3" {...props} /> })));
-// --- 模块 6: menu-6-7 ---
+  '@/components/Pages/module6/dataSupplyConfig/ApiAuthManagement'
+).then(m => ({ default: m.ApiAuthManagement })));
+// --- 模块 6: menu-6-7 数据供给监控与统计 ---
 const Stub_6_7_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-7-1" {...props} /> })));
+  '@/components/Pages/module6/dataSupplyMonitor/ApiCallAnalysis'
+).then(m => ({ default: m.ApiCallAnalysis })));
 const Stub_6_7_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-7-2" {...props} /> })));
+  '@/components/Pages/module6/dataSupplyMonitor/ApiExceptionAlert'
+).then(m => ({ default: m.ApiExceptionAlert })));
 const Stub_6_7_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-7-3" {...props} /> })));
-// --- 模块 6: menu-6-8 ---
+  '@/components/Pages/module6/dataSupplyMonitor/ApiHotspotAnalysis'
+).then(m => ({ default: m.ApiHotspotAnalysis })));
+// --- 模块 6: menu-6-8 身份认证接入配置 ---
 const Stub_6_8_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-8-1" {...props} /> })));
-// --- 模块 6: menu-6-9 ---
+  '@/components/Pages/module6/identityAuth/IdpIntegrationConfig'
+).then(m => ({ default: m.IdpIntegrationConfig })));
+// --- 模块 6: menu-6-9 访问控制规则配置 ---
 const Stub_6_9_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-9-1" {...props} /> })));
+  '@/components/Pages/module6/accessControl/IpWhitelistConfig'
+).then(m => ({ default: m.IpWhitelistConfig })));
 const Stub_6_9_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-9-2" {...props} /> })));
+  '@/components/Pages/module6/accessControl/TimeBasedAccessPolicy'
+).then(m => ({ default: m.TimeBasedAccessPolicy })));
 const Stub_6_9_3 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-9-3" {...props} /> })));
@@ -699,13 +699,13 @@ const Stub_6_9_4 = dynamic(() => import(
 const Stub_6_9_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-9-5" {...props} /> })));
-// --- 模块 6: menu-6-10 ---
+// --- 模块 6: menu-6-10 模块运行健康监控 ---
 const Stub_6_10_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-10-1" {...props} /> })));
+  '@/components/Pages/module6/healthMonitor/ServiceStatusMonitor'
+).then(m => ({ default: m.ServiceStatusMonitor })));
 const Stub_6_10_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-10-2" {...props} /> })));
+  '@/components/Pages/module6/healthMonitor/DatabaseConnectionMonitor'
+).then(m => ({ default: m.DatabaseConnectionMonitor })));
 const Stub_6_10_3 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-10-3" {...props} /> })));
@@ -715,27 +715,27 @@ const Stub_6_10_4 = dynamic(() => import(
 const Stub_6_10_5 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-10-5" {...props} /> })));
-// --- 模块 6: menu-6-11 ---
+// --- 模块 6: menu-6-11 数据备份与恢复 ---
 const Stub_6_11_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-11-1" {...props} /> })));
+  '@/components/Pages/module6/backupRecovery/BackupStrategy'
+).then(m => ({ default: m.BackupStrategy })));
 const Stub_6_11_2 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-11-2" {...props} /> })));
-// --- 模块 6: menu-6-12 ---
+// --- 模块 6: menu-6-12 登录日志查询 ---
 const Stub_6_12_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-12-1" {...props} /> })));
+  '@/components/Pages/module6/logs/LoginLogQuery'
+).then(m => ({ default: m.LoginLogQuery })));
 const Stub_6_12_2 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-12-2" {...props} /> })));
 const Stub_6_12_3 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-12-3" {...props} /> })));
-// --- 模块 6: menu-6-13 ---
+// --- 模块 6: menu-6-13 操作日志查询 ---
 const Stub_6_13_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-13-1" {...props} /> })));
+  '@/components/Pages/module6/logs/OperationLogQuery'
+).then(m => ({ default: m.OperationLogQuery })));
 const Stub_6_13_2 = dynamic(() => import(
   '@/components/Pages/_shared/GenericStub'
 ).then(m => ({ default: (props) => <m.GenericStub menuId="menu-6-13-2" {...props} /> })));
