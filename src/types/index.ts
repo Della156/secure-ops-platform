@@ -45,13 +45,16 @@ export interface SystemState {
   highPriorityTodos: HighPriorityTodo[];
   activeMenu: string;
   sidebarCollapsed: boolean;
+  theme: 'dark' | 'light' | 'system';
 }
 
 export interface SystemContextValue extends SystemState {
   // 触发风险评分重算
   recalculateRiskScore: (trigger?: 'manual' | 'scheduled' | 'event' | 'initial') => Promise<void>;
   setActiveMenu: (menuId: string) => void;
+  setSidebarCollapsed: (collapsed: boolean) => void;
   toggleSidebar: () => void;
+  setTheme: (theme: 'dark' | 'light' | 'system') => void;
   addHighPriorityTodo: (todo: HighPriorityTodo) => void;
   removeHighPriorityTodo: (id: string) => void;
 }

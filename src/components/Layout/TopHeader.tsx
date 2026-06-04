@@ -5,6 +5,7 @@ import { Search, Bell, User, ChevronRight, Home, Command, RefreshCw } from 'luci
 import { useSystem } from '@/contexts/SystemContext';
 import { menuData } from '@/data/menuData';
 import { GlobalSearch } from '@/components/Common/GlobalSearch';
+import { ThemeSwitcher } from '@/components/Common/ThemeSwitcher';
 import { useGlobalShortcut } from '@/hooks/useGlobalShortcut';
 import { useMounted } from '@/hooks/useMounted';
 
@@ -52,23 +53,23 @@ export function TopHeader() {
 
   return (
     <>
-      <header className="h-14 bg-[#20293F] border-b border-[#2A354D] flex items-center px-4 sticky top-0 z-40">
+      <header className="h-14 bg-app-bg-card border-b border-app-border-base flex items-center px-4 sticky top-0 z-40 theme-transition">
         {/* 面包屑 */}
         <nav className="flex items-center gap-1.5 text-sm flex-1 min-w-0">
           <button
             onClick={() => setActiveMenu('dashboard')}
-            className="flex items-center gap-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
+            className="flex items-center gap-1 text-app-text-secondary hover:text-app-text-primary transition-colors flex-shrink-0"
           >
             <Home className="w-3.5 h-3.5" />
             <span>首页</span>
           </button>
           {path.map((p, i) => (
             <React.Fragment key={p.id}>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-600 flex-shrink-0" />
+              <ChevronRight className="w-3.5 h-3.5 text-app-text-muted flex-shrink-0" />
               <button
                 onClick={() => setActiveMenu(p.id)}
                 className={`truncate transition-colors ${
-                  i === path.length - 1 ? 'text-slate-100 font-medium' : 'text-slate-400 hover:text-slate-200'
+                  i === path.length - 1 ? 'text-app-text-primary font-medium' : 'text-app-text-secondary hover:text-app-text-primary'
                 }`}
               >
                 {p.label}
@@ -82,11 +83,11 @@ export function TopHeader() {
           {/* 全局搜索按钮 */}
           <button
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-2 px-3 h-8 bg-[#111625] border border-[#2A354D] rounded-lg text-slate-400 hover:border-slate-500 transition-colors text-xs"
+            className="flex items-center gap-2 px-3 h-8 bg-app-bg-deep border border-app-border-base rounded-lg text-app-text-secondary hover:border-app-text-secondary transition-colors text-xs"
           >
             <Search className="w-3.5 h-3.5" />
             <span className="hidden md:inline">搜索菜单...</span>
-            <kbd className="hidden md:flex items-center gap-0.5 ml-2 text-[10px] text-slate-500">
+            <kbd className="hidden md:flex items-center gap-0.5 ml-2 text-[10px] text-app-text-muted">
               <Command className="w-2.5 h-2.5" />K
             </kbd>
           </button>
@@ -96,17 +97,20 @@ export function TopHeader() {
             <button
               onClick={() => recalculateRiskScore('manual')}
               disabled={isCalculatingRisk}
-              className="p-1.5 rounded-md text-slate-400 hover:text-slate-200 hover:bg-[#181F32] transition-colors"
+              className="p-1.5 rounded-md text-app-text-secondary hover:text-app-text-primary hover:bg-app-bg-surface transition-colors"
               title="刷新风险评分"
             >
               <RefreshCw className={`w-4 h-4 ${isCalculatingRisk ? 'animate-spin' : ''}`} />
             </button>
           )}
 
+          {/* 主题切换 */}
+          <ThemeSwitcher />
+
           {/* 高优待办铃铛 */}
           <button
             onClick={() => setTodoDrawerOpen(true)}
-            className="relative p-1.5 rounded-md text-slate-400 hover:text-slate-200 hover:bg-[#181F32] transition-colors"
+            className="relative p-1.5 rounded-md text-app-text-secondary hover:text-app-text-primary hover:bg-app-bg-surface transition-colors"
             title="高优待办"
           >
             <Bell className="w-4 h-4" />
@@ -118,13 +122,13 @@ export function TopHeader() {
           </button>
 
           {/* 用户头像 */}
-          <div className="flex items-center gap-2 pl-2 border-l border-[#2A354D]">
+          <div className="flex items-center gap-2 pl-2 border-l border-app-border-base">
             <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-xs font-medium">
               ZS
             </div>
             <div className="hidden md:block">
-              <p className="text-xs text-slate-200 leading-tight">主理人</p>
-              <p className="text-[10px] text-slate-500">超级管理员</p>
+              <p className="text-xs text-app-text-primary leading-tight">主理人</p>
+              <p className="text-[10px] text-app-text-secondary">超级管理员</p>
             </div>
           </div>
         </div>

@@ -5,30 +5,71 @@
   --color-foreground: #F3F4F6;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+  /* === 主题色：CSS 变量驱动（深/浅切换） === */
+  --color-app-bg-deep: var(--app-bg-deep);
+  --color-app-bg-surface: var(--app-bg-surface);
+  --color-app-bg-card: var(--app-bg-card);
+  --color-app-border-base: var(--app-border-base);
+  --color-app-border-focus: var(--app-border-focus);
+  --color-app-text-primary: var(--app-text-primary);
+  --color-app-text-secondary: var(--app-text-secondary);
+  --color-app-text-muted: var(--app-text-muted);
 }
 
-/* ===== XSOAR 设计系统变量 ===== */
+/* ===== 主题色变量（深色 - 默认） ===== */
+:root,
+[data-theme="dark"] {
+  --app-bg-deep: #111625;       /* 画布背景 */
+  --app-bg-surface: #181F32;    /* 面板/工作区 */
+  --app-bg-card: #20293F;       /* 卡片/菜单底色 */
+  --app-border-base: #2A354D;   /* 默认边框 */
+  --app-border-focus: #0066FF;  /* 激活态边框 */
+  --app-text-primary: #F3F4F6;  /* 主标题/代码 */
+  --app-text-secondary: #9CA3AF;/* 描述/时间戳 */
+  --app-text-muted: #6B7280;    /* 禁用状态 */
+
+  --color-primary: #0066FF;     /* 核心行动点 */
+  --color-ai: #6366F1;          /* AI 智能体专用 */
+  --color-success: #00C853;     /* 正常/通过 */
+  --color-warning: #FF9100;     /* 审批/异常 */
+  --color-danger: #FF3B30;      /* 失败/高危 */
+}
+
+/* ===== 浅色主题 ===== */
+[data-theme="light"] {
+  --app-bg-deep: #F8FAFC;       /* Slate 50 - 画布 */
+  --app-bg-surface: #F1F5F9;    /* Slate 100 - 面板 */
+  --app-bg-card: #FFFFFF;       /* 白 - 卡片 */
+  --app-border-base: #E2E8F0;   /* Slate 200 - 边框 */
+  --app-border-focus: #0066FF;  /* 蓝 - 激活 */
+  --app-text-primary: #0F172A;  /* Slate 900 - 主文本 */
+  --app-text-secondary: #475569;/* Slate 600 - 描述 */
+  --app-text-muted: #94A3B8;    /* Slate 400 - 禁用 */
+
+  /* 浅色主题下语义色微调（保持品牌识别） */
+  --color-primary: #0066FF;
+  --color-ai: #6366F1;
+  --color-success: #16A34A;     /* 绿略深 */
+  --color-warning: #EA580C;     /* 橙略深 */
+  --color-danger: #DC2626;      /* 红略深 */
+}
+
+/* ===== XSOAR 设计系统变量（兼容旧引用） ===== */
 :root {
   /* 基础背景层 */
-  --bg-main: #111625;          /* 画布背景 */
-  --bg-surface: #181F32;       /* 面板/工作区 */
-  --bg-card: #20293F;          /* 卡片/菜单底色 */
+  --bg-main: #111625;
+  --bg-surface: #181F32;
+  --bg-card: #20293F;
 
   /* 边框与连线 */
-  --border-light: #2A354D;     /* 默认边框 */
-  --border-focus: #0066FF;     /* 激活态边框 */
+  --border-light: #2A354D;
+  --border-focus: #0066FF;
 
   /* 文本层级 */
-  --text-primary: #F3F4F6;     /* 主标题/代码 */
-  --text-secondary: #9CA3AF;   /* 描述/时间戳 */
-  --text-muted: #6B7280;       /* 禁用状态 */
-
-  /* 语义资产色 — XSOAR 经典 */
-  --color-primary: #0066FF;    /* 核心行动点 */
-  --color-ai: #6366F1;         /* AI 智能体专用 */
-  --color-success: #00C853;    /* 正常/通过 */
-  --color-warning: #FF9100;    /* 审批/异常 */
-  --color-danger: #FF3B30;     /* 失败/高危 */
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
 }
 
 /* 极细滚动条 (XSOAR 风格) */
@@ -73,4 +114,10 @@
 /* Modal/浮层光晕边框 */
 .glow-focus {
   box-shadow: 0 0 12px 0 rgba(0, 102, 255, 0.12);
+}
+
+/* 主题切换平滑过渡（仅外壳元素） */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease !important;
 }

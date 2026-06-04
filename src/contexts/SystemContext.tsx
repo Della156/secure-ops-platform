@@ -53,6 +53,7 @@ export function SystemProvider({
   const [activeMenu, setActiveMenuRaw] = useState<string>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsedRaw] = useState<boolean>(false);
   const [persistedHydrated, setPersistedHydrated] = useState(false);
+  const [theme, setThemeRaw] = useState<'dark' | 'light' | 'system'>('dark');
 
   // 客户端挂载后从 localStorage 读取持久化值
   useEffect(() => {
@@ -62,11 +63,24 @@ export function SystemProvider({
       if (savedMenu) setActiveMenuRaw(savedMenu);
       const savedCollapsed = window.localStorage.getItem('sys:sidebarCollapsed');
       if (savedCollapsed !== null) setSidebarCollapsedRaw(savedCollapsed === '1');
+      const savedTheme = window.localStorage.getItem('sys:theme');
+      if (savedTheme === 'dark' || savedTheme === 'light' || savedTheme === 'system') setThemeRaw(savedTheme);
     } catch (e) {
       // ignore
     }
     setPersistedHydrated(true);
   }, []);
+
+  // 主题应用：写 data-theme 到 <html>
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const html = document.documentElement;
+    let resolved = theme;
+    if (theme === 'system') {
+      resolved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    html.setAttribute('data-theme', resolved);
+  }, [theme]);
 
   // 持久化 setter
   const setActiveMenu = useCallback((id: string) => {
@@ -149,6 +163,13 @@ export function SystemProvider({
     });
   }, []);
 
+  const setTheme = useCallback((t: 'dark' | 'light' | 'system') => {
+    setThemeRaw(t);
+    try {
+      if (typeof window !== 'undefined') window.localStorage.setItem('sys:theme', t);
+    } catch (e) {}
+  }, []);
+
   const addHighPriorityTodo = useCallback((todo: HighPriorityTodo) => {
     setHighPriorityTodos((prev) => [todo, ...prev]);
   }, []);
@@ -173,6 +194,8 @@ export function SystemProvider({
     setActiveMenu,
     setSidebarCollapsed,
     toggleSidebar,
+    theme,
+    setTheme,
     addHighPriorityTodo,
     removeHighPriorityTodo,
   };

@@ -12,7 +12,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   const { sidebarCollapsed } = useSystem();
 
   return (
-    <div className="min-h-screen bg-[#111625]">
+    <div className="min-h-screen bg-app-bg-deep theme-transition">
       <Sidebar />
       <main
         className={`
