@@ -50,7 +50,7 @@ export function SystemProvider({
 
   const [accountPermissions] = useState<AccountPermission[]>(defaultPermissions);
   const [highPriorityTodos, setHighPriorityTodos] = useState<HighPriorityTodo[]>(defaultHighPriorityTodos);
-  const [activeMenu, setActiveMenu] = useState<string>('auto-task-config');
+  const [activeMenu, setActiveMenu] = useState<string>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
 
   const previousScoreRef = useRef<number | undefined>(undefined);

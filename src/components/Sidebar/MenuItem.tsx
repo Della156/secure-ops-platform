@@ -28,17 +28,19 @@ interface MenuItemProps {
 }
 
 export function MenuItem({ item }: MenuItemProps) {
-  const [expanded, setExpanded] = useState(item.id === 'auto-task-config');
   const { activeMenu, setActiveMenu } = useSystem();
 
   const hasChildren = item.children && item.children.length > 0;
   const Icon = iconMap[item.icon || 'Settings'];
 
+  // 默认展开第一个模块（menu-1），方便演示直接看到子菜单
+  const [expanded, setExpanded] = useState(item.id === 'menu-1');
+
   const handleClick = () => {
     if (hasChildren) {
       setExpanded(!expanded);
     }
-    setActiveMenu(item.id);
+    // 一级目录不设置 activeMenu，仅展开/收起子菜单
   };
 
   const isActive = activeMenu === item.id || activeMenu.startsWith(item.id + '-');
@@ -80,7 +82,7 @@ export function MenuItem({ item }: MenuItemProps) {
                 <button
                   onClick={() => {
                     if (hasThirdLevel) {
-                      // Toggle third level submenu
+                      // Toggle third level submenu - don't navigate
                       const btn = document.getElementById(`third-toggle-${child.id}`);
                       if (btn) {
                         const isOpen = btn.getAttribute('data-open') === 'true';
@@ -89,11 +91,6 @@ export function MenuItem({ item }: MenuItemProps) {
                         if (submenu) {
                           submenu.style.display = isOpen ? 'none' : 'block';
                         }
-                      }
-                      // Auto-navigate to first child page
-                      const firstChild = child.children?.[0];
-                      if (firstChild) {
-                        setActiveMenu(firstChild.id);
                       }
                     } else {
                       setActiveMenu(child.id);

@@ -7,7 +7,7 @@ import { MenuItem } from './MenuItem';
 import { RiskBadge } from './RiskBadge';
 
 export function Sidebar() {
-  const { sidebarCollapsed, toggleSidebar } = useSystem();
+  const { sidebarCollapsed, toggleSidebar, setActiveMenu } = useSystem();
 
   return (
     <aside
@@ -17,9 +17,9 @@ export function Sidebar() {
         ${sidebarCollapsed ? 'w-[72px]' : 'w-[280px]'}
       `}
     >
-      {/* Logo Header */}
+      {/* Logo Header - 可点击返回首页 */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-[#2A354D]">
-        <div className="flex items-center gap-3 overflow-hidden">
+        <button onClick={() => setActiveMenu('dashboard')} className="flex items-center gap-3 overflow-hidden flex-1 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 bg-[#0066FF] rounded-lg flex items-center justify-center flex-shrink-0">
             <Shield className="w-5 h-5 text-[#F3F4F6]" />
           </div>
@@ -28,10 +28,10 @@ export function Sidebar() {
               网络安全态势感知
             </span>
           )}
-        </div>
+        </button>
         <button
           onClick={toggleSidebar}
-          className="p-1.5 rounded-md text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] transition-colors"
+          className="p-1.5 rounded-md text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-[#181F32] transition-colors flex-shrink-0"
         >
           {sidebarCollapsed ? (
             <PanelLeft className="w-5 h-5" />
