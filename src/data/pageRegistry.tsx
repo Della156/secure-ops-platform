@@ -22,38 +22,38 @@ import type { ComponentType } from 'react';
 
 // --- menu-4-6 漏洞管理任务（除 5 之外）---
 const Stub_4_6_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-1" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnManageOverview'
+).then(m => ({ default: m.VulnManageOverview })));
 const Stub_4_6_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-2" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnScannerManager'
+).then(m => ({ default: m.VulnScannerManager })));
 const Stub_4_6_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-3" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnScanExecute'
+).then(m => ({ default: m.VulnScanExecute })));
 const Stub_4_6_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-4" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnAnalysis'
+).then(m => ({ default: m.VulnAnalysis })));
 const Stub_4_6_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-6" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnRetestClose'
+).then(m => ({ default: m.VulnRetestClose })));
 const Stub_4_6_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-7" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnDatabase'
+).then(m => ({ default: m.VulnDatabase })));
 const Stub_4_6_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-8" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnUnfixableList'
+).then(m => ({ default: m.VulnUnfixableList })));
 const Stub_4_6_9 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-9" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnTaskMonitor'
+).then(m => ({ default: m.VulnTaskMonitor })));
 const Stub_4_6_10 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-10" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnHistoryQuery'
+).then(m => ({ default: m.VulnHistoryQuery })));
 const Stub_4_6_11 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-11" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnTaskAudit'
+).then(m => ({ default: m.VulnTaskAudit })));
 const Stub_4_6_12 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-6-12" {...props} /> })));
+  '@/components/Pages/module4/vulnManage/VulnTaskReport'
+).then(m => ({ default: m.VulnTaskReport })));
 
 // ==========================================================
 // 模块 3/4/5/6 占位注册（补全 296 个三级菜单）
@@ -958,42 +958,42 @@ const Stub_4_9_7 = dynamic(() => import(
   '@/components/Pages/module4/endpointCompliance/EndpointComplianceReport'
 ).then(m => ({ default: m.EndpointComplianceReport })));
 const Stub_4_9_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-8" {...props} /> })));
+  '@/components/Pages/module4/endpointCompliance/EndpointComplianceAudit'
+).then(m => ({ default: m.EndpointComplianceAudit })));
 const Stub_4_9_9 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-9-9" {...props} /> })));
+  '@/components/Pages/module4/endpointCompliance/EndpointComplianceReport'
+).then(m => ({ default: m.EndpointComplianceReport })));
 // --- 模块 4: menu-4-10 ---
 const Stub_4_10_1 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-1" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PenetrationTestView'
+).then(m => ({ default: m.PenetrationTestView })));
 const Stub_4_10_2 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-2" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestTaskManage'
+).then(m => ({ default: m.PentestTaskManage })));
 const Stub_4_10_3 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-3" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/AttackPathPlan'
+).then(m => ({ default: m.AttackPathPlan })));
 const Stub_4_10_4 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-4" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/AttackBehaviorSim'
+).then(m => ({ default: m.AttackBehaviorSim })));
 const Stub_4_10_5 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-5" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestResultAnalysis'
+).then(m => ({ default: m.PentestResultAnalysis })));
 const Stub_4_10_6 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-6" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestReportGen'
+).then(m => ({ default: m.PentestReportGen })));
 const Stub_4_10_7 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-7" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestStatusMonitor'
+).then(m => ({ default: m.PentestStatusMonitor })));
 const Stub_4_10_8 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-8" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestHistoryQuery'
+).then(m => ({ default: m.PentestHistoryQuery })));
 const Stub_4_10_9 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-9" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestTaskAudit'
+).then(m => ({ default: m.PentestTaskAudit })));
 const Stub_4_10_10 = dynamic(() => import(
-  '@/components/Pages/_shared/GenericStub'
-).then(m => ({ default: (props) => <m.GenericStub menuId="menu-4-10-10" {...props} /> })));
+  '@/components/Pages/module4/penetrationTest/PentestTaskReport'
+).then(m => ({ default: m.PentestTaskReport })));
 
 // 模块 1：网络安全自动任务配置
 // ──────────────────────────────────
@@ -2265,6 +2265,12 @@ const JobReport = dynamic(() => import(
 ).then(m => ({ default: m.JobReport })));
 // 模块 3：网络安全自动运营
 // ──────────────────────────────────────────────（已移除）
+
+// 首页仪表盘
+const DashboardPage = dynamic(() => import(
+  '@/components/Pages/DashboardPage'
+).then(m => ({ default: m.default })));
+
 /**
  * 默认占位页面（开发中）
  */
@@ -3118,6 +3124,9 @@ export const pageRegistry: Record<string, ComponentType<any>> = {
   // ─────────────────────────────────
   // 第6组：漏洞管理任务
   'menu-4-6-5': VulnRectifyTrack,
+
+  // 首页仪表盘
+  'dashboard': DashboardPage,
 };
 
 /**
