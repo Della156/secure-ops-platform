@@ -1,55 +1,44 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, Search, Edit2, Trash2, Clock, Calendar, RefreshCw, Zap } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Clock, Calendar, Sun, Moon } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 
-interface SyncStrategy {
+interface TimePolicy {
   id: string;
   name: string;
-  type: 'full' | 'incremental';
-  scheduleType: 'cron' | 'interval' | 'manual';
-  schedule: string;
-  lastRun: string;
-  nextRun: string;
+  type: 'allow' | 'deny';
+  startTime: string;
+  endTime: string;
+  days: string[];
+  description: string;
   status: 'active' | 'inactive';
   createTime: string;
 }
 
-export function SyncStrategySchedule() {
+export function TimeBasedAccessPolicy() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const mockData: SyncStrategy[] = [
-    { id: 'SS-001', name: '用户数据全量同步', type: 'full', scheduleType: 'cron', schedule: '0 2 * * *', lastRun: '2026-06-04 02:00:00', nextRun: '2026-06-05 02:00:00', status: 'active', createTime: '2026-01-15 09:00:00' },
-    { id: 'SS-002', name: '资产数据增量同步', type: 'incremental', scheduleType: 'interval', schedule: '每5分钟', lastRun: '2026-06-04 10:30:00', nextRun: '2026-06-04 10:35:00', status: 'active', createTime: '2026-02-20 14:30:00' },
-    { id: 'SS-003', name: '日志数据实时同步', type: 'incremental', scheduleType: 'interval', schedule: '实时', lastRun: '2026-06-04 10:35:23', nextRun: '-', status: 'active', createTime: '2026-03-10 10:00:00' },
-    { id: 'SS-004', name: '告警数据增量同步', type: 'incremental', scheduleType: 'cron', schedule: '*/10 * * * *', lastRun: '2026-06-04 10:30:00', nextRun: '2026-06-04 10:40:00', status: 'active', createTime: '2026-04-01 08:00:00' },
-    { id: 'SS-005', name: '威胁情报每日同步', type: 'full', scheduleType: 'cron', schedule: '0 0 * * *', lastRun: '2026-06-04 00:00:00', nextRun: '2026-06-05 00:00:00', status: 'active', createTime: '2026-05-15 16:30:00' },
+  const mockData: TimePolicy[] = [
+    { id: 'TP-001', name: '工作时间访问', type: 'allow', startTime: '08:00', endTime: '18:00', days: ['周一', '周二', '周三', '周四', '周五'], description: '工作日工作时间允许访问', status: 'active', createTime: '2026-01-10 09:00:00' },
+    { id: 'TP-002', name: '周末禁止访问', type: 'deny', startTime: '00:00', endTime: '24:00', days: ['周六', '周日'], description: '周末禁止所有外部访问', status: 'active', createTime: '2026-01-15 14:30:00' },
+    { id: 'TP-003', name: '夜间访问限制', type: 'deny', startTime: '22:00', endTime: '06:00', days: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'], description: '夜间禁止非紧急访问', status: 'active', createTime: '2026-02-01 10:00:00' },
+    { id: 'TP-004', name: '午休时间宽松', type: 'allow', startTime: '12:00', endTime: '13:30', days: ['周一', '周二', '周三', '周四', '周五'], description: '午休时间允许内部访问', status: 'inactive', createTime: '2026-03-10 16:00:00' },
   ];
 
   const filteredData = mockData.filter(item => 
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getTypeLabel = (type: string) => type === 'full' ? '全量同步' : '增量同步';
-  const getTypeColor = (type: string) => type === 'full' ? 'bg-orange-500/20 text-orange-400' : 'bg-blue-500/20 text-blue-400';
-
-  const getScheduleTypeLabel = (type: string) => {
-    switch (type) {
-      case 'cron': return 'Cron表达式';
-      case 'interval': return '时间间隔';
-      case 'manual': return '手动触发';
-      default: return type;
-    }
-  };
+  const daysOptions = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-white">全量与增量同步策略及定时调度</h2>
-          <p className="text-sm text-gray-400 mt-1">配置同步策略类型和定时调度规则</p>
+          <h2 className="text-xl font-semibold text-white">基于时间段的访问策略设置</h2>
+          <p className="text-sm text-gray-400 mt-1">配置基于时间的访问控制策略，限制特定时间段的访问</p>
         </div>
         <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded flex items-center gap-1.5">
           <Plus className="w-4 h-4" />
@@ -75,11 +64,9 @@ export function SyncStrategySchedule() {
           <thead>
             <tr className="bg-[#111625]">
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">策略名称</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">同步类型</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">调度类型</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">调度规则</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">上次执行</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">下次执行</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">类型</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">时间范围</th>
+              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">适用日期</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">状态</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">操作</th>
             </tr>
@@ -92,17 +79,27 @@ export function SyncStrategySchedule() {
                   <div className="text-xs text-gray-500">{item.id}</div>
                 </td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 rounded text-xs ${getTypeColor(item.type)}`}>
-                    {getTypeLabel(item.type)}
+                  <span className={`px-2 py-1 rounded text-xs ${item.type === 'allow' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                    {item.type === 'allow' ? '允许' : '拒绝'}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-300">{getScheduleTypeLabel(item.scheduleType)}</td>
                 <td className="px-4 py-3 text-sm text-gray-300 flex items-center gap-2">
-                  {item.scheduleType === 'cron' ? <Clock className="w-3 h-3" /> : <RefreshCw className="w-3 h-3" />}
-                  {item.schedule}
+                  {item.startTime >= '06:00' && item.startTime < '18:00' ? (
+                    <Sun className="w-4 h-4 text-yellow-400" />
+                  ) : (
+                    <Moon className="w-4 h-4 text-blue-400" />
+                  )}
+                  {item.startTime} - {item.endTime}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-400">{item.lastRun}</td>
-                <td className="px-4 py-3 text-sm text-blue-400">{item.nextRun}</td>
+                <td className="px-4 py-3">
+                  <div className="flex flex-wrap gap-1">
+                    {item.days.map(day => (
+                      <span key={day} className="px-2 py-0.5 bg-[#111625] text-gray-400 text-xs rounded">
+                        {day}
+                      </span>
+                    ))}
+                  </div>
+                </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 rounded text-xs ${item.status === 'active' ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
                     {item.status === 'active' ? '启用' : '停用'}
@@ -132,36 +129,49 @@ export function SyncStrategySchedule() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增同步策略">
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增时间策略">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">策略名称</label>
             <input type="text" className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm" placeholder="请输入策略名称" />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">同步类型</label>
+            <label className="block text-sm text-gray-400 mb-1">策略类型</label>
             <div className="flex gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="syncType" defaultChecked className="text-blue-600" />
-                <span className="text-sm text-gray-300">全量同步</span>
+                <input type="radio" name="policyType" defaultChecked className="text-blue-600" />
+                <span className="text-sm text-gray-300">允许访问</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="syncType" className="text-blue-600" />
-                <span className="text-sm text-gray-300">增量同步</span>
+                <input type="radio" name="policyType" className="text-blue-600" />
+                <span className="text-sm text-gray-300">拒绝访问</span>
               </label>
             </div>
           </div>
-          <div>
-            <label className="block text-sm text-gray-400 mb-1">调度类型</label>
-            <select className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm">
-              <option value="cron">Cron表达式</option>
-              <option value="interval">时间间隔</option>
-              <option value="manual">手动触发</option>
-            </select>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">开始时间</label>
+              <input type="time" className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">结束时间</label>
+              <input type="time" className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm" />
+            </div>
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">调度规则</label>
-            <input type="text" className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm" placeholder="如：0 2 * * * 或 每5分钟" />
+            <label className="block text-sm text-gray-400 mb-2">适用日期</label>
+            <div className="flex flex-wrap gap-2">
+              {daysOptions.map(day => (
+                <label key={day} className="flex items-center gap-1.5 px-3 py-1.5 bg-[#111625] rounded cursor-pointer hover:bg-[#20293F]">
+                  <input type="checkbox" className="text-blue-600" defaultChecked={day !== '周六' && day !== '周日'} />
+                  <span className="text-sm text-gray-300">{day}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">描述</label>
+            <textarea className="w-full bg-[#111625] border border-[#2A354D] rounded-lg px-3 py-2 text-white text-sm h-20" placeholder="策略描述" />
           </div>
           <div className="flex justify-end gap-2 pt-4">
             <button onClick={() => setShowModal(false)} className="px-4 py-2 bg-[#20293F] text-gray-300 rounded hover:bg-[#2A354D]">取消</button>
@@ -173,4 +183,4 @@ export function SyncStrategySchedule() {
   );
 }
 
-export default SyncStrategySchedule;
+export default TimeBasedAccessPolicy;

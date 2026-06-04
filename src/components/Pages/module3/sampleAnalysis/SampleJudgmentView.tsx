@@ -48,10 +48,10 @@ export function SampleJudgmentView() {
       />
 
       <StatsCardGrid>
-        <StatsCard title="样本总数" value={stats.total} icon={FlaskConical} />
-        <StatsCard title="恶意样本" value={stats.malicious} icon={AlertTriangle} color="red" />
-        <StatsCard title="可疑样本" value={stats.suspicious} icon={AlertTriangle} color="yellow" />
-        <StatsCard title="良性样本" value={stats.benign} icon={CheckCircle2} color="green" />
+        <StatsCard title="样本总数" value={stats.total} icon={<FlaskConical className="w-5 h-5" />} />
+        <StatsCard title="恶意样本" value={stats.malicious} icon={<AlertTriangle className="w-5 h-5" />} color="red" />
+        <StatsCard title="可疑样本" value={stats.suspicious} icon={<AlertTriangle className="w-5 h-5" />} color="yellow" />
+        <StatsCard title="良性样本" value={stats.benign} icon={<CheckCircle2 className="w-5 h-5" />} color="green" />
       </StatsCardGrid>
 
       <div className="bg-[#0D1117] rounded-xl border border-[#2A354D]">
