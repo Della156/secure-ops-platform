@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, Search, Edit2, Trash2, Test, Database, Cloud, FileText, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, CheckCircle, Database, Cloud, FileText, ToggleLeft, ToggleRight } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 
 interface DataSource {
@@ -141,7 +141,7 @@ export function DataSource() {
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-1">
                     <button className="p-1.5 hover:bg-[#111625] rounded text-gray-400 hover:text-green-400" title="测试连接">
-                      <Test className="w-4 h-4" />
+                      <CheckCircle className="w-4 h-4" />
                     </button>
                     <button className="p-1.5 hover:bg-[#111625] rounded text-gray-400 hover:text-yellow-400">
                       <Edit2 className="w-4 h-4" />
