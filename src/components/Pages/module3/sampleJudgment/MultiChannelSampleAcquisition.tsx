@@ -279,16 +279,16 @@ export function MultiChannelSampleAcquisition() {
     {
       key: 'name', title: '渠道名称', width: '220px',
       render: (c: Channel) => {
-        const TypeIcon = channelTypeConfig[c.type].icon;
+        const TypeIcon = channelTypeConfig[c.type as keyof typeof channelTypeConfig].icon;
         return (
           <div className="flex items-center gap-2">
-            <div className={`w-8 h-8 rounded flex items-center justify-center ${channelTypeConfig[c.type].color}`}>
+            <div className={`w-8 h-8 rounded flex items-center justify-center ${channelTypeConfig[c.type as keyof typeof channelTypeConfig].color}`}>
               <TypeIcon className="w-4 h-4" />
             </div>
             <div>
               <div className="text-sm text-slate-100">{c.name}</div>
-              <div className={`text-[10px] mt-0.5 inline-block px-1.5 py-0 rounded ${channelTypeConfig[c.type].color}`}>
-                {channelTypeConfig[c.type].label}
+              <div className={`text-[10px] mt-0.5 inline-block px-1.5 py-0 rounded ${channelTypeConfig[c.type as keyof typeof channelTypeConfig].color}`}>
+                {channelTypeConfig[c.type as keyof typeof channelTypeConfig].label}
               </div>
             </div>
           </div>
@@ -407,7 +407,7 @@ export function MultiChannelSampleAcquisition() {
         <h3 className="text-sm font-medium text-slate-200 mb-3">渠道类型分布（今日采集）</h3>
         <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
           {(Object.keys(channelTypeConfig) as ChannelType[]).map((t) => {
-            const cfg = channelTypeConfig[t];
+            const cfg = channelTypeConfig[t as keyof typeof channelTypeConfig];
             const Icon = cfg.icon;
             const count = channels.filter((c) => c.type === t).reduce((sum, c) => sum + c.todayCount, 0);
             return (
@@ -463,8 +463,8 @@ export function MultiChannelSampleAcquisition() {
                   <td className="py-1.5 px-2 text-slate-300">{s.channel}</td>
                   <td className="py-1.5 px-2 text-slate-100">{s.name}</td>
                   <td className="py-1.5 px-2">
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded bg-[#111625] ${sampleTypeConfig[s.type].color}`}>
-                      {sampleTypeConfig[s.type].label}
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded bg-[#111625] ${sampleTypeConfig[s.type as keyof typeof sampleTypeConfig].color}`}>
+                      {sampleTypeConfig[s.type as keyof typeof sampleTypeConfig].label}
                     </span>
                   </td>
                   <td className="py-1.5 px-2 text-right text-slate-300 font-mono">
@@ -490,7 +490,7 @@ export function MultiChannelSampleAcquisition() {
         filters={[
           {
             key: 'type', label: '类型',
-            options: (Object.keys(channelTypeConfig) as ChannelType[]).map((t) => ({ value: t, label: channelTypeConfig[t].label })),
+            options: (Object.keys(channelTypeConfig) as ChannelType[]).map((t) => ({ value: t, label: channelTypeConfig[t as keyof typeof channelTypeConfig].label })),
           },
           {
             key: 'status', label: '状态',
@@ -564,12 +564,12 @@ function ChannelDetailDrawer({ channel, onClose }: { channel: Channel; onClose: 
         <div className="p-5 space-y-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${channelTypeConfig[channel.type].color}`}>
-                {(() => { const I = channelTypeConfig[channel.type].icon; return <I className="w-6 h-6" />; })()}
+              <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${channelTypeConfig[channel.type as keyof typeof channelTypeConfig].color}`}>
+                {(() => { const I = channelTypeConfig[channel.type as keyof typeof channelTypeConfig].icon; return <I className="w-6 h-6" />; })()}
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-slate-100">{channel.name}</h2>
-                <p className="text-xs text-slate-500 mt-0.5">{channel.id} · {channelTypeConfig[channel.type].label}</p>
+                <p className="text-xs text-slate-500 mt-0.5">{channel.id} · {channelTypeConfig[channel.type as keyof typeof channelTypeConfig].label}</p>
               </div>
             </div>
             <Button variant="ghost" size="sm" onClick={onClose}>关闭</Button>
@@ -607,7 +607,7 @@ function ChannelDetailDrawer({ channel, onClose }: { channel: Channel; onClose: 
                     <Hash className="w-3 h-3 text-slate-500" />
                     <span className="font-mono text-slate-500 w-32 truncate">{s.hash.substring(0, 12)}...</span>
                     <span className="text-slate-100 flex-1 truncate">{s.name}</span>
-                    <span className={`text-[10px] px-1.5 py-0 rounded ${sampleTypeConfig[s.type].color}`}>{sampleTypeConfig[s.type].label}</span>
+                    <span className={`text-[10px] px-1.5 py-0 rounded ${sampleTypeConfig[s.type as keyof typeof sampleTypeConfig].color}`}>{sampleTypeConfig[s.type as keyof typeof sampleTypeConfig].label}</span>
                     <span className="text-slate-400 w-16 text-right font-mono">
                       {s.size > 1048576 ? `${(s.size / 1048576).toFixed(1)}MB` : `${(s.size / 1024).toFixed(0)}KB`}
                     </span>

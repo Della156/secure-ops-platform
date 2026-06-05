@@ -67,7 +67,7 @@ export function ForensicsProcessReport() {
         </div>
         <div className="space-y-3">
           {operations.map((op, idx) => {
-            const sc = statusConfig[op.status];
+            const sc = statusConfig[op.status as keyof typeof statusConfig];
             return (
               <div key={idx} className="flex items-start gap-3">
                 <div className="flex flex-col items-center">

@@ -171,7 +171,7 @@ export function VulnTaskMonitor() {
         <h3 className="text-sm font-medium text-slate-200 mb-3">运行中任务类型分布</h3>
         <div className="grid grid-cols-5 gap-2">
           {(Object.keys(typeConfig) as TaskType[]).map((t) => {
-            const cfg = typeConfig[t];
+            const cfg = typeConfig[t as keyof typeof typeConfig];
             const Icon = cfg.icon;
             return (
               <button
@@ -227,7 +227,7 @@ export function VulnTaskMonitor() {
           <div className="flex border border-[#2A354D] rounded overflow-hidden">
             {[
               { v: 'all', l: '全部类型' },
-              ...(Object.keys(typeConfig) as TaskType[]).map((t) => ({ v: t, l: typeConfig[t].label })),
+              ...(Object.keys(typeConfig) as TaskType[]).map((t) => ({ v: t, l: typeConfig[t as keyof typeof typeConfig].label })),
             ].map((f) => (
               <button
                 key={f.v}
@@ -244,7 +244,7 @@ export function VulnTaskMonitor() {
       {/* 任务列表 */}
       <div className="space-y-3">
         {filtered.map((t) => {
-          const tc = typeConfig[t.type];
+          const tc = typeConfig[t.type as keyof typeof typeConfig];
           const TypeIcon = tc.icon;
           const sb = statusBadgeMap[t.status];
           return (
@@ -363,7 +363,7 @@ export function VulnTaskMonitor() {
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <Field label="任务类型" value={typeConfig[selectedTask.type].label} />
+              <Field label="任务类型" value={typeConfig[selectedTask.type as keyof typeof typeConfig].label} />
               <Field label="状态" value={statusBadgeMap[selectedTask.status].text} />
               <Field label="开始时间" value={selectedTask.startTime} />
               <Field label="耗时" value={selectedTask.duration} />

@@ -295,7 +295,7 @@ export function VulnUnfixableList() {
             </div>
           </div>
           {filtered.map(v => {
-            const status = statusConfig[v.status];
+            const status = statusConfig[v.status as keyof typeof statusConfig];
             const reason = reasonLabels[v.reasonType];
             const allApproved = v.approvers.every(a => a.status === 'approved');
             const someRejected = v.approvers.some(a => a.status === 'rejected');
@@ -311,7 +311,7 @@ export function VulnUnfixableList() {
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-[10px] text-gray-500 font-mono">{v.id}</span>
-                      <span className={`text-sm font-medium ${severityColors[v.level]}`}>{v.vulnName}</span>
+                      <span className={`text-sm font-medium ${severityColors[v.level as keyof typeof severityColors]}`}>{v.vulnName}</span>
                       {v.cve && <span className="text-[10px] text-gray-500 font-mono">{v.cve}</span>}
                     </div>
                     <div className="text-xs text-gray-400">
@@ -367,7 +367,7 @@ export function VulnUnfixableList() {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <div className="text-gray-500 text-[10px]">等级</div>
-                    <div className={severityColors[selected.level]}>{selected.level.toUpperCase()}</div>
+                    <div className={severityColors[selected.level as keyof typeof severityColors]}>{selected.level.toUpperCase()}</div>
                   </div>
                   <div>
                     <div className="text-gray-500 text-[10px]">CVSS</div>

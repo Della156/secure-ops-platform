@@ -14,8 +14,8 @@ export function RiskScoreCard() {
   if (!riskSnapshot) {
     return (
       <div className="px-4 py-3">
-        <div className="bg-[#181F32]/50 rounded-lg p-4 border border-[#2A354D]">
-          <div className="text-center text-[#9CA3AF] text-sm py-4">
+        <div className="bg-app-bg-surface/50 rounded-lg p-4 border border-app-border-base">
+          <div className="text-center text-app-text-secondary text-sm py-4">
             <RefreshCw className="w-5 h-5 animate-spin mx-auto mb-2" />
             正在计算风险评分...
           </div>
@@ -58,10 +58,10 @@ export function RiskScoreCard() {
 
   return (
     <div className="px-4 py-3">
-      <div className={`bg-[#181F32]/50 rounded-lg p-4 border border-[#2A354D] ring-1 ${colors.ring}`}>
+      <div className={`bg-app-bg-surface/50 rounded-lg p-4 border border-app-border-base ring-1 ${colors.ring}`}>
         {/* Header */}
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-[#9CA3AF] uppercase tracking-wider">系统风险评分</span>
+          <span className="text-xs text-app-text-secondary uppercase tracking-wider">系统风险评分</span>
           <div className="flex items-center gap-1">
             <span className={`text-xs px-2 py-0.5 rounded-full ${colors.bg} text-[#F3F4F6]`}>
               {levelLabel}
@@ -72,7 +72,7 @@ export function RiskScoreCard() {
               className="p-1 rounded hover:bg-[#2A354D] transition-colors disabled:opacity-50"
               title="重新计算"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-[#9CA3AF] ${isCalculatingRisk ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 text-app-text-secondary ${isCalculatingRisk ? 'animate-spin' : ''}`} />
             </button>
           </div>
         </div>
@@ -84,7 +84,7 @@ export function RiskScoreCard() {
           {delta && (
             <span className={`text-xs flex items-center gap-0.5 ml-2 ${
               delta.trend === 'up' ? 'text-[#FF3B30]' :
-              delta.trend === 'down' ? 'text-[#00C853]' : 'text-[#9CA3AF]'
+              delta.trend === 'down' ? 'text-[#00C853]' : 'text-app-text-secondary'
             }`}>
               <DeltaIcon className="w-3 h-3" />
               {delta.score > 0 ? '+' : ''}{delta.score}
@@ -106,7 +106,7 @@ export function RiskScoreCard() {
             const dimColor = getColorByScore(c.score);
             return (
               <div key={c.name} className="flex items-center gap-2 text-xs">
-                <span className="text-[#9CA3AF] w-16 truncate">{c.name}</span>
+                <span className="text-app-text-secondary w-16 truncate">{c.name}</span>
                 <div className="flex-1 h-1.5 bg-[#2A354D] rounded-full overflow-hidden">
                   <div
                     className={`h-full ${dimColor.bar} transition-all duration-500`}
@@ -125,7 +125,7 @@ export function RiskScoreCard() {
         </div>
 
         {/* Footer Info */}
-        <div className="pt-2 border-t border-[#2A354D] space-y-1">
+        <div className="pt-2 border-t border-app-border-base space-y-1">
           <div className="flex items-center justify-between text-xs text-[#6B7280]">
             <span>触发: {triggerLabels[trigger]}</span>
             <span>权重: 资产30% · 告警25% · 漏洞20% · 合规15% · 覆盖10%</span>

@@ -233,14 +233,14 @@ export function VulnRetestClose() {
       {/* 复测任务列表 */}
       <div className="space-y-2">
         {filtered.map(t => {
-          const r = resultConfig[t.result];
+          const r = resultConfig[t.result as keyof typeof resultConfig];
           return (
             <div key={t.id} className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] text-gray-500 font-mono">{t.id}</span>
-                    <span className={`text-sm font-medium ${severityColors[t.level]}`}>{t.vulnName}</span>
+                    <span className={`text-sm font-medium ${severityColors[t.level as keyof typeof severityColors]}`}>{t.vulnName}</span>
                     <span className="text-[10px] text-gray-500 font-mono">{t.cve}</span>
                   </div>
                   <div className="text-xs text-gray-400">

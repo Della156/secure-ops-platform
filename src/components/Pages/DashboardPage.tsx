@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Shield, Activity, AlertTriangle, CheckCircle2, Clock, TrendingUp,
   Server, Database, Network, Cloud, Terminal, Settings,
-  ArrowUpRight, ChevronRight, RefreshCw, Zap, Users, FileText,
+  ArrowUpRight, ChevronRight, Zap, Users, FileText,
   Bug, Lock, Globe, Wifi, Layers, BarChart3, Target,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -12,8 +12,8 @@ import { useSystem } from '@/contexts/SystemContext';
 
 // 4 个大屏 widget 动态加载（首页首屏更轻）
 const WidgetSkeleton = () => (
-  <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 h-[260px] flex items-center justify-center">
-    <div className="animate-pulse text-[10px] text-slate-500">加载大屏组件...</div>
+  <div className="bg-app-bg-card border border-app-border-base rounded-xl p-4 h-[260px] flex items-center justify-center">
+    <div className="animate-pulse text-[10px] text-app-text-muted">加载大屏组件...</div>
   </div>
 );
 const RealtimeThreatWidget = dynamic(() => import('@/components/Dashboard/RealtimeThreatWidget').then(m => m.RealtimeThreatWidget), { ssr: false, loading: WidgetSkeleton });
@@ -86,12 +86,12 @@ function MetricCard({ title, value, subtitle, icon: Icon, color, trend }: {
   title: string; value: string | number; subtitle?: string; icon: React.ComponentType<any>; color: string; trend?: { value: string; up: boolean };
 }) {
   return (
-    <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-5 hover:border-[#3A4560] transition-all duration-300 group">
+    <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-5 hover:border-app-border-focus/50 transition-all duration-300 group">
       <div className="flex items-start justify-between">
         <div className="space-y-1">
-          <p className="text-xs font-medium text-[#6B7280] tracking-wider uppercase">{title}</p>
+          <p className="text-xs font-medium text-app-text-muted tracking-wider uppercase">{title}</p>
           <p className="text-2xl font-bold text-white tracking-tight">{value}</p>
-          {subtitle && <p className="text-[10px] text-[#6B7280]">{subtitle}</p>}
+          {subtitle && <p className="text-[10px] text-app-text-muted">{subtitle}</p>}
         </div>
         <div className={`p-2.5 rounded-xl ${color}/10 group-hover:${color}/20 transition-colors`}>
           <Icon className={`w-5 h-5 ${color}`} />
@@ -102,7 +102,7 @@ function MetricCard({ title, value, subtitle, icon: Icon, color, trend }: {
           <span className={trend.up ? 'text-emerald-400' : 'text-red-400'}>
             {trend.up ? '↑' : '↓'} {trend.value}
           </span>
-          <span className="text-[#6B7280]">较昨日</span>
+          <span className="text-app-text-muted">较昨日</span>
         </div>
       )}
     </div>
@@ -118,7 +118,7 @@ function RiskGauge({ score }: { score: number }) {
     <div className="flex flex-col items-center justify-center py-2">
       <div className="relative w-32 h-16 overflow-hidden">
         <svg className="w-32 h-16" viewBox="0 0 120 60">
-          <path d="M10 50 A50 50 0 0 1 110 50" fill="none" stroke="#2A354D" strokeWidth="8" strokeLinecap="round" />
+          <path d="M10 50 A50 50 0 0 1 110 50" fill="none" stroke="var(--app-border-base)" strokeWidth="8" strokeLinecap="round" />
           <path d="M10 50 A50 50 0 0 1 110 50" fill="none" stroke={color} strokeWidth="8" strokeLinecap="round"
             strokeDasharray={`${(score / 100) * 157} 157`} />
         </svg>
@@ -134,19 +134,19 @@ function RiskGauge({ score }: { score: number }) {
 }
 
 function AlertItem({ alert }: { alert: typeof alerts[0] }) {
-  const cfg = LEVEL_CONFIG[alert.level];
+  const cfg = LEVEL_CONFIG[alert.level as keyof typeof LEVEL_CONFIG];
   return (
-    <div className="flex items-start gap-3 px-4 py-3 hover:bg-[#1A2332]/50 rounded-lg transition-colors group cursor-pointer border-b border-[#2A354D]/30 last:border-0">
+    <div className="flex items-start gap-3 px-4 py-3 hover:bg-app-bg-card-hover/50 rounded-lg transition-colors group cursor-pointer border-b border-app-border-base/30 last:border-0">
       <span className={`mt-1.5 w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`} />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${cfg.bg}`}>{cfg.label}</span>
-          <span className="text-xs text-[#6B7280]">{alert.time}</span>
+          <span className="text-xs text-app-text-muted">{alert.time}</span>
         </div>
-        <p className="text-sm text-[#E5E7EB] mt-1 truncate">{alert.title}</p>
-        <p className="text-[11px] text-[#6B7280] mt-0.5 truncate">{alert.detail}</p>
+        <p className="text-sm text-app-text-on-card mt-1 truncate">{alert.title}</p>
+        <p className="text-[11px] text-app-text-muted mt-0.5 truncate">{alert.detail}</p>
       </div>
-      <ChevronRight className="w-4 h-4 text-[#4B5563] mt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+      <ChevronRight className="w-4 h-4 text-app-text-muted mt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
     </div>
   );
 }
@@ -167,7 +167,7 @@ function BarChart() {
               style={{ height: `${(d.success / maxVal) * 100}%`, minHeight: '4px' }}
             />
           </div>
-          <span className="text-[10px] text-[#6B7280]">{d.label}</span>
+          <span className="text-[10px] text-app-text-muted">{d.label}</span>
         </div>
       ))}
     </div>
@@ -177,50 +177,18 @@ function BarChart() {
 // ─── Main Dashboard ──────────────────────────────────────────
 
 export default function DashboardPage() {
-  const [currentTime, setCurrentTime] = useState('');
   const [alertFilter, setAlertFilter] = useState<string>('all');
   const { setActiveMenu } = useSystem();
-
-  useEffect(() => {
-    const now = new Date();
-    setCurrentTime(`${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
-  }, []);
 
   const filteredAlerts = alertFilter === 'all' ? alerts : alerts.filter(a => a.level === alertFilter);
 
   return (
-    <div className="min-h-screen bg-[#111625]">
-      {/* ── Top Header Bar ── */}
-      <div className="sticky top-0 z-40 bg-[#111625]/80 backdrop-blur-xl border-b border-[#2A354D]/40 px-6 py-3">
-        <div className="flex items-center justify-between max-w-[1600px] mx-auto">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#0066FF] to-[#0052CC] rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <Shield className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-[#F3F4F6] font-semibold text-sm">网络安全态势感知平台</span>
-            </div>
-            <span className="text-[10px] text-[#6B7280] px-3 py-1 bg-[#1E2736] rounded-full border border-[#2A354D]/50">
-              {currentTime || '加载中...'}
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-[11px] text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              系统运行正常
-            </span>
-            <button className="p-1.5 rounded-lg text-[#6B7280] hover:text-[#F3F4F6] hover:bg-[#1E2736] transition-colors">
-              <RefreshCw className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="px-6 py-5 max-w-[1600px] mx-auto space-y-5">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-app-bg-deep -mx-4 -mt-4 -mb-4">
+      <div className="px-8 py-6 space-y-5">
         {/* ── Metrics Row ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-4 lg:col-span-1">
-            <p className="text-[10px] font-medium text-[#6B7280] tracking-wider uppercase mb-1">系统风险评分</p>
+          <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-4 lg:col-span-1">
+            <p className="text-[10px] font-medium text-app-text-muted tracking-wider uppercase mb-1">系统风险评分</p>
             <RiskGauge score={37} />
           </div>
           <MetricCard title="活跃告警" value="23" subtitle="未处理" icon={AlertTriangle} color="text-red-400" trend={{ value: '12%', up: false }} />
@@ -241,18 +209,18 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
 
           {/* Left Column: Alerts Feed */}
-          <div className="xl:col-span-1 bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-[#2A354D]/40 flex items-center justify-between">
+          <div className="xl:col-span-1 bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-app-border-base/40 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Activity className="w-4 h-4 text-red-400" />
-                <span className="text-sm font-medium text-[#E5E7EB]">实时告警</span>
+                <span className="text-sm font-medium text-app-text-on-card">实时告警</span>
                 <span className="text-[10px] bg-red-500/15 text-red-400 px-1.5 py-0.5 rounded-full">{alerts.length}</span>
               </div>
               <div className="flex gap-1">
                 {['all', 'critical', 'high', 'warning'].map(key => (
                   <button key={key} onClick={() => setAlertFilter(key)}
                     className={`text-[10px] px-2 py-1 rounded-md transition-colors ${
-                      alertFilter === key ? 'bg-[#2A354D] text-white' : 'text-[#6B7280] hover:text-[#E5E7EB]'
+                      alertFilter === key ? 'bg-app-border-base text-app-text-primary' : 'text-app-text-muted hover:text-app-text-on-card'
                     }`}
                   >
                     {key === 'all' ? '全部' : LEVEL_CONFIG[key as keyof typeof LEVEL_CONFIG]?.label || key}
@@ -260,13 +228,13 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-            <div className="divide-y divide-[#2A354D]/30 max-h-[420px] overflow-y-auto">
+            <div className="divide-y divide-app-border-base/30 max-h-[420px] overflow-y-auto">
               {filteredAlerts.map(alert => (
                 <AlertItem key={alert.id} alert={alert} />
               ))}
             </div>
-            <div className="px-4 py-2.5 border-t border-[#2A354D]/40">
-              <button className="text-[11px] text-[#0066FF] hover:text-[#0080FF] flex items-center gap-1">
+            <div className="px-4 py-2.5 border-t border-app-border-base/40">
+              <button className="text-[11px] text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 flex items-center gap-1">
                 查看全部告警 <ChevronRight className="w-3 h-3" />
               </button>
             </div>
@@ -277,13 +245,13 @@ export default function DashboardPage() {
 
             {/* Task Trend + Quick Actions */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <div className="lg:col-span-2 bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-5">
+              <div className="lg:col-span-2 bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-[#E5E7EB]">自动化任务执行趋势</span>
+                    <span className="text-sm font-medium text-app-text-on-card">自动化任务执行趋势</span>
                   </div>
-                  <div className="flex items-center gap-3 text-[10px] text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-[10px] text-app-text-muted">
                     <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-blue-500/70" /> 成功</span>
                     <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-red-500/60" /> 失败</span>
                   </div>
@@ -291,10 +259,10 @@ export default function DashboardPage() {
                 <BarChart />
               </div>
 
-              <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-5">
+              <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <Target className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-medium text-[#E5E7EB]">快捷操作</span>
+                  <span className="text-sm font-medium text-app-text-on-card">快捷操作</span>
                 </div>
                 <div className="space-y-2">
                   {[
@@ -303,9 +271,9 @@ export default function DashboardPage() {
                     { label: '漏洞扫描报告', icon: Bug, color: 'text-orange-400' },
                     { label: '系统健康检查', icon: Activity, color: 'text-emerald-400' },
                   ].map((item, i) => (
-                    <button key={i} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[#1A2332] transition-colors text-left">
+                    <button key={i} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-app-bg-card-hover transition-colors text-left">
                       <item.icon className={`w-4 h-4 ${item.color}`} />
-                      <span className="text-xs text-[#D1D5DB]">{item.label}</span>
+                      <span className="text-xs text-app-text-secondary-on-card">{item.label}</span>
                     </button>
                   ))}
                 </div>
@@ -313,19 +281,19 @@ export default function DashboardPage() {
             </div>
 
             {/* Module Grid */}
-            <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-5">
+            <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Layers className="w-4 h-4 text-[#0066FF]" />
-                  <span className="text-sm font-medium text-[#E5E7EB]">功能模块概览</span>
+                  <span className="text-sm font-medium text-app-text-on-card">功能模块概览</span>
                 </div>
-                <span className="text-[10px] text-[#6B7280]">6大模块 · 699个自动化场景</span>
+                <span className="text-[10px] text-app-text-muted">6大模块 · 699个自动化场景</span>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {modules.map(mod => (
                   <button key={mod.id}
                     onClick={() => setActiveMenu(mod.id)}
-                    className="group relative bg-[#1A2332]/50 border border-[#2A354D]/40 rounded-xl p-4 hover:border-[#3A4560] transition-all duration-300 text-left overflow-hidden"
+                    className="group relative bg-app-bg-card-hover/50 border border-app-border-base/40 rounded-xl p-4 hover:border-app-border-focus/50 transition-all duration-300 text-left overflow-hidden"
                   >
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{ background: `radial-gradient(600px circle at 50% 0%, ${mod.color}08, transparent)` }} />
@@ -334,8 +302,8 @@ export default function DashboardPage() {
                         style={{ backgroundColor: `${mod.color}15` }}>
                         <mod.icon className="w-4 h-4" style={{ color: mod.color }} />
                       </div>
-                      <p className="text-xs font-medium text-[#E5E7EB] group-hover:text-white transition-colors">{mod.label}</p>
-                      <p className="text-[10px] text-[#6B7280] mt-1">{mod.desc}</p>
+                      <p className="text-xs font-medium text-app-text-on-card group-hover:text-white transition-colors">{mod.label}</p>
+                      <p className="text-[10px] text-app-text-muted mt-1">{mod.desc}</p>
                       <p className="text-[11px] font-semibold mt-2" style={{ color: mod.color }}>{mod.count}</p>
                     </div>
                   </button>
@@ -349,45 +317,45 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
 
           {/* High Priority Todos */}
-          <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-[#2A354D]/40 flex items-center justify-between">
+          <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-app-border-base/40 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-red-400" />
-                <span className="text-sm font-medium text-[#E5E7EB]">高危待办</span>
+                <span className="text-sm font-medium text-app-text-on-card">高危待办</span>
                 <span className="text-[10px] bg-red-500/15 text-red-400 px-1.5 py-0.5 rounded-full">{todos.length}</span>
               </div>
-              <button className="text-[11px] text-[#0066FF] hover:text-[#0080FF]">查看全部</button>
+              <button className="text-[11px] text-[var(--color-primary)] hover:text-[var(--color-primary)]/80">查看全部</button>
             </div>
-            <div className="divide-y divide-[#2A354D]/30">
+            <div className="divide-y divide-app-border-base/30">
               {todos.map(todo => (
-                <div key={todo.id} className="flex items-start gap-3 px-4 py-3 hover:bg-[#1A2332]/50 transition-colors cursor-pointer">
+                <div key={todo.id} className="flex items-start gap-3 px-4 py-3 hover:bg-app-bg-card-hover/50 transition-colors cursor-pointer">
                   <div className={`mt-0.5 w-2 h-2 rounded-full flex-shrink-0 ${
                     todo.priority === 'critical' ? 'bg-red-500' : todo.priority === 'high' ? 'bg-orange-500' : 'bg-yellow-500'
                   }`} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-[#E5E7EB] truncate">{todo.title}</p>
+                    <p className="text-sm text-app-text-on-card truncate">{todo.title}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className={`text-[10px] px-1.5 py-0.5 rounded ${
                         PRIORITY_CONFIG[todo.priority as keyof typeof PRIORITY_CONFIG]?.bg || ''
                       } ${PRIORITY_CONFIG[todo.priority as keyof typeof PRIORITY_CONFIG]?.label ? 'text-' + (todo.priority === 'critical' ? 'red' : todo.priority === 'high' ? 'orange' : 'yellow') + '-400' : ''}`}>
                         {PRIORITY_CONFIG[todo.priority as keyof typeof PRIORITY_CONFIG]?.label || todo.priority}
                       </span>
-                      <span className="text-[10px] text-[#6B7280]">{todo.module}</span>
-                      <span className="text-[10px] text-[#6B7280]">{todo.time}</span>
+                      <span className="text-[10px] text-app-text-muted">{todo.module}</span>
+                      <span className="text-[10px] text-app-text-muted">{todo.time}</span>
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-[#4B5563] mt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-app-text-muted mt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                 </div>
               ))}
             </div>
           </div>
 
           {/* System Status */}
-          <div className="bg-[#1E2736]/80 backdrop-blur-sm border border-[#2A354D]/60 rounded-xl p-5">
+          <div className="bg-app-bg-surface/80 backdrop-blur-sm border border-app-border-base/60 rounded-xl p-5">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Server className="w-4 h-4 text-emerald-400" />
-                <span className="text-sm font-medium text-[#E5E7EB]">系统运行状态</span>
+                <span className="text-sm font-medium text-app-text-on-card">系统运行状态</span>
               </div>
               <span className="flex items-center gap-1.5 text-[10px] text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -396,16 +364,16 @@ export default function DashboardPage() {
             </div>
             <div className="space-y-2">
               {systemStatus.map(s => (
-                <div key={s.name} className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[#1A2332]/50 transition-colors">
+                <div key={s.name} className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-app-bg-card-hover/50 transition-colors">
                   <div className="flex items-center gap-3">
                     <span className={`w-2 h-2 rounded-full ${s.status === 'healthy' ? 'bg-emerald-500' : 'bg-yellow-500'}`} />
-                    <span className="text-sm text-[#D1D5DB]">{s.name}</span>
+                    <span className="text-sm text-app-text-secondary-on-card">{s.name}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`text-[11px] ${s.status === 'healthy' ? 'text-emerald-400' : 'text-yellow-400'}`}>
                       {s.status === 'healthy' ? '正常' : '降级'}
                     </span>
-                    <span className="text-[11px] text-[#6B7280]">{s.uptime}</span>
+                    <span className="text-[11px] text-app-text-muted">{s.uptime}</span>
                   </div>
                 </div>
               ))}
@@ -414,7 +382,7 @@ export default function DashboardPage() {
         </div>
 
         {/* ── Footer ── */}
-        <div className="text-center text-[10px] text-[#4B5563] pt-4 pb-2 border-t border-[#2A354D]/30">
+        <div className="text-center text-[10px] text-app-text-muted pt-4 pb-2 border-t border-app-border-base/30">
           网络安全智能化运维平台 v1.0.0 · 6大模块 699个自动化场景 · 数据模拟仅供参考
         </div>
       </div>

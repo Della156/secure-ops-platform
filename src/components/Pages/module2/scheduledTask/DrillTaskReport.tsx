@@ -205,7 +205,7 @@ export function DrillTaskReport() {
             </thead>
             <tbody>
               {filtered.map(r => {
-                const sc = statusConfig[r.status];
+                const sc = statusConfig[r.status as keyof typeof statusConfig];
                 const rpoOk = parseInt(r.rpoActual) <= parseInt(r.rpoTarget.replace(/[^\d]/g, '')) || r.rpoActual === '0s' || r.rpoActual === '<1s';
                 const rtoOk = r.rtoActual !== '超时' && (parseInt(r.rtoActual) <= parseInt(r.rtoTarget.replace(/[^\d]/g, '')) || r.rtoActual === '8s' || r.rtoActual === '15s' || r.rtoActual === '12min');
                 return (

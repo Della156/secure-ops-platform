@@ -4,7 +4,7 @@
  * 用于菜单 2-24-8 防火墙策略工单任务状态监控
  */
 
-export type TaskStatus = 'pending' | 'processing' | 'failed' | 'completed' | 'rolledback';
+export type TaskStatus = 'pending' | 'processing' | 'failed' | 'completed' | 'rolledback' | 'paused';
 
 export type TaskPhase = 'submitted' | 'reviewing' | 'dispatching' | 'verifying' | 'done';
 

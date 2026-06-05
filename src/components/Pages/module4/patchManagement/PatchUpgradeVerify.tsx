@@ -17,7 +17,7 @@ const statusConfig = {
   pending: { label: '待验证', color: 'bg-gray-500/20 text-gray-400', icon: RefreshIcon },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function PatchUpgradeVerify() {
   const [search, setSearch] = useState('');
@@ -115,7 +115,7 @@ export function PatchUpgradeVerify() {
             </thead>
             <tbody>
               {filteredVerifications.map(v => {
-                const status = statusConfig[v.status];
+                const status = statusConfig[v.status as keyof typeof statusConfig];
                 const StatusIcon = status.icon;
                 return (
                   <tr key={v.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">

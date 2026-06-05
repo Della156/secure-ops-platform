@@ -21,7 +21,7 @@ interface OpLevel {
 interface OpRule {
   id: string;
   name: string;
-  category: '隔离/阻断' | '取证' | '修复' | '通知' | '配置变更' | '数据操作';
+  category: '隔离/阻断' | '取证' | '修复' | '通知' | '配置变更' | '数据操作' | '账号';
   description: string;
   riskLevel: 'low' | 'medium' | 'high' | 'critical';
   affectedScope: '单资产' | '子网' | '全网' | '数据库' | '账号';
@@ -84,6 +84,7 @@ const categoryColor: Record<OpRule['category'], string> = {
   '通知': '#FF6D00',
   '配置变更': '#EAB308',
   '数据操作': '#EF4444',
+  '账号': '#06B6D4',
 };
 
 const riskColor: Record<OpRule['riskLevel'], string> = {

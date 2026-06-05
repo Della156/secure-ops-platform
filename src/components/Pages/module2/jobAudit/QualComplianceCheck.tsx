@@ -15,8 +15,8 @@ interface ComplianceCheck {
   id: string;
   category: '等保 2.0' | 'ISO 27001' | 'GDPR' | 'PCI DSS' | '行业规范' | '内部规范';
   standard: string;
-  clause: string;
-  description: string;
+  clause?: string;
+  description?: string;
   status: 'pass' | 'warn' | 'fail' | 'pending';
   evidence: string;
   lastChecked: string;
@@ -72,7 +72,7 @@ export function QualComplianceCheck() {
   const [selectedId, setSelectedId] = useState<string | null>('CC-001');
 
   const filtered = checks.filter(c => {
-    if (search && !c.standard.includes(search) && !c.clause.includes(search)) return false;
+    if (search && !c.standard.includes(search) && !(c.clause ?? '').includes(search)) return false;
     if (categoryFilter !== 'all' && c.category !== categoryFilter) return false;
     if (statusFilter !== 'all' && c.status !== statusFilter) return false;
     return true;
@@ -159,7 +159,7 @@ export function QualComplianceCheck() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(c => {
-              const sc = statusConfig[c.status];
+              const sc = statusConfig[c.status as keyof typeof statusConfig];
               return (
                 <div
                   key={c.id}
@@ -194,7 +194,7 @@ export function QualComplianceCheck() {
               <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${categoryColor[selected.category]}20`, color: categoryColor[selected.category] }}>{selected.category}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>{statusConfig[selected.status].label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status as keyof typeof statusConfig].bg} ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>{statusConfig[selected.status as keyof typeof statusConfig].label}</span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.standard}</h3>
               <div className="text-[10px] text-blue-300 font-mono mb-1">{selected.clause}</div>

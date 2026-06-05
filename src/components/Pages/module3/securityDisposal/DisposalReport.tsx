@@ -111,7 +111,7 @@ export function DisposalReport() {
                 cx="50%" cy="50%"
                 innerRadius={50} outerRadius={80}
                 dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
                 labelLine={false}
               >
                 {reportData.disposalType.map((entry, index) => (

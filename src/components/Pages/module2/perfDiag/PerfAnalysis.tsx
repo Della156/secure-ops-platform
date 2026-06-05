@@ -146,7 +146,7 @@ export function PerfAnalysis() {
             <div className="px-4 pb-4">
               <div className="space-y-3">
                 {bottlenecks.map((item, idx) => (
-                  <div key={idx} className={`border rounded-lg p-3 ${severityColors[item.severity]}`}>
+                  <div key={idx} className={`border rounded-lg p-3 ${severityColors[item.severity as keyof typeof severityColors]}`}>
                     <div className="flex items-center gap-2 mb-1">
                       <AlertTriangle className="w-4 h-4" />
                       <span className="text-sm font-medium">{item.issue}</span>
@@ -191,7 +191,7 @@ export function PerfAnalysis() {
                   <div key={idx} className="bg-[#111827] rounded-lg p-3">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xs text-gray-500">{log.time}</span>
-                      <span className={`text-xs font-medium ${levelColors[log.level]}`}>[{log.level.toUpperCase()}]</span>
+                      <span className={`text-xs font-medium ${levelColors[log.level as keyof typeof levelColors]}`}>[{log.level.toUpperCase()}]</span>
                       <span className="text-xs text-gray-500">{log.source}</span>
                     </div>
                     <p className="text-sm text-gray-300">{log.message}</p>

@@ -162,7 +162,7 @@ export function UserAccountConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增用户">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增用户">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>

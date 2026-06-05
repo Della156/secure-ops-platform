@@ -132,7 +132,7 @@ export function SyncStrategySchedule() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增同步策略">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增同步策略">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">策略名称</label>

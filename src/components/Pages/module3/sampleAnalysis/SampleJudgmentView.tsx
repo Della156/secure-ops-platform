@@ -116,7 +116,7 @@ export function SampleJudgmentView() {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <StatusBadge status={judge.status} config={statusConfig} />
+                    <StatusBadge status={judge.status} />
                   </td>
                   <td className="py-3 px-4 text-[#9CA3AF] flex items-center gap-1">
                     <Clock className="w-3 h-3" />

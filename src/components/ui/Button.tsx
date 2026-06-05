@@ -19,12 +19,12 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const base = 'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111625] disabled:opacity-50 disabled:cursor-not-allowed';
+  const base = 'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-app-bg-deep disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
     primary: 'bg-[#0066FF] hover:bg-[#0052CC] text-[#F3F4F6] focus:ring-[#0066FF] shadow-sm shadow-[#0066FF]/20',
-    secondary: 'bg-[#181F32] hover:bg-[#2A354D] text-[#D1D5DB] border border-[#2A354D] focus:ring-[#2A354D]',
-    ghost: 'hover:bg-[#181F32] text-[#9CA3AF] hover:text-[#F3F4F6] focus:ring-[#2A354D]',
+    secondary: 'bg-app-bg-surface hover:bg-app-border-base text-app-text-on-card border border-app-border-base focus:ring-app-border-base',
+    ghost: 'hover:bg-app-bg-surface text-app-text-secondary hover:text-app-text-primary focus:ring-app-border-base',
     danger: 'bg-[#FF3B30] hover:bg-[#D62D20] text-[#F3F4F6] focus:ring-[#FF3B30] shadow-sm shadow-[#FF3B30]/20',
     success: 'bg-[#00C853] hover:bg-[#00A843] text-[#F3F4F6] focus:ring-[#00C853] shadow-sm shadow-[#00C853]/20',
   };

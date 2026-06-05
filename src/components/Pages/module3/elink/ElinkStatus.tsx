@@ -108,7 +108,7 @@ export function ElinkStatus() {
 
       <div className="space-y-3">
         {tasks.map(task => (
-          <Card key={task.id} padding="p-4" className={`border ${statusColor(task.status)}`}>
+          <Card key={task.id} padding="sm" className={`border ${statusColor(task.status)}`}>
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3">
                 <div className={`p-2 rounded-lg ${task.status === 'running' ? 'bg-green-500/20' : task.status === 'completed' ? 'bg-green-500/10' : task.status === 'failed' ? 'bg-red-500/20' : 'bg-yellow-500/20'}`}>

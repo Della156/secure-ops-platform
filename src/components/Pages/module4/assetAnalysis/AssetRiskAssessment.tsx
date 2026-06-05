@@ -53,7 +53,7 @@ export function AssetRiskAssessment() {
         {riskLevels.map(item => {
           const Icon = item.icon;
           return (
-            <div key={item.level} className={`bg-[#20293F] border rounded-lg p-4 ${levelColors[item.level]}`}>
+            <div key={item.level} className={`bg-[#20293F] border rounded-lg p-4 ${levelColors[item.level as keyof typeof levelColors]}`}>
               <div className="flex items-center gap-3">
                 <div className={`p-2 rounded-lg bg-${item.color}-500/20`}>
                   <Icon className={`w-5 h-5 text-${item.color}-400`} />
@@ -84,7 +84,7 @@ export function AssetRiskAssessment() {
 
       <div className="space-y-4">
         {filteredAssets.map(asset => (
-          <div key={asset.id} className={`bg-[#20293F] border rounded-lg p-4 ${levelColors[asset.riskLevel]}`}>
+          <div key={asset.id} className={`bg-[#20293F] border rounded-lg p-4 ${levelColors[asset.riskLevel as keyof typeof levelColors]}`}>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-4">
                 <div className="p-2 bg-blue-500/20 rounded-lg">
@@ -110,7 +110,7 @@ export function AssetRiskAssessment() {
                   <span>{asset.riskLevel}</span>
                 </div>
                 <div className="h-2 bg-[#111625] rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full ${scoreColors[asset.riskLevel]}`} style={{ width: `${asset.riskScore}%` }} />
+                  <div className={`h-full rounded-full ${scoreColors[asset.riskLevel as keyof typeof scoreColors]}`} style={{ width: `${asset.riskScore}%` }} />
                 </div>
               </div>
               <div className="text-right">

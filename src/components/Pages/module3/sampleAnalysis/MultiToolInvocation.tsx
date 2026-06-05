@@ -41,11 +41,11 @@ const toolStatusConfig = {
 };
 
 export function MultiToolInvocation() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<string>('');
   const [showConfigModal, setShowConfigModal] = useState(false);
-  const [newChain, setNewChain] = useState({ name: '', tools: [], timeout: '30', failureStrategy: 'skip' });
+  const [newChain, setNewChain] = useState<{ name: string; tools: string[]; timeout: string; failureStrategy: string }>({ name: '', tools: [], timeout: '30', failureStrategy: 'skip' });
 
-  const filtered = toolchains.filter(t => t.name.includes(search) || t.id.includes(search));
+  const filtered = toolchains.filter(t => t.name.includes(search) || String(t.id).includes(search));
 
   const handleAddTool = (tool: string) => {
     if (!newChain.tools.includes(tool)) {

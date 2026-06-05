@@ -34,6 +34,7 @@ const statusBadgeMap: Record<TaskStatus, { status: any; text: string }> = {
   failed: { status: 'failed', text: '失败' },
   completed: { status: 'success', text: '已完成' },
   rolledback: { status: 'warning', text: '已回滚' },
+  paused: { status: 'info', text: '已暂停' },
 };
 
 const priorityBadgeMap: Record<string, { status: any; text: string }> = {

@@ -10,7 +10,7 @@ interface ResourceServiceViewProps {
 }
 
 export function ResourceServiceView({ resourceType }: ResourceServiceViewProps) {
-  const config = resourceConfig[resourceType];
+  const config = resourceConfig[resourceType as keyof typeof resourceConfig];
   const mock = getResourceMock(resourceType);
   
   const [services, setServices] = useState<ServiceItem[]>(mock.services);

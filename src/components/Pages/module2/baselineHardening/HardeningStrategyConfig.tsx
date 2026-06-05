@@ -66,8 +66,7 @@ export function HardeningStrategyConfig() {
   return (
     <PolicyEditor
       policyType="baseline"
-      config={config}
-      policies={MOCK_POLICIES}
+      config={config} policies={MOCK_POLICIES}
     />
   );
 }

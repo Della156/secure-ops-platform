@@ -167,7 +167,7 @@ export function OsBaselineView() {
           </div>
           <div className="max-h-[640px] overflow-y-auto">
             {filtered.map(h => {
-              const sc = statusConfig[h.status];
+              const sc = statusConfig[h.status as keyof typeof statusConfig];
               return (
                 <div
                   key={h.id}

@@ -10,7 +10,7 @@ interface ResourceAuthManagerProps {
 }
 
 export function ResourceAuthManager({ resourceType }: ResourceAuthManagerProps) {
-  const config = resourceConfig[resourceType];
+  const config = resourceConfig[resourceType as keyof typeof resourceConfig];
   const mock = getResourceMock(resourceType);
   
   const [authList, setAuthList] = useState<AuthPermission[]>(mock.authList);

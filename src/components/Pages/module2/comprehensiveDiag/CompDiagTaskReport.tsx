@@ -198,7 +198,7 @@ export function CompDiagTaskReport() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(r => {
-              const sc = statusConfig[r.status];
+              const sc = statusConfig[r.status as keyof typeof statusConfig];
               return (
                 <div
                   key={r.id}
@@ -237,7 +237,7 @@ export function CompDiagTaskReport() {
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${categoryColor[selected.category]}20`, color: categoryColor[selected.category] }}>{selected.category}</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400">{selected.rcaMethod}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>{statusConfig[selected.status].label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status as keyof typeof statusConfig].bg} ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>{statusConfig[selected.status as keyof typeof statusConfig].label}</span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>
             </div>

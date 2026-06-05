@@ -276,7 +276,7 @@ export function AccountPolicyCheck() {
           </div>
           <div className="max-h-[640px] overflow-y-auto">
             {filtered.map(c => {
-              const cc = categoryConfig[c.category];
+              const cc = categoryConfig[c.category as keyof typeof categoryConfig];
               return (
                 <div
                   key={c.id}

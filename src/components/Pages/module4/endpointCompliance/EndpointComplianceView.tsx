@@ -115,7 +115,7 @@ export function EndpointComplianceView() {
                     </span>
                   </td>
                   <td className="py-3 px-4">
-                    <StatusBadge status={ep.status} config={statusConfig} />
+                    <StatusBadge status={ep.status} />
                   </td>
                   <td className="py-3 px-4 text-[#9CA3AF] flex items-center gap-1">
                     <Clock className="w-3 h-3" />

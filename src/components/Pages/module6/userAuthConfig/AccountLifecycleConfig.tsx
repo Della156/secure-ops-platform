@@ -186,7 +186,7 @@ export function AccountLifecycleConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增生命周期规则">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增生命周期规则">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">规则名称</label>

@@ -395,7 +395,7 @@ export function VulnManageOverview() {
                     <span className={`font-bold ${v.cvss >= 9.0 ? 'text-red-400' : 'text-orange-400'}`}>{v.cvss.toFixed(1)}</span>
                   </td>
                   <td className="py-2 px-2 text-center">
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded border ${severityColors[v.level]}`}>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded border ${severityColors[v.level as keyof typeof severityColors]}`}>
                       {v.level.toUpperCase()}
                     </span>
                   </td>

@@ -92,7 +92,7 @@ export function AssetAnalysisAudit() {
                     <User className="w-4 h-4 text-slate-500" />{log.operator}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-1 rounded ${operationColors[log.operation] || 'bg-gray-500/20 text-gray-400'}`}>
+                    <span className={`text-xs px-2 py-1 rounded ${operationColors[log.operation as keyof typeof operationColors] || 'bg-gray-500/20 text-gray-400'}`}>
                       {log.operation}
                     </span>
                   </td>

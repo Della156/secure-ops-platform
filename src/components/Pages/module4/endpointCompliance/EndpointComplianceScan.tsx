@@ -18,7 +18,7 @@ const statusConfig = {
   in_progress: { label: '扫描中', color: 'bg-blue-500/20 text-blue-400', icon: Loader2 },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function EndpointComplianceScan() {
   const [search, setSearch] = useState('');
@@ -99,7 +99,7 @@ export function EndpointComplianceScan() {
 
         <div className="divide-y divide-[#2A354D]">
           {filteredResults.map(result => {
-            const config = statusConfig[result.status];
+            const config = statusConfig[result.status as keyof typeof statusConfig];
             const Icon = config.icon;
             return (
               <div key={result.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-[#181F32]">

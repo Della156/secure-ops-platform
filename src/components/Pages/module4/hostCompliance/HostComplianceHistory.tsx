@@ -79,7 +79,7 @@ export function HostComplianceHistory() {
             </thead>
             <tbody>
               {filteredHistory.map(item => {
-                const config = statusConfig[item.status];
+                const config = statusConfig[item.status as keyof typeof statusConfig];
                 const Icon = config.icon;
                 return (
                   <tr key={item.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">

@@ -148,7 +148,7 @@ export function SystemRoleConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增角色">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增角色">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">角色名称</label>

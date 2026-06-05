@@ -170,8 +170,8 @@ export function DrillProcessRecord() {
           </div>
           <div className="max-h-[560px] overflow-y-auto">
             {filtered.map(r => {
-              const sc = statusConfig[r.status];
-              const rc = resultConfig[r.result];
+              const sc = statusConfig[r.status as keyof typeof statusConfig];
+              const rc = resultConfig[r.result as keyof typeof resultConfig];
               const isExp = expanded.has(r.id);
               return (
                 <div key={r.id} className="border-b border-[#2A354D]">

@@ -194,7 +194,7 @@ export function CompDiagView() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(c => {
-              const sc = statusConfig[c.status];
+              const sc = statusConfig[c.status as keyof typeof statusConfig];
               return (
                 <div
                   key={c.id}
@@ -203,7 +203,7 @@ export function CompDiagView() {
                 >
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-xs text-blue-400 font-mono">{c.id}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 border rounded ${severityConfig[c.severity]}`}>{severityConfig[c.severity].label}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 border rounded ${severityConfig[c.severity as keyof typeof severityConfig]}`}>{severityConfig[c.severity as keyof typeof severityConfig].label}</span>
                     <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${sc.bg} ${sc.color}`}>
                       {sc.label}
                     </span>
@@ -239,7 +239,7 @@ export function CompDiagView() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 border rounded ${severityConfig[selected.severity]}`}>{severityConfig[selected.severity].label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 border rounded ${severityConfig[selected.severity as keyof typeof severityConfig]}`}>{severityConfig[selected.severity as keyof typeof severityConfig].label}</span>
                 {selected.autoFixed && <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400">AI 自愈</span>}
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>

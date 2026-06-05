@@ -87,7 +87,7 @@ export function PatchManagementMonitor() {
 
         <div className="divide-y divide-[#2A354D]">
           {filteredTasks.map(task => {
-            const config = statusConfig[task.status];
+            const config = statusConfig[task.status as keyof typeof statusConfig];
             const Icon = config.icon;
             return (
               <div key={task.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-[#181F32]">

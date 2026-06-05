@@ -89,7 +89,7 @@ export function HostComplianceView() {
                     <div className="text-sm text-[#9CA3AF]">{tool.type}</div>
                   </div>
                 </div>
-                <StatusBadge status={tool.status} config={statusConfig} />
+                <StatusBadge status={tool.status} />
               </div>
               <div className="mb-2">
                 <div className="flex justify-between text-xs text-[#9CA3AF] mb-1">

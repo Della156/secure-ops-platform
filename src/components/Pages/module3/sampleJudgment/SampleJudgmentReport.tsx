@@ -125,7 +125,7 @@ export function SampleJudgmentReport() {
       </div>
     )},
     { key: 'type', title: '类型', width: '90px', render: (r: Report) => {
-      const cfg = typeConfig[r.type];
+      const cfg = typeConfig[r.type as keyof typeof typeConfig];
       const Icon = cfg.icon;
       return <span className={`text-[10px] px-1.5 py-0.5 rounded ${cfg.color} inline-flex items-center gap-1`}><Icon className="w-3 h-3" />{cfg.label}</span>;
     }},
@@ -174,7 +174,7 @@ export function SampleJudgmentReport() {
         searchValue={search}
         onSearchChange={setSearch}
         filters={[
-          { key: 'type', label: '类型', options: (Object.keys(typeConfig) as ReportType[]).map(t => ({ value: t, label: typeConfig[t].label })) },
+          { key: 'type', label: '类型', options: (Object.keys(typeConfig) as ReportType[]).map(t => ({ value: t, label: typeConfig[t as keyof typeof typeConfig].label })) },
           { key: 'status', label: '状态', options: (Object.keys(statusBadgeMap) as ReportStatus[]).map(s => ({ value: s, label: statusBadgeMap[s].text })) },
         ]}
         filterValues={{ type: typeFilter, status: statusFilter }}
@@ -209,7 +209,7 @@ function ReportDetail({ r }: { r: Report }) {
       </div>
       <div className="flex items-center gap-2">
         <StatusBadge status={statusBadgeMap[r.status].status} />
-        <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[r.type].color}`}>{typeConfig[r.type].label}</span>
+        <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[r.type as keyof typeof typeConfig].color}`}>{typeConfig[r.type as keyof typeof typeConfig].label}</span>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
@@ -230,7 +230,7 @@ function ReportDetail({ r }: { r: Report }) {
         {r.pushChannels.length > 0 ? (
           <div className="space-y-2">
             {r.pushChannels.map((ch) => {
-              const cfg = channelConfig[ch];
+              const cfg = channelConfig[ch as keyof typeof channelConfig];
               const Icon = cfg.icon;
               const ps = r.pushStatus.find(s => s.channel === ch);
               return (

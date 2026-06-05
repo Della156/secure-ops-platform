@@ -135,7 +135,7 @@ export function BaselineToolManagement() {
                   <label className="block text-xs text-slate-400 mb-1">工具名称</label>
                   <input
                     type="text" value={editingTool.name}
-                    onChange={e => setEditingTool(prev => ({ ...prev, name: e.target.value }))}
+                    onChange={e => setEditingTool(prev => prev ? { ...prev, name: e.target.value } : null)}
                     className="w-full px-3 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
                     placeholder="输入工具名称"
                   />
@@ -144,7 +144,7 @@ export function BaselineToolManagement() {
                   <label className="block text-xs text-slate-400 mb-1">工具类型</label>
                   <select
                     value={editingTool.type}
-                    onChange={e => setEditingTool(prev => ({ ...prev, type: e.target.value }))}
+                    onChange={e => setEditingTool(prev => prev ? { ...prev, type: e.target.value } : null)}
                     className="w-full px-3 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
                   >
                     <option value="自动化工具">自动化工具</option>
@@ -157,7 +157,7 @@ export function BaselineToolManagement() {
                 <label className="block text-xs text-slate-400 mb-1">API地址</label>
                 <input
                   type="text" value={editingTool.apiUrl}
-                  onChange={e => setEditingTool(prev => ({ ...prev, apiUrl: e.target.value }))}
+                  onChange={e => setEditingTool(prev => prev ? { ...prev, apiUrl: e.target.value } : null)}
                   className="w-full px-3 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
                   placeholder="输入API地址"
                 />
@@ -167,7 +167,7 @@ export function BaselineToolManagement() {
                   <label className="block text-xs text-slate-400 mb-1">认证方式</label>
                   <select
                     value={editingTool.authType}
-                    onChange={e => setEditingTool(prev => ({ ...prev, authType: e.target.value }))}
+                    onChange={e => setEditingTool(prev => prev ? { ...prev, authType: e.target.value } : null)}
                     className="w-full px-3 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
                   >
                     <option value="API Key">API Key</option>
@@ -180,7 +180,7 @@ export function BaselineToolManagement() {
                   <label className="block text-xs text-slate-400 mb-1">超时设置(秒)</label>
                   <input
                     type="number" value={editingTool.timeout}
-                    onChange={e => setEditingTool(prev => ({ ...prev, timeout: e.target.value }))}
+                    onChange={e => setEditingTool(prev => prev ? { ...prev, timeout: e.target.value } : null)}
                     className="w-full px-3 py-2 bg-[#111625] border border-[#2A354D] text-white text-sm rounded-md focus:border-blue-500 outline-none"
                   />
                 </div>

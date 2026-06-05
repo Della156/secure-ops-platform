@@ -181,7 +181,7 @@ export function TaskRunStatusList() {
           </thead>
           <tbody>
             {filtered.map(r => {
-              const sc = statusConfig[r.status];
+              const sc = statusConfig[r.status as keyof typeof statusConfig];
               return (
                 <tr key={r.id} className="border-t border-[#2A354D] hover:bg-[#111625]/50 cursor-pointer" onClick={() => setSelectedId(r.id)}>
                   <td className="px-3 py-2.5 text-blue-400 font-mono text-xs">{r.id}</td>

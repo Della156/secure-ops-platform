@@ -157,7 +157,7 @@ export function JobAssistantHistoryQuery() {
           <div className="px-4 py-3 border-b border-[#2A354D]"><h3 className="text-sm font-semibold text-white">历史记录 ({filtered.length})</h3></div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(r => {
-              const rc = resultConfig[r.result];
+              const rc = resultConfig[r.result as keyof typeof resultConfig];
               return (
                 <div key={r.id} onClick={() => setSelectedId(r.id)}
                   className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === r.id ? 'bg-[#111625]' : ''}`}>
@@ -191,7 +191,7 @@ export function JobAssistantHistoryQuery() {
               <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${jobTypeColor[selected.jobType] || '#0066FF'}20`, color: jobTypeColor[selected.jobType] || '#0066FF' }}>{selected.jobType}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result].bg} ${resultConfig[selected.result].color}`}>{resultConfig[selected.result].label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result as keyof typeof resultConfig].bg} ${resultConfig[selected.result as keyof typeof resultConfig].color}`}>{resultConfig[selected.result as keyof typeof resultConfig].label}</span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.jobName}</h3>
             </div>

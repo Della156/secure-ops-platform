@@ -154,8 +154,8 @@ export function VirusExecute() {
             </thead>
             <tbody>
               {filtered.map(record => {
-                const ac = actionConfig[record.action];
-                const rc = resultConfig[record.result];
+                const ac = actionConfig[record.action as keyof typeof actionConfig];
+                const rc = resultConfig[record.result as keyof typeof resultConfig];
                 return (
                   <tr key={record.id} className="border-b border-[#2A354D] hover:bg-[#111625]/50">
                     <td className="px-4 py-3 text-xs text-blue-400 font-mono">{record.id}</td>

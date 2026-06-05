@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Shield, CheckCircle2, AlertTriangle, XCircle } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
+import { StatusBadge } from '@/components/Common/StatusBadge';
 import type { ComplianceMappingItem as Mapping } from './types';
 
 interface ComplianceMappingProps {

@@ -152,7 +152,7 @@ export function JobAssistantTaskReport() {
           <div className="px-4 py-3 border-b border-[#2A354D]"><h3 className="text-sm font-semibold text-white">报告列表 ({filtered.length})</h3></div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(r => {
-              const rc = resultConfig[r.result];
+              const rc = resultConfig[r.result as keyof typeof resultConfig];
               return (
                 <div key={r.id} onClick={() => setSelectedId(r.id)}
                   className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === r.id ? 'bg-[#111625]' : ''}`}>

@@ -76,7 +76,7 @@ export function SampleDeepAnalysis() {
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs font-mono text-blue-400">{sample.id}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${threatColors[sample.threatLevel]}`}>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${threatColors[sample.threatLevel as keyof typeof threatColors]}`}>
                       {sample.threatLevel}
                     </span>
                   </div>

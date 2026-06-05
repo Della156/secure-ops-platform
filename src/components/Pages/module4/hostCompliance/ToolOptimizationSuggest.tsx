@@ -19,7 +19,7 @@ const levelConfig = {
   low: { label: '低', color: 'bg-blue-500/20 text-blue-400', icon: Lightbulb },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-5 h-5" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-5 h-5" />;
 
 export function ToolOptimizationSuggest() {
   const [search, setSearch] = useState('');
@@ -106,7 +106,7 @@ export function ToolOptimizationSuggest() {
 
         <div className="divide-y divide-[#2A354D]">
           {filteredSuggestions.map(sug => {
-            const config = levelConfig[sug.level];
+            const config = levelConfig[sug.level as keyof typeof levelConfig];
             const Icon = config.icon;
             return (
               <div key={sug.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-[#181F32]">

@@ -21,9 +21,9 @@ export function Card({ children, className = '', padding = 'md', hover = false, 
   return (
     <div
       className={`
-        bg-[#20293F] border border-[#2A354D] rounded-xl
+        bg-app-bg-card border border-app-border-base rounded-xl shadow-[var(--card-shadow)]
         ${paddings[padding]}
-        ${hover ? 'hover:border-[#0066FF]/40 hover:shadow-sm hover:shadow-[#0066FF]/5 transition-all duration-200 cursor-pointer' : ''}
+        ${hover ? 'hover:border-[var(--color-primary)]/40 hover:shadow-sm hover:shadow-[var(--card-shadow-hover)] transition-all duration-200 cursor-pointer' : ''}
         ${onClick ? 'cursor-pointer' : ''}
         ${className}
       `}

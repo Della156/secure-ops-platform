@@ -184,7 +184,7 @@ export function JobAuditView() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(j => {
-              const sc = statusConfig[j.status];
+              const sc = statusConfig[j.status as keyof typeof statusConfig];
               return (
                 <div
                   key={j.id}
@@ -196,7 +196,7 @@ export function JobAuditView() {
                     <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${typeColor[j.jobType]}20`, color: typeColor[j.jobType] }}>{j.jobType}</span>
                     <span className={`text-[10px] px-1.5 py-0.5 border rounded ${riskColor[j.riskLevel]}`}>{j.riskLevel === 'critical' ? '严重' : j.riskLevel === 'high' ? '高' : j.riskLevel === 'medium' ? '中' : '低'}</span>
                     <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${sc.bg} ${sc.color}`}>{sc.label}</span>
-                    {j.autoAuditResult && <span className={`text-[10px] px-1.5 py-0.5 rounded ${autoResultConfig[j.autoAuditResult].bg} ${autoResultConfig[j.autoAuditResult].color}`}>AI {autoResultConfig[j.autoAuditResult].label}</span>}
+                    {j.autoAuditResult && <span className={`text-[10px] px-1.5 py-0.5 rounded ${autoResultConfig[j.autoAuditResult as keyof typeof autoResultConfig].bg} ${autoResultConfig[j.autoAuditResult as keyof typeof autoResultConfig].color}`}>AI {autoResultConfig[j.autoAuditResult as keyof typeof autoResultConfig].label}</span>}
                     <div className="flex-1" />
                     <span className={`text-[10px] font-mono ${j.riskScore >= 80 ? 'text-red-400' : j.riskScore >= 60 ? 'text-orange-400' : 'text-green-400'}`}>风险 {j.riskScore}</span>
                   </div>
@@ -241,7 +241,7 @@ export function JobAuditView() {
               <div className="bg-[#111625] border border-[#2A354D] rounded p-2">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-slate-300">AI 自动审核</span>
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${autoResultConfig[selected.autoAuditResult].bg} ${autoResultConfig[selected.autoAuditResult].color}`}>{autoResultConfig[selected.autoAuditResult].label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${autoResultConfig[selected.autoAuditResult as keyof typeof autoResultConfig].bg} ${autoResultConfig[selected.autoAuditResult as keyof typeof autoResultConfig].color}`}>{autoResultConfig[selected.autoAuditResult as keyof typeof autoResultConfig].label}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 h-1.5 bg-[#20293F] rounded-full overflow-hidden">

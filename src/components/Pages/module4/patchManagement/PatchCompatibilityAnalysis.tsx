@@ -18,7 +18,7 @@ const statusConfig = {
   incompatible: { label: '不兼容', color: 'bg-red-500/20 text-red-400', icon: XCircle },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 const riskConfig = {
   low: { label: '低', color: 'bg-green-500/20 text-green-400' },
@@ -123,7 +123,7 @@ export function PatchCompatibilityAnalysis() {
             </thead>
             <tbody>
               {filteredResults.map(result => {
-                const config = statusConfig[result.status];
+                const config = statusConfig[result.status as keyof typeof statusConfig];
                 const Icon = config.icon;
                 return (
                   <tr key={result.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">
@@ -142,8 +142,8 @@ export function PatchCompatibilityAnalysis() {
                       </span>
                     </td>
                   <td className="py-3 px-4">
-                    <span className={`px-2 py-1 rounded-full text-xs ${riskConfig[result.risk].color}`}>
-                      {riskConfig[result.risk].label}
+                    <span className={`px-2 py-1 rounded-full text-xs ${riskConfig[result.risk as keyof typeof riskConfig].color}`}>
+                      {riskConfig[result.risk as keyof typeof riskConfig].label}
                     </span>
                   </td>
                   <td className="py-3 px-4 text-[#9CA3AF]">{result.details}</td>

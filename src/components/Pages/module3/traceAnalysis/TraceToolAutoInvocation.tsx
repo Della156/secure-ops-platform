@@ -134,7 +134,7 @@ export function TraceToolAutoInvocation() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3">
             {filtered.map(t => {
-              const sc = statusConfig[t.status];
+              const sc = statusConfig[t.status as keyof typeof statusConfig];
               return (
                 <div
                   key={t.id}
@@ -199,8 +199,8 @@ export function TraceToolAutoInvocation() {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-[10px] text-slate-500 font-mono">{selected.id}</span>
-                  <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>
-                    {statusConfig[selected.status].icon}{statusConfig[selected.status].label}
+                  <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status as keyof typeof statusConfig].bg} ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>
+                    {statusConfig[selected.status as keyof typeof statusConfig].icon}{statusConfig[selected.status as keyof typeof statusConfig].label}
                   </span>
                 </div>
                 <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>

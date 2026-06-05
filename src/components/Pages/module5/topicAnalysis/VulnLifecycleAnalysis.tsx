@@ -225,30 +225,31 @@ export function VulnLifecycleAnalysis() {
           </h3>
           <div className="flex justify-center">
             <svg width="140" height="140" className="transform -rotate-90">
-              {severityStats.reduce((acc, item, i) => {
-                const angle = (item.percentage / 100) * 360;
-                const startAngle = acc;
-                const endAngle = acc + angle;
-                acc += angle;
-
-                const startRad = (startAngle * Math.PI) / 180;
-                const endRad = (endAngle * Math.PI) / 180;
-                const x1 = 70 + 50 * Math.cos(startRad);
-                const y1 = 70 + 50 * Math.sin(startRad);
-                const x2 = 70 + 50 * Math.cos(endRad);
-                const y2 = 70 + 50 * Math.sin(endRad);
-                const largeArc = angle > 180 ? 1 : 0;
-
-                return (
-                  <g key={i}>
-                    <path
-                      d={`M 70 70 L ${x1} ${y1} A 50 50 0 ${largeArc} 1 ${x2} ${y2} Z`}
-                      fill={item.color}
-                      opacity={0.7}
-                    />
-                  </g>
-                );
-              }, 0)}
+              {(() => {
+                let acc = 0;
+                return severityStats.map((item, i) => {
+                  const angle = (item.percentage / 100) * 360;
+                  const startAngle = acc;
+                  const endAngle = acc + angle;
+                  acc = endAngle;
+                  const startRad = (startAngle * Math.PI) / 180;
+                  const endRad = (endAngle * Math.PI) / 180;
+                  const x1 = 70 + 50 * Math.cos(startRad);
+                  const y1 = 70 + 50 * Math.sin(startRad);
+                  const x2 = 70 + 50 * Math.cos(endRad);
+                  const y2 = 70 + 50 * Math.sin(endRad);
+                  const largeArc = angle > 180 ? 1 : 0;
+                  return (
+                    <g key={i}>
+                      <path
+                        d={`M 70 70 L ${x1} ${y1} A 50 50 0 ${largeArc} 1 ${x2} ${y2} Z`}
+                        fill={item.color}
+                        opacity={0.7}
+                      />
+                    </g>
+                  );
+                });
+              })()}
               <circle cx="70" cy="70" r="25" fill="#0F172A" />
               <text x="70" y="68" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">
                 {stats.total}

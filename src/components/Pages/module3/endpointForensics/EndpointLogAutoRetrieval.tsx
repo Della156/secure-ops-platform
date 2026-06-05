@@ -84,12 +84,12 @@ export function EndpointLogAutoRetrieval() {
                   <td className="px-4 py-3 text-xs text-white">{item.endpoint}</td>
                   <td className="px-4 py-3">
                     <span className="text-xs text-slate-300 flex items-center gap-1">
-                      {logTypeConfig[item.logType].icon}{logTypeConfig[item.logType].label}
+                      {logTypeConfig[item.logType as keyof typeof logTypeConfig].icon}{logTypeConfig[item.logType as keyof typeof logTypeConfig].label}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-0.5 rounded ${statusConfig[item.status].bg} ${statusConfig[item.status].color}`}>
-                      {statusConfig[item.status].label}
+                    <span className={`text-xs px-2 py-0.5 rounded ${statusConfig[item.status as keyof typeof statusConfig].bg} ${statusConfig[item.status as keyof typeof statusConfig].color}`}>
+                      {statusConfig[item.status as keyof typeof statusConfig].label}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-xs text-slate-300">{item.size}</td>

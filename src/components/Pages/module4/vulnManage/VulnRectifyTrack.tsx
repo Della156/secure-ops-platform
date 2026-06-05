@@ -638,9 +638,9 @@ export function VulnRectifyTrack() {
                       {task.vulnName}
                     </div>
                     <div className="flex items-center gap-2 mt-1.5">
-                      <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold border ${levelConfig[task.vulnLevel].bg} ${levelConfig[task.vulnLevel].border}`}
-                        style={{ color: levelConfig[task.vulnLevel].color }}>
-                        {levelConfig[task.vulnLevel].label}
+                      <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold border ${levelConfig[task.vulnLevel as keyof typeof levelConfig].bg} ${levelConfig[task.vulnLevel as keyof typeof levelConfig].border}`}
+                        style={{ color: levelConfig[task.vulnLevel as keyof typeof levelConfig].color }}>
+                        {levelConfig[task.vulnLevel as keyof typeof levelConfig].label}
                       </span>
                       <span className="text-[10px] text-[#6B7280] font-mono">{task.cveId}</span>
                       <span className="text-[10px] text-[#9CA3AF]">CVSS {task.cvssScore}</span>
@@ -848,7 +848,7 @@ export function VulnRectifyTrack() {
 
 // ============= 状态徽章 =============
 function StatusBadge({ status }: { status: RectifyStatus }) {
-  const config = statusConfig[status];
+  const config = statusConfig[status as keyof typeof statusConfig];
   const Icon = config.icon;
   return (
     <span
@@ -926,9 +926,9 @@ function DetailDrawer({ task, onClose, onUrge, onAssign, onRetest }: {
           <Section title="漏洞信息" icon={ShieldAlert}>
             <div className="space-y-2">
               <div className="flex items-start gap-3">
-                <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${levelConfig[task.vulnLevel].bg} ${levelConfig[task.vulnLevel].border}`}
-                  style={{ color: levelConfig[task.vulnLevel].color }}>
-                  {levelConfig[task.vulnLevel].label}
+                <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${levelConfig[task.vulnLevel as keyof typeof levelConfig].bg} ${levelConfig[task.vulnLevel as keyof typeof levelConfig].border}`}
+                  style={{ color: levelConfig[task.vulnLevel as keyof typeof levelConfig].color }}>
+                  {levelConfig[task.vulnLevel as keyof typeof levelConfig].label}
                 </span>
                 <div className="flex-1">
                   <div className="text-sm text-[#F3F4F6] font-medium">{task.vulnName}</div>
@@ -1008,7 +1008,7 @@ function DetailDrawer({ task, onClose, onUrge, onAssign, onRetest }: {
           <Section title="整改时间线" icon={Clock}>
             <div className="space-y-3">
               {task.timeline.map((event, idx) => {
-                const config = timelineTypeConfig[event.type];
+                const config = timelineTypeConfig[event.type as keyof typeof timelineTypeConfig];
                 const Icon = config.icon;
                 return (
                   <div key={idx} className="flex gap-3">

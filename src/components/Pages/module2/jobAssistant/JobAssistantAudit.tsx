@@ -160,7 +160,7 @@ export function JobAssistantAudit() {
           <div className="px-4 py-3 border-b border-[#2A354D]"><h3 className="text-sm font-semibold text-white">审计日志 ({filtered.length})</h3></div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(l => {
-              const rc = resultConfig[l.result];
+              const rc = resultConfig[l.result as keyof typeof resultConfig];
               return (
                 <div key={l.id} onClick={() => setSelectedId(l.id)}
                   className={`px-4 py-3 border-b border-[#2A354D] cursor-pointer hover:bg-[#111625]/50 ${selectedId === l.id ? 'bg-[#111625]' : ''}`}>
@@ -191,7 +191,7 @@ export function JobAssistantAudit() {
               <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded ${actionColor[selected.action]}`}>{selected.action}</span>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result].color}`}>{resultConfig[selected.result].label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result as keyof typeof resultConfig].color}`}>{resultConfig[selected.result as keyof typeof resultConfig].label}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 border rounded ${riskColor[selected.risk]}`}>{selected.risk === 'low' ? '低风险' : selected.risk === 'medium' ? '中风险' : '高风险'}</span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.resource}</h3>

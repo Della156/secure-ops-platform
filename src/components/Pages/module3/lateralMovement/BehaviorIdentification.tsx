@@ -157,7 +157,7 @@ export function BehaviorIdentification() {
             </div>
             <div className="max-h-[420px] overflow-y-auto">
               {filtered.map(b => {
-                const sc = statusConfig[b.status];
+                const sc = statusConfig[b.status as keyof typeof statusConfig];
                 return (
                   <div
                     key={b.id}
@@ -243,7 +243,7 @@ export function BehaviorIdentification() {
                 </div>
                 <div className="bg-[#111625] rounded p-2">
                   <div className="text-slate-500 mb-0.5">状态</div>
-                  <div className={`text-lg ${statusConfig[selected.status].color}`}>{statusConfig[selected.status].label}</div>
+                  <div className={`text-lg ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>{statusConfig[selected.status as keyof typeof statusConfig].label}</div>
                 </div>
               </div>
 

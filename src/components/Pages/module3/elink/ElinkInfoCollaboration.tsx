@@ -49,7 +49,7 @@ export function ElinkInfoCollaboration() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Card padding="p-4">
+        <Card padding="sm">
           <h3 className="text-sm font-semibold text-white mb-3">协同消息</h3>
           <div className="space-y-3 max-h-80 overflow-y-auto">
             {messageList.map(msg => (
@@ -88,7 +88,7 @@ export function ElinkInfoCollaboration() {
           </div>
         </Card>
 
-        <Card padding="p-4">
+        <Card padding="sm">
           <h3 className="text-sm font-semibold text-white mb-3">协同事项</h3>
           <div className="space-y-3">
             {collaborationItems.map(item => (

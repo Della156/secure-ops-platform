@@ -185,7 +185,7 @@ export function OrgTreeConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增组织">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增组织">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">组织名称</label>

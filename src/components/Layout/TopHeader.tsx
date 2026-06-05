@@ -52,7 +52,7 @@ export function TopHeader() {
   const mounted = useMounted();
 
   const info = findMenuPath(activeMenu);
-  const path = info?.path || [{ id: 'dashboard', label: '首页' }];
+  const path = activeMenu === 'dashboard' ? [] : (info?.path || [{ id: 'dashboard', label: '首页' }]);
 
   return (
     <>

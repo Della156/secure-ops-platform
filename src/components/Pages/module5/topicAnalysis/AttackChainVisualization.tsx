@@ -68,11 +68,11 @@ function PhaseCard({ phase, expanded, onToggle }: { phase: AttackPhase; expanded
     current: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/30', iconColor: 'text-yellow-400', glow: 'animate-pulse' },
     pending: { bg: 'bg-gray-500/10', border: 'border-gray-500/30', iconColor: 'text-gray-400' },
   };
-  const config = statusConfig[phase.status];
+  const config = statusConfig[phase.status as keyof typeof statusConfig];
 
   return (
     <div className={`bg-[#20293F] border rounded-lg overflow-hidden ${config.border}`}>
-      <div className={`p-4 cursor-pointer hover:bg-[#111625] ${phase.status === 'current' ? config.glow : ''}`} onClick={onToggle}>
+      <div className={`p-4 cursor-pointer hover:bg-[#111625] ${phase.status === 'current' ? (config as any).glow ?? '' : ''}`} onClick={onToggle}>
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${config.bg} ${config.iconColor}`}>
             {phase.icon}
@@ -153,8 +153,8 @@ function AttackGraph({ nodes, edges }: { nodes: AttackNode[]; edges: AttackEdge[
       </svg>
 
       {nodes.map((node) => {
-        const config = nodeConfig[node.type];
-        const status = statusConfig[node.status];
+        const config = nodeConfig[node.type as keyof typeof nodeConfig];
+        const status = statusConfig[node.status as keyof typeof statusConfig];
         return (
           <div
             key={node.id}

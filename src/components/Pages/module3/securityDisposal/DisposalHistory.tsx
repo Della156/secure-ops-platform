@@ -233,8 +233,8 @@ export function DisposalHistory() {
           </div>
           <div className="max-h-[520px] overflow-y-auto">
             {filtered.map(item => {
-              const tc = typeConfig[item.type];
-              const sc = statusConfig[item.status];
+              const tc = typeConfig[item.type as keyof typeof typeConfig];
+              const sc = statusConfig[item.status as keyof typeof statusConfig];
               return (
                 <div
                   key={item.id}
@@ -277,11 +277,11 @@ export function DisposalHistory() {
                 <span className={`text-[10px] px-1.5 py-0.5 rounded ${priorityColor[selectedItem.priority]}`}>
                   {selectedItem.priority === 'critical' ? '紧急' : selectedItem.priority === 'high' ? '高' : selectedItem.priority === 'medium' ? '中' : '低'}
                 </span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${typeConfig[selectedItem.type].bg} ${typeConfig[selectedItem.type].color}`}>
-                  {typeConfig[selectedItem.type].icon}{typeConfig[selectedItem.type].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${typeConfig[selectedItem.type as keyof typeof typeConfig].bg} ${typeConfig[selectedItem.type as keyof typeof typeConfig].color}`}>
+                  {typeConfig[selectedItem.type as keyof typeof typeConfig].icon}{typeConfig[selectedItem.type as keyof typeof typeConfig].label}
                 </span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selectedItem.status].bg} ${statusConfig[selectedItem.status].color}`}>
-                  {statusConfig[selectedItem.status].icon}{statusConfig[selectedItem.status].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selectedItem.status as keyof typeof statusConfig].bg} ${statusConfig[selectedItem.status as keyof typeof statusConfig].color}`}>
+                  {statusConfig[selectedItem.status as keyof typeof statusConfig].icon}{statusConfig[selectedItem.status as keyof typeof statusConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selectedItem.name}</h3>

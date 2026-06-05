@@ -494,7 +494,7 @@ export function AssetComplianceStatus() {
                     </div>
                   </td>
                   <td className="py-2 px-2 text-center">
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded border ${riskColors[asset.riskLevel]}`}>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded border ${riskColors[asset.riskLevel as keyof typeof riskColors]}`}>
                       {asset.riskLevel.toUpperCase()}
                     </span>
                   </td>

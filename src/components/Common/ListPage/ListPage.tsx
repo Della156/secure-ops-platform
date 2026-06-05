@@ -55,8 +55,8 @@ export function ListPage<T extends Record<string, any>>({
 
   // 选中行 key 提取
   const getRowKey = (item: T): string => {
-    if (typeof rowKey === 'function') return rowKey(item);
-    return String(item[rowKey]);
+    if (typeof rowKey === 'function') return (rowKey as (item: T) => string)(item);
+    return String((item as Record<string, unknown>)[rowKey as string]);
   };
 
   // 全选/取消全选

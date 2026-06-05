@@ -1,3 +1,16 @@
+/**
+ * StatusBadge — 项目统一状态徽章
+ *
+ * ⚠️ 项目约定：
+ * - 业务页面需要状态徽章时，统一使用本组件
+ * - **不要**自行 import 'Badge' 或 'badge'（本项目不提供）
+ * - **不要**使用 shadcn 风格的 Badge/Dialog/Label（已从代码库移除）
+ *
+ * 使用示例：
+ *   import { StatusBadge } from '@/components/Common/StatusBadge';
+ *   <StatusBadge status="running" />
+ *   <StatusBadge status="failed" pulse />
+ */
 'use client';
 
 import React from 'react';
@@ -25,7 +38,7 @@ const statusConfig: Record<string, { label: string; bg: string; text: string }> 
 };
 
 export function StatusBadge({ status, size = 'sm', pulse }: StatusBadgeProps) {
-  const cfg = statusConfig[status] || { label: status, bg: 'bg-gray-500/20', text: 'text-gray-400' };
+  const cfg = statusConfig[status as keyof typeof statusConfig] || { label: status, bg: 'bg-gray-500/20', text: 'text-gray-400' };
   const sizeClass = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm';
   return (
     <span className={`inline-flex items-center gap-1.5 ${sizeClass} rounded-full ${cfg.bg} ${cfg.text} font-medium`}>

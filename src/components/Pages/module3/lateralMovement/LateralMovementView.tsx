@@ -201,7 +201,7 @@ export function LateralMovementView() {
         </div>
         <div className="max-h-[500px] overflow-y-auto">
           {filtered.map(e => {
-            const sc = statusConfig[e.status];
+            const sc = statusConfig[e.status as keyof typeof statusConfig];
             return (
               <div key={e.id} className="px-4 py-3 border-b border-[#2A354D] hover:bg-[#111625]/50">
                 <div className="flex items-center gap-2 mb-1.5">

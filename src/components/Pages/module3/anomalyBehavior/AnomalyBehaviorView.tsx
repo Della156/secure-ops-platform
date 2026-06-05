@@ -199,7 +199,7 @@ export function AnomalyBehaviorView() {
         </div>
         <div className="max-h-[500px] overflow-y-auto">
           {filtered.map(a => {
-            const sc = statusConfig[a.status];
+            const sc = statusConfig[a.status as keyof typeof statusConfig];
             return (
               <div key={a.id} className="px-4 py-3 border-b border-[#2A354D] hover:bg-[#111625]/50">
                 <div className="flex items-center gap-2 mb-1.5">
@@ -225,7 +225,7 @@ export function AnomalyBehaviorView() {
                   <div className="flex-1 min-w-0">
                     <div className="text-sm text-white font-medium">{a.user} <span className="text-slate-500 text-xs font-normal">· {a.dept}</span></div>
                   </div>
-                  <span className="text-[10px] text-slate-500">风险分 <span className={a.riskScore >= 90 ? 'text-red-400' : a.riskScore >= 70 ? 'text-orange-400' : 'text-yellow-400'} className="font-mono">{a.riskScore}</span></span>
+                  <span className="text-[10px] text-slate-500">风险分 <span className={`${a.riskScore >= 90 ? 'text-red-400' : a.riskScore >= 70 ? 'text-orange-400' : 'text-yellow-400'} font-mono`}>{a.riskScore}</span></span>
                   <span className="text-[10px] text-slate-500">置信度 <span className="text-blue-400 font-mono">{a.confidence}%</span></span>
                 </div>
                 <div className="text-xs text-slate-300 mb-1.5">{a.description}</div>

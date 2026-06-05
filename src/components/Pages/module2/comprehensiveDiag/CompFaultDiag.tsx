@@ -186,7 +186,7 @@ export function CompFaultDiag() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(n => {
-              const hc = healthConfig[n.health];
+              const hc = healthConfig[n.health as keyof typeof healthConfig];
               const Icon = typeIcon[n.type];
               return (
                 <div
@@ -243,9 +243,9 @@ export function CompFaultDiag() {
                 <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: `${typeColor[selected.type]}20`, color: typeColor[selected.type] }}>
                   {selected.type}
                 </span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${healthConfig[selected.health].bg} ${healthConfig[selected.health].color}`}>
-                  <span className={`w-1.5 h-1.5 rounded-full ${healthConfig[selected.health].dot}`} />
-                  {healthConfig[selected.health].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${healthConfig[selected.health as keyof typeof healthConfig].bg} ${healthConfig[selected.health as keyof typeof healthConfig].color}`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${healthConfig[selected.health as keyof typeof healthConfig].dot}`} />
+                  {healthConfig[selected.health as keyof typeof healthConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>

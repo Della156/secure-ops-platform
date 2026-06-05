@@ -215,9 +215,9 @@ export function AnalysisToolAutoInvocation() {
             <PolarGrid stroke="#2A354D" />
             <PolarAngleAxis dataKey="dim" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
             {tools.map((tool, idx) => {
-              const data = CAPABILITY_DIMENSIONS.map(dim => ({ dim, val: tool.capabilities[dim] || 0 }));
+              const data: { dim: string; val: number }[] = CAPABILITY_DIMENSIONS.map(dim => ({ dim, val: tool.capabilities[dim] || 0 }));
               return (
-                <Radar key={tool.id} name={TOOL_DISPLAY[tool.name].label} dataKey="val" data={data} stroke={RADAR_COLORS[idx]} fill={RADAR_COLORS[idx]} fillOpacity={0.05} strokeWidth={1.5} />
+                <Radar key={tool.id} {...({ name: TOOL_DISPLAY[tool.name].label, dataKey: 'val', data, stroke: RADAR_COLORS[idx], fill: RADAR_COLORS[idx], fillOpacity: 0.05, strokeWidth: 1.5 } as any)} />
               );
             })}
             <Tooltip contentStyle={{ backgroundColor: '#1E2736', border: '1px solid #2A354D', borderRadius: 8, fontSize: 12 }} />

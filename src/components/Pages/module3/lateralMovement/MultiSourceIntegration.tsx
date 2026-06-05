@@ -162,7 +162,7 @@ export function MultiSourceIntegration() {
             </thead>
             <tbody>
               {filtered.map(s => {
-                const sc = statusConfig[s.status];
+                const sc = statusConfig[s.status as keyof typeof statusConfig];
                 return (
                   <tr
                     key={s.id}
@@ -186,7 +186,7 @@ export function MultiSourceIntegration() {
                     </td>
                     <td className="px-3 py-2.5 text-right text-slate-200 font-mono">{(s.eventsToday / 10000).toFixed(0)}万</td>
                     <td className="px-3 py-2.5 text-right">
-                      <span className={s.lag < 5 ? 'text-green-400' : s.lag < 15 ? 'text-yellow-400' : 'text-red-400'} className="font-mono">{s.lag}s</span>
+                      <span className={`${s.lag < 5 ? 'text-green-400' : s.lag < 15 ? 'text-yellow-400' : 'text-red-400'} font-mono`}>{s.lag}s</span>
                     </td>
                     <td className="px-3 py-2.5 text-right">
                       <span className={`text-[10px] ${healthColor[s.health]}`}>
@@ -206,8 +206,8 @@ export function MultiSourceIntegration() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs text-slate-500 font-mono">{selected.id}</span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>
-                  {statusConfig[selected.status].icon}{statusConfig[selected.status].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status as keyof typeof statusConfig].bg} ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>
+                  {statusConfig[selected.status as keyof typeof statusConfig].icon}{statusConfig[selected.status as keyof typeof statusConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.name}</h3>

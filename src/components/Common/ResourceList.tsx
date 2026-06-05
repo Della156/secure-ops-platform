@@ -10,7 +10,7 @@ interface ResourceListProps {
 }
 
 export function ResourceList({ resourceType }: ResourceListProps) {
-  const config = resourceConfig[resourceType];
+  const config = resourceConfig[resourceType as keyof typeof resourceConfig];
   const mock = getResourceMock(resourceType);
   
   const [items, setItems] = useState<ResourceItem[]>(mock.list);

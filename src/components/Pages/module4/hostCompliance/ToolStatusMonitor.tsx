@@ -17,7 +17,7 @@ const statusConfig = {
   offline: { label: '离线', color: 'bg-red-500/20 text-red-400', icon: XCircle },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function ToolStatusMonitor() {
   const [search, setSearch] = useState('');
@@ -111,7 +111,7 @@ export function ToolStatusMonitor() {
 
         <div className="divide-y divide-[#2A354D]">
           {filteredStatus.map(item => {
-            const config = statusConfig[item.status];
+            const config = statusConfig[item.status as keyof typeof statusConfig];
             const Icon = config.icon;
             return (
               <div key={item.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-[#181F32]">

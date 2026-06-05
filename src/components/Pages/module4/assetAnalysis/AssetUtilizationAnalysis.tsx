@@ -99,7 +99,7 @@ export function AssetUtilizationAnalysis() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-white font-medium">{asset.name}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded ${statusColors[asset.status]}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded ${statusColors[asset.status as keyof typeof statusColors]}`}>
                       {asset.status === 'high' ? '高负载' : asset.status === 'normal' ? '正常' : '低负载'}
                     </span>
                   </div>

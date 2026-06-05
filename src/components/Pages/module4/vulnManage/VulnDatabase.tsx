@@ -159,7 +159,7 @@ export function VulnDatabase() {
           <div className="text-sm text-slate-100 line-clamp-1">{e.name}</div>
           <div className="text-[10px] text-slate-500 mt-0.5 flex items-center gap-2">
             <span>{e.vendor} · {e.product}</span>
-            <span className={`text-[10px] px-1 py-0 rounded ${sourceConfig[e.source].color}`}>{sourceConfig[e.source].label}</span>
+            <span className={`text-[10px] px-1 py-0 rounded ${sourceConfig[e.source as keyof typeof sourceConfig].color}`}>{sourceConfig[e.source as keyof typeof sourceConfig].label}</span>
           </div>
         </div>
       ),
@@ -313,7 +313,7 @@ export function VulnDatabase() {
             <div className="space-y-4">
               <div>
                 <h3 className="text-base font-semibold text-slate-100">{e.name}</h3>
-                <p className="text-xs text-slate-500 mt-1">ID: {e.id} · 来源: {sourceConfig[e.source].label}</p>
+                <p className="text-xs text-slate-500 mt-1">ID: {e.id} · 来源: {sourceConfig[e.source as keyof typeof sourceConfig].label}</p>
               </div>
               <div className="flex items-center gap-2">
                 <StatusBadge status={levelBadgeMap[e.level].status} />
@@ -377,11 +377,11 @@ function SyncTaskList({ tasks, onTrigger }: { tasks: SyncTask[]; onTrigger: (id:
         <Card key={t.id}>
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${sourceConfig[t.source].color}`}>
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${sourceConfig[t.source as keyof typeof sourceConfig].color}`}>
                 <Database className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-slate-100">{sourceConfig[t.source].label} 同步任务</h3>
+                <h3 className="text-sm font-semibold text-slate-100">{sourceConfig[t.source as keyof typeof sourceConfig].label} 同步任务</h3>
                 <p className="text-[10px] text-slate-500 mt-0.5">{t.id}</p>
               </div>
             </div>

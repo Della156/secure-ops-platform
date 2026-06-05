@@ -270,11 +270,11 @@ export function VulnHistoryQuery() {
                   <div className="text-[10px] text-gray-500">{t.creator} · {t.startTime}</div>
                 </td>
                 <td className="py-2 px-3 text-center">
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeColors[t.type]}`}>{typeLabels[t.type]}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeColors[t.type as keyof typeof typeColors]}`}>{typeLabels[t.type]}</span>
                 </td>
                 <td className="py-2 px-3 text-gray-400 font-mono text-[11px] max-w-xs truncate">{t.target}</td>
                 <td className="py-2 px-3 text-center">
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusColors[t.status]}`}>{statusLabels[t.status]}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusColors[t.status as keyof typeof statusColors]}`}>{statusLabels[t.status]}</span>
                 </td>
                 <td className="py-2 px-3 text-center text-red-400 font-medium">{t.vulnFound.critical}</td>
                 <td className="py-2 px-3 text-center text-orange-400 font-medium">{t.vulnFound.high}</td>

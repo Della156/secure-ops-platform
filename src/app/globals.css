@@ -15,6 +15,13 @@
   --color-app-text-primary: var(--app-text-primary);
   --color-app-text-secondary: var(--app-text-secondary);
   --color-app-text-muted: var(--app-text-muted);
+
+  /* 新增：主题相关的额外语义变量 */
+  --color-app-bg-deep-rgb: var(--app-bg-deep-rgb);
+  --color-app-text-on-card: var(--app-text-on-card);
+  --color-app-text-secondary-on-card: var(--app-text-secondary-on-card);
+  --color-app-bg-card-hover: var(--app-bg-card-hover);
+  --color-app-border-subtle: var(--app-border-subtle);
 }
 
 /* ===== 主题色变量（深色 - 默认） ===== */
@@ -23,11 +30,17 @@
   --app-bg-deep: #111625;       /* 画布背景 */
   --app-bg-surface: #181F32;    /* 面板/工作区 */
   --app-bg-card: #20293F;       /* 卡片/菜单底色 */
+  --app-bg-card-hover: #1A2332; /* 卡片 hover */
   --app-border-base: #2A354D;   /* 默认边框 */
   --app-border-focus: #0066FF;  /* 激活态边框 */
+  --app-border-subtle: #1E2736; /* 更淡的边框 */
   --app-text-primary: #F3F4F6;  /* 主标题/代码 */
   --app-text-secondary: #9CA3AF;/* 描述/时间戳 */
   --app-text-muted: #6B7280;    /* 禁用状态 */
+  --app-text-on-card: #E5E7EB;  /* 卡片上的正文 */
+  --app-text-secondary-on-card: #D1D5DB; /* 卡片上的次要文字 */
+
+  --app-bg-deep-rgb: 17, 22, 37;
 
   --color-primary: #0066FF;     /* 核心行动点 */
   --color-ai: #6366F1;          /* AI 智能体专用 */
@@ -36,23 +49,52 @@
   --color-danger: #FF3B30;      /* 失败/高危 */
 }
 
-/* ===== 浅色主题 ===== */
+/* ===== 浅色主题 — 暖灰蓝调高级版 ===== */
 [data-theme="light"] {
-  --app-bg-deep: #F8FAFC;       /* Slate 50 - 画布 */
-  --app-bg-surface: #F1F5F9;    /* Slate 100 - 面板 */
-  --app-bg-card: #FFFFFF;       /* 白 - 卡片 */
-  --app-border-base: #E2E8F0;   /* Slate 200 - 边框 */
-  --app-border-focus: #0066FF;  /* 蓝 - 激活 */
-  --app-text-primary: #0F172A;  /* Slate 900 - 主文本 */
-  --app-text-secondary: #475569;/* Slate 600 - 描述 */
-  --app-text-muted: #94A3B8;    /* Slate 400 - 禁用 */
+  /* 背景层次：暖灰底 + 白卡片，比 Slate 灰阶更通透 */
+  --app-bg-deep: #F0F4F9;       /* 画布背景 — 暖灰 */
+  --app-bg-surface: #F7FAFC;    /* 面板/工作区 — 微暖白 */
+  --app-bg-card: #FFFFFF;       /* 卡片/菜单底色 — 纯白 */
+  --app-bg-card-hover: #F0F4F9; /* 卡片 hover */
+  --app-border-base: #E2E9F2;   /* 默认边框 — 浅暖灰 */
+  --app-border-focus: #0066FF;  /* 激活态边框 — 品牌蓝 */
+  --app-border-subtle: #EBF0F6; /* 更淡的边框 */
 
-  /* 浅色主题下语义色微调（保持品牌识别） */
+  /* 文本层次：深蓝黑为主，比纯黑更柔和 */
+  --app-text-primary: #0B1A33;  /* 主标题 — 深蓝黑 */
+  --app-text-secondary: #4A5B75;/* 描述/时间戳 — 中灰蓝 */
+  --app-text-muted: #8A9BB5;    /* 禁用状态 — 浅灰蓝 */
+  --app-text-on-card: #1E293B;  /* 卡片上的正文 — 深灰 */
+  --app-text-secondary-on-card: #475569; /* 卡片上的次要文字 */
+
+  --app-bg-deep-rgb: 240, 244, 249;
+
+  /* 语义色 — 微调饱和度以适配浅底 */
   --color-primary: #0066FF;
   --color-ai: #6366F1;
-  --color-success: #16A34A;     /* 绿略深 */
-  --color-warning: #EA580C;     /* 橙略深 */
-  --color-danger: #DC2626;      /* 红略深 */
+  --color-success: #0F973D;     /* 略深绿，浅底更醒目 */
+  --color-warning: #D97A00;     /* 深橙，浅底不刺眼 */
+  --color-danger: #D92D2D;      /* 深红，浅底更稳 */
+
+  /* 浅色专用语义背景（用于胶囊/徽标） */
+  --color-success-bg: #E8F8EF;
+  --color-warning-bg: #FFF4E5;
+  --color-danger-bg: #FDE8E8;
+  --color-info-bg: #E8F0FE;
+
+  /* 卡片阴影（浅色下更 subtle） */
+  --card-shadow: 0 1px 3px 0 rgba(11, 26, 51, 0.06), 0 1px 2px -1px rgba(11, 26, 51, 0.04);
+  --card-shadow-hover: 0 4px 12px 0 rgba(11, 26, 51, 0.08);
+}
+
+/* 深色下的语义背景（保持一致定义） */
+[data-theme="dark"] {
+  --color-success-bg: rgba(0, 200, 83, 0.1);
+  --color-warning-bg: rgba(255, 145, 0, 0.1);
+  --color-danger-bg: rgba(255, 59, 48, 0.1);
+  --color-info-bg: rgba(0, 102, 255, 0.1);
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 4px 12px 0 rgba(0, 0, 0, 0.4);
 }
 
 /* ===== XSOAR 设计系统变量（兼容旧引用） ===== */

@@ -243,7 +243,7 @@ export function SampleJudgmentView() {
                 }`}>{s.rank}</span>
                 <span className="text-sm text-slate-100 flex-1 truncate">{s.name}</span>
                 <span className="text-[10px] text-slate-500 font-mono">{s.hash.substring(0, 12)}</span>
-                <StatusBadge status={SEVERITY_MAP[s.severity].status} />
+                <StatusBadge status={SEVERITY_MAP[s.severity as keyof typeof SEVERITY_MAP].status} />
                 <span className={`text-xs font-medium ${
                   s.confidence >= 95 ? 'text-green-400' :
                   s.confidence >= 90 ? 'text-yellow-400' :
@@ -278,7 +278,7 @@ export function SampleJudgmentView() {
           </h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
-              <Pie data={CONCLUSION_DATA} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} label={({ name, percent }: any) => `${name} ${(percent * 100).toFixed(0)}%`}>
+              <Pie data={CONCLUSION_DATA} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} label={({ name, percent }: any) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}>
                 {CONCLUSION_DATA.map((entry, idx) => <Cell key={idx} fill={entry.color} />)}
               </Pie>
               <Tooltip contentStyle={{ backgroundColor: '#1E2736', border: '1px solid #2A354D', borderRadius: 8, fontSize: 12 }} />

@@ -246,7 +246,7 @@ export function DisposalAudit() {
           </div>
           <div className="max-h-[520px] overflow-y-auto">
             {filteredLogs.map(log => {
-              const rc = resultConfig[log.result];
+              const rc = resultConfig[log.result as keyof typeof resultConfig];
               return (
                 <div
                   key={log.id}
@@ -285,8 +285,8 @@ export function DisposalAudit() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs text-slate-500 font-mono">{selectedLog.id}</span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selectedLog.result].bg} ${resultConfig[selectedLog.result].color}`}>
-                  {resultConfig[selectedLog.result].icon}{resultConfig[selectedLog.result].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selectedLog.result as keyof typeof resultConfig].bg} ${resultConfig[selectedLog.result as keyof typeof resultConfig].color}`}>
+                  {resultConfig[selectedLog.result as keyof typeof resultConfig].icon}{resultConfig[selectedLog.result as keyof typeof resultConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selectedLog.action}</h3>

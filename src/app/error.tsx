@@ -24,17 +24,17 @@ export default function GlobalError({
 
   return (
     <html lang="zh-CN">
-      <body className="bg-[#111625] text-slate-100">
+      <body className="bg-app-bg-deep text-app-text-primary">
         <div className="min-h-screen flex items-center justify-center p-4">
           <div className="max-w-md w-full text-center">
             <div className="w-16 h-16 mx-auto mb-4 bg-red-500/10 border border-red-500/30 rounded-2xl flex items-center justify-center">
               <AlertTriangle className="w-8 h-8 text-red-400" />
             </div>
             <h1 className="text-2xl font-bold mb-2">页面出错了</h1>
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="text-app-text-secondary text-sm mb-6">
               {error.message || '发生未知错误，请重试或返回首页。'}
             </p>
-            {error.digest && <p className="text-[10px] text-slate-600 font-mono mb-4">digest: {error.digest}</p>}
+            {error.digest && <p className="text-[10px] text-app-text-muted font-mono mb-4">digest: {error.digest}</p>}
             <div className="flex gap-2 justify-center">
               <button
                 onClick={reset}
@@ -45,7 +45,7 @@ export default function GlobalError({
               </button>
               <Link
                 href="/"
-                className="flex items-center gap-2 px-4 h-9 bg-[#20293F] border border-[#2A354D] hover:bg-[#181F32] text-slate-200 text-sm rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 h-9 bg-app-bg-card border border-app-border-base hover:bg-app-bg-surface text-app-text-on-card text-sm rounded-lg transition-colors"
               >
                 <Home className="w-4 h-4" />
                 返回首页

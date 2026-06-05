@@ -147,30 +147,31 @@ export function EventMultiDimAnalysis() {
               </h3>
               <div className="flex justify-center">
                 <svg width="200" height="200" className="transform -rotate-90">
-                  {currentData.reduce((acc, item, i) => {
-                    const angle = (item.percentage / 100) * 360;
-                    const startAngle = acc;
-                    const endAngle = acc + angle;
-                    acc += angle;
-
-                    const startRad = (startAngle * Math.PI) / 180;
-                    const endRad = (endAngle * Math.PI) / 180;
-                    const x1 = 100 + 60 * Math.cos(startRad);
-                    const y1 = 100 + 60 * Math.sin(startRad);
-                    const x2 = 100 + 60 * Math.cos(endRad);
-                    const y2 = 100 + 60 * Math.sin(endRad);
-                    const largeArc = angle > 180 ? 1 : 0;
-
-                    return (
-                      <g key={i}>
-                        <path
-                          d={`M 100 100 L ${x1} ${y1} A 60 60 0 ${largeArc} 1 ${x2} ${y2} Z`}
-                          fill={item.color}
-                          opacity={0.8}
-                        />
-                      </g>
-                    );
-                  }, 0)}
+                  {(() => {
+                    let acc = 0;
+                    return currentData.map((item, i) => {
+                      const angle = (item.percentage / 100) * 360;
+                      const startAngle = acc;
+                      const endAngle = acc + angle;
+                      acc = endAngle;
+                      const startRad = (startAngle * Math.PI) / 180;
+                      const endRad = (endAngle * Math.PI) / 180;
+                      const x1 = 100 + 60 * Math.cos(startRad);
+                      const y1 = 100 + 60 * Math.sin(startRad);
+                      const x2 = 100 + 60 * Math.cos(endRad);
+                      const y2 = 100 + 60 * Math.sin(endRad);
+                      const largeArc = angle > 180 ? 1 : 0;
+                      return (
+                        <g key={i}>
+                          <path
+                            d={`M 100 100 L ${x1} ${y1} A 60 60 0 ${largeArc} 1 ${x2} ${y2} Z`}
+                            fill={item.color}
+                            opacity={0.8}
+                          />
+                        </g>
+                      );
+                    });
+                  })()}
                   <circle cx="100" cy="100" r="35" fill="#0F172A" />
                   <text x="100" y="95" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
                     346

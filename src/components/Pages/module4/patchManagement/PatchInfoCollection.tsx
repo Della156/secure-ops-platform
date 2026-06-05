@@ -17,7 +17,7 @@ const statusConfig = {
   error: { label: '错误', color: 'bg-red-500/20 text-red-400', icon: AlertCircle },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function PatchInfoCollection() {
   const [search, setSearch] = useState('');
@@ -59,7 +59,7 @@ export function PatchInfoCollection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 p-4">
           {filteredSources.map(source => {
-            const config = statusConfig[source.status];
+            const config = statusConfig[source.status as keyof typeof statusConfig];
             const Icon = config.icon;
             return (
               <div

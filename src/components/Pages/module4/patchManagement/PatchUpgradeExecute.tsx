@@ -18,7 +18,7 @@ const statusConfig = {
   failed: { label: '失败', color: 'bg-red-500/20 text-red-400', icon: AlertCircle },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function PatchUpgradeExecute() {
   const [search, setSearch] = useState('');
@@ -98,7 +98,7 @@ export function PatchUpgradeExecute() {
 
         <div className="divide-y divide-[#2A354D]">
           {filteredTasks.map(task => {
-            const config = statusConfig[task.status];
+            const config = statusConfig[task.status as keyof typeof statusConfig];
             const Icon = config.icon;
             return (
               <div key={task.id} className="p-4 hover:bg-[#181F32]">

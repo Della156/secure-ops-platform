@@ -20,7 +20,7 @@ const severityConfig = {
   low: { label: '低危', color: 'bg-green-500/20 text-green-400', icon: CheckCircle2 },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 const statusConfig = {
   pending: { label: '待部署', color: 'bg-gray-500/20 text-gray-400' },
@@ -125,7 +125,7 @@ export function PatchManagementView() {
             </thead>
             <tbody>
               {filteredPatches.map(patch => {
-                const severity = severityConfig[patch.severity];
+                const severity = severityConfig[patch.severity as keyof typeof severityConfig];
                 const SeverityIcon = severity.icon;
                 return (
                   <tr key={patch.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">
@@ -138,7 +138,7 @@ export function PatchManagementView() {
                       </span>
                     </td>
                   <td className="py-3 px-4">
-                    <StatusBadge status={patch.status} config={statusConfig} />
+                    <StatusBadge status={patch.status} />
                   </td>
                   <td className="py-3 px-4 text-[#9CA3AF]">{patch.releasedAt}</td>
                   <td className="py-3 px-4 text-[#9CA3AF]">{patch.affectedAssets}</td>

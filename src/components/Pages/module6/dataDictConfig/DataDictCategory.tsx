@@ -116,7 +116,7 @@ export function DataDictCategory() {
         ))}
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增字典分类">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增字典分类">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">分类名称</label>

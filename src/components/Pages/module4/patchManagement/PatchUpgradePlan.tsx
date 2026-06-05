@@ -17,7 +17,7 @@ const statusConfig = {
   failed: { label: '失败', color: 'bg-red-500/20 text-red-400', icon: AlertCircle },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 const priorityConfig = {
   critical: { label: '紧急', color: 'bg-red-500/20 text-red-400' },
@@ -87,14 +87,14 @@ export function PatchUpgradePlan() {
             </thead>
             <tbody>
               {filteredPlans.map(plan => {
-                const status = statusConfig[plan.status];
+                const status = statusConfig[plan.status as keyof typeof statusConfig];
                 const StatusIcon = status.icon;
                 return (
                   <tr key={plan.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">
                     <td className="py-3 px-4 text-[#F3F4F6] font-medium">{plan.name}</td>
                     <td className="py-3 px-4">
-                      <span className={`px-2 py-1 rounded-full text-xs ${priorityConfig[plan.priority].color}`}>
-                        {priorityConfig[plan.priority].label}
+                      <span className={`px-2 py-1 rounded-full text-xs ${priorityConfig[plan.priority as keyof typeof priorityConfig].color}`}>
+                        {priorityConfig[plan.priority as keyof typeof priorityConfig].label}
                       </span>
                     </td>
                     <td className="py-3 px-4">

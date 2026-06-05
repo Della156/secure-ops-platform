@@ -159,7 +159,7 @@ export function SystemDiagView() {
                 </td>
                 <td className="px-4 py-3 text-sm text-gray-300">{task.target}</td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 rounded text-xs ${statusColors[task.status]}`}>
+                  <span className={`px-2 py-1 rounded text-xs ${statusColors[task.status as keyof typeof statusColors]}`}>
                     {statusLabels[task.status]}
                   </span>
                 </td>

@@ -328,7 +328,7 @@ export function VulnTaskAudit() {
                 onClick={() => setActionFilter(a)}
                 className={`px-2.5 py-1 text-xs ${actionFilter === a ? 'bg-blue-600 text-white' : 'bg-[#111625] text-gray-400'}`}
               >
-                {actionConfig[a].l}
+                {actionConfig[a as keyof typeof actionConfig].l}
               </button>
             ))}
           </div>
@@ -354,7 +354,7 @@ export function VulnTaskAudit() {
         {/* 日志列表 */}
         <div className={`${selected ? 'lg:col-span-2' : 'lg:col-span-3'} space-y-1.5`}>
           {filtered.map(log => {
-            const ac = actionConfig[log.action];
+            const ac = actionConfig[log.action as keyof typeof actionConfig];
             return (
               <div
                 key={log.id}

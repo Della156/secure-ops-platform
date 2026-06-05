@@ -109,7 +109,7 @@ export function SampleJudgmentHistory() {
         <div className="text-[10px] text-slate-500 font-mono mt-0.5">{t.sampleHash.substring(0, 16)}...</div>
       </div>
     )},
-    { key: 'type', title: '类型', width: '80px', render: (t: HistoricalTask) => <span className={`text-[10px] px-1.5 py-0.5 rounded ${sampleTypeConfig[t.sampleType].color}`}>{sampleTypeConfig[t.sampleType].label}</span> },
+    { key: 'type', title: '类型', width: '80px', render: (t: HistoricalTask) => <span className={`text-[10px] px-1.5 py-0.5 rounded ${sampleTypeConfig[t.sampleType as keyof typeof sampleTypeConfig].color}`}>{sampleTypeConfig[t.sampleType as keyof typeof sampleTypeConfig].label}</span> },
     { key: 'family', title: '家族', width: '120px', render: (t: HistoricalTask) => <span className="text-sm text-slate-300">{t.family}</span> },
     { key: 'severity', title: '严重度', width: '80px', render: (t: HistoricalTask) => <StatusBadge status={severityBadgeMap[t.severity].status} /> },
     { key: 'conclusion', title: '结论', width: '80px', render: (t: HistoricalTask) => <StatusBadge status={conclusionBadgeMap[t.conclusion].status} /> },
@@ -164,7 +164,7 @@ export function SampleJudgmentHistory() {
             { value: 'medium', label: '中危' },
             { value: 'low', label: '低危' },
           ]},
-          { key: 'type', label: '类型', options: (Object.keys(sampleTypeConfig) as SampleType[]).map(t => ({ value: t, label: sampleTypeConfig[t].label })) },
+          { key: 'type', label: '类型', options: (Object.keys(sampleTypeConfig) as SampleType[]).map(t => ({ value: t, label: sampleTypeConfig[t as keyof typeof sampleTypeConfig].label })) },
         ]}
         filterValues={{ conclusion: conclusionFilter, severity: severityFilter, type: typeFilter }}
         onFilterChange={(k, v) => {
@@ -203,7 +203,7 @@ function HistoryDetail({ t }: { t: HistoricalTask }) {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <Field label="样本类型" value={sampleTypeConfig[t.sampleType].label} />
+        <Field label="样本类型" value={sampleTypeConfig[t.sampleType as keyof typeof sampleTypeConfig].label} />
         <Field label="置信度" value={`${t.confidence}%`} />
         <Field label="分析耗时" value={`${t.duration} 分钟`} />
         <Field label="操作员" value={t.operator} />

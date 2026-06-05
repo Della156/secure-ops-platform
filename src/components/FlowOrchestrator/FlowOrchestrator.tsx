@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Save, Play, Upload, Download, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { NodeLibrary } from './NodeLibrary';
@@ -113,7 +113,6 @@ export function FlowOrchestrator({
   canvasHeaderInfo,
   renderToolbar,
 }: FlowOrchestratorProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
   const currentScenario = scenarios?.find((s) => s.id === currentScenarioId);
   const selectedNode = nodes.find((n) => n.id === selectedNodeId) || null;
   const selectedNodeType = selectedNode
@@ -260,7 +259,6 @@ export function FlowOrchestrator({
         {/* 中间：画布 */}
         <div className={`lg:col-span-${canvasColSpan}`}>
           <FlowCanvas
-            ref={canvasRef}
             nodes={nodes}
             edges={edges}
             nodeTypes={nodeTypes}

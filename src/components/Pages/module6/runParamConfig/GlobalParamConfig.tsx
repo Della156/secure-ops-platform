@@ -149,7 +149,7 @@ export function GlobalParamConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增全局参数">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增全局参数">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">参数名称</label>

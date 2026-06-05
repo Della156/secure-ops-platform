@@ -236,7 +236,7 @@ function AuditDetail({ a }: { a: AuditRecord }) {
         <Button variant="secondary">导出报告</Button>
         {a.status === 'pending' && (
           <>
-            <Button variant="ghost" danger>驳回</Button>
+            <Button variant="danger">驳回</Button>
             <Button variant="primary">通过</Button>
           </>
         )}

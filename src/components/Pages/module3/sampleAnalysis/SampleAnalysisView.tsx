@@ -107,7 +107,7 @@ export function SampleAnalysisView() {
                   <td className="px-4 py-3 text-sm text-blue-400 font-mono">{task.id}</td>
                   <td className="px-4 py-3 text-sm text-white">{task.name}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-1 rounded ${threatLevelColors[task.threatLevel]}`}>
+                    <span className={`text-xs px-2 py-1 rounded ${threatLevelColors[task.threatLevel as keyof typeof threatLevelColors]}`}>
                       {task.threatLevel}
                     </span>
                   </td>

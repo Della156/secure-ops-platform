@@ -205,7 +205,7 @@ export function ApiAutoGenerate() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="生成API接口">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="生成API接口">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">选择数据模型</label>

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Search, Filter, RefreshCw, Lightbulb, ArrowRight, CheckCircle2, Clock, Server, Database } from 'lucide-react';
+import { Search, Filter, RefreshCw, Lightbulb, ArrowRight, CheckCircle2, Clock, Server, Database, Shield } from 'lucide-react';
 import { PageHeader } from '@/components/Common/PageStates';
 
 const suggestions = [
@@ -22,7 +22,7 @@ const statusColors: Record<string, string> = {
   'completed': 'bg-green-500/20 text-green-400',
 };
 
-const typeIcons: Record<string, React.ReactNode> = {
+const typeIcons: Record<string, any> = {
   '资源优化': Server,
   '配置优化': Database,
   '安全优化': Shield,
@@ -33,8 +33,6 @@ const typeColors: Record<string, string> = {
   '配置优化': 'bg-green-500/20 text-green-400',
   '安全优化': 'bg-red-500/20 text-red-400',
 };
-
-import { Shield } from 'lucide-react';
 
 export function AssetOptimizationSuggestions() {
   const [priorityFilter, setPriorityFilter] = useState('');
@@ -84,13 +82,13 @@ export function AssetOptimizationSuggestions() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-white font-medium">{suggestion.assetName}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded ${typeColors[suggestion.type]}`}>
+                      <span className={`text-xs px-2 py-0.5 rounded ${typeColors[suggestion.type as keyof typeof typeColors]}`}>
                         <TypeIcon className="w-3 h-3 inline" /> {suggestion.type}
                       </span>
-                      <span className={`text-xs px-2 py-0.5 rounded ${priorityColors[suggestion.priority]}`}>
+                      <span className={`text-xs px-2 py-0.5 rounded ${priorityColors[suggestion.priority as keyof typeof priorityColors]}`}>
                         {suggestion.priority === 'high' ? '高优先级' : suggestion.priority === 'medium' ? '中优先级' : '低优先级'}
                       </span>
-                      <span className={`text-xs px-2 py-0.5 rounded ${statusColors[suggestion.status]}`}>
+                      <span className={`text-xs px-2 py-0.5 rounded ${statusColors[suggestion.status as keyof typeof statusColors]}`}>
                         {suggestion.status === 'pending' ? '待处理' : suggestion.status === 'processing' ? '处理中' : '已完成'}
                       </span>
                     </div>

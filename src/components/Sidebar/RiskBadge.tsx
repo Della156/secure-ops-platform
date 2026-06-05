@@ -16,18 +16,18 @@ export function RiskBadge() {
 
   return (
     <div className="px-4 py-3">
-      <div className="bg-[#181F32]/50 rounded-lg p-4 border border-[#2A354D]">
+      <div className="bg-app-bg-surface/50 rounded-lg p-4 border border-app-border-base">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-[#9CA3AF] uppercase tracking-wider">系统风险评分</span>
-          <span className={`text-xs px-2 py-0.5 rounded-full ${risk.color} text-[#F3F4F6]`}>
+          <span className="text-xs text-app-text-secondary uppercase tracking-wider">系统风险评分</span>
+          <span className={`text-xs px-2 py-0.5 rounded-full ${risk.color} text-app-text-primary`}>
             {risk.label}
           </span>
         </div>
         <div className="flex items-baseline gap-2">
           <span className={`text-4xl font-bold ${risk.textColor}`}>{riskScore}</span>
-          <span className="text-[#6B7280] text-sm">/ 100</span>
+          <span className="text-app-text-muted text-sm">/ 100</span>
         </div>
-        <div className="mt-3 h-2 bg-[#2A354D] rounded-full overflow-hidden">
+        <div className="mt-3 h-2 bg-app-border-base rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-500 ${risk.color}`}
             style={{ width: `${riskScore}%` }}

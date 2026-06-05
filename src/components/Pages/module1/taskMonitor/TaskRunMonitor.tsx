@@ -5,7 +5,7 @@ import {
   Terminal, Pause, Play, XCircle, RotateCcw, Download, Maximize2,
   Clock, Server, Activity, ChevronRight, Filter, RefreshCw, Cpu,
   HardDrive, Wifi, Database, CheckCircle2, AlertCircle, Info,
-  AlertTriangle, Debug, Copy, Check, ChevronDown, ChevronUp, Search,
+  AlertTriangle, Copy, Check, ChevronDown, ChevronUp, Search, X,
   Square, CheckSquare, Gauge, Zap
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
@@ -283,7 +283,7 @@ export function TaskRunMonitor() {
   };
 
   const drawConnections = useCallback(() => {
-    const connections = [];
+    const connections: JSX.Element[] = [];
     const nodePositions: Record<string, { x: number; y: number }> = {};
     const cols = 5;
     const rows = 2;

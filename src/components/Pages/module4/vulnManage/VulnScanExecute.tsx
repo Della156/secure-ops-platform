@@ -191,7 +191,7 @@ export function VulnScanExecute() {
       {tab === 'active' && (
         <div className="space-y-3">
           {activeTasks.map(t => {
-            const status = statusConfig[t.status];
+            const status = statusConfig[t.status as keyof typeof statusConfig];
             const totalVuln = t.vulnFound.critical + t.vulnFound.high + t.vulnFound.medium + t.vulnFound.low;
             return (
               <div key={t.id} className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4">
@@ -314,7 +314,7 @@ export function VulnScanExecute() {
             </thead>
             <tbody>
               {filteredHistory.map(t => {
-                const status = statusConfig[t.status];
+                const status = statusConfig[t.status as keyof typeof statusConfig];
                 return (
                   <tr key={t.id} className="border-b border-[#2A354D]/50 hover:bg-[#111625]/30">
                     <td className="py-2 px-3 font-mono text-xs text-blue-400">{t.id}</td>

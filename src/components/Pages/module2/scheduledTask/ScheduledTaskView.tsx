@@ -231,7 +231,7 @@ export function ScheduledTaskView() {
             </thead>
             <tbody>
               {filtered.map(d => {
-                const sc = statusConfig[d.status];
+                const sc = statusConfig[d.status as keyof typeof statusConfig];
                 return (
                   <tr key={d.id} className="border-t border-[#2A354D] hover:bg-[#111625]/50">
                     <td className="px-3 py-2.5 text-blue-400 font-mono">{d.id}</td>
@@ -282,7 +282,7 @@ export function ScheduledTaskView() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map(d => {
-            const sc = statusConfig[d.status];
+            const sc = statusConfig[d.status as keyof typeof statusConfig];
             return (
               <div key={d.id} className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4 hover:border-blue-500/50 cursor-pointer">
                 <div className="flex items-center justify-between mb-2">

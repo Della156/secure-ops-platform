@@ -31,7 +31,7 @@ export interface ConnectTestRecord {
   resourceName: string;
   protocol: string;
   address: string;
-  status: 'success' | 'failed' | 'timeout';
+  status: 'success' | 'failed' | 'timeout' | 'warning';
   responseTime: number;
   timestamp: string;
   message: string;

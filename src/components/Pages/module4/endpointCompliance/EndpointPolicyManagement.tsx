@@ -17,7 +17,7 @@ const statusConfig = {
   inactive: { label: '已停用', color: 'bg-gray-500/20 text-gray-400', icon: Clock },
 };
 
-const IconComponent = ({ icon: Icon }) => <Icon className="w-3 h-3" />;
+const IconComponent = ({ icon: Icon }: { icon: any }) => <Icon className="w-3 h-3" />;
 
 export function EndpointPolicyManagement() {
   const [search, setSearch] = useState('');
@@ -115,7 +115,7 @@ export function EndpointPolicyManagement() {
             </thead>
             <tbody>
               {filteredPolicies.map(policy => {
-                const config = statusConfig[policy.status];
+                const config = statusConfig[policy.status as keyof typeof statusConfig];
                 const Icon = config.icon;
                 return (
                   <tr key={policy.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">

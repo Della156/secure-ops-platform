@@ -66,7 +66,7 @@ export function ElinkAlertSend() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Card padding="p-4">
+        <Card padding="sm">
           <h3 className="text-sm font-semibold text-white mb-4">发送告警信息</h3>
           <div className="space-y-4">
             <div>
@@ -107,7 +107,7 @@ export function ElinkAlertSend() {
           </div>
         </Card>
 
-        <Card padding="p-4">
+        <Card padding="sm">
           <h3 className="text-sm font-semibold text-white mb-3">最近发送记录</h3>
           <div className="space-y-3">
             {recentAlerts.map(alert => (

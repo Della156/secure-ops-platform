@@ -165,7 +165,7 @@ export function ImpactRangeEval() {
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={assetTypeData} cx="50%" cy="50%" innerRadius={30} outerRadius={60} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}>
+                <Pie data={assetTypeData} cx="50%" cy="50%" innerRadius={30} outerRadius={60} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}>
                   {assetTypeData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={['#3B82F6', '#22C55E', '#F59E0B', '#8B5CF6'][index % 4]} />
                   ))}

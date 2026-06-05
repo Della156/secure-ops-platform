@@ -9,7 +9,7 @@ import { TemplateLibrary } from './TemplateLibrary';
 import { ComplianceMapping } from './ComplianceMapping';
 import { ApprovalConfig } from './ApprovalConfig';
 import { VersionHistory } from './VersionHistory';
-import type { PolicyEditorProps, PolicyItem, PolicyTemplate, ComplianceMapping as Mapping, ApprovalLevel, PolicyVersion } from './types';
+import type { PolicyEditorProps, PolicyItem, PolicyTemplate, ComplianceMappingItem as Mapping, ApprovalLevel, PolicyVersion } from './types';
 
 const TABS = [
   { key: 'policies', label: '策略列表', icon: FileText },
@@ -67,10 +67,7 @@ export function PolicyEditor({
 
       {/* Tab 内容 */}
       {activeTab === 'policies' && (
-        <PolicyListTab
-          policies={policies}
-          config={config}
-        />
+        <PolicyListTab policies={policies} config={config} />
       )}
 
       {activeTab === 'templates' && (

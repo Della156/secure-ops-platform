@@ -362,7 +362,7 @@ export function VulnTaskReport() {
               </thead>
               <tbody>
                 {filteredHistory.map(r => {
-                  const s = statusConfig[r.status];
+                  const s = statusConfig[r.status as keyof typeof statusConfig];
                   return (
                     <tr key={r.id} className="border-b border-[#2A354D]/50 hover:bg-[#111625]/30">
                       <td className="py-2 px-3 font-mono text-xs text-blue-400">{r.id}</td>

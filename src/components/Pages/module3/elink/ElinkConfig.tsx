@@ -41,7 +41,7 @@ export function ElinkConfig() {
         </div>
       </div>
 
-      <Card padding="p-4">
+      <Card padding="sm">
         <div className="flex items-center gap-2 mb-4">
           <Globe className="w-5 h-5 text-blue-400" />
           <h3 className="text-sm font-semibold text-white">连接平台配置</h3>
@@ -72,7 +72,7 @@ export function ElinkConfig() {
         </div>
       </Card>
 
-      <Card padding="p-4">
+      <Card padding="sm">
         <div className="flex items-center gap-2 mb-4">
           <Settings className="w-5 h-5 text-blue-400" />
           <h3 className="text-sm font-semibold text-white">通知类型配置</h3>

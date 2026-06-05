@@ -16,6 +16,8 @@ interface ConfirmInfo {
   title: string;
   message: string;
   type?: 'warning' | 'info' | 'danger';
+  confirmText?: string;
+  cancelText?: string;
   onConfirm: () => void;
   onCancel?: () => void;
 }

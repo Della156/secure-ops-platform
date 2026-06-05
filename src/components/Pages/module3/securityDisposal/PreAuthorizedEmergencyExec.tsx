@@ -160,7 +160,7 @@ export function PreAuthorizedEmergencyExec() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(p => {
-              const sc = statusConfig[p.status];
+              const sc = statusConfig[p.status as keyof typeof statusConfig];
               const usagePct = (p.usedActions / p.maxActions) * 100;
               return (
                 <div

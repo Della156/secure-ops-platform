@@ -123,7 +123,7 @@ export function VulnAnalysis() {
         <div className="flex items-start justify-between mb-3">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className={`text-[10px] px-2 py-0.5 rounded border ${severityColors[currentVuln.level]}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded border ${severityColors[currentVuln.level as keyof typeof severityColors]}`}>
                 {currentVuln.level.toUpperCase()}
               </span>
               <span className="text-xs text-gray-500">CVSS: <span className="text-red-400 font-bold text-base">{currentVuln.cvss.base.toFixed(1)}</span></span>

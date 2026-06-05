@@ -28,9 +28,11 @@ const trend30 = Array.from({ length: 30 }, (_, i) => {
  */
 export function RiskScoreWidget() {
   const total = 73;
-  const level = 'medium';
-  const color = level === 'critical' ? '#EF4444' : level === 'high' ? '#F97316' : level === 'medium' ? '#EAB308' : '#22C55E';
-  const label = level === 'medium' ? '中风险' : '低风险';
+  const level: 'critical' | 'high' | 'medium' | 'low' = 'medium';
+  const colorMap: Record<string, string> = { critical: '#EF4444', high: '#F97316', medium: '#EAB308', low: '#22C55E' };
+  const color = colorMap[level];
+  const labelMap: Record<string, string> = { critical: '高风险', high: '中风险', medium: '中风险', low: '低风险' };
+  const label = labelMap[level];
 
   return (
     <div className="bg-[#20293F] border border-[#2A354D] rounded-xl p-4 h-full">

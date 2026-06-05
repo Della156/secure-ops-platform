@@ -208,7 +208,7 @@ export function AttackPathVisualization() {
 
               {/* 节点 */}
               {nodes.map(n => {
-                const cfg = nodeTypeConfig[n.type];
+                const cfg = nodeTypeConfig[n.type as keyof typeof nodeTypeConfig];
                 const isSelected = selectedNode === n.id;
                 return (
                   <g
@@ -250,7 +250,7 @@ export function AttackPathVisualization() {
             <div className="bg-[#20293F] border border-[#2A354D] rounded-lg p-4 space-y-3">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span style={{ color: nodeTypeConfig[selected.type].color }}>{nodeTypeConfig[selected.type].icon}</span>
+                  <span style={{ color: nodeTypeConfig[selected.type as keyof typeof nodeTypeConfig].color }}>{nodeTypeConfig[selected.type as keyof typeof nodeTypeConfig].icon}</span>
                   <h3 className="text-base font-semibold text-white">{selected.label}</h3>
                 </div>
                 <p className="text-xs text-slate-500 font-mono">{selected.ip}</p>
@@ -307,7 +307,7 @@ export function AttackPathVisualization() {
               <h3 className="text-sm font-semibold text-white mb-2">高价值资产</h3>
               <div className="space-y-1.5 max-h-[280px] overflow-y-auto">
                 {byPriority.map((n, i) => {
-                  const cfg = nodeTypeConfig[n.type];
+                  const cfg = nodeTypeConfig[n.type as keyof typeof nodeTypeConfig];
                   return (
                     <div
                       key={n.id}

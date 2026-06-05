@@ -10,7 +10,7 @@ interface ResourceAccessLogProps {
 }
 
 export function ResourceAccessLog({ resourceType }: ResourceAccessLogProps) {
-  const config = resourceConfig[resourceType];
+  const config = resourceConfig[resourceType as keyof typeof resourceConfig];
   const mock = getResourceMock(resourceType);
   
   const [logs, setLogs] = useState<AccessLogItem[]>(mock.accessLogs);

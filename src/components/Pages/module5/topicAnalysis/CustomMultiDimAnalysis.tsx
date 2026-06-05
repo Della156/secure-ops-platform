@@ -33,7 +33,7 @@ const dimensions: Dimension[] = [
   { id: 'score', name: '风险评分', type: 'numeric', selected: false },
 ];
 
-const mockResults = [
+const mockResults: any = [
   { id: '1', name: '安全事件趋势分析', type: 'chart' as const, data: [
     { date: '5/27', count: 120, avgScore: 75 },
     { date: '5/28', count: 156, avgScore: 82 },
@@ -251,7 +251,7 @@ export function CustomMultiDimAnalysis() {
               <div className="bg-[#111625] rounded-lg p-4">
                 <h3 className="text-sm font-medium text-white mb-3">资产风险分布</h3>
                 <div className="space-y-2">
-                  {mockResults[1].data.map((item: { asset: string; high: number; medium: number; low: number }, i) => (
+                  {mockResults[1].data.map((item: any, i: number) => (
                     <div key={i} className="space-y-1">
                       <div className="text-xs text-gray-400">{item.asset}</div>
                       <div className="flex gap-1 h-4">

@@ -73,7 +73,7 @@ export function HostSecurityDataSync() {
             </thead>
             <tbody>
               {filtered.map(host => {
-                const sc = statusConfig[host.status];
+                const sc = statusConfig[host.status as keyof typeof statusConfig];
                 return (
                   <tr key={host.id} className="border-b border-[#2A354D] hover:bg-[#111625]/50">
                     <td className="px-4 py-3 text-xs text-white flex items-center gap-2">

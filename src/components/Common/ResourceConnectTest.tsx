@@ -10,7 +10,7 @@ interface ResourceConnectTestProps {
 }
 
 export function ResourceConnectTest({ resourceType }: ResourceConnectTestProps) {
-  const config = resourceConfig[resourceType];
+  const config = resourceConfig[resourceType as keyof typeof resourceConfig];
   const mock = getResourceMock(resourceType);
   
   const [connectHistory, setConnectHistory] = useState<ConnectTestRecord[]>(mock.connectHistory);

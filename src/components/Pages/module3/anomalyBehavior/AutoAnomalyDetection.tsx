@@ -197,7 +197,7 @@ export function AutoAnomalyDetection() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(r => {
-              const sc = statusConfig[r.status];
+              const sc = statusConfig[r.status as keyof typeof statusConfig];
               const ac = algorithmColor[r.algorithm];
               return (
                 <div

@@ -235,7 +235,7 @@ function EventStream({ events }: { events: ThreatEvent[] }) {
   return (
     <div className="space-y-1 max-h-[420px] overflow-hidden" ref={scrollRef}>
       {localEvents.map((e) => {
-        const sc = severityColors[e.severity];
+        const sc = severityColors[e.severity as keyof typeof severityColors];
         return (
           <div key={e.id} className={`${sc.bg} rounded p-2 text-xs border-l-2 ${sc.dot.replace('bg-', 'border-')}`}>
             <div className="flex items-start justify-between gap-2">
@@ -450,7 +450,7 @@ export function RealtimeThreatTrend() {
           </h3>
           <div className="space-y-2 max-h-[260px] overflow-y-auto">
             {mockAttackSources.map((s, i) => {
-              const sc = severityColors[s.riskLevel];
+              const sc = severityColors[s.riskLevel as keyof typeof severityColors];
               return (
                 <div key={s.ip} className="bg-[#111625] rounded p-2 hover:bg-[#20293F]/50">
                   <div className="flex items-center justify-between">

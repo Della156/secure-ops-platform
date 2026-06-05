@@ -18,7 +18,7 @@ interface ApprovalTicket {
   operation: string;
   operationId: string;
   targetAsset: string;
-  targetScope: '单资产' | '子网' | '全网';
+  targetScope: '单资产' | '子网' | '全网' | '数据库';
   riskLevel: 'high' | 'critical' | 'medium';
   reason: string;
   affectedAssets: number;
@@ -234,7 +234,7 @@ export function SensitiveOperationApproval() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(t => {
-              const sc = statusConfig[t.status];
+              const sc = statusConfig[t.status as keyof typeof statusConfig];
               return (
                 <div
                   key={t.id}
@@ -274,8 +274,8 @@ export function SensitiveOperationApproval() {
                 <span className={`text-[10px] px-1.5 py-0.5 rounded ${riskColor[selected.riskLevel]}`}>
                   {selected.riskLevel === 'critical' ? '极高风险' : '高风险'}
                 </span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status].bg} ${statusConfig[selected.status].color}`}>
-                  {statusConfig[selected.status].icon}{statusConfig[selected.status].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${statusConfig[selected.status as keyof typeof statusConfig].bg} ${statusConfig[selected.status as keyof typeof statusConfig].color}`}>
+                  {statusConfig[selected.status as keyof typeof statusConfig].icon}{statusConfig[selected.status as keyof typeof statusConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.operation}</h3>

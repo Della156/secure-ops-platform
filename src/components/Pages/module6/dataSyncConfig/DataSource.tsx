@@ -165,7 +165,7 @@ export function DataSource() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="新增数据源">
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="新增数据源">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">数据源名称</label>

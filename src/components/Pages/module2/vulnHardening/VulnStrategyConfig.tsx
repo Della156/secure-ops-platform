@@ -69,8 +69,7 @@ export function VulnStrategyConfig() {
   return (
     <PolicyEditor
       policyType="vuln"
-      config={config}
-      policies={MOCK_POLICIES}
+      config={config} policies={MOCK_POLICIES}
     />
   );
 }

@@ -74,8 +74,7 @@ export function AuditRuleConfig() {
   return (
     <PolicyEditor
       policyType="audit"
-      config={config}
-      policies={MOCK_POLICIES}
+      config={config} policies={MOCK_POLICIES}
     />
   );
 }

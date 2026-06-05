@@ -97,7 +97,7 @@ export function AssetInfoComparison() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-[#111625] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className={`p-1.5 rounded ${sourceColors[comp.source1]}`}>
+                    <span className={`p-1.5 rounded ${sourceColors[comp.source1 as keyof typeof sourceColors]}`}>
                       {sourceIcons[comp.source1]}
                     </span>
                     <span className="text-sm text-white">{comp.source1}</span>
@@ -113,7 +113,7 @@ export function AssetInfoComparison() {
                 </div>
                 <div className="bg-[#111625] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className={`p-1.5 rounded ${sourceColors[comp.source2]}`}>
+                    <span className={`p-1.5 rounded ${sourceColors[comp.source2 as keyof typeof sourceColors]}`}>
                       {sourceIcons[comp.source2]}
                     </span>
                     <span className="text-sm text-white">{comp.source2}</span>

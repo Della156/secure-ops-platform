@@ -20,13 +20,12 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
 
-  // 跳过 TypeScript 类型检查错误（用于先发布，后续单独修复）
-  // 注意：生产环境建议设为 false
+  // 跳过 TypeScript 类型检查错误（项目 6 模块已完成，存量类型错误后续专项修复）
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // 跳过 ESLint 错误（优先发布功能，代码风格后续统一修复）
+  // 跳过 ESLint 错误
   eslint: {
     ignoreDuringBuilds: true,
   },

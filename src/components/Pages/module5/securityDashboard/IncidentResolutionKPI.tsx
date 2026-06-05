@@ -496,7 +496,7 @@ export function IncidentResolutionKPI() {
             </thead>
             <tbody>
               {mockSlowIncidents.map(inc => {
-                const sc = severityColors[inc.severity];
+                const sc = severityColors[inc.severity as keyof typeof severityColors];
                 return (
                   <tr key={inc.id} className="border-b border-[#2A354D]/50 hover:bg-[#111625]/30">
                     <td className="py-2 px-2 font-mono text-xs text-blue-400">{inc.id}</td>

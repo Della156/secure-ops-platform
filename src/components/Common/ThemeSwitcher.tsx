@@ -17,7 +17,8 @@ const THEME_OPTIONS: { value: Theme; label: string; icon: any; desc: string }[] 
  * 主题切换器（深/浅/跟随）
  * - 真实切换 <html data-theme="...">
  * - localStorage 持久化
- * - 浅色时仅外壳（Layout / Sidebar / TopHeader）变浅，业务页保持深色
+ * - 外壳（Layout / Sidebar / TopHeader）+ UI 组件库 + 侧栏全部响应主题
+ * - 业务页面硬编码深色，暂保持原样
  */
 export function ThemeSwitcher() {
   const { theme, setTheme } = useSystem();
@@ -77,7 +78,7 @@ export function ThemeSwitcher() {
           })}
           <div className="px-3 py-2 border-t border-app-border-base bg-app-bg-surface/50">
             <p className="text-[10px] text-app-text-muted leading-relaxed">
-              提示：主题仅影响外壳（顶栏/侧栏/画布），业务页保持深色以保证数据可视性。
+              提示：外壳、侧栏、UI 组件已适配浅色主题，业务页面暂保持深色。
             </p>
           </div>
         </div>

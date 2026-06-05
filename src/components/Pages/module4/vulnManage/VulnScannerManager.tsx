@@ -117,10 +117,10 @@ export function VulnScannerManager() {
     {
       key: 'name', title: '名称', width: '200px',
       render: (s: Scanner) => {
-        const TIcon = typeConfig[s.type].icon;
+        const TIcon = typeConfig[s.type as keyof typeof typeConfig].icon;
         return (
           <div className="flex items-center gap-2">
-            <div className={`w-7 h-7 rounded flex items-center justify-center ${typeConfig[s.type].color}`}>
+            <div className={`w-7 h-7 rounded flex items-center justify-center ${typeConfig[s.type as keyof typeof typeConfig].color}`}>
               <TIcon className="w-3.5 h-3.5" />
             </div>
             <div>
@@ -133,7 +133,7 @@ export function VulnScannerManager() {
     },
     {
       key: 'type', title: '类型', width: '90px',
-      render: (s: Scanner) => <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[s.type].color}`}>{typeConfig[s.type].label}</span>,
+      render: (s: Scanner) => <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[s.type as keyof typeof typeConfig].color}`}>{typeConfig[s.type as keyof typeof typeConfig].label}</span>,
     },
     {
       key: 'host', title: '地址', width: '180px',
@@ -228,7 +228,7 @@ export function VulnScannerManager() {
         filters={[
           {
             key: 'type', label: '类型',
-            options: (Object.keys(typeConfig) as ScannerType[]).map((t) => ({ value: t, label: typeConfig[t].label })),
+            options: (Object.keys(typeConfig) as ScannerType[]).map((t) => ({ value: t, label: typeConfig[t as keyof typeof typeConfig].label })),
           },
           {
             key: 'status', label: '状态',
@@ -260,15 +260,15 @@ export function VulnScannerManager() {
         renderDetail={(s) => (
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${typeConfig[s.type].color}`}>
-                {(() => { const I = typeConfig[s.type].icon; return <I className="w-6 h-6" />; })()}
+              <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${typeConfig[s.type as keyof typeof typeConfig].color}`}>
+                {(() => { const I = typeConfig[s.type as keyof typeof typeConfig].icon; return <I className="w-6 h-6" />; })()}
               </div>
               <div className="flex-1">
                 <h3 className="text-base font-semibold text-slate-100">{s.name}</h3>
                 <p className="text-xs text-slate-500 mt-0.5">{s.vendor} · v{s.version} · ID: {s.id}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <StatusBadge status={statusBadgeMap[s.status].status} />
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[s.type].color}`}>{typeConfig[s.type].label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${typeConfig[s.type as keyof typeof typeConfig].color}`}>{typeConfig[s.type as keyof typeof typeConfig].label}</span>
                 </div>
               </div>
             </div>

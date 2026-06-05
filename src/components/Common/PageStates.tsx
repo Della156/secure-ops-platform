@@ -65,7 +65,7 @@ export interface ActionConfig {
 }
 
 export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: React.ReactNode | ActionConfig[] }) {
-  const renderActions = () => {
+  const renderActions = (): React.ReactNode => {
     if (!actions) return null;
     if (Array.isArray(actions) && actions.length > 0 && 'icon' in actions[0] && 'label' in actions[0] && 'onClick' in actions[0]) {
       return (actions as ActionConfig[]).map((action, i) => {
@@ -87,7 +87,7 @@ export function PageHeader({ title, description, actions }: { title: string; des
         );
       });
     }
-    return actions;
+    return actions as React.ReactNode;
   };
 
   return (

@@ -8,6 +8,8 @@ interface SkeletonProps {
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
   /** 动画模式 */
   animate?: 'pulse' | 'shimmer';
+  /** 行内样式（如指定 height） */
+  style?: React.CSSProperties;
 }
 
 const ROUNDED = {
@@ -21,9 +23,10 @@ const ROUNDED = {
 /**
  * 基础骨架屏（脉冲动画 + 高光横扫）
  */
-export function Skeleton({ className = '', rounded = 'md', animate = 'pulse' }: SkeletonProps) {
+export function Skeleton({ className = '', rounded = 'md', animate = 'pulse', style }: SkeletonProps) {
   return (
     <div
+      style={style}
       className={`${ROUNDED[rounded]} ${
         animate === 'pulse' ? 'animate-pulse' : ''
       } bg-[#181F32] relative overflow-hidden ${className}`}

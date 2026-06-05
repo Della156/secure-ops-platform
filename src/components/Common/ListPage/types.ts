@@ -65,7 +65,8 @@ export interface ListPageProps<T> {
   /** 表格 */
   data: T[];
   columns: any[];
-  rowKey?: string;
+  /** 唯一键：可以是字段名或提取函数 */
+  rowKey?: string | ((item: T) => string);
   loading?: boolean;
   emptyText?: string;
 

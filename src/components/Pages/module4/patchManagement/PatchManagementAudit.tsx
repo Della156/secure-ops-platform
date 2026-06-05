@@ -70,7 +70,7 @@ export function PatchManagementAudit() {
             </thead>
             <tbody>
               {filteredAudits.map(item => {
-                const config = resultConfig[item.result];
+                const config = resultConfig[item.result as keyof typeof resultConfig];
                 return (
                   <tr key={item.id} className="border-b border-[#2A354D] hover:bg-[#181F32]">
                     <td className="py-3 px-4 text-[#F3F4F6] flex items-center gap-2">

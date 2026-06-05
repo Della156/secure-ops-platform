@@ -237,7 +237,7 @@ export function TraceAnalysisView() {
           </div>
           <div className="max-h-[440px] overflow-y-auto">
             {filtered.map(t => {
-              const sc = statusConfig[t.status];
+              const sc = statusConfig[t.status as keyof typeof statusConfig];
               return (
                 <div key={t.id} className="px-4 py-3 border-b border-[#2A354D] hover:bg-[#111625]/50">
                   <div className="flex items-center justify-between mb-2">
@@ -251,7 +251,7 @@ export function TraceAnalysisView() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <span>置信度 <span className={t.confidence >= 90 ? 'text-green-400' : t.confidence >= 70 ? 'text-yellow-400' : 'text-red-400'} className="font-mono">{t.confidence}%</span></span>
+                      <span>置信度 <span className={`${t.confidence >= 90 ? 'text-green-400' : t.confidence >= 70 ? 'text-yellow-400' : 'text-red-400'} font-mono`}>{t.confidence}%</span></span>
                       <span>·</span>
                       <span className="font-mono">{t.hopCount} 跳</span>
                       <span>·</span>

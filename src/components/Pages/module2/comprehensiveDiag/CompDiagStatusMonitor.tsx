@@ -180,7 +180,7 @@ export function CompDiagStatusMonitor() {
           </div>
           <div className="max-h-[480px] overflow-y-auto">
             {filtered.map(t => {
-              const sc = statusConfig[t.status];
+              const sc = statusConfig[t.status as keyof typeof statusConfig];
               return (
                 <div
                   key={t.id}

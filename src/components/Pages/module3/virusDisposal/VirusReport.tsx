@@ -74,7 +74,7 @@ export function VirusReport() {
                 cx="50%" cy="50%"
                 innerRadius={50} outerRadius={80}
                 dataKey="count"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
                 labelLine={false}
               >
                 {reportData.virusTypes.map((entry, index) => (

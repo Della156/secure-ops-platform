@@ -177,7 +177,7 @@ export function SyncTaskConfig() {
         </div>
       </div>
 
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title={editingItem ? '编辑同步任务' : '新增同步任务'}>
+      <Modal open={showModal} onClose={() => setShowModal(false)} title={editingItem ? '编辑同步任务' : '新增同步任务'}>
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">任务名称</label>

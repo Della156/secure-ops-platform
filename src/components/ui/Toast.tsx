@@ -77,7 +77,7 @@ export function useToast() {
         return (
           <div
             key={t.id}
-            className={`flex items-start gap-3 px-4 py-3 rounded-lg border backdrop-blur-md shadow-lg animate-slide-in ${bgColors[t.type]}`}
+            className={`flex items-start gap-3 px-4 py-3 rounded-lg border backdrop-blur-md shadow-lg animate-slide-in ${bgColors[t.type as keyof typeof bgColors]}`}
           >
             <div className="flex-shrink-0 mt-0.5">{icons[t.type]}</div>
             <p className="flex-1 text-sm text-gray-200">{t.message}</p>

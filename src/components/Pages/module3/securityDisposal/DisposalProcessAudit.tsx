@@ -247,8 +247,8 @@ export function DisposalProcessAudit() {
           </div>
           <div className="max-h-[520px] overflow-y-auto">
             {filtered.map(r => {
-              const rc = resultConfig[r.result];
-              const ac = actionTypeConfig[r.actionType];
+              const rc = resultConfig[r.result as keyof typeof resultConfig];
+              const ac = actionTypeConfig[r.actionType as keyof typeof actionTypeConfig];
               return (
                 <div
                   key={r.id}
@@ -291,8 +291,8 @@ export function DisposalProcessAudit() {
                 <span className={`text-[10px] px-1.5 py-0.5 rounded ${riskColor[selected.riskLevel]}`}>
                   {selected.riskLevel === 'critical' ? '极高风险' : selected.riskLevel === 'high' ? '高风险' : selected.riskLevel === 'medium' ? '中风险' : '低风险'}
                 </span>
-                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result].bg} ${resultConfig[selected.result].color}`}>
-                  {resultConfig[selected.result].icon}{resultConfig[selected.result].label}
+                <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded ${resultConfig[selected.result as keyof typeof resultConfig].bg} ${resultConfig[selected.result as keyof typeof resultConfig].color}`}>
+                  {resultConfig[selected.result as keyof typeof resultConfig].icon}{resultConfig[selected.result as keyof typeof resultConfig].label}
                 </span>
               </div>
               <h3 className="text-base font-semibold text-white mb-1">{selected.operationName}</h3>

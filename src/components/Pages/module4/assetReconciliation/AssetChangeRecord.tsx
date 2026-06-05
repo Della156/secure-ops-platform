@@ -75,7 +75,7 @@ export function AssetChangeRecord() {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-4">
                 <span className="text-blue-400 font-mono text-sm">{change.id}</span>
-                <span className={`text-xs px-2 py-1 rounded ${changeTypeColors[change.changeType]}`}>
+                <span className={`text-xs px-2 py-1 rounded ${changeTypeColors[change.changeType as keyof typeof changeTypeColors]}`}>
                   {change.changeType}
                 </span>
               </div>
