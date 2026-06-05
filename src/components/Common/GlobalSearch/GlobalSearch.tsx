@@ -11,21 +11,44 @@ interface SearchHit {
   breadcrumb: string;
   level: 1 | 2 | 3;
   parentPath: string[];
+  /** 跳转目标：1/2 级菜单点击时优先跳到第一个子菜单（pageRegistry 中只有 3 级 menuId 有 entry） */
+  firstChildId?: string;
 }
 
 /** 展平菜单为可搜索列表（保留完整路径用于面包屑） */
 function flattenMenu(): SearchHit[] {
   const hits: SearchHit[] = [];
   for (const lvl1 of menuData) {
-    hits.push({ id: lvl1.id, label: lvl1.label, breadcrumb: lvl1.label, level: 1, parentPath: [] });
+    // 1 级菜单：firstChildId = 第一个 3 级子菜单（绕过 2 级，直接跳到具体页面，避开 GenericStub）
+    // 因为 pageRegistry 只为 3 级 menuId 有 entry，1/2 级 menuId 会走 fallback DefaultPage
+    let l1FirstChild: string | undefined;
+    if (lvl1.children && lvl1.children.length > 0) {
+      const firstL2 = lvl1.children[0];
+      if (firstL2.children && firstL2.children.length > 0) {
+        l1FirstChild = firstL2.children[0].id;
+      } else {
+        l1FirstChild = firstL2.id; // 退而求其次：如果该 2 级无 3 级子
+      }
+    }
+    hits.push({
+      id: lvl1.id,
+      label: lvl1.label,
+      breadcrumb: lvl1.label,
+      level: 1,
+      parentPath: [],
+      firstChildId: l1FirstChild,
+    });
     if (lvl1.children) {
       for (const lvl2 of lvl1.children) {
+        // 2 级菜单：firstChildId = 第一个 3 级子菜单（如果存在）
+        const l2FirstChild = lvl2.children && lvl2.children.length > 0 ? lvl2.children[0].id : undefined;
         hits.push({
           id: lvl2.id,
           label: lvl2.label,
           breadcrumb: `${lvl1.label} / ${lvl2.label}`,
           level: 2,
           parentPath: [lvl1.label],
+          firstChildId: l2FirstChild,
         });
         if (lvl2.children) {
           for (const lvl3 of lvl2.children) {
@@ -92,7 +115,13 @@ export function GlobalSearch({ open, onClose }: GlobalSearchProps) {
       return allHits.filter((h) => h.level === 1 || h.level === 2).slice(0, 12);
     }
     const matched = allHits
-      .map((h) => ({ hit: h, match: fuzzyMatch(query, h.label) }))
+      .map((h) => {
+        const base = fuzzyMatch(query, h.label);
+        // 1/2 级菜单作为"分组"：点击时会跳到第一个子菜单
+        // 排序时压低分数，让 3 级菜单（具体功能）排前面
+        const adjusted = h.level < 3 ? { ...base, score: base.score - 50 } : base;
+        return { hit: h, match: adjusted };
+      })
       .filter((m) => m.match.matched)
       .sort((a, b) => b.match.score - a.match.score)
       .slice(0, 30)
@@ -118,7 +147,10 @@ export function GlobalSearch({ open, onClose }: GlobalSearchProps) {
 
   const handleSelect = useCallback(
     (hit: SearchHit) => {
-      setActiveMenu(hit.id);
+      // 1/2 级菜单（且存在子菜单）：跳到第一个子项（pageRegistry 中只有 3 级 menuId 有 entry）
+      // 3 级菜单：直接跳到自身
+      const targetId = hit.level < 3 && hit.firstChildId ? hit.firstChildId : hit.id;
+      setActiveMenu(targetId);
       onClose();
     },
     [setActiveMenu, onClose]
